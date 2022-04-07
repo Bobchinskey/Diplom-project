@@ -3,10 +3,58 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Datacontext="clr-namespace:Partner.ViewModels.Windows"
+        xmlns:cmd="clr-namespace:Partner.Infrastructure.Commands"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:Partner.Views.Windows"
         mc:Ignorable="d"
-        Title="AuthorizationWindow" Height="450" Width="800">
+        Title="Авторизация"
+        WindowStartupLocation="CenterScreen"
+        Height="350" Width="300"
+        ResizeMode="NoResize">
+    <Window.DataContext>
+        <Datacontext:AuthorizationWindowViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
+    </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Ctrl" Key="Q" Command="{StaticResource CloseApplicationCommand}"/>
+    </Window.InputBindings>
     <Grid>
-        
+        <DockPanel Background="BlueViolet" VerticalAlignment="Top">
+            <TextBlock Text="Авторизация" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,15,0,15" FontSize="18"/>
+        </DockPanel>
+        <Grid Width="250" Margin="22,54,22,0">
+            <StackPanel>
+                <DockPanel Margin="0,50,0,0">
+                    <fa:ImageAwesome Margin="5,0,0,0" Icon="User" HorizontalAlignment="Left"
+                                     Height="25"
+                                     Foreground="BlueViolet"/>
+                    <TextBox BorderThickness="0.5" BorderBrush="Black"
+                             Text="{Binding Login}"
+                             VerticalAlignment="Center" HorizontalAlignment="Center" 
+                             Width="180" MaxLength="15" Height="25"
+                             Margin="0,0,5,0" FontSize="18"/>
+                </DockPanel>
+                <DockPanel Margin="0,40,0,0">
+                    <fa:ImageAwesome Margin="5,0,0,0" Icon="lock" HorizontalAlignment="Left" 
+                                     Height="25"
+                                     Foreground="BlueViolet"/>
+                    <PasswordBox BorderThickness="0.5" BorderBrush="Black"
+                                 x:Name="PasswordBox" HorizontalAlignment="Center" 
+                                 Width="180" MaxLength="15" Height="25"
+                                 Margin="0,0,5,0" FontSize="18"/>
+                </DockPanel>
+            </StackPanel>
+        </Grid>
+        <Button BorderThickness="0.5" BorderBrush="Black" Background="White" 
+                        Content="Войти" 
+                        HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                        Width="120" Height="30"
+                        Margin="0,0,0,50"
+                        Style="{StaticResource MainButtons}"
+                        Command="{Binding AuthorizationModuleCommand}"
+                        CommandParameter="{Binding ElementName=PasswordBox}"/>
     </Grid>
 </Window>
