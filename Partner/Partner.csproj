@@ -66,6 +66,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Views\Manager\MainPageManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Views\Manager\Pages\MainPageRental.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\AuthorizationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -91,8 +99,17 @@
     <Compile Include="Models\InformativeWindowModels\NewsModel.cs" />
     <Compile Include="Models\PersonalData\UserDataModel.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
+    <Compile Include="ViewModels\Views\Maneger\MainPageManagerViewModel.cs" />
+    <Compile Include="ViewModels\Views\Maneger\Pages\MainPageRentalViewModel.cs" />
     <Compile Include="ViewModels\Windows\AuthorizationWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\InformativeWindows\StartingInformationWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowViewModel.cs" />
+    <Compile Include="Views\Views\Manager\MainPageManager.xaml.cs">
+      <DependentUpon>MainPageManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Views\Manager\Pages\MainPageRental.xaml.cs">
+      <DependentUpon>MainPageRental.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\AuthorizationWindow.xaml.cs">
       <DependentUpon>AuthorizationWindow.xaml</DependentUpon>
     </Compile>
@@ -132,8 +149,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModels\Views\" />
-    <Folder Include="Views\Views\" />
+    <Folder Include="Views\Views\Administration\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Pictures\MainIconWindow.png" />

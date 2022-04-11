@@ -6,7 +6,13 @@ namespace ConsoleTest
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            string phrase = "The quick brown fox,umps over,the lazy dog.";
+            string[] words = phrase.Split(',');
+
+            foreach (var word in words)
+            {
+                System.Console.WriteLine($"<{word}>");
+            }
         }
     }
 }

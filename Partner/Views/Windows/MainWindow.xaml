@@ -3,11 +3,24 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:cmd="clr-namespace:Partner.Infrastructure.Commands"
+        xmlns:DataContext="clr-namespace:Partner.ViewModels.Windows"
         xmlns:local="clr-namespace:Partner"
         mc:Ignorable="d"
         Title="ООО ПАРТНЕР"
-        WindowState="Maximized">
+        ResizeMode="NoResize" 
+        WindowState="Maximized"
+        MinHeight="750" MinWidth="1300">
+    <Window.Resources>
+        <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
+    </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Ctrl" Key="Q" Command="{StaticResource CloseApplicationCommand}"/>
+    </Window.InputBindings>
+    <Window.DataContext>
+        <DataContext:MainWindowViewModel/>
+    </Window.DataContext>
     <Grid>
-        
+        <Frame Content="{Binding StartPageRoles}"/>
     </Grid>
 </Window>

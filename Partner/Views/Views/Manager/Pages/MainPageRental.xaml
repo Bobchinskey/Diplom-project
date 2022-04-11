@@ -1,0 +1,19 @@
+﻿<Page x:Class="Partner.Views.Views.Manager.Pages.MainPageRental"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:Datacontext="clr-namespace:Partner.ViewModels.Views.Maneger.Pages"
+      xmlns:local="clr-namespace:Partner.Views.Views.Manager.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MainPageRental">
+    
+    <Page.DataContext>
+        <Datacontext:MainPageRentalViewModel/>
+    </Page.DataContext>
+    
+    <Grid>
+        <DataGrid ItemsSource="{Binding rentalTable}" CanUserReorderColumns="False" CanUserAddRows="False"/>
+    </Grid>
+</Page>
