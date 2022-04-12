@@ -73,6 +73,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\Styles\HyperlinkButtons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Views\Manager\MainPageManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -81,11 +85,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Views\Manager\Pages\Texs.xaml">
+    <Page Include="Views\Windows\AuthorizationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Windows\AuthorizationWindow.xaml">
+    <Page Include="Views\Windows\InformativeWindows\AboutPprogram.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -113,6 +117,7 @@
     <Compile Include="ViewModels\Views\Maneger\MainPageManagerViewModel.cs" />
     <Compile Include="ViewModels\Views\Maneger\Pages\MainPageRentalViewModel.cs" />
     <Compile Include="ViewModels\Windows\AuthorizationWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\InformativeWindows\AboutProgramViewModel.cs" />
     <Compile Include="ViewModels\Windows\InformativeWindows\StartingInformationWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowViewModel.cs" />
     <Compile Include="Views\Views\Manager\MainPageManager.xaml.cs">
@@ -121,11 +126,11 @@
     <Compile Include="Views\Views\Manager\Pages\MainPageRental.xaml.cs">
       <DependentUpon>MainPageRental.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Views\Manager\Pages\Texs.xaml.cs">
-      <DependentUpon>Texs.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Windows\AuthorizationWindow.xaml.cs">
       <DependentUpon>AuthorizationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\InformativeWindows\AboutPprogram.xaml.cs">
+      <DependentUpon>AboutPprogram.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\InformativeWindows\StartingInformationWindow.xaml.cs">
       <DependentUpon>StartingInformationWindow.xaml</DependentUpon>

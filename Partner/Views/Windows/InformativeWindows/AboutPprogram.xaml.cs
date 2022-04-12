@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Partner.Views.Views.Manager.Pages
+namespace Partner.Views.Windows.InformativeWindows
 {
     /// <summary>
-    /// Логика взаимодействия для Texs.xaml
+    /// Логика взаимодействия для AboutPprogram.xaml
     /// </summary>
-    public partial class Texs : Page
+    public partial class AboutPprogram : Window
     {
-        public Texs()
+        public AboutPprogram()
         {
             InitializeComponent();
         }

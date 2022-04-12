@@ -1,0 +1,56 @@
+﻿<Window x:Class="Partner.Views.Windows.InformativeWindows.AboutPprogram"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Datacontext="clr-namespace:Partner.ViewModels.Windows.InformativeWindows"
+        xmlns:local="clr-namespace:Partner.Views.Windows.InformativeWindows"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Title="О программе" Height="350" Width="850">
+    <Window.DataContext>
+        <Datacontext:AboutProgramViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Button Grid.Column="0" Command="{Binding OpenProgramWebsiteCommand}" HorizontalAlignment="Center" Width="400" Margin="5"  VerticalAlignment="Center" Style="{StaticResource HyperlinkButton}" BorderThickness="0">
+            <Image Source="/Resources/Pictures/MainPicture.jpg" Cursor="Hand"/>
+        </Button>
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Margin="5,45,0,0" Grid.Column="1" HorizontalAlignment="Left">
+                <TextBlock TextAlignment="Left" FontWeight="Bold" Text="{Binding LastUpdateProgram}"/>
+                <TextBlock Margin="0,10,0,0" TextAlignment="Left" FontWeight="Bold" Text="{Binding VersionProgram}"/>
+                <TextBlock Margin="0,10,0,0" TextAlignment="Left" FontWeight="Bold" Text="{Binding VersionDatabase}"/>
+                <Button Margin="0,32,0,0" Command="{Binding OpenDevelopersWebsiteCommand}" Style="{StaticResource HyperlinkButton}" HorizontalAlignment="Left" Width="auto" FontWeight="Bold" FontSize="10" BorderThickness="0">
+                    <Button.Content>
+                        <TextBlock Text="{Binding DevelopersWebsite}" TextAlignment="Left" Foreground="DodgerBlue" TextDecorations="Underline" Cursor="Hand"/>
+                    </Button.Content>
+                </Button>
+                <Button Margin="0,13,0,0" Command="{Binding OpenProgramWebsiteCommand}" Style="{StaticResource HyperlinkButton}" HorizontalAlignment="Left" Width="auto" FontWeight="Bold" FontSize="10" BorderThickness="0">
+                    <Button.Content>
+                        <TextBlock Text="{Binding ProgramWebsite}" TextAlignment="Left" Foreground="DodgerBlue" TextDecorations="Underline" Cursor="Hand"/>
+                    </Button.Content>
+                </Button>
+                <TextBlock Margin="0,31,0,0" TextAlignment="Left" FontWeight="Bold" Text="{Binding NumderPhone}"/>
+                <TextBlock Margin="0,9,0,0" TextAlignment="Left" FontWeight="Bold" Text="{Binding Email}"/>
+            </StackPanel>
+            <StackPanel Margin="0,45,5,0" Grid.Column="0" HorizontalAlignment="Right">
+                <TextBlock TextAlignment="Right" Text="Последние обновление:"/>
+                <TextBlock Margin="0,10,0,0" TextAlignment="Right" Text="Версия программы:"/>
+                <TextBlock Margin="0,10,0,0" TextAlignment="Right" Text="Базы данных:"/>
+                <TextBlock Margin="0,30,0,0" TextAlignment="Right" Text="Сайт разработчика:"/>
+                <TextBlock Margin="0,10,0,0" TextAlignment="Right" Text="Страница программы:"/>
+                <TextBlock Margin="0,30,0,0" TextAlignment="Right" Text="Номер телефона:"/>
+                <TextBlock Margin="0,10,0,0" TextAlignment="Right" Text="Электронная почта:"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

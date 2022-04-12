@@ -79,6 +79,20 @@ namespace Partner.ViewModels.Views.Maneger
 
         #endregion
 
+        #region Команда вызова окна "О программе"
+
+        public ICommand OpenAboutProgramCommand { get; }
+
+        private bool CanAboutProgramCommandExecute(object p) => true;
+
+        private void OnAboutProgramCommandExecuted(object p)
+        {
+            AboutPprogram aboutPprogram = new AboutPprogram();
+            aboutPprogram.Show();
+        }
+
+        #endregion
+
         #endregion
 
         /*------------------------------------------------------------------------------------------------*/
@@ -93,6 +107,8 @@ namespace Partner.ViewModels.Views.Maneger
             UpdatePageCommand = new LamdaCommand(OnUpdatePageCommandExecuted, CanUpdatePageCommandExecute);
 
             OpenNewsPageCommand = new LamdaCommand(OnOpenNewsPageCommandExecuted, CanOpenNewsPageCommandExecute);
+
+            OpenAboutProgramCommand = new LamdaCommand(OnAboutProgramCommandExecuted, CanAboutProgramCommandExecute);
 
             #endregion
         }
