@@ -22,40 +22,18 @@
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch">
             <Menu Background="White" DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="16">
-                <Menu.Resources>
-                    <ControlTemplate x:Key="{x:Static MenuItem.SubmenuItemTemplateKey}"
-               TargetType="{x:Type MenuItem}">
-                        <Border Name="Border" Background="White">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" SharedSizeGroup="Icon" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" SharedSizeGroup="Shortcut" />
-                                    <ColumnDefinition Width="13" />
-                                </Grid.ColumnDefinitions>
-                                <ContentPresenter Name="Icon" Margin="6,0,6,0" VerticalAlignment="Center" ContentSource="Icon" />
-                                <ContentPresenter Name="HeaderHost" Grid.Column="1" ContentSource="Header" RecognizesAccessKey="True" />
-                            </Grid>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsHighlighted" Value="true">
-                                <Setter TargetName="Border" Property="Background" Value="#3D26A0DA" />
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="#3D26A0DA" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Menu.Resources>
                 <MenuItem Header="Программа" VerticalAlignment="Center">
-                    <MenuItem Header="Войти как..."/>
-                    <MenuItem Header="Выход" Command="{StaticResource CloseApplicationCommand}"/>
+                    <MenuItem Header="Обновить..." Command="{Binding UpdatePageCommand}" FontSize="14"/>
+                    <MenuItem Header="Новости..." Command="{Binding OpenNewsPageCommand}" FontSize="14"/>
+                    <MenuItem Header="Войти как..." Command="{Binding ChangeUserCommand}" FontSize="14"/>
+                    <Separator/>
+                    <MenuItem Header="Выход" Command="{StaticResource CloseApplicationCommand}" FontSize="14"/>
                 </MenuItem>
                 <MenuItem Header="Заказчики"/>
                 <MenuItem Header="Автомобили"/>
                 <MenuItem Header="Водители"/>
             </Menu>
         </DockPanel>
-        <Frame Grid.Row="1" Content="{Binding StartPage}"/>
+        <Frame Grid.Row="1" Content="{Binding StartPage}" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Page>

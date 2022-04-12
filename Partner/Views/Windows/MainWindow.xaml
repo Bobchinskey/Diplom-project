@@ -10,7 +10,7 @@
         Title="ООО ПАРТНЕР"
         ResizeMode="NoResize" 
         WindowState="Maximized"
-        MinHeight="750" MinWidth="1300">
+        MinHeight="800" MinWidth="1500">
     <Window.Resources>
         <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
     </Window.Resources>
@@ -21,6 +21,6 @@
         <DataContext:MainWindowViewModel/>
     </Window.DataContext>
     <Grid>
-        <Frame Content="{Binding StartPageRoles}"/>
+        <Frame Content="{Binding StartPageRoles}" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

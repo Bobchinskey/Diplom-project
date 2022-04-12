@@ -1,4 +1,5 @@
-﻿namespace Partner.Models.PersonalData
+﻿
+namespace Partner.Models.PersonalData
 {
     class UserDataModel
     {

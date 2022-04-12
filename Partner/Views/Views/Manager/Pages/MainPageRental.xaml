@@ -3,17 +3,109 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
       xmlns:Datacontext="clr-namespace:Partner.ViewModels.Views.Maneger.Pages"
       xmlns:local="clr-namespace:Partner.Views.Views.Manager.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="1000"
       Title="MainPageRental">
-    
     <Page.DataContext>
         <Datacontext:MainPageRentalViewModel/>
     </Page.DataContext>
-    
     <Grid>
-        <DataGrid ItemsSource="{Binding rentalTable}" CanUserReorderColumns="False" CanUserAddRows="False"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid FontSize="18" Grid.Column="0" ItemsSource="{Binding rentalTable}" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False"/>
+        <Grid Grid.Column="1" Background="BlueViolet">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Width="200" >
+                <Button Margin="0,15" Style="{StaticResource ButtonStroge}" Background="White" HorizontalAlignment="Center" Width="180" Height="35">
+                    <Button.Content>
+                        <WrapPanel HorizontalAlignment="Stretch" Width="170">
+                            <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
+                            <TextBlock Margin="10,0,0,0" FontSize="16" Text="Новая аренда..." HorizontalAlignment="Right"/>
+                        </WrapPanel>
+                    </Button.Content>
+                </Button>
+                <Button Margin="0,15" Style="{StaticResource ButtonStroge}" Background="White" HorizontalAlignment="Center" Width="180" Height="35">
+                    <Button.Content>
+                        <WrapPanel HorizontalAlignment="Stretch" Width="170">
+                            <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
+                            <TextBlock Margin="10,0,0,0" FontSize="16" Text="Новая бронь..." HorizontalAlignment="Right"/>
+                        </WrapPanel>
+                    </Button.Content>
+                </Button>
+                <Button Margin="0,15" Style="{StaticResource ButtonStroge}" Background="White" HorizontalAlignment="Center" Width="180" Height="35">
+                    <Button.Content>
+                        <WrapPanel HorizontalAlignment="Stretch" Width="170">
+                            <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
+                            <TextBlock Margin="10,0,0,0" FontSize="16" Text="Новый сервис..." HorizontalAlignment="Right"/>
+                        </WrapPanel>
+                    </Button.Content>
+                </Button>
+                <Button Margin="0,40,0,15" Style="{StaticResource ButtonStroge}" Background="White" HorizontalAlignment="Center" Width="180" Height="35">
+                    <Button.Content>
+                        <WrapPanel HorizontalAlignment="Stretch" Width="170">
+                            <fa:ImageAwesome Icon="List" HorizontalAlignment="Left" Height="18" Foreground="Black"/>
+                            <TextBlock Margin="10,0,0,0" FontSize="16" Text="Список аренд..." HorizontalAlignment="Right"/>
+                        </WrapPanel>
+                    </Button.Content>
+                </Button>
+                <Button Margin="0,15" Style="{StaticResource ButtonStroge}" Background="White" HorizontalAlignment="Center" Width="180" Height="35">
+                    <Button.Content>
+                        <WrapPanel HorizontalAlignment="Stretch" Width="170">
+                            <fa:ImageAwesome Icon="List" HorizontalAlignment="Left" Height="18" Foreground="Black"/>
+                            <TextBlock Margin="10,0,0,0" FontSize="16" Text="Список брони..." HorizontalAlignment="Right"/>
+                        </WrapPanel>
+                    </Button.Content>
+                </Button>
+                <Button Margin="0,15" Style="{StaticResource ButtonStroge}" Background="White" HorizontalAlignment="Center" Width="180" Height="35">
+                    <Button.Content>
+                        <WrapPanel HorizontalAlignment="Stretch" Width="170">
+                            <fa:ImageAwesome Icon="List" HorizontalAlignment="Left" Height="18" Foreground="Black"/>
+                            <TextBlock Margin="10,0,0,0" FontSize="16" Text="Список штрафов..." HorizontalAlignment="Right"/>
+                        </WrapPanel>
+                    </Button.Content>
+                </Button>
+                <Button FontSize="16" Margin="0,40,0,15" Style="{StaticResource ButtonStroge}" Background="White" HorizontalAlignment="Center" Width="180" Height="35">
+                    <Button.Content>
+                        <TextBlock>
+                            <Run Text="Уведомления("/>
+                            <Run Text="{}"/>
+                            <Run Text=")"/>
+                        </TextBlock>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+            <Grid Margin="10,0,10,0" Grid.Row="1" VerticalAlignment="Bottom" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image x:Name="ProfileImage" Width="60" Margin="5" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Image.Source>
+                            <Binding Path="Image">
+                                <Binding.TargetNullValue>
+                                    <ImageSource>/Resources/Pictures/NullImage.jpg</ImageSource>
+                                </Binding.TargetNullValue>
+                            </Binding>
+                        </Image.Source>
+                    </Image>
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1">
+                        <TextBlock Text="Пользователь:" Foreground="Black"/>
+                    <TextBlock Foreground="Black" TextWrapping="Wrap">
+                            <Run Text="{Binding Surname}"/>
+                            <Run Text=" "/>
+                            <Run Text="{Binding Name}"/>
+                    </TextBlock>
+                    <TextBlock Text="{Binding AccessLavel}" Foreground="Black"/>
+                    </StackPanel>
+                </Grid>
+        </Grid>
     </Grid>
 </Page>

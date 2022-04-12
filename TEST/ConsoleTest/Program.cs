@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace ConsoleTest
 {
@@ -6,13 +7,14 @@ namespace ConsoleTest
     {
         static void Main(string[] args)
         {
-            string phrase = "The quick brown fox,umps over,the lazy dog.";
-            string[] words = phrase.Split(',');
-
-            foreach (var word in words)
-            {
-                System.Console.WriteLine($"<{word}>");
-            }
+            // Время указывается в миллисекундах
+            Timer timer = new Timer(showTime, null, 0, 2000);
+            // Таймер будет работать до тех пор, пока мы не нажмём Enter
+            Console.ReadLine();
+        }
+        static void showTime(Object obj)
+        {
+            Console.WriteLine("Текущие дата и время: {0}", DateTime.Now.ToString());
         }
     }
 }

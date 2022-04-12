@@ -1,4 +1,5 @@
-﻿using Partner.ViewModels.Base;
+﻿using Partner.Models.PersonalData;
+using Partner.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -14,6 +15,8 @@ namespace Partner.ViewModels.Views.Maneger.Pages
     class MainPageRentalViewModel : ViewModelBase
     {
 
+        #region Данные
+
         #region Информационная таблица аренд : rentalTable
 
         private DataTable _rentalTable;
@@ -24,6 +27,73 @@ namespace Partner.ViewModels.Views.Maneger.Pages
             get => _rentalTable;
             set => Set(ref _rentalTable, value);
         }
+
+        #endregion
+
+        #region Фамилия : Surname
+
+        private string _Surname = UserDataModel.surname;
+
+        /// <summary>Surname</summary>
+        public string Surname
+        {
+            get => _Surname;
+            set => Set(ref _Surname, value);
+        }
+
+        #endregion
+
+        #region Имя : Name
+
+        private string _Name = UserDataModel.name;
+
+        /// <summary>Name</summary>
+        public string Name
+        {
+            get => _Name;
+            set => Set(ref _Name, value);
+        }
+
+        #endregion
+
+        #region Отчество : Patronymic
+
+        private string _Patronymic = UserDataModel.patronymic;
+
+        /// <summary>Patronymic</summary>
+        public string Patronymic
+        {
+            get => _Patronymic;
+            set => Set(ref _Patronymic, value);
+        }
+
+        #endregion
+
+        #region Уровень доступа : AccessLavel
+
+        private string _AccessLavel = UserDataModel.access_lavel;
+
+        /// <summary>AccessLavel</summary>
+        public string AccessLavel
+        {
+            get => _AccessLavel;
+            set => Set(ref _AccessLavel, value);
+        }
+
+        #endregion
+
+        #region Изображение : UserDataModel.image
+
+        private object _Image = UserDataModel.image;
+
+        /// <summary>Image</summary>
+        public object Image
+        {
+            get => _Image;
+            set => Set(ref _Image, value);
+        }
+
+        #endregion
 
         #endregion
 
@@ -70,7 +140,7 @@ namespace Partner.ViewModels.Views.Maneger.Pages
             {
                 column = new DataColumn();
                 column.DataType = System.Type.GetType("System.String");
-                column.ColumnName = Convert.ToString(i);
+                column.ColumnName = "Аренда " + Convert.ToString(i+1);
                 column.ReadOnly = true;
                 column.Unique = false;
                 rentalMediunTable.Columns.Add(column);
