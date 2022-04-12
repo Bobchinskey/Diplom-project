@@ -63,7 +63,7 @@
                     </MenuItem.Header>
                 </MenuItem>
                 <MenuItem Header="Опции">
-                    <MenuItem Header="Пользовательские настройки..." FontSize="14"/>
+                    <MenuItem Header="Пользовательские настройки..." Command="{Binding OpenUserSettingsWindowCommand}" FontSize="14"/>
                 </MenuItem>
                 <MenuItem Header="Помощь">
                     <MenuItem Header="О программе..." Command="{Binding OpenAboutProgramCommand}" FontSize="14"/>

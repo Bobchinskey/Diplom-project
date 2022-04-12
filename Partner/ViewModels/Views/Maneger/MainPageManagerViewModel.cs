@@ -6,6 +6,7 @@ using Partner.Views.Views.Manager;
 using Partner.Views.Views.Manager.Pages;
 using Partner.Views.Windows;
 using Partner.Views.Windows.InformativeWindows;
+using Partner.Views.Windows.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,6 +94,20 @@ namespace Partner.ViewModels.Views.Maneger
 
         #endregion
 
+        #region Команда вызова окна "Пользовательские настройки"
+
+        public ICommand OpenUserSettingsWindowCommand { get; }
+
+        private bool CanOpenUserSettingsWindowCommandExecute(object p) => true;
+
+        private void OnOpenUserSettingsWindowCommandExecuted(object p)
+        {
+            UserSettingsWindow userSettingsWindow = new UserSettingsWindow();
+            userSettingsWindow.Show();
+        }
+
+        #endregion
+
         #endregion
 
         /*------------------------------------------------------------------------------------------------*/
@@ -109,6 +124,8 @@ namespace Partner.ViewModels.Views.Maneger
             OpenNewsPageCommand = new LamdaCommand(OnOpenNewsPageCommandExecuted, CanOpenNewsPageCommandExecute);
 
             OpenAboutProgramCommand = new LamdaCommand(OnAboutProgramCommandExecuted, CanAboutProgramCommandExecute);
+
+            OpenUserSettingsWindowCommand = new LamdaCommand(OnOpenUserSettingsWindowCommandExecuted, CanOpenUserSettingsWindowCommandExecute);
 
             #endregion
         }
