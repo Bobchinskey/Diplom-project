@@ -1,13 +1,8 @@
 ﻿using Partner.Infrastructure.Commands;
 using Partner.ViewModels.Base;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Partner.ViewModels.Windows.InformativeWindows
@@ -174,7 +169,6 @@ namespace Partner.ViewModels.Windows.InformativeWindows
             }
             thisReader.Close();
             ThisConnection.Close();
-            
         }
     }
 }

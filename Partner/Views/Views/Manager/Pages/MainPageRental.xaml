@@ -45,7 +45,7 @@
                         <Button.Content>
                             <WrapPanel HorizontalAlignment="Stretch" Width="170">
                                 <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
-                                <TextBlock Margin="10,0,0,0" FontSize="16" Text="Новый сервис..." HorizontalAlignment="Right"/>
+                                <TextBlock Margin="10,0,0,0" FontSize="16" Text="Новое ТО..." HorizontalAlignment="Right"/>
                             </WrapPanel>
                         </Button.Content>
                     </Button>
