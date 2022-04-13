@@ -211,5 +211,8 @@
   <ItemGroup>
     <Resource Include="IconMainProgram.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Pictures\NullImageVehicle.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

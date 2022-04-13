@@ -144,15 +144,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
         {
             AddVehicleWindow addVehicleWindow = new AddVehicleWindow();
             addVehicleWindow.Show();
-
-            foreach (System.Windows.Window window in System.Windows.Application.Current.Windows)
-            {
-                if (window.DataContext == this)
-                {
-                    window.Close();
-                }
-            }
-
         }
 
         #endregion
@@ -180,7 +171,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
             SqlCommand thisCommand = ThisConnection.CreateCommand();
             thisCommand.CommandText = "Select id_vehicle,make_model,state_number,category,status from vehicle where status!='В архиве'";
             SqlDataReader thisReader = thisCommand.ExecuteReader();
-            dt.Load(thisReader);            
+            dt.Load(thisReader);
             MainListVehicle = dt.AsEnumerable().Select(se => new ListVehicle() { id_vehicle = se.Field<int>("id_vehicle"), make_model = se.Field<string>("make_model"), state_number = se.Field<string>("state_number"), category = se.Field<string>("category"), status = se.Field<string>("status")}).ToList();
             ThisConnection.Close();
             int k = MainListVehicle.Count;

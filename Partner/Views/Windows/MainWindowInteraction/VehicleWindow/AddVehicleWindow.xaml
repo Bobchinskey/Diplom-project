@@ -3,30 +3,204 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Partner.Views.Windows.MainWindowInteraction.VehicleWindow"
+        xmlns:local="clr-namespace:Partner.Views.Windows.MainWindowInteraction.VehicleWindow" 
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Добавление автомобиля" 
-        Height="600" Width="1000"
-        MinHeight="600" MinWidth="1000"
+        Height="600" Width="100"
+        MinHeight="650" MinWidth="1000"
         ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <WrapPanel Grid.Row="0"/>
+        <WrapPanel Grid.Row="0" Background="BlueViolet">
+            <TextBlock Margin="10" Text="Добавление автомобиля" Foreground="White" FontSize="25"/>
+        </WrapPanel>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="500"/>
+                <ColumnDefinition Width="500"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
-                <WrapPanel Margin="10">
-                    <TextBlock Text="Марка и модель"/>
-                    <TextBox Margin="20,0" Width="300"/>
-                </WrapPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" HorizontalAlignment="Right" Margin="10">
+                        <TextBlock Margin="0,10" Text="Марка и модель:" TextAlignment="Right"/>
+                        <TextBlock Margin="0,10" Text="VIN номер:" TextAlignment="Right"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,10">
+                        <TextBox Margin="20,10,20,10" Width="280"/>
+                        <TextBox Margin="20,10" Width="280" MaxLength="17"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Margin="10,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <WrapPanel Grid.Column="0" FlowDirection="RightToLeft">
+                        <TextBox Margin="10,0" Width="100" MaxLength="9"/>
+                        <TextBlock Text=":Гос. номер" Margin="10,0,0,0"/>
+                    </WrapPanel>
+                    <WrapPanel Grid.Column="1" FlowDirection="RightToLeft">
+                        <ComboBox Margin="10,0" Width="100"/>
+                        <TextBlock Text=":Тип ТС" Margin="10,0,0,0"/>
+                    </WrapPanel>
+                </Grid>
+                <Grid Margin="10,15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <WrapPanel Grid.Column="0" FlowDirection="RightToLeft">
+                        <TextBox Margin="10,0" Width="100" MaxLength="9"/>
+                        <TextBlock Text=":Год изготовления" Margin="10,0,0,0"/>
+                    </WrapPanel>
+                    <WrapPanel Grid.Column="1" FlowDirection="RightToLeft">
+                        <ComboBox Margin="10,0" Width="100"/>
+                        <TextBlock Text=":Категория ТС" Margin="10,0,0,0"/>
+                    </WrapPanel>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" HorizontalAlignment="Right" Margin="10,10,0,10">
+                        <TextBlock Margin="0,10" Text="Номер двигателя:" TextAlignment="Right"/>
+                        <TextBlock Margin="0,10" Text="Номер шасси(рама):" TextAlignment="Right"/>
+                        <TextBlock Margin="0,10" Text="Номер кузова(прицепа):" TextAlignment="Right"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,10">
+                        <TextBox Margin="20,10" Width="280"/>
+                        <TextBox Margin="20,10" Width="280" MaxLength="17"/>
+                        <TextBox Margin="20,10" Width="280" MaxLength="17"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Margin="10,15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <WrapPanel Grid.Column="0" FlowDirection="RightToLeft">
+                        <TextBox Margin="10,0" Width="100" MaxLength="9"/>
+                        <TextBlock Text=":Цвет кузова" Margin="10,0,0,0"/>
+                    </WrapPanel>
+                    <WrapPanel Grid.Column="1" FlowDirection="RightToLeft">
+                        <TextBox Margin="7,0" Width="100"/>
+                        <TextBlock Text=":Экологический класс" Margin="5,0,0,0"/>
+                    </WrapPanel>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" HorizontalAlignment="Right" Margin="10,10,0,10">
+                        <TextBlock Margin="0,10" Text="Мощьность:" TextAlignment="Right"/>
+                        <TextBlock Margin="0,10" Text="Рабочий объем двигателя:" TextAlignment="Right"/>
+                        <TextBlock Margin="0,10" Text="Тип двигаиеля:" TextAlignment="Right"/>
+                        <TextBlock Margin="0,10" Text="Масса без нагрузки:" TextAlignment="Right"/>
+                        <TextBlock Margin="0,10" Text="Разрешенная макс. масса:" TextAlignment="Right"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,10">
+                        <WrapPanel>
+                            <TextBox Margin="20,10,5,10" Width="150" HorizontalAlignment="Left"/>
+                            <TextBlock Text="Л.С." VerticalAlignment="Center"/>
+                        </WrapPanel>
+                        <WrapPanel>
+                            <TextBox Margin="20,10,5,10" Width="150" HorizontalAlignment="Left"/>
+                            <TextBlock Text="Куб. см" VerticalAlignment="Center"/>
+                        </WrapPanel>
+                        <TextBox Margin="20,10" Width="280" MaxLength="17"/>
+                        <WrapPanel>
+                            <TextBox Margin="20,6,5,10" Width="150" HorizontalAlignment="Left"/>
+                            <TextBlock Text="КГ" VerticalAlignment="Center"/>
+                        </WrapPanel>
+                        <WrapPanel>
+                            <TextBox Margin="20,6,5,10" Width="150" HorizontalAlignment="Left"/>
+                            <TextBlock Text="КГ" VerticalAlignment="Center"/>
+                        </WrapPanel>
+                    </StackPanel>
+                </Grid>
             </StackPanel>
+            <StackPanel Grid.Column="1">
+                <Border Margin="10,10,20,10" BorderBrush="Black" BorderThickness="1">
+                    <Grid HorizontalAlignment="Center">
+                        <Image Margin="10" x:Name="ProfileImage" Width="400" Height="156" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                            <Image.Source>
+                                <Binding>
+                                    <Binding.TargetNullValue>
+                                        <ImageSource>/Resources/Pictures/NullImageVehicle.jpg</ImageSource>
+                                    </Binding.TargetNullValue>
+                                </Binding>
+                            </Image.Source>
+                        </Image>
+                    </Grid>
+                </Border>
+                <Grid Margin="0,40,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <WrapPanel Grid.Column="0" FlowDirection="RightToLeft">
+                        <TextBox Margin="10,0" Width="100" MaxLength="4"/>
+                        <TextBlock Text=":Серия ПТС" Margin="10,0,0,0"/>
+                    </WrapPanel>
+                    <WrapPanel Grid.Column="1" Margin="0,0,20,0" FlowDirection="RightToLeft">
+                        <TextBox Margin="10,0" Width="100" MaxLength="6"/>
+                        <TextBlock Text=":Номер ПТС" Margin="5,0,0,0"/>
+                    </WrapPanel>
+                </Grid>
+                <Grid>
+                    <StackPanel Grid.Column="0" HorizontalAlignment="Left" Margin="10,10,10,10">
+                        <TextBlock Margin="0,10" Text="Кем выдан:" TextAlignment="Right"/>
+                        <TextBlock Margin="0,10" Text="Когда выдан:" TextAlignment="Right"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" HorizontalAlignment="Right" Margin="10,10,10,10">
+                        <TextBox Margin="20,10" Width="280"/>
+                        <DatePicker Margin="20,10" Width="280"/>
+                    </StackPanel>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <WrapPanel Grid.Column="0" FlowDirection="RightToLeft">
+                        <TextBox Margin="10,0" Width="100" MaxLength="4"/>
+                        <TextBlock Text=":Серия СТС" Margin="10,0,0,0"/>
+                    </WrapPanel>
+                    <WrapPanel Grid.Column="1" Margin="0,0,20,0" FlowDirection="RightToLeft">
+                        <TextBox Margin="10,0" Width="100" MaxLength="6"/>
+                        <TextBlock Text=":Номер СТС" Margin="5,0,0,0"/>
+                    </WrapPanel>
+                </Grid>
+                <Grid>
+                    <StackPanel Grid.Column="0" HorizontalAlignment="Left" Margin="10,10,10,10">
+                        <TextBlock Margin="0,10" Text="Кем выдан:" TextAlignment="Right"/>
+                        <TextBlock Margin="0,10" Text="Когда выдан:" TextAlignment="Right"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" HorizontalAlignment="Right" Margin="10,10,10,10">
+                        <TextBox Margin="20,10" Width="280"/>
+                        <DatePicker Margin="20,10" Width="280"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <Button Grid.Column="1" Command="{Binding}" Style="{StaticResource ButtonStroge}" Background="White" Width="120" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">
+                <Button.Content>
+                    <Grid HorizontalAlignment="Stretch" Width="120">
+                        <fa:ImageAwesome Icon="Save" HorizontalAlignment="Left" Height="20" Margin="5,0" Foreground="BlueViolet"/>
+                        <TextBlock Text="Сохранить" HorizontalAlignment="Center"/>
+                    </Grid>
+                </Button.Content>
+            </Button>
         </Grid>
     </Grid>
 </Window>
