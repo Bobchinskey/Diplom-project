@@ -1,0 +1,32 @@
+﻿<Window x:Class="Partner.Views.Windows.MainWindowInteraction.VehicleWindow.AddVehicleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Partner.Views.Windows.MainWindowInteraction.VehicleWindow"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Добавление автомобиля" 
+        Height="600" Width="1000"
+        MinHeight="600" MinWidth="1000"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <WrapPanel Grid.Row="0"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <WrapPanel Margin="10">
+                    <TextBlock Text="Марка и модель"/>
+                    <TextBox Margin="20,0" Width="300"/>
+                </WrapPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

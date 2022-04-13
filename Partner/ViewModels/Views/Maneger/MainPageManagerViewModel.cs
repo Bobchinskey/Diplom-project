@@ -6,6 +6,7 @@ using Partner.Views.Views.Manager;
 using Partner.Views.Views.Manager.Pages;
 using Partner.Views.Windows;
 using Partner.Views.Windows.InformativeWindows;
+using Partner.Views.Windows.MainWindowInteraction.VehicleWindow;
 using Partner.Views.Windows.Settings;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,8 @@ namespace Partner.ViewModels.Views.Maneger
         }
 
         #endregion
+
+
 
         /*------------------------------------------------------------------------------------------------*/
 
@@ -108,6 +111,21 @@ namespace Partner.ViewModels.Views.Maneger
 
         #endregion
 
+        #region Команда вызова окна "Автомобили"
+
+        public ICommand OpenListVehicleWindowCommand { get; }
+
+        private bool CanOpenListVehicleWindowCommandExecute(object p) => true;
+
+        private void OnOpenListVehicleWindowCommandExecuted(object p)
+        {
+            ListVehicleWindow listVehicleWindow = new ListVehicleWindow();
+            listVehicleWindow.Show();
+        }
+
+        #endregion
+
+
         #endregion
 
         /*------------------------------------------------------------------------------------------------*/
@@ -126,6 +144,8 @@ namespace Partner.ViewModels.Views.Maneger
             OpenAboutProgramCommand = new LamdaCommand(OnAboutProgramCommandExecuted, CanAboutProgramCommandExecute);
 
             OpenUserSettingsWindowCommand = new LamdaCommand(OnOpenUserSettingsWindowCommandExecuted, CanOpenUserSettingsWindowCommandExecute);
+
+            OpenListVehicleWindowCommand = new LamdaCommand(OnOpenListVehicleWindowCommandExecuted, CanOpenListVehicleWindowCommandExecute);
 
             #endregion
         }

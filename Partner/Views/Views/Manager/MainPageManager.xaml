@@ -34,7 +34,7 @@
                     <MenuItem Header="Аренды..." FontSize="14"/>
                     <MenuItem Header="Брони..." FontSize="14"/>
                     <Separator/>
-                    <MenuItem Header="Автомобили..." FontSize="14"/>
+                    <MenuItem Header="Автомобили..." Command="{Binding OpenListVehicleWindowCommand}" FontSize="14"/>
                     <MenuItem Header="Страхование..." FontSize="14"/>
                     <Separator/>
                     <MenuItem Header="Список штрафов..." FontSize="14"/>
@@ -42,7 +42,9 @@
                     <MenuItem Header="Тарифы..." FontSize="14"/>
                     <MenuItem Header="Дополнительные услуги..." FontSize="14"/>
                 </MenuItem>
-                <MenuItem Header="Отчеты"/>
+                <MenuItem Header="Отчеты">
+                    
+                </MenuItem>
                 <MenuItem Header="Журналы">
                     <MenuItem Header="Список удаленных аренд..." FontSize="14"/>
                     <MenuItem Header="Список удаленных броней..." FontSize="14"/>
