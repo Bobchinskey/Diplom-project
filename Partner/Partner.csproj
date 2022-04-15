@@ -72,6 +72,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Vehicle\ListVehicle.cs" />
+    <Compile Include="Models\Vehicle\VehicleDataModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\VehicleWindow\AddVehicleWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\VehicleWindow\ListVehicleWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\Settings\AuthorizationWindowViewModel.cs" />
     <Compile Include="Views\Windows\MainWindowInteraction\VehicleWindow\AddVehicleWindow.xaml.cs">

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Partner.Views.Windows.MainWindowInteraction.VehicleWindow" 
+        xmlns:Datacontext="clr-namespace:Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
@@ -11,6 +12,9 @@
         Height="600" Width="100"
         MinHeight="650" MinWidth="1000"
         ResizeMode="NoResize">
+    <Window.DataContext>
+        <Datacontext:AddVehicleWindowViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -35,52 +39,52 @@
                         <TextBlock Margin="0,10" Text="VIN номер:" TextAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,10">
-                        <TextBox Margin="20,10,20,10" Width="280"/>
-                        <TextBox Margin="20,10" Width="280" MaxLength="17"/>
+                        <TextBox Margin="20,10,20,10" Width="280" Text="{Binding MakeModel, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Margin="20,10" Width="280" MaxLength="17" Text="{Binding VIN, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                 </Grid>
-                <Grid Margin="10,5">
+                <Grid Margin="10,5,10,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <WrapPanel Grid.Column="0" FlowDirection="RightToLeft">
-                        <TextBox Margin="10,0" Width="100" MaxLength="9"/>
-                        <TextBlock Text=":Гос. номер" Margin="10,0,0,0"/>
-                    </WrapPanel>
-                    <WrapPanel Grid.Column="1" FlowDirection="RightToLeft">
-                        <ComboBox Margin="10,0" Width="100"/>
-                        <TextBlock Text=":Тип ТС" Margin="10,0,0,0"/>
-                    </WrapPanel>
+                    <Grid Grid.Column="0">
+                        <TextBox HorizontalAlignment="Right" Margin="10,0" Width="100" MaxLength="9" Text="{Binding StateNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock Text="Гос. номер:" HorizontalAlignment="Left" Margin="47,0,0,0" Width="80"/>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <ComboBox Margin="10,0" HorizontalAlignment="Right" Width="100" ItemsSource="{Binding TypeVehicle}" SelectedItem="{Binding SelectStateNumber}"/>
+                        <TextBlock Text="Тип ТС:" HorizontalAlignment="Left" Margin="70,0,0,0"/>
+                    </Grid>
                 </Grid>
                 <Grid Margin="10,15">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <WrapPanel Grid.Column="0" FlowDirection="RightToLeft">
-                        <TextBox Margin="10,0" Width="100" MaxLength="9"/>
-                        <TextBlock Text=":Год изготовления" Margin="10,0,0,0"/>
-                    </WrapPanel>
-                    <WrapPanel Grid.Column="1" FlowDirection="RightToLeft">
-                        <ComboBox Margin="10,0" Width="100"/>
-                        <TextBlock Text=":Категория ТС" Margin="10,0,0,0"/>
-                    </WrapPanel>
+                    <Grid Grid.Column="0">
+                        <TextBox PreviewTextInput="NumberValidationTextBox" MaxLength="4" HorizontalAlignment="Right" Margin="10,0" Width="100" Text="{Binding YearManufacture, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock Text="Год изготовления:" Width="100" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <ComboBox ItemsSource="{Binding Category}" SelectedItem="{Binding SelectCategory}" HorizontalAlignment="Right" Margin="10,0" Width="100"/>
+                        <TextBlock Margin="35,0,0,0" HorizontalAlignment="Left" Text="Категория ТС:"/>
+                    </Grid>
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0" HorizontalAlignment="Right" Margin="10,10,0,10">
+                    <StackPanel Grid.Column="0" HorizontalAlignment="Right" Margin="10,0,0,10">
                         <TextBlock Margin="0,10" Text="Номер двигателя:" TextAlignment="Right"/>
                         <TextBlock Margin="0,10" Text="Номер шасси(рама):" TextAlignment="Right"/>
                         <TextBlock Margin="0,10" Text="Номер кузова(прицепа):" TextAlignment="Right"/>
                     </StackPanel>
-                    <StackPanel Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,10">
-                        <TextBox Margin="20,10" Width="280"/>
-                        <TextBox Margin="20,10" Width="280" MaxLength="17"/>
-                        <TextBox Margin="20,10" Width="280" MaxLength="17"/>
+                    <StackPanel Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,10">
+                        <TextBox Margin="20,10" Width="280" Text="{Binding NumberEngine, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Margin="20,10" Width="280" MaxLength="17" Text="{Binding ChassisNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Margin="20,10" Width="280" MaxLength="17" Text="{Binding BodyNumber, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                 </Grid>
                 <Grid Margin="10,15">
@@ -88,13 +92,13 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <WrapPanel Grid.Column="0" FlowDirection="RightToLeft">
-                        <TextBox Margin="10,0" Width="100" MaxLength="9"/>
-                        <TextBlock Text=":Цвет кузова" Margin="10,0,0,0"/>
+                    <WrapPanel Grid.Column="0">
+                        <TextBlock Text="Цвет кузова:" Margin="10,0,0,0"/>
+                        <TextBox Margin="10,0" Width="100" MaxLength="9" Text="{Binding Color, UpdateSourceTrigger=PropertyChanged}"/>
                     </WrapPanel>
-                    <WrapPanel Grid.Column="1" FlowDirection="RightToLeft">
-                        <TextBox Margin="7,0" Width="100"/>
-                        <TextBlock Text=":Экологический класс" Margin="5,0,0,0"/>
+                    <WrapPanel Grid.Column="1">
+                        <TextBlock Text="Экологический класс:" Margin="5,0,0,0"/>
+                        <TextBox Margin="7,0" Width="100" Text="{Binding EnvironmentalClass, UpdateSourceTrigger=PropertyChanged}"/>
                     </WrapPanel>
                 </Grid>
                 <Grid>
@@ -103,7 +107,7 @@
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" HorizontalAlignment="Right" Margin="10,10,0,10">
-                        <TextBlock Margin="0,10" Text="Мощьность:" TextAlignment="Right"/>
+                        <TextBlock Margin="0,10" Text="Мощность:" TextAlignment="Right"/>
                         <TextBlock Margin="0,10" Text="Рабочий объем двигателя:" TextAlignment="Right"/>
                         <TextBlock Margin="0,10" Text="Тип двигаиеля:" TextAlignment="Right"/>
                         <TextBlock Margin="0,10" Text="Масса без нагрузки:" TextAlignment="Right"/>
@@ -111,20 +115,20 @@
                     </StackPanel>
                     <StackPanel Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,10">
                         <WrapPanel>
-                            <TextBox Margin="20,10,5,10" Width="150" HorizontalAlignment="Left"/>
+                            <TextBox MaxLength="4" PreviewTextInput="NumberValidationTextBox" Margin="20,10,5,10" Width="150" HorizontalAlignment="Left" Text="{Binding PowerEngine}"/>
                             <TextBlock Text="Л.С." VerticalAlignment="Center"/>
                         </WrapPanel>
                         <WrapPanel>
-                            <TextBox Margin="20,10,5,10" Width="150" HorizontalAlignment="Left"/>
+                            <TextBox MaxLength="5" PreviewTextInput="NumberValidationTextBox" Margin="20,10,5,10" Width="150" HorizontalAlignment="Left" Text="{Binding DisplacementEngine}"/>
                             <TextBlock Text="Куб. см" VerticalAlignment="Center"/>
                         </WrapPanel>
-                        <TextBox Margin="20,10" Width="280" MaxLength="17"/>
+                        <TextBox Margin="20,10" Width="280" MaxLength="17" Text="{Binding TypeEngine}"/>
                         <WrapPanel>
-                            <TextBox Margin="20,6,5,10" Width="150" HorizontalAlignment="Left"/>
+                            <TextBox PreviewTextInput="NumberValidationTextBox" Margin="20,6,5,10" Width="150" HorizontalAlignment="Left" MaxLength="6" Text="{Binding WeightWithoutLoad}"/>
                             <TextBlock Text="КГ" VerticalAlignment="Center"/>
                         </WrapPanel>
                         <WrapPanel>
-                            <TextBox Margin="20,6,5,10" Width="150" HorizontalAlignment="Left"/>
+                            <TextBox PreviewTextInput="NumberValidationTextBox" Margin="20,6,5,10" Width="150" HorizontalAlignment="Left" MaxLength="6" Text="{Binding PermittedMaximumMass}"/>
                             <TextBlock Text="КГ" VerticalAlignment="Center"/>
                         </WrapPanel>
                     </StackPanel>
@@ -133,9 +137,9 @@
             <StackPanel Grid.Column="1">
                 <Border Margin="10,10,20,10" BorderBrush="Black" BorderThickness="1">
                     <Grid HorizontalAlignment="Center">
-                        <Image Margin="10" x:Name="ProfileImage" Width="400" Height="156" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <Image Margin="10" x:Name="ProfileImage" Width="400" Height="156" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image.Source>
-                                <Binding>
+                                <Binding Path="Image">
                                     <Binding.TargetNullValue>
                                         <ImageSource>/Resources/Pictures/NullImageVehicle.jpg</ImageSource>
                                     </Binding.TargetNullValue>
@@ -149,13 +153,13 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <WrapPanel Grid.Column="0" FlowDirection="RightToLeft">
-                        <TextBox Margin="10,0" Width="100" MaxLength="4"/>
-                        <TextBlock Text=":Серия ПТС" Margin="10,0,0,0"/>
+                    <WrapPanel Grid.Column="0" Margin="10,0,0,0">
+                        <TextBlock Text="Серия ПТС:" Margin="10,0,0,0"/>
+                        <TextBox PreviewTextInput="NumberValidationTextBox" Margin="10,0" Width="100" MaxLength="4" Text="{Binding SeriesPTS, UpdateSourceTrigger=PropertyChanged}"/>
                     </WrapPanel>
-                    <WrapPanel Grid.Column="1" Margin="0,0,20,0" FlowDirection="RightToLeft">
-                        <TextBox Margin="10,0" Width="100" MaxLength="6"/>
-                        <TextBlock Text=":Номер ПТС" Margin="5,0,0,0"/>
+                    <WrapPanel Grid.Column="1" Margin="10,0,20,0">
+                        <TextBlock Text="Номер ПТС:" Margin="5,0,0,0"/>
+                        <TextBox PreviewTextInput="NumberValidationTextBox" Margin="10,0" Width="100" MaxLength="6" Text="{Binding NumberPTS, UpdateSourceTrigger=PropertyChanged}"/>
                     </WrapPanel>
                 </Grid>
                 <Grid>
@@ -164,8 +168,8 @@
                         <TextBlock Margin="0,10" Text="Когда выдан:" TextAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" HorizontalAlignment="Right" Margin="10,10,10,10">
-                        <TextBox Margin="20,10" Width="280"/>
-                        <DatePicker Margin="20,10" Width="280"/>
+                        <TextBox Margin="20,10" Width="280" Text="{Binding WhoIssuedPTS, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DatePicker Margin="20,10" Width="280" SelectedDate="{Binding DateIssuedPTS, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                 </Grid>
                 <Grid>
@@ -173,13 +177,13 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <WrapPanel Grid.Column="0" FlowDirection="RightToLeft">
-                        <TextBox Margin="10,0" Width="100" MaxLength="4"/>
-                        <TextBlock Text=":Серия СТС" Margin="10,0,0,0"/>
+                    <WrapPanel Grid.Column="0" Margin="10,0,0,0">
+                        <TextBlock Text="Серия СТС:" Margin="10,0,0,0"/>
+                        <TextBox PreviewTextInput="NumberValidationTextBox" Margin="10,0" Width="100" MaxLength="4" Text="{Binding SeriesSTS, UpdateSourceTrigger=PropertyChanged}"/>
                     </WrapPanel>
-                    <WrapPanel Grid.Column="1" Margin="0,0,20,0" FlowDirection="RightToLeft">
-                        <TextBox Margin="10,0" Width="100" MaxLength="6"/>
-                        <TextBlock Text=":Номер СТС" Margin="5,0,0,0"/>
+                    <WrapPanel Grid.Column="1" Margin="10,0,20,0">
+                        <TextBlock Text="Номер СТС:" Margin="5,0,0,0"/>
+                        <TextBox PreviewTextInput="NumberValidationTextBox" Margin="10,0" Width="100" MaxLength="6" Text="{Binding NumberSTS, UpdateSourceTrigger=PropertyChanged}"/>
                     </WrapPanel>
                 </Grid>
                 <Grid>
@@ -188,16 +192,16 @@
                         <TextBlock Margin="0,10" Text="Когда выдан:" TextAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" HorizontalAlignment="Right" Margin="10,10,10,10">
-                        <TextBox Margin="20,10" Width="280"/>
-                        <DatePicker Margin="20,10" Width="280"/>
+                        <TextBox Margin="20,10" Width="280" Text="{Binding WhoIssuedSTS, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DatePicker Margin="20,10" Width="280" SelectedDate="{Binding DateIssuedSTS, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                 </Grid>
             </StackPanel>
-            <Button Grid.Column="1" Command="{Binding}" Style="{StaticResource ButtonStroge}" Background="White" Width="120" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">
+            <Button Grid.Column="1" Command="{Binding AddVehicleCommand}" Style="{StaticResource ButtonStroge}" Background="White" Width="120" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">
                 <Button.Content>
                     <Grid HorizontalAlignment="Stretch" Width="120">
-                        <fa:ImageAwesome Icon="Save" HorizontalAlignment="Left" Height="20" Margin="5,0" Foreground="BlueViolet"/>
-                        <TextBlock Text="Сохранить" HorizontalAlignment="Center"/>
+                        <fa:ImageAwesome Icon="Save" HorizontalAlignment="Left" Height="20" Margin="5,0" Foreground="Black"/>
+                        <TextBlock Text="Сохранить" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
                 </Button.Content>
             </Button>

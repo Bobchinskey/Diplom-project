@@ -120,7 +120,9 @@ namespace Partner.ViewModels.Views.Maneger
         private void OnOpenListVehicleWindowCommandExecuted(object p)
         {
             ListVehicleWindow listVehicleWindow = new ListVehicleWindow();
-            listVehicleWindow.Show();
+            listVehicleWindow.ShowDialog();
+
+            UpdatePageCommand.Execute(null);
         }
 
         #endregion
