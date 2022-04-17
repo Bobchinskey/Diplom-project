@@ -20,6 +20,20 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
     {
         #region Данные 
 
+        #region Заголовок окна : Title 
+
+        private string _Title = VehicleDataModel.EditOrAdd;
+
+        /// <summary>Title</summary>
+        public string Title
+        {
+            get => _Title;
+            set => Set(ref _Title, value);
+        }
+
+        #endregion
+
+
         #region Марка и модель : MakeModel 
 
         private string _MakeModel = VehicleDataModel.MakeModel;
@@ -403,7 +417,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
                             {
                                 if ((SeriesPTS.Length == 4) && (NumberPTS.Length == 6))
                                 {
-                                    if (VehicleDataModel.EditOrAdd == "Добавить")
+                                    if (VehicleDataModel.EditOrAdd == "Добавить автомобиль")
                                     {
                                         string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
                                         SqlConnection ThisConnection = new SqlConnection(connectionString);

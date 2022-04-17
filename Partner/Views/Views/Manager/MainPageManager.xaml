@@ -30,7 +30,7 @@
                     <MenuItem Header="Выход" Command="{StaticResource CloseApplicationCommand}" FontSize="14"/>
                 </MenuItem>
                 <MenuItem Header="Списки">
-                    <MenuItem Header="Клиенты..." FontSize="14"/>
+                    <MenuItem Header="Клиенты..." Command="{Binding OpenListClientWindowCommand}" FontSize="14"/>
                     <MenuItem Header="Аренды..." FontSize="14"/>
                     <MenuItem Header="Брони..." FontSize="14"/>
                     <Separator/>

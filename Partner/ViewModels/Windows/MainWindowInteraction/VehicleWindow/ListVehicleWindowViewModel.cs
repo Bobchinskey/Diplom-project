@@ -58,6 +58,20 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
 
         #endregion
 
+        #region Видимость кнопки "Востановить удаленныю запись" : VisibleRecoverButton
+
+        private string _VisibleRecoverButton = "Hidden";
+
+        /// <summary>VisibleRecoverButton</summary>
+        public string VisibleRecoverButton
+        {
+            get => _VisibleRecoverButton;
+            set => Set(ref _VisibleRecoverButton, value);
+        }
+
+        #endregion
+
+
         #region Массив данных фильтрующих элементов : status
 
         private string[] _status = { "В автопарке", "Архив", "Все" };
@@ -88,6 +102,8 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
         {
             if (SelectedVehicleProperty == "В автопарке")
             {
+                VisibleRecoverButton = "Hidden";
+
                 DataTable dt = new DataTable();
 
                 string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
@@ -107,6 +123,8 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
             }
             else if (SelectedVehicleProperty == "Архив")
             {
+                VisibleRecoverButton = "Visible";
+
                 DataTable dt = new DataTable();
 
                 string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
@@ -126,6 +144,8 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
             }
             else if (SelectedVehicleProperty == "Все")
             {
+                VisibleRecoverButton = "Hidden";
+
                 DataTable dt = new DataTable();
 
                 string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
@@ -181,7 +201,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
             VehicleDataModel.DateIssuedSTS = DateTime.Today;
             VehicleDataModel.WhoIssuedSTS = "";
             VehicleDataModel.Image = null;
-            VehicleDataModel.EditOrAdd = "Добавить";
+            VehicleDataModel.EditOrAdd = "Добавить автомобиль";
             AddVehicleWindow addVehicleWindow = new AddVehicleWindow();
 
             addVehicleWindow.ShowDialog();
@@ -191,7 +211,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
 
         #endregion
 
-        #region Команда вызывающая окно "Добавить автомобиль"
+        #region Команда вызывающая окно "Редактировать автомобиль"
 
         public ICommand OpenEditVehicleWindowCommand { get; }
 
@@ -228,7 +248,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
             VehicleDataModel.WhAddSystem = MainListVehicle[SelectedVehicle].WhAddSystem;
             VehicleDataModel.DateAddSystem = MainListVehicle[SelectedVehicle].DateAddSystem;
             VehicleDataModel.Image = null;
-            VehicleDataModel.EditOrAdd = "Редактировать";
+            VehicleDataModel.EditOrAdd = "Редактировать автомобиль";
             AddVehicleWindow addVehicleWindow = new AddVehicleWindow();
 
             addVehicleWindow.ShowDialog();
@@ -268,6 +288,32 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
 
         #endregion
 
+        #region Команда востановление удаленного автомобиля
+        public ICommand RepeatVehicleCommand { get; }
+
+        private bool CanRepeatVehicleCommandExecute(object p) => SelectedVehicle >= 0;
+
+        private void OnRepeatVehicleCommandExecuted(object p)
+        {
+            if (MessageBox.Show("Вы действительно хотите удалить безвозвратно данную запись?", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
+                SqlConnection ThisConnection = new SqlConnection(connectionString);
+                ThisConnection.Open();
+                var command = ThisConnection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "Drop_vehicle";
+                command.Parameters.AddWithValue("@id_vehicle", MainListVehicle[SelectedVehicle].id_vehicle);
+                command.Parameters.AddWithValue("@status", "Свободен");
+                command.ExecuteNonQuery();
+                ThisConnection.Close();
+
+                FilterVehicleStatusCommand.Execute(null);
+            }
+        }
+
+        #endregion
+
 
         #endregion
 
@@ -285,6 +331,8 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
             OpenEditVehicleWindowCommand = new LamdaCommand(OnOpenEditVehicleWindowCommandExecuted, CanOpenEditVehicleWindowCommandExecute);
 
             DropVehicleCommand = new LamdaCommand(OnDropVehicleCommandExecuted, CanDropVehicleCommandExecute);
+
+            RepeatVehicleCommand = new LamdaCommand(OnRepeatVehicleCommandExecuted, CanRepeatVehicleCommandExecute);
 
             #endregion
 

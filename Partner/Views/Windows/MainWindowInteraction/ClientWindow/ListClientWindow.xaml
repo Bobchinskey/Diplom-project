@@ -1,19 +1,19 @@
-﻿<Window x:Class="Partner.Views.Windows.MainWindowInteraction.VehicleWindow.ListVehicleWindow"
+﻿<Window x:Class="Partner.Views.Windows.MainWindowInteraction.ClientWindow.ListClientWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Datacontext="clr-namespace:Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
-        xmlns:Datacontext="clr-namespace:Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow"
-        xmlns:local="clr-namespace:Partner.Views.Windows.MainWindowInteraction.VehicleWindow"
         xmlns:i1="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:local="clr-namespace:Partner.Views.Windows.MainWindowInteraction.ClientWindow"
         mc:Ignorable="d"
-        Title="Автомобили"
+        Title="Клиенты"
         WindowStartupLocation="CenterScreen"
         Height="550" Width="1000"
         MinHeight="550" MinWidth="1000">
     <Window.DataContext>
-        <Datacontext:ListVehicleWindowViewModel/>
+        <Datacontext:ListClientWindowViewModel/>
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
@@ -27,7 +27,7 @@
         <ComboBox Margin="5,5,5,0" ItemsSource="{Binding status}" SelectedItem="{Binding SelectedVehicleProperty,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" Width="100">
             <i1:Interaction.Triggers>
                 <i1:EventTrigger EventName="SelectionChanged">
-                    <i1:InvokeCommandAction Command="{Binding FilterVehicleStatusCommand}"/>
+                    <i1:InvokeCommandAction Command="{Binding FilterClientStatusCommand}"/>
                 </i1:EventTrigger>
             </i1:Interaction.Triggers>
             <ComboBox.ToolTip>
@@ -36,29 +36,37 @@
                 </ToolTip>
             </ComboBox.ToolTip>
         </ComboBox>
-        <DataGrid Margin="5,5,5,5" SelectedIndex="{Binding SelectedVehicle}" ItemsSource="{Binding MainListVehicle}" IsReadOnly="True" Grid.Row="1" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
+        <DataGrid Margin="5,5,5,5" SelectedIndex="{Binding SelectedClient}" ItemsSource="{Binding MainListClient}" IsReadOnly="True" Grid.Row="1" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№" Binding="{Binding num}"/>
-                <DataGridTextColumn Header="Наименование" Binding="{Binding MakeModel}"/>
-                <DataGridTextColumn Header="Гос. номер" Binding="{Binding StateNumber}"/>
-                <DataGridTextColumn Header="Категория" Binding="{Binding SelectCategory}"/>
-                <DataGridTextColumn Header="Статус" Binding="{Binding Status}"/>
+                <DataGridTextColumn Header="Клиент" Binding="{Binding name}"/>
+                <DataGridTextColumn Header="Номер телефона" Binding="{Binding phone_number}"/>
+                <DataGridTextColumn Header="Тип" Binding="{Binding type}"/>
+                <DataGridTextColumn Header="Статус" Binding="{Binding reality}"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Margin="5,0,10,0" Grid.Row="1" Grid.Column="1">
-            <Button Background="White" Width="50" Height="50" Command="{Binding OpenAddVehicleWindowCommand}">
-                <Button.Content>
-                    <Grid>
-                        <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
-                    </Grid>
-                </Button.Content>
+            <Button Background="White" Width="50" Height="50">
                 <Button.ToolTip>
                     <ToolTip>
                         <TextBlock Text="Добавить"/>
                     </ToolTip>
                 </Button.ToolTip>
+                <Button.Content>
+                    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Menu Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <MenuItem HorizontalAlignment="Center" VerticalAlignment="Center" Width="48" Height="48">
+                                <MenuItem.Header>
+                                    <fa:ImageAwesome Margin="1,2,1,0" Icon="Plus" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Foreground="Black"/>
+                                </MenuItem.Header>
+                                <MenuItem Header="Физическое лицо" FontSize="12" Command="{Binding OpenAddClientWindowCommand}"/>
+                                <MenuItem Header="Юридическое лицо" FontSize="12"/>
+                            </MenuItem>
+                        </Menu>
+                    </Grid>
+                </Button.Content>
             </Button>
-            <Button Command="{Binding OpenEditVehicleWindowCommand}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
+            <Button Command="{Binding}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
                 <Button.Content>
                     <Grid>
                         <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
@@ -70,7 +78,7 @@
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button Command="{Binding DropVehicleCommand}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
+            <Button Command="{Binding DropClientCommand}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
                 <Button.Content>
                     <Grid>
                         <fa:ImageAwesome Icon="Trash" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
@@ -79,18 +87,6 @@
                 <Button.ToolTip>
                     <ToolTip>
                         <TextBlock Text="Удалить"/>
-                    </ToolTip>
-                </Button.ToolTip>
-            </Button>
-            <Button Margin="0,30,0,0" Background="White" Width="50" Height="50">
-                <Button.Content>
-                    <Grid>
-                        <fa:ImageAwesome Icon="Money" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
-                    </Grid>
-                </Button.Content>
-                <Button.ToolTip>
-                    <ToolTip>
-                        <TextBlock Text="Штрафы"/>
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
@@ -106,7 +102,7 @@
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button Margin="0,30,0,0" Background="White" Width="50" Height="50" Command="{Binding RepeatVehicleCommand}" Visibility="{Binding VisibleRecoverButton}">
+            <Button Margin="0,30,0,0" Background="White" Width="50" Height="50" Command="{Binding RepeatClientCommand}" Visibility="{Binding VisibleRecoverButton}">
                 <Button.Content>
                     <Grid>
                         <fa:ImageAwesome Icon="Repeat" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
@@ -119,5 +115,6 @@
                 </Button.ToolTip>
             </Button>
         </StackPanel>
+
     </Grid>
 </Window>

@@ -6,6 +6,7 @@ using Partner.Views.Views.Manager;
 using Partner.Views.Views.Manager.Pages;
 using Partner.Views.Windows;
 using Partner.Views.Windows.InformativeWindows;
+using Partner.Views.Windows.MainWindowInteraction.ClientWindow;
 using Partner.Views.Windows.MainWindowInteraction.VehicleWindow;
 using Partner.Views.Windows.Settings;
 using System;
@@ -127,6 +128,22 @@ namespace Partner.ViewModels.Views.Maneger
 
         #endregion
 
+        #region Команда вызова окна "Клиенты"
+
+        public ICommand OpenListClientWindowCommand { get; }
+
+        private bool CanOpenListClientWindowCommandExecute(object p) => true;
+
+        private void OnOpenListClientWindowCommandExecuted(object p)
+        {
+            ListClientWindow listClientWindow = new ListClientWindow();
+            listClientWindow.ShowDialog();
+
+            UpdatePageCommand.Execute(null);
+        }
+
+        #endregion
+
 
         #endregion
 
@@ -148,6 +165,8 @@ namespace Partner.ViewModels.Views.Maneger
             OpenUserSettingsWindowCommand = new LamdaCommand(OnOpenUserSettingsWindowCommandExecuted, CanOpenUserSettingsWindowCommandExecute);
 
             OpenListVehicleWindowCommand = new LamdaCommand(OnOpenListVehicleWindowCommandExecuted, CanOpenListVehicleWindowCommandExecute);
+
+            OpenListClientWindowCommand = new LamdaCommand(OnOpenListClientWindowCommandExecuted, CanOpenListClientWindowCommandExecute);
 
             #endregion
         }

@@ -71,11 +71,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Client\ListClient.cs" />
+    <Compile Include="Models\Client\ListClientProcedure.cs" />
+    <Compile Include="Models\Client\ListNaturalPersonAdditionalData.cs" />
     <Compile Include="Models\Vehicle\ListVehicle.cs" />
     <Compile Include="Models\Vehicle\VehicleDataModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\AddClientNaturapPersonViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\ListClientWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\VehicleWindow\AddVehicleWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\VehicleWindow\ListVehicleWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\Settings\AuthorizationWindowViewModel.cs" />
+    <Compile Include="Views\Windows\MainWindowInteraction\ClientWindow\AddClientWindow.xaml.cs">
+      <DependentUpon>AddClientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\ClientWindow\ListClientWindow.xaml.cs">
+      <DependentUpon>ListClientWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\VehicleWindow\AddVehicleWindow.xaml.cs">
       <DependentUpon>AddVehicleWindow.xaml</DependentUpon>
     </Compile>
@@ -159,6 +170,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Windows\MainWindowInteraction\ClientWindow\AddClientWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\ClientWindow\ListClientWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\MainWindowInteraction\VehicleWindow\AddVehicleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -215,6 +234,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Pictures\NullImageVehicle.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Pictures\UserNullImage.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
