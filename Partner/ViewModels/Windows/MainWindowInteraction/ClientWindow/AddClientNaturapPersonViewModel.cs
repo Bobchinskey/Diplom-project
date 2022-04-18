@@ -1,10 +1,13 @@
 ﻿using Partner.Infrastructure.Commands;
 using Partner.Models.Client;
+using Partner.Models.PersonalData;
 using Partner.ViewModels.Base;
 using Partner.Views.Windows.MainWindowInteraction.ClientWindow;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -385,6 +388,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
         private void OnDropAdditionalDataCommandExecuted(object p)
         {
             DataRow b = AdditionalDataClientPhoneNumber.Rows[SelectAdditionalPhoneNumber];
+            AdditionalDataClientPhoneNumberDelivery.Rows.Remove(b);
             AdditionalDataClientPhoneNumber.Rows.Remove(b);
         }
 
@@ -396,7 +400,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
         private bool CanAddClientCommandExecute(object p)
         {
-            if ((Surname != "") && (Name != "") && (Patronymic != "") && ((DateTime.Today.Year - Birthday.Year) > 18) && (PlaceBirthday != "") && (PhoneNumber != "") && (PhoneNumber.Length == 11) && (Email != "") && (INN != "") && (INN.Length == 12) && (SeriesPassport != "") && (SeriesPassport.Length == 4) && (NumberPassport != "") && (NumberPassport.Length == 6) && (Registration != "") && (ActualPlaceResidence != "") && (NumberCard != "") && (ValidityPeriodCard > DateTime.Today) && (CVC2 != "") && (CVC2.Length == 3))
+            if ((Surname != "") && (DateIssuedPassport < DateTime.Today) && (Name != "") && (Patronymic != "") && ((DateTime.Today.Year - Birthday.Year) > 18) && (PlaceBirthday != "") && (PhoneNumber != "") && (PhoneNumber.Length == 11) && (Email != "") && (INN != "") && (INN.Length == 12) && (SeriesPassport != "") && (SeriesPassport.Length == 4) && (NumberPassport != "") && (NumberPassport.Length == 6) && (Registration != "") && (ActualPlaceResidence != "") && (NumberCard != "") && (ValidityPeriodCard > DateTime.Today) && (CVC2 != "") && (CVC2.Length == 3))
             {
                 return true;
             }
@@ -408,7 +412,78 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
         private void OnAddClientCommandExecuted(object p)
         {
-            
+            string gender;
+
+            if (IsCheckedMan)
+                gender = "Мужской";
+            else
+                gender = "Женский";
+
+            string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
+            SqlConnection ThisConnection = new SqlConnection(connectionString);
+            ThisConnection.Open();
+            var command = ThisConnection.CreateCommand();
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "Add_natural_person";
+            command.Parameters.AddWithValue("@surname", Surname);
+            command.Parameters.AddWithValue("@name", Name);
+            command.Parameters.AddWithValue("@patronymic", Patronymic);
+            command.Parameters.AddWithValue("@gender", gender);
+            command.Parameters.AddWithValue("@birthday", Birthday);
+            command.Parameters.AddWithValue("@place_birthday", PlaceBirthday);
+            command.Parameters.AddWithValue("@INN", INN);
+            command.Parameters.AddWithValue("@series_passport", SeriesPassport);
+            command.Parameters.AddWithValue("@number_passport", NumberPassport);
+            command.Parameters.AddWithValue("@who_issued_passport", WhoIssuedPassport);
+            command.Parameters.AddWithValue("@date_issued_passport", DateIssuedPassport);
+            command.Parameters.AddWithValue("@number_card", NumberCard);
+            command.Parameters.AddWithValue("@validity_period_card", ValidityPeriodCard);
+            command.Parameters.AddWithValue("@CVC2", CVC2);
+            command.Parameters.AddWithValue("@registration", Registration);
+            command.Parameters.AddWithValue("@actual_place_residence", ActualPlaceResidence);
+            command.Parameters.AddWithValue("@phone_number", PhoneNumber);
+            command.Parameters.AddWithValue("@email", Email);
+            command.Parameters.AddWithValue("@image", "NULL");
+            command.Parameters.AddWithValue("@reality", "Актуально");
+            command.Parameters.AddWithValue("@who_add_system", UserDataModel.id_user);
+            command.Parameters.AddWithValue("@date_add_system", DateTime.Today);
+            command.ExecuteNonQuery();
+            ThisConnection.Close();
+
+            ThisConnection.Open();
+            SqlCommand thisCommand = ThisConnection.CreateCommand();
+            thisCommand.CommandText = "select id_natural_person from natural_person where series_passport = '"+ SeriesPassport + "' and number_passport = '"+ NumberPassport +"'";
+            SqlDataReader thisReader = thisCommand.ExecuteReader();
+            thisReader.Read();
+
+            ListClientProcedure.id_natural_person = Convert.ToInt32(thisReader["id_natural_person"].ToString());
+
+            thisReader.Close();
+            ThisConnection.Close();
+
+            for (int i = 1; i <= AdditionalDataClientPhoneNumber.Rows.Count; i++)
+            {
+                MessageBox.Show(Convert.ToString(AdditionalDataClientPhoneNumber.Rows.Count));
+                ThisConnection.Open();
+                var command2 = ThisConnection.CreateCommand();
+                command2.CommandType = CommandType.StoredProcedure;
+                command2.CommandText = "Add_additional_phone_numbers";
+                command2.Parameters.AddWithValue("@id_natural_person", ListClientProcedure.id_natural_person);
+                command2.Parameters.AddWithValue("@phone_number", Convert.ToString(AdditionalDataClientPhoneNumber.Rows[i - 1]["phone_number"]));
+                command2.Parameters.AddWithValue("@other", Convert.ToString(AdditionalDataClientPhoneNumber.Rows[i - 1]["other"]));
+                command2.ExecuteNonQuery();
+                ThisConnection.Close();
+            }
+
+            MessageBox.Show("Даннае добавлены");
+
+            foreach (System.Windows.Window window in System.Windows.Application.Current.Windows)
+            {
+                if (window.DataContext == this)
+                {
+                    window.Close();
+                }
+            }
         }
 
         #endregion
