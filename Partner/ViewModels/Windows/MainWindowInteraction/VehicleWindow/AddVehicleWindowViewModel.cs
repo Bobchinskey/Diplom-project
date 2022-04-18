@@ -33,7 +33,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
 
         #endregion
 
-
         #region Марка и модель : MakeModel 
 
         private string _MakeModel = VehicleDataModel.MakeModel;

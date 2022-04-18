@@ -1,0 +1,48 @@
+﻿<Window x:Class="Partner.Views.Windows.MainWindowInteraction.ClientWindow.AdditionalDataClientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:Datacontext="clr-namespace:Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow"
+        xmlns:local="clr-namespace:Partner.Views.Windows.MainWindowInteraction.ClientWindow"
+        mc:Ignorable="d"
+        Title="{Binding Title}" Height="200" Width="400"
+        ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <Datacontext:AdditionalDataClientWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="BlueViolet">
+            <TextBlock Margin="5" Text="{Binding Title}" HorizontalAlignment="Center" TextAlignment="Center" Foreground="White" FontSize="20"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <TextBlock Margin="10" Text="Номер телефона:" HorizontalAlignment="Right"/>
+                <TextBlock Margin="10" Text="Описание:" HorizontalAlignment="Right"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <TextBox PreviewTextInput="NumberValidationTextBox" Text="{Binding Numberphone, UpdateSourceTrigger=PropertyChanged}" Margin="10" HorizontalAlignment="Left" MaxLength="11" Width="120"/>
+                <TextBox Text="{Binding Other}" Margin="10,10" HorizontalAlignment="Left" Width="200"/>
+            </StackPanel>
+        </Grid>
+        <Button Command="{Binding AddAdditionalDataCommand}" Grid.Row="2" Background="White" Margin="10" HorizontalAlignment="Right" Style="{StaticResource ButtonStroge}">
+            <Button.Content>
+                <Grid HorizontalAlignment="Stretch" Width="120">
+                    <fa:ImageAwesome Icon="Save" HorizontalAlignment="Left" Height="20" Margin="5,2,5,0" Foreground="Black"/>
+                    <TextBlock Text="Сохранить" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+            </Button.Content>
+        </Button>
+    </Grid>
+</Window>

@@ -8,7 +8,7 @@
         xmlns:Datacontext="clr-namespace:Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Добавление Физического лица" 
+        Title="{Binding Title}" 
         Height="610" Width="100"
         MinHeight="610" MinWidth="1000"
         ResizeMode="NoResize">
@@ -21,7 +21,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <WrapPanel Grid.Row="0" Background="BlueViolet">
-            <TextBlock Margin="10" Text="{Binding}" Foreground="White" FontSize="25"/>
+            <TextBlock Margin="10" Text="{Binding Title}" Foreground="White" FontSize="25"/>
         </WrapPanel>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -29,31 +29,34 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Margin="10">
+                <WrapPanel Margin="0,10,0,0" Height="20">
+                    <TextBlock VerticalAlignment="Center" Margin="32,0,0,0" Text="ФИО:" HorizontalAlignment="Left"/>
+                    <TextBox Margin="10,0,5,0" Width="140" Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Margin="10,0,5,0" Width="100" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Margin="10,0,0,0" Width="130" Text="{Binding Patronymic, UpdateSourceTrigger=PropertyChanged}"/>
+                </WrapPanel>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Margin="10,10,0,10" Grid.Column="0">
-                        <TextBlock Margin="0,0,0,10" Text="ФИО:" HorizontalAlignment="Right"/>
+                        
                         <TextBlock Margin="0,10" Text="Пол:" HorizontalAlignment="Right"/>
                         <TextBlock Margin="0,10" Text="Дата рождения:" HorizontalAlignment="Right"/>
                         <TextBlock Margin="0,17,0,10" Text="Место рождения:" HorizontalAlignment="Right"/>
                         <TextBlock Margin="0,12,0,10" Text="Номер телефона:" HorizontalAlignment="Right"/>
                         <TextBlock Margin="0,11,0,10" Text="Email:" HorizontalAlignment="Right"/>
                     </StackPanel>
-                    <StackPanel Margin="10" Grid.Column="1">
-                        <WrapPanel Margin="0,0,0,10">
-                            <TextBox Margin="5,0,10,0" Width="310"/>
-                        </WrapPanel>
+                    <StackPanel Margin="10,10,0,10" Grid.Column="1">
                         <WrapPanel Margin="5,10">
-                            <RadioButton Content="Мужской" IsChecked="True"/>
-                            <RadioButton Margin="10,0" Content="Женский"/>
+                            <RadioButton Content="Мужской" IsChecked="{Binding IsCheckedMan, UpdateSourceTrigger=PropertyChanged}" />
+                            <RadioButton Margin="10,0" Content="Женский" />
                         </WrapPanel>
-                        <DatePicker Margin="5,10" Width="120" HorizontalAlignment="Left"/>
-                        <TextBox Margin="5,10" Width="310" HorizontalAlignment="Left"/>
-                        <TextBox Margin="5,10" Width="120" MaxLength="11" HorizontalAlignment="Left" PreviewTextInput="NumberValidationTextBox"/>
-                        <TextBox Margin="5,10" Width="200" HorizontalAlignment="Left"/>
+                        <DatePicker SelectedDate="{Binding Birthday, UpdateSourceTrigger=PropertyChanged}" Margin="5,10" Width="120" HorizontalAlignment="Left"/>
+                        <TextBox Text="{Binding PlaceBirthday, UpdateSourceTrigger=PropertyChanged}" Margin="5,10" Width="310" HorizontalAlignment="Left"/>
+                        <TextBox Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Margin="5,10" Width="120" MaxLength="11" HorizontalAlignment="Left" PreviewTextInput="NumberValidationTextBox"/>
+                        <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Margin="5,10" Width="200" HorizontalAlignment="Left"/>
                     </StackPanel>
                 </Grid>
                 <Grid>
@@ -61,15 +64,14 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="50"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid Grid.Column="0" Height="230" CanUserResizeColumns="False" AutoGenerateColumns="False">
+                    <DataGrid SelectedIndex="{Binding SelectAdditionalPhoneNumber}" ItemsSource="{Binding AdditionalDataClientPhoneNumber}" Height="220" Grid.Column="0" CanUserResizeColumns="False" AutoGenerateColumns="False" IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="№"/>
-                            <DataGridTextColumn Header="Дополнительный номер телефона"/>
-                            <DataGridTextColumn Header="Описание"/>
+                            <DataGridTextColumn Header="Дополнительный номер телефона" Binding="{Binding phone_number}"/>
+                            <DataGridTextColumn Header="Описание" Binding="{Binding other}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <StackPanel Grid.Column="1">
-                        <Button Margin="0,25,0,0" Command="{Binding}" Background="White" Width="30" Height="30">
+                        <Button Margin="0,25,0,0" Command="{Binding AddAdditionalDataCommand}" Background="White" Width="30" Height="30">
                             <Button.Content>
                                 <Grid>
                                     <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
@@ -81,7 +83,7 @@
                                 </ToolTip>
                             </Button.ToolTip>
                         </Button>
-                        <Button Command="{Binding}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
+                        <Button Command="{Binding EditAdditionalDataCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
                             <Button.Content>
                                 <Grid>
                                     <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
@@ -93,7 +95,7 @@
                                 </ToolTip>
                             </Button.ToolTip>
                         </Button>
-                        <Button Command="{Binding}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
+                        <Button Command="{Binding DropAdditionalDataCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
                             <Button.Content>
                                 <Grid>
                                     <fa:ImageAwesome Icon="Trash" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
@@ -113,7 +115,7 @@
                     <Grid HorizontalAlignment="Center">
                         <Image Margin="10" x:Name="ProfileImage" Width="400" Height="156">
                             <Image.Source>
-                                <Binding>
+                                <Binding Path="Image">
                                     <Binding.TargetNullValue>
                                         <ImageSource>/Resources/Pictures/UserNullImage.png</ImageSource>
                                     </Binding.TargetNullValue>
@@ -131,7 +133,7 @@
                         <TextBlock Margin="0,0,0,10" Text="ИНН:" HorizontalAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Margin="10,10,10,0" Grid.Column="1">
-                        <TextBox Margin="0,0,0,10" HorizontalAlignment="Left" Width="120" MaxLength="12" PreviewTextInput="NumberValidationTextBox"/>
+                        <TextBox Text="{Binding INN, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10" HorizontalAlignment="Left" Width="120" MaxLength="12" PreviewTextInput="NumberValidationTextBox"/>
                     </StackPanel>
                 </Grid>
                 <Grid Margin="0,10">
@@ -161,16 +163,15 @@
                         <TextBlock Margin="0,10" Text="Код безопасности:" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Margin="0,10" Grid.Column="1">
-                        <TextBox Margin="10,0,30.2,0"/>
-                        <TextBox Margin="10,27,30.2,10"/>
-                        <TextBox Margin="10,17,30.2,10" PreviewTextInput="NumberValidationTextBox" MaxLength="13" />
-                        <DatePicker Margin="10,5,30.2,10" Width="120" HorizontalAlignment="Left"/>
-                        <TextBox Margin="10,6,30.2,10" Width="120" HorizontalAlignment="Left" PreviewTextInput="NumberValidationTextBox" MaxLength="3" />
-
+                        <TextBox Text="{Binding Registration}" Margin="10,0,30.2,0"/>
+                        <TextBox Text="{Binding ActualPlaceResidence}" Margin="10,27,30.2,10"/>
+                        <TextBox Text="{Binding NumberCard}" Margin="10,17,30.2,10" PreviewTextInput="NumberValidationTextBox" MaxLength="13" />
+                        <DatePicker SelectedDate="{Binding ValidityPeriodCard}" Margin="10,5,30.2,10" Width="120" HorizontalAlignment="Left"/>
+                        <TextBox Text="{Binding CVC2}" Margin="10,6,30.2,10" Width="120" HorizontalAlignment="Left" PreviewTextInput="NumberValidationTextBox" MaxLength="3" />
                     </StackPanel>
                 </Grid>
             </StackPanel>
-            <Button Grid.Column="1" Style="{StaticResource ButtonStroge}" Background="White" Width="120" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">
+            <Button Grid.Column="1" Command="{Binding EditAdditionalDataCommand}" Style="{StaticResource ButtonStroge}" Background="White" Width="120" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">
                 <Button.Content>
                     <Grid HorizontalAlignment="Stretch" Width="120">
                         <fa:ImageAwesome Icon="Save" HorizontalAlignment="Left" Height="20" Margin="5,0" Foreground="Black"/>

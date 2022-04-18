@@ -295,7 +295,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
         #endregion
 
-        #region Команда вызывающая окно "Добавить автомобиль"
+        #region Команда вызывающая окно "Добавить клиента"
 
         public ICommand OpenAddClientWindowCommand { get; }
 
@@ -303,6 +303,26 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
         private void OnOpenAddClientWindowCommandExecuted(object p)
         {
+            ListClientProcedure.EditOrAdd = "Добавление клиента";
+            ListClientProcedure.surname = "";
+            ListClientProcedure.name = "";
+            ListClientProcedure.patronymic = "";
+            ListClientProcedure.birthday = DateTime.Today;
+            ListClientProcedure.place_birthday = "";
+            ListClientProcedure.patronymic = "";
+            ListClientProcedure.INN = "";
+            ListClientProcedure.series_passport = "";
+            ListClientProcedure.number_passport = "";
+            ListClientProcedure.who_issued_passport = "";
+            ListClientProcedure.date_issued_passport = DateTime.Today;
+            ListClientProcedure.number_card = "";
+            ListClientProcedure.validity_period_card = DateTime.Today;
+            ListClientProcedure.CVC2 = "";
+            ListClientProcedure.registration = "";
+            ListClientProcedure.actual_place_residence = "";
+            ListClientProcedure.phone_number = "";
+            ListClientProcedure.email = "";
+
             AddClientWindow addClientWindow = new AddClientWindow();
             addClientWindow.ShowDialog();
 
@@ -310,7 +330,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
         }
 
         #endregion
-
 
         #endregion
 
