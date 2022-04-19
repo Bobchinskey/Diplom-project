@@ -171,15 +171,15 @@
                         <TextBlock Margin="0,10" Text="Код безопасности:" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Margin="0,10" Grid.Column="1">
-                        <TextBox Text="{Binding Registration}" Margin="10,0,30.2,0"/>
-                        <TextBox Text="{Binding ActualPlaceResidence}" Margin="10,27,30.2,10"/>
-                        <TextBox Text="{Binding NumberCard}" Margin="10,17,30.2,10" PreviewTextInput="NumberValidationTextBox" MaxLength="13" />
+                        <TextBox Text="{Binding Registration, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,30.2,0"/>
+                        <TextBox Text="{Binding ActualPlaceResidence, UpdateSourceTrigger=PropertyChanged}" Margin="10,27,30.2,10"/>
+                        <TextBox Text="{Binding NumberCard, UpdateSourceTrigger=PropertyChanged}" Margin="10,17,30.2,10" PreviewTextInput="NumberValidationTextBox" MaxLength="13" />
                         <DatePicker SelectedDate="{Binding ValidityPeriodCard}" Margin="10,5,30.2,10" Width="120" HorizontalAlignment="Left"/>
-                        <TextBox Text="{Binding CVC2}" Margin="10,6,30.2,10" Width="120" HorizontalAlignment="Left" PreviewTextInput="NumberValidationTextBox" MaxLength="3" />
+                        <TextBox Text="{Binding CVC2, UpdateSourceTrigger=PropertyChanged}" Margin="10,6,30.2,10" Width="120" HorizontalAlignment="Left" PreviewTextInput="NumberValidationTextBox" MaxLength="3" />
                     </StackPanel>
                 </Grid>
             </StackPanel>
-            <Button Grid.Column="1" Command="{Binding AddClientCommand}" Style="{StaticResource ButtonStroge}" Background="White" Width="120" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">
+            <Button Grid.Column="1" Command="{Binding}" Style="{StaticResource ButtonStroge}" Background="White" Width="120" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">
                 <Button.Content>
                     <Grid HorizontalAlignment="Stretch" Width="120">
                         <fa:ImageAwesome Icon="Save" HorizontalAlignment="Left" Height="20" Margin="5,0" Foreground="Black"/>

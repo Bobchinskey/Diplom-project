@@ -463,7 +463,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
             for (int i = 1; i <= AdditionalDataClientPhoneNumber.Rows.Count; i++)
             {
-                MessageBox.Show(Convert.ToString(AdditionalDataClientPhoneNumber.Rows.Count));
                 ThisConnection.Open();
                 var command2 = ThisConnection.CreateCommand();
                 command2.CommandType = CommandType.StoredProcedure;
