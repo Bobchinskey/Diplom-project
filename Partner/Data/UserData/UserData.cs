@@ -17,19 +17,20 @@ namespace Partner.Data.UserData
             SqlConnection ThisConnection = new SqlConnection(connectionString);
             ThisConnection.Open();
             SqlCommand thisCommand = ThisConnection.CreateCommand();
-            thisCommand.CommandText = "select [image],[id_user],[access_lavel],[surname],[name],[patronymic],[reality] from [user] where [login]='" + Login + "' and [password]='" + Password + "'";
+            thisCommand.CommandText = "select * from [user] where [login]='" + Login + "' and [password]='" + Password + "' and reality='Актуально'";
             SqlDataReader thisReader = thisCommand.ExecuteReader();
             thisReader.Read();
             if (thisReader.HasRows)
-                if (thisReader["reality"].ToString()=="Актуально")
-                {
-                    UserDataModel.access_lavel = thisReader["access_lavel"].ToString();
-                    UserDataModel.surname = thisReader["surname"].ToString();
-                    UserDataModel.name = thisReader["name"].ToString();
-                    UserDataModel.patronymic = thisReader["patronymic"].ToString();
-                    UserDataModel.id_user = Convert.ToInt32(thisReader["id_user"].ToString());
-                    UserDataModel.image = thisReader["image"];
-                }
+            {
+                UserDataModel.access_lavel = thisReader["access_lavel"].ToString();
+                UserDataModel.surname = thisReader["surname"].ToString();
+                UserDataModel.name = thisReader["name"].ToString();
+                UserDataModel.patronymic = thisReader["patronymic"].ToString();
+                UserDataModel.id_user = Convert.ToInt32(thisReader["id_user"].ToString());
+                UserDataModel.image = thisReader["image"];
+            }
+            else
+                UserDataModel.id_user = -1;
             thisReader.Close();
             ThisConnection.Close();
         }

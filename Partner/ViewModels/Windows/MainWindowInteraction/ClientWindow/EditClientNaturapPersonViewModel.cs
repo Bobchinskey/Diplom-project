@@ -1,6 +1,5 @@
 ﻿using Partner.Infrastructure.Commands;
 using Partner.Models.Client;
-using Partner.Models.PersonalData;
 using Partner.ViewModels.Base;
 using Partner.Views.Windows.MainWindowInteraction.ClientWindow;
 using System;
@@ -16,9 +15,8 @@ using System.Windows.Input;
 
 namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 {
-    class AddClientNaturapPersonViewModel : ViewModelBase
+    class EditClientNaturapPersonViewModel : ViewModelBase
     {
-
         #region Данные
 
         #region Заголовок окна : Title 
@@ -36,13 +34,26 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
         #region Пол мужской : IsCheckedMan 
 
-        private bool _IsCheckedMan = true;
+        private bool _IsCheckedMan;
 
         /// <summary>IsCheckedMan</summary>
         public bool IsCheckedMan
         {
             get => _IsCheckedMan;
             set => Set(ref _IsCheckedMan, value);
+        }
+
+        #endregion
+
+        #region Пол женский : IsCheckedWoman 
+
+        private bool _IsCheckedWoman;
+
+        /// <summary>IsCheckedWoman</summary>
+        public bool IsCheckedWoman
+        {
+            get => _IsCheckedWoman;
+            set => Set(ref _IsCheckedWoman, value);
         }
 
         #endregion
@@ -294,20 +305,15 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
         #endregion
 
-        #region Данные дополнительных телефонныйх номеров : AdditionalDataClientPhoneNumber
+        #region List данных дополнительных номеров клиенотов : ListClientAdditionalData
 
-        private DataTable _AdditionalDataClientPhoneNumber;
+        private List<ListNaturalPersonAdditionalData> _ListClientAdditionalData;
 
-        /// <summary>AdditionalDataClientPhoneNumber</summary>
-        public DataTable AdditionalDataClientPhoneNumber
+        public List<ListNaturalPersonAdditionalData> ListClientAdditionalData
         {
-            get => _AdditionalDataClientPhoneNumber;
-            set => Set(ref _AdditionalDataClientPhoneNumber, value);
+            get => _ListClientAdditionalData;
+            set => Set(ref _ListClientAdditionalData, value);
         }
-
-        public DataTable AdditionalDataClientPhoneNumberDelivery = new DataTable("AdditionalDataClientPhoneNumberDelivery");
-        DataColumn column;
-        DataRow row;
 
         #endregion
 
@@ -331,6 +337,30 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
         #region Команды
 
+        #region Команда обновления списка дополнительных телефонов
+
+        public ICommand ReturnAdditionalDataCommand { get; }
+
+        private bool CanReturnAdditionalDataCommandExecute(object p) => true;
+
+        private void OnReturnAdditionalDataCommandExecuted(object p)
+        {
+            DataTable dt = new DataTable();
+
+            string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
+            SqlConnection ThisConnection = new SqlConnection(connectionString);
+            ThisConnection.Open();
+            SqlCommand thisCommand = ThisConnection.CreateCommand();
+            thisCommand.CommandText = "Select * from additional_phone_numbers where [id_natural_person]=" + ListClientProcedure.id_natural_person;
+            SqlDataReader thisReader = thisCommand.ExecuteReader();
+            dt.Load(thisReader);
+            ListClientAdditionalData = dt.AsEnumerable().Select(se => new ListNaturalPersonAdditionalData() { id_additional_phone_numbers = se.Field<int>("id_additional_phone_numbers"), phone_number = se.Field<string>("phone_number"), other = se.Field<string>("other") }).ToList();
+            ThisConnection.Close();
+        }
+
+        #endregion
+
+
         #region Команда Добавления дополнительного телефона
 
         public ICommand AddAdditionalDataCommand { get; }
@@ -346,12 +376,19 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
             AdditionalDataClientWindow additionalDataClientWindow = new AdditionalDataClientWindow();
             additionalDataClientWindow.ShowDialog();
 
-            row = AdditionalDataClientPhoneNumberDelivery.NewRow();
-            row["phone_number"] = EditorAdd.phone_number;
-            row["other"] = EditorAdd.other;
-            AdditionalDataClientPhoneNumberDelivery.Rows.Add(row);
+            string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
+            SqlConnection ThisConnection = new SqlConnection(connectionString);
+            ThisConnection.Open();
+            var command2 = ThisConnection.CreateCommand();
+            command2.CommandType = CommandType.StoredProcedure;
+            command2.CommandText = "Add_additional_phone_numbers";
+            command2.Parameters.AddWithValue("@id_natural_person", ListClientProcedure.id_natural_person);
+            command2.Parameters.AddWithValue("@phone_number", EditorAdd.phone_number);
+            command2.Parameters.AddWithValue("@other", EditorAdd.other);
+            command2.ExecuteNonQuery();
+            ThisConnection.Close();
 
-            AdditionalDataClientPhoneNumber = AdditionalDataClientPhoneNumberDelivery;
+            ReturnAdditionalDataCommand.Execute(null);
         }
 
         #endregion
@@ -365,16 +402,25 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
         private void OnEditAdditionalDataCommandExecuted(object p)
         {
             EditorAdd.editoradd = "Редактирование номера телефона";
-            EditorAdd.phone_number = Convert.ToString(AdditionalDataClientPhoneNumber.Rows[SelectAdditionalPhoneNumber]["phone_number"]);
-            EditorAdd.other = Convert.ToString(AdditionalDataClientPhoneNumber.Rows[SelectAdditionalPhoneNumber]["other"]);
+            EditorAdd.phone_number = ListClientAdditionalData[SelectAdditionalPhoneNumber].phone_number;
+            EditorAdd.other = ListClientAdditionalData[SelectAdditionalPhoneNumber].other;
 
             AdditionalDataClientWindow additionalDataClientWindow = new AdditionalDataClientWindow();
             additionalDataClientWindow.ShowDialog();
 
-            AdditionalDataClientPhoneNumber.Rows[SelectAdditionalPhoneNumber]["phone_number"] = EditorAdd.phone_number;
-            AdditionalDataClientPhoneNumber.Rows[SelectAdditionalPhoneNumber]["other"] = EditorAdd.other;
-            AdditionalDataClientPhoneNumberDelivery.Rows[SelectAdditionalPhoneNumber]["phone_number"] = EditorAdd.phone_number;
-            AdditionalDataClientPhoneNumberDelivery.Rows[SelectAdditionalPhoneNumber]["other"] = EditorAdd.other;
+            string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
+            SqlConnection ThisConnection = new SqlConnection(connectionString);
+            ThisConnection.Open();
+            var command2 = ThisConnection.CreateCommand();
+            command2.CommandType = CommandType.StoredProcedure;
+            command2.CommandText = "Edit_additional_phone_numbers";
+            command2.Parameters.AddWithValue("@id_additional_phone_numbers", ListClientAdditionalData[SelectAdditionalPhoneNumber].id_additional_phone_numbers);
+            command2.Parameters.AddWithValue("@phone_number", EditorAdd.phone_number);
+            command2.Parameters.AddWithValue("@other", EditorAdd.other);
+            command2.ExecuteNonQuery();
+            ThisConnection.Close();
+
+            ReturnAdditionalDataCommand.Execute(null);
         }
 
         #endregion
@@ -387,9 +433,20 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
         private void OnDropAdditionalDataCommandExecuted(object p)
         {
-            DataRow b = AdditionalDataClientPhoneNumber.Rows[SelectAdditionalPhoneNumber];
-            AdditionalDataClientPhoneNumberDelivery.Rows.Remove(b);
-            AdditionalDataClientPhoneNumber.Rows.Remove(b);
+            if (MessageBox.Show("Вы действительно хотите удалить безвозвратно данную запись?", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
+                SqlConnection ThisConnection = new SqlConnection(connectionString);
+                ThisConnection.Open();
+                var command2 = ThisConnection.CreateCommand();
+                command2.CommandType = CommandType.StoredProcedure;
+                command2.CommandText = "Drop_additional_phone_numbers";
+                command2.Parameters.AddWithValue("@id_additional_phone_numbers", ListClientAdditionalData[SelectAdditionalPhoneNumber].id_additional_phone_numbers);
+                command2.ExecuteNonQuery();
+                ThisConnection.Close();
+
+                ReturnAdditionalDataCommand.Execute(null);
+            }
         }
 
         #endregion
@@ -424,7 +481,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
             ThisConnection.Open();
             var command = ThisConnection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "Add_natural_person";
+            command.CommandText = "Edit_natural_person";
             command.Parameters.AddWithValue("@surname", Surname);
             command.Parameters.AddWithValue("@name", Name);
             command.Parameters.AddWithValue("@patronymic", Patronymic);
@@ -445,14 +502,12 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
             command.Parameters.AddWithValue("@email", Email);
             command.Parameters.AddWithValue("@image", "NULL");
             command.Parameters.AddWithValue("@reality", "Актуально");
-            command.Parameters.AddWithValue("@who_add_system", UserDataModel.id_user);
-            command.Parameters.AddWithValue("@date_add_system", DateTime.Today);
             command.ExecuteNonQuery();
             ThisConnection.Close();
 
             ThisConnection.Open();
             SqlCommand thisCommand = ThisConnection.CreateCommand();
-            thisCommand.CommandText = "select id_natural_person from natural_person where series_passport = '"+ SeriesPassport + "' and number_passport = '"+ NumberPassport +"'";
+            thisCommand.CommandText = "select id_natural_person from natural_person where series_passport = '" + SeriesPassport + "' and number_passport = '" + NumberPassport + "'";
             SqlDataReader thisReader = thisCommand.ExecuteReader();
             thisReader.Read();
 
@@ -461,7 +516,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
             thisReader.Close();
             ThisConnection.Close();
 
-            if (AdditionalDataClientPhoneNumber.Rows.Count >= 1)
+            /*if (AdditionalDataClientPhoneNumber.Rows.Count >= 1)
             {
                 for (int i = 1; i <= AdditionalDataClientPhoneNumber.Rows.Count; i++)
                 {
@@ -476,6 +531,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
                     ThisConnection.Close();
                 }
             }
+            */
 
             MessageBox.Show("Даннае добавлены");
 
@@ -495,7 +551,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
         /*------------------------------------------------------------------------------------------------*/
 
-        public AddClientNaturapPersonViewModel()
+        public EditClientNaturapPersonViewModel()
         {
             #region Команды
 
@@ -507,26 +563,25 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
             AddClientCommand = new LamdaCommand(OnAddClientCommandExecuted, CanAddClientCommandExecute);
 
-            #endregion
-
-            #region Создание колонок таблицы AdditionalDataClientPhoneNumberDelivery
-
-            column = new DataColumn();
-            column.DataType = System.Type.GetType("System.String");
-            column.ColumnName = "phone_number";
-            column.ReadOnly = false;
-            column.Unique = false;
-            AdditionalDataClientPhoneNumberDelivery.Columns.Add(column);
-
-            column = new DataColumn();
-            column.DataType = System.Type.GetType("System.String");
-            column.ColumnName = "other";
-            column.ReadOnly = false;
-            column.Unique = false;
-            AdditionalDataClientPhoneNumberDelivery.Columns.Add(column);
+            ReturnAdditionalDataCommand = new LamdaCommand(OnReturnAdditionalDataCommandExecuted, CanReturnAdditionalDataCommandExecute);
 
             #endregion
+
+            DataTable dt = new DataTable();
+
+            string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
+            SqlConnection ThisConnection = new SqlConnection(connectionString);
+            ThisConnection.Open();
+            SqlCommand thisCommand = ThisConnection.CreateCommand();
+            thisCommand.CommandText = "Select * from additional_phone_numbers where [id_natural_person]=" + ListClientProcedure.id_natural_person;
+            SqlDataReader thisReader = thisCommand.ExecuteReader();
+            dt.Load(thisReader);
+            ListClientAdditionalData = dt.AsEnumerable().Select(se => new ListNaturalPersonAdditionalData() { id_additional_phone_numbers = se.Field<int>("id_additional_phone_numbers"), phone_number = se.Field<string>("phone_number"), other = se.Field<string>("other")}).ToList();
+            ThisConnection.Close();
+
+            if (ListClientProcedure.gender == "Мужской")
+                IsCheckedMan = true;
+            else IsCheckedWoman = true;
         }
-
     }
 }

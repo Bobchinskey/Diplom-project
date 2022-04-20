@@ -108,7 +108,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
                 SqlConnection ThisConnection = new SqlConnection(connectionString);
                 ThisConnection.Open();
                 SqlCommand thisCommand = ThisConnection.CreateCommand();
-                thisCommand.CommandText = "(Select id_legal_entity,name_organization as 'name', phone_number, reality, 'Юридическое лицо' as 'type' from legal_entity where reality != 'Архив') Union (Select id_natural_person,[name] + ' ' + surname + ' ' + patronymic, phone_number, reality, 'Физическое лицо' from natural_person where reality != 'Архив') ORDER BY name";
+                thisCommand.CommandText = "(Select id_legal_entity,name_organization as 'name', phone_number, reality, 'Юридическое лицо' as 'type' from legal_entity where reality != 'Архив') Union (Select id_natural_person,surname + ' ' + [name] + ' ' + patronymic, phone_number, reality, 'Физическое лицо' from natural_person where reality != 'Архив') ORDER BY name";
                 SqlDataReader thisReader = thisCommand.ExecuteReader();
                 dt.Load(thisReader);
                 MainListClient = dt.AsEnumerable().Select(se => new ListClient() { id_legal_entity = se.Field<int>("id_legal_entity"), name = se.Field<string>("name"), phone_number = se.Field<string>("phone_number"), reality = se.Field<string>("reality"), type = se.Field<string>("type") }).ToList();
@@ -150,7 +150,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
                 SqlConnection ThisConnection = new SqlConnection(connectionString);
                 ThisConnection.Open();
                 SqlCommand thisCommand = ThisConnection.CreateCommand();
-                thisCommand.CommandText = "Select id_natural_person,[name] + ' ' + surname + ' ' + patronymic  as 'name', phone_number, reality, 'Физическое лицо' as type from natural_person  where reality != 'Архив' ORDER BY name";
+                thisCommand.CommandText = "Select id_natural_person,surname + ' ' + [name] + ' ' + patronymic  as 'name', phone_number, reality, 'Физическое лицо' as type from natural_person  where reality != 'Архив' ORDER BY name";
                 SqlDataReader thisReader = thisCommand.ExecuteReader();
                 dt.Load(thisReader);
                 MainListClient = dt.AsEnumerable().Select(se => new ListClient() { id_legal_entity = se.Field<int>("id_natural_person"), name = se.Field<string>("name"), phone_number = se.Field<string>("phone_number"), reality = se.Field<string>("reality"), type = se.Field<string>("type") }).ToList();
@@ -171,7 +171,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
                 SqlConnection ThisConnection = new SqlConnection(connectionString);
                 ThisConnection.Open();
                 SqlCommand thisCommand = ThisConnection.CreateCommand();
-                thisCommand.CommandText = "(Select id_legal_entity,name_organization as 'name', phone_number, reality, 'Юридическое лицо' as 'type' from legal_entity where reality = 'Архив') Union (Select id_natural_person,[name] + ' ' + surname + ' ' + patronymic, phone_number, reality, 'Физическое лицо' from natural_person where reality = 'Архив') ORDER BY name";
+                thisCommand.CommandText = "(Select id_legal_entity,name_organization as 'name', phone_number, reality, 'Юридическое лицо' as 'type' from legal_entity where reality = 'Архив') Union (Select id_natural_person,surname + ' ' + [name] + ' ' + patronymic, phone_number, reality, 'Физическое лицо' from natural_person where reality = 'Архив') ORDER BY name";
                 SqlDataReader thisReader = thisCommand.ExecuteReader();
                 dt.Load(thisReader);
                 MainListClient = dt.AsEnumerable().Select(se => new ListClient() { id_legal_entity = se.Field<int>("id_legal_entity"), name = se.Field<string>("name"), phone_number = se.Field<string>("phone_number"), reality = se.Field<string>("reality"), type = se.Field<string>("type") }).ToList();
@@ -192,7 +192,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
                 SqlConnection ThisConnection = new SqlConnection(connectionString);
                 ThisConnection.Open();
                 SqlCommand thisCommand = ThisConnection.CreateCommand();
-                thisCommand.CommandText = "(Select id_legal_entity,name_organization as 'name', phone_number, reality, 'Юридическое лицо' as 'type' from legal_entity) Union (Select id_natural_person,[name] + ' ' + surname + ' ' + patronymic, phone_number, reality, 'Физическое лицо' from natural_person) ORDER BY name";
+                thisCommand.CommandText = "(Select id_legal_entity,name_organization as 'name', phone_number, reality, 'Юридическое лицо' as 'type' from legal_entity) Union (Select id_natural_person,surname + ' ' + [name] + ' ' + patronymic, phone_number, reality, 'Физическое лицо' from natural_person) ORDER BY name";
                 SqlDataReader thisReader = thisCommand.ExecuteReader();
                 dt.Load(thisReader);
                 MainListClient = dt.AsEnumerable().Select(se => new ListClient() { id_legal_entity = se.Field<int>("id_legal_entity"), name = se.Field<string>("name"), phone_number = se.Field<string>("phone_number"), reality = se.Field<string>("reality"), type = se.Field<string>("type") }).ToList();
@@ -331,6 +331,60 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
         #endregion
 
+        #region Команда вызывающая окно "Редактирование информации о клиенте"
+
+        public ICommand OpenEditClientWindowCommand { get; }
+
+        private bool CanOpenEditClientWindowCommandExecute(object p) => SelectedClient > -1;
+
+        private void OnOpenEditClientWindowCommandExecuted(object p)
+        {
+            if (MainListClient[SelectedClient].type == "Физическое лицо")
+            {
+                ListClientProcedure.id_natural_person = MainListClient[SelectedClient].id_legal_entity;
+
+                string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
+                SqlConnection ThisConnection = new SqlConnection(connectionString);
+                ThisConnection.Open();
+                SqlCommand thisCommand = ThisConnection.CreateCommand();
+                thisCommand.CommandText = "select * from [natural_person] where id_natural_person=" + ListClientProcedure.id_natural_person;
+                SqlDataReader thisReader = thisCommand.ExecuteReader();
+                thisReader.Read();
+                if (thisReader.HasRows)
+                {
+                    ListClientProcedure.surname = thisReader["surname"].ToString();
+                    ListClientProcedure.name = thisReader["name"].ToString();
+                    ListClientProcedure.patronymic = thisReader["patronymic"].ToString();
+                    ListClientProcedure.gender = thisReader["gender"].ToString();
+                    ListClientProcedure.birthday = Convert.ToDateTime(thisReader["birthday"].ToString());
+                    ListClientProcedure.place_birthday = thisReader["place_birthday"].ToString();
+                    ListClientProcedure.INN = thisReader["INN"].ToString();
+                    ListClientProcedure.series_passport = thisReader["series_passport"].ToString();
+                    ListClientProcedure.number_passport = thisReader["number_passport"].ToString();
+                    ListClientProcedure.who_issued_passport = thisReader["who_issued_passport"].ToString();
+                    ListClientProcedure.date_issued_passport = Convert.ToDateTime(thisReader["date_issued_passport"].ToString());
+                    ListClientProcedure.number_card = thisReader["number_card"].ToString();
+                    ListClientProcedure.validity_period_card = Convert.ToDateTime(thisReader["validity_period_card"].ToString());
+                    ListClientProcedure.CVC2 = thisReader["CVC2"].ToString();
+                    ListClientProcedure.registration = thisReader["registration"].ToString();
+                    ListClientProcedure.actual_place_residence = thisReader["actual_place_residence"].ToString();
+                    ListClientProcedure.phone_number = thisReader["phone_number"].ToString();
+                    ListClientProcedure.email = thisReader["email"].ToString();
+                }
+                thisReader.Close();
+                ThisConnection.Close();
+
+                ListClientProcedure.EditOrAdd = "Редактирование информации о клиенте";
+
+                EditClientWindow editClientWindow = new EditClientWindow();
+                editClientWindow.ShowDialog();
+
+                FilterClientStatusCommand.Execute(null);
+            }
+        }
+
+        #endregion
+
         #endregion
 
         /*------------------------------------------------------------------------------------------------*/
@@ -344,6 +398,8 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
             OpenAddClientWindowCommand = new LamdaCommand(OnOpenAddClientWindowCommandExecuted, CanOpenAddClientWindowCommandExecute);
 
+            OpenEditClientWindowCommand = new LamdaCommand(OnOpenEditClientWindowCommandExecuted, CanOpenEditClientWindowCommandExecute);
+
             DropClientCommand = new LamdaCommand(OnDropClientCommandExecuted, CanDropClientCommandExecute);
 
             RepeatClientCommand = new LamdaCommand(OnRepeatClientCommandExecuted, CanRepeatClientCommandExecute);
@@ -356,7 +412,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
             SqlConnection ThisConnection = new SqlConnection(connectionString);
             ThisConnection.Open();
             SqlCommand thisCommand = ThisConnection.CreateCommand();
-            thisCommand.CommandText = "(Select id_legal_entity,name_organization as 'name', phone_number, reality, 'Юридическое лицо' as 'type' from legal_entity where reality != 'Архив') Union (Select id_natural_person,[name] + ' ' + surname + ' ' + patronymic, phone_number, reality, 'Физическое лицо' from natural_person where reality != 'Архив') ORDER BY name";
+            thisCommand.CommandText = "(Select id_legal_entity,name_organization as 'name', phone_number, reality, 'Юридическое лицо' as 'type' from legal_entity where reality != 'Архив') Union (Select id_natural_person,surname + ' ' + [name] + ' ' + patronymic, phone_number, reality, 'Физическое лицо' from natural_person where reality != 'Архив') ORDER BY name";
             SqlDataReader thisReader = thisCommand.ExecuteReader();
             dt.Load(thisReader);
             MainListClient = dt.AsEnumerable().Select(se => new ListClient() { id_legal_entity = se.Field<int>("id_legal_entity"), name = se.Field<string>("name"), phone_number = se.Field<string>("phone_number"), reality = se.Field<string>("reality"), type = se.Field<string>("type")}).ToList();

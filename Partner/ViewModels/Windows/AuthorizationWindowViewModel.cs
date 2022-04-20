@@ -58,14 +58,14 @@ namespace Partner.ViewModels.Windows
 
         private void OnAuthorizationModuleExecuted(object p)
         {
-            var passwordBox = p as PasswordBox;
-            var password = passwordBox.Password;
+            PasswordBox passwordBox = p as PasswordBox;
+            string password = passwordBox.Password;
             if (Login != "")
             {
                 if (password != "")
                 {
                     UserData userData = new UserData(Login, password);
-                    if (UserDataModel.id_user != default(int))
+                    if (UserDataModel.id_user != -1)
                     {
                         MessageBox.Show(UserDataModel.name + " " + UserDataModel.surname + "\nДобро пожаловать в программу 'ООО Партнер'\nУдачного рабочего дня!", "Авторизация", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                         password = null;

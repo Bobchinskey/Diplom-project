@@ -101,9 +101,9 @@
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1">
                             <TextBlock Text="Пользователь:" Foreground="Black"/>
                             <TextBlock Foreground="Black" TextWrapping="Wrap">
-                            <Run Text="{Binding Surname}"/>
-                            <Run Text=" "/>
-                            <Run Text="{Binding Name}"/>
+                                <Run Text="{Binding Surname}"/>
+                                <Run Text=" "/>
+                                <Run Text="{Binding Name}"/>
                             </TextBlock>
                             <TextBlock Text="{Binding AccessLavel}" Foreground="Black"/>
                         </StackPanel>

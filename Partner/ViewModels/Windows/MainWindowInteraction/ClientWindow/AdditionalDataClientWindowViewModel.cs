@@ -72,22 +72,15 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
         private void OnAddAdditionalDataCommandExecuted(object p)
         {
-            if ((EditorAdd.editoradd == "Добавление номера телефона") || (EditorAdd.editoradd == "Редактирование номера телефона"))
-            {
-                EditorAdd.phone_number = Numberphone;
-                EditorAdd.other = Other;
+            EditorAdd.phone_number = Numberphone;
+            EditorAdd.other = Other;
 
-                foreach (System.Windows.Window window in System.Windows.Application.Current.Windows)
-                {
-                    if (window.DataContext == this)
-                    {
-                        window.Close();
-                    }
-                }
-            }
-            else
+            foreach (System.Windows.Window window in System.Windows.Application.Current.Windows)
             {
-                    
+                if (window.DataContext == this)
+                {
+                    window.Close();
+                }
             }
         }
 

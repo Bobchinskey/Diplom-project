@@ -78,6 +78,7 @@
     <Compile Include="Models\Vehicle\VehicleDataModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\AddClientNaturapPersonViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\AdditionalDataClientWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\EditClientNaturapPersonViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\ListClientWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\VehicleWindow\AddVehicleWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\VehicleWindow\ListVehicleWindowViewModel.cs" />
@@ -87,6 +88,9 @@
     </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\ClientWindow\AdditionalDataClientWindow.xaml.cs">
       <DependentUpon>AdditionalDataClientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\ClientWindow\EditClientWindow.xaml.cs">
+      <DependentUpon>EditClientWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\ClientWindow\ListClientWindow.xaml.cs">
       <DependentUpon>ListClientWindow.xaml</DependentUpon>
@@ -179,6 +183,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Windows\MainWindowInteraction\ClientWindow\AdditionalDataClientWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\ClientWindow\EditClientWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

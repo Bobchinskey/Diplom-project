@@ -30,11 +30,6 @@
                     <i1:InvokeCommandAction Command="{Binding FilterVehicleStatusCommand}"/>
                 </i1:EventTrigger>
             </i1:Interaction.Triggers>
-            <ComboBox.ToolTip>
-                <ToolTip>
-                    <TextBlock Text="Сортировка по актуальности"/>
-                </ToolTip>
-            </ComboBox.ToolTip>
         </ComboBox>
         <DataGrid Margin="5,5,5,5" SelectedIndex="{Binding SelectedVehicle}" ItemsSource="{Binding MainListVehicle}" IsReadOnly="True" Grid.Row="1" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>

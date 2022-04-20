@@ -9,7 +9,7 @@ namespace Partner.Models.Client
 {
     class ListNaturalPersonAdditionalData
     {
-        public int num { get; set; }
+        public int id_additional_phone_numbers { get; set; }
         public string phone_number { get; set; }
         public string other { get; set; }
     }

@@ -11,6 +11,7 @@ namespace Partner.Models.Client
         public static int id_natural_person { get; set; }
         public static string surname { get; set; }
         public static string name { get; set; }
+        public static string gender { get; set; }
         public static string patronymic { get; set; }
         public static DateTime birthday { get; set; }
         public static string place_birthday { get; set; }

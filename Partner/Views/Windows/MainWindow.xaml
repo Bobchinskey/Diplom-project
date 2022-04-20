@@ -10,7 +10,7 @@
         Title="ООО ПАРТНЕР"
         ResizeMode="NoResize" 
         WindowState="Maximized"
-        MinHeight="800" MinWidth="1500">
+        WindowStyle="SingleBorderWindow">
     <Window.Resources>
         <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
     </Window.Resources>
