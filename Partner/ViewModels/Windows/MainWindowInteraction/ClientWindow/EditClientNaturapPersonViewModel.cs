@@ -451,11 +451,11 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
         #endregion
 
-        #region Команда Добавления нового клиента
+        #region Команда Редактирования информации о клиенте
 
-        public ICommand AddClientCommand { get; }
+        public ICommand EditClientCommand { get; }
 
-        private bool CanAddClientCommandExecute(object p)
+        private bool CanEditClientCommandExecute(object p)
         {
             if ((Surname != "") && (DateIssuedPassport < DateTime.Today) && (Name != "") && (Patronymic != "") && ((DateTime.Today.Year - Birthday.Year) > 18) && (PlaceBirthday != "") && (PhoneNumber != "") && (PhoneNumber.Length == 11) && (Email != "") && (INN != "") && (INN.Length == 12) && (SeriesPassport != "") && (SeriesPassport.Length == 4) && (NumberPassport != "") && (NumberPassport.Length == 6) && (Registration != "") && (ActualPlaceResidence != "") && (NumberCard != "") && (ValidityPeriodCard > DateTime.Today) && (CVC2 != "") && (CVC2.Length == 3))
             {
@@ -467,7 +467,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
             }
         }
 
-        private void OnAddClientCommandExecuted(object p)
+        private void OnEditClientCommandExecuted(object p)
         {
             string gender;
 
@@ -482,6 +482,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
             var command = ThisConnection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
             command.CommandText = "Edit_natural_person";
+            command.Parameters.AddWithValue("@id_natural_person", ListClientProcedure.id_natural_person);
             command.Parameters.AddWithValue("@surname", Surname);
             command.Parameters.AddWithValue("@name", Name);
             command.Parameters.AddWithValue("@patronymic", Patronymic);
@@ -501,39 +502,10 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
             command.Parameters.AddWithValue("@phone_number", PhoneNumber);
             command.Parameters.AddWithValue("@email", Email);
             command.Parameters.AddWithValue("@image", "NULL");
-            command.Parameters.AddWithValue("@reality", "Актуально");
             command.ExecuteNonQuery();
             ThisConnection.Close();
 
-            ThisConnection.Open();
-            SqlCommand thisCommand = ThisConnection.CreateCommand();
-            thisCommand.CommandText = "select id_natural_person from natural_person where series_passport = '" + SeriesPassport + "' and number_passport = '" + NumberPassport + "'";
-            SqlDataReader thisReader = thisCommand.ExecuteReader();
-            thisReader.Read();
-
-            ListClientProcedure.id_natural_person = Convert.ToInt32(thisReader["id_natural_person"].ToString());
-
-            thisReader.Close();
-            ThisConnection.Close();
-
-            /*if (AdditionalDataClientPhoneNumber.Rows.Count >= 1)
-            {
-                for (int i = 1; i <= AdditionalDataClientPhoneNumber.Rows.Count; i++)
-                {
-                    ThisConnection.Open();
-                    var command2 = ThisConnection.CreateCommand();
-                    command2.CommandType = CommandType.StoredProcedure;
-                    command2.CommandText = "Add_additional_phone_numbers";
-                    command2.Parameters.AddWithValue("@id_natural_person", ListClientProcedure.id_natural_person);
-                    command2.Parameters.AddWithValue("@phone_number", Convert.ToString(AdditionalDataClientPhoneNumber.Rows[i - 1]["phone_number"]));
-                    command2.Parameters.AddWithValue("@other", Convert.ToString(AdditionalDataClientPhoneNumber.Rows[i - 1]["other"]));
-                    command2.ExecuteNonQuery();
-                    ThisConnection.Close();
-                }
-            }
-            */
-
-            MessageBox.Show("Даннае добавлены");
+            MessageBox.Show("Даннае обновлены");
 
             foreach (System.Windows.Window window in System.Windows.Application.Current.Windows)
             {
@@ -545,7 +517,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
         }
 
         #endregion
-
 
         #endregion
 
@@ -561,7 +532,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
             DropAdditionalDataCommand = new LamdaCommand(OnDropAdditionalDataCommandExecuted, CanDropAdditionalDataCommandExecute);
 
-            AddClientCommand = new LamdaCommand(OnAddClientCommandExecuted, CanAddClientCommandExecute);
+            EditClientCommand = new LamdaCommand(OnEditClientCommandExecuted, CanEditClientCommandExecute);
 
             ReturnAdditionalDataCommand = new LamdaCommand(OnReturnAdditionalDataCommandExecuted, CanReturnAdditionalDataCommandExecute);
 

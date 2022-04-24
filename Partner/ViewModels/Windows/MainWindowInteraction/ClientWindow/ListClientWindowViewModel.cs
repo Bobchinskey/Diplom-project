@@ -210,7 +210,12 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
         #region Команда удаления клиента
         public ICommand DropClientCommand { get; }
 
-        private bool CanDropClientCommandExecute(object p) => SelectedClient >= 0;
+        private bool CanDropClientCommandExecute(object p)
+        {
+            if ((SelectedClient > -1) && (SelectedVehicleProperty != "Архив"))
+                return true;
+            else return false;
+        }
 
         private void OnDropClientCommandExecuted(object p)
         {
@@ -335,8 +340,12 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
         public ICommand OpenEditClientWindowCommand { get; }
 
-        private bool CanOpenEditClientWindowCommandExecute(object p) => SelectedClient > -1;
-
+        private bool CanOpenEditClientWindowCommandExecute(object p)
+        {
+            if ((SelectedClient > -1) && (SelectedVehicleProperty != "Архив"))
+                return true;
+            else return false;
+        }
         private void OnOpenEditClientWindowCommandExecuted(object p)
         {
             if (MainListClient[SelectedClient].type == "Физическое лицо")

@@ -179,7 +179,7 @@
                     </StackPanel>
                 </Grid>
             </StackPanel>
-            <Button Grid.Column="1" Command="{Binding}" Style="{StaticResource ButtonStroge}" Background="White" Width="120" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">
+            <Button Grid.Column="1" Command="{Binding EditClientCommand}" Style="{StaticResource ButtonStroge}" Background="White" Width="120" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">
                 <Button.Content>
                     <Grid HorizontalAlignment="Stretch" Width="120">
                         <fa:ImageAwesome Icon="Save" HorizontalAlignment="Left" Height="20" Margin="5,0" Foreground="Black"/>
