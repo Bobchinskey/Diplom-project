@@ -39,7 +39,7 @@
                     <Separator/>
                     <MenuItem Header="Список штрафов..." FontSize="14"/>
                     <Separator/>
-                    <MenuItem Header="Тарифы..." FontSize="14"/>
+                    <MenuItem Header="Тарифы..." Command="{Binding OpenListRateWindowCommand}" FontSize="14"/>
                     <MenuItem Header="Дополнительные услуги..." FontSize="14"/>
                 </MenuItem>
                 <MenuItem Header="Отчеты">

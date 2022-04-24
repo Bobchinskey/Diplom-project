@@ -7,6 +7,7 @@ using Partner.Views.Views.Manager.Pages;
 using Partner.Views.Windows;
 using Partner.Views.Windows.InformativeWindows;
 using Partner.Views.Windows.MainWindowInteraction.ClientWindow;
+using Partner.Views.Windows.MainWindowInteraction.Rates;
 using Partner.Views.Windows.MainWindowInteraction.VehicleWindow;
 using Partner.Views.Windows.Settings;
 using System;
@@ -144,6 +145,21 @@ namespace Partner.ViewModels.Views.Maneger
 
         #endregion
 
+        #region Команда вызова окна "Тарифы"
+
+        public ICommand OpenListRateWindowCommand { get; }
+
+        private bool CanOpenListRateWindowCommandExecute(object p) => true;
+
+        private void OnOpenListRateWindowCommandExecuted(object p)
+        {
+            RateWindow rateWindow = new RateWindow();
+            rateWindow.ShowDialog();
+
+            UpdatePageCommand.Execute(null);
+        }
+
+        #endregion
 
         #endregion
 
@@ -167,6 +183,8 @@ namespace Partner.ViewModels.Views.Maneger
             OpenListVehicleWindowCommand = new LamdaCommand(OnOpenListVehicleWindowCommandExecuted, CanOpenListVehicleWindowCommandExecute);
 
             OpenListClientWindowCommand = new LamdaCommand(OnOpenListClientWindowCommandExecuted, CanOpenListClientWindowCommandExecute);
+
+            OpenListRateWindowCommand = new LamdaCommand(OnOpenListRateWindowCommandExecuted, CanOpenListRateWindowCommandExecute);
 
             #endregion
         }

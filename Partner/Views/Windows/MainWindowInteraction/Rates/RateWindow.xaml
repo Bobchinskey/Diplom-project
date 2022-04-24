@@ -1,0 +1,70 @@
+﻿<Window x:Class="Partner.Views.Windows.MainWindowInteraction.Rates.RateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Datacontext="clr-namespace:Partner.ViewModels.Windows.MainWindowInteraction.Rates"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:local="clr-namespace:Partner.Views.Windows.MainWindowInteraction.Rates"
+        mc:Ignorable="d"
+        Title="Тарифы" 
+        Height="500" Width="1000"
+        MinHeight="500" MinWidth="1000"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Window.DataContext>
+        <Datacontext:RateWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <WrapPanel Grid.Row="0" Grid.Column="0" Background="BlueViolet">
+            <TextBlock Text="Редактор тарифов" Foreground="White" FontSize="18" Margin="10"/>
+        </WrapPanel>
+        <WrapPanel Grid.Row="0" Grid.Column="1" Background="BlueViolet"/>
+        <DataGrid Margin="5,5,5,5" SelectedIndex="{Binding SelectedRate, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding MainListRate}" IsReadOnly="True" Grid.Row="1" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№" Binding="{Binding num}"/>
+                <DataGridTextColumn Header="Автомобиль" Binding="{Binding make_model}"/>
+                <DataGridTextColumn Header="1-3 дня, сутки" Binding="{Binding Rate1_3}"/>
+                <DataGridTextColumn Header="4-9 дня, сутки" Binding="{Binding Rate4_9}"/>
+                <DataGridTextColumn Header="10-29 дней, сутки" Binding="{Binding Rate10_29}"/>
+                <DataGridTextColumn Header="от 30 дней, сутки" Binding="{Binding Rate30}"/>
+                <DataGridTextColumn Header="Залог" Binding="{Binding Deposit}"/>
+                <DataGridTextColumn Header="Стоимость перепробега 1 км" Binding="{Binding excess_mileage}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Margin="5,0,10,0" Grid.Row="1" Grid.Column="1">
+            <Button Command="{Binding OpenEditRateWindowCommand}" Margin="0,5" Background="White" Width="50" Height="50">
+                <Button.Content>
+                    <Grid>
+                        <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
+                    </Grid>
+                </Button.Content>
+                <Button.ToolTip>
+                    <ToolTip>
+                        <TextBlock Text="Редактировать"/>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+            <Button Margin="0,30,0,0" Background="White" Width="50" Height="50">
+                <Button.Content>
+                    <Grid>
+                        <fa:ImageAwesome Icon="FileExcelOutline" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
+                    </Grid>
+                </Button.Content>
+                <Button.ToolTip>
+                    <ToolTip>
+                        <TextBlock Text="Экспортировать таблицу в Excel"/>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>
