@@ -41,7 +41,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Margin="5,0,10,0" Grid.Row="1" Grid.Column="1">
-            <Button Background="White" Width="50" Height="50" Command="{Binding OpenAddVehicleWindowCommand}">
+            <Button Background="White" Margin="0,5" Width="50" Height="50" Command="{Binding OpenAddVehicleWindowCommand}">
                 <Button.Content>
                     <Grid>
                         <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="30" Foreground="Black"/>

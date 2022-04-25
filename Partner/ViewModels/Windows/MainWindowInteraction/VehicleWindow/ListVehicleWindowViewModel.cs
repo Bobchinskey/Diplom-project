@@ -314,7 +314,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
 
         #endregion
 
-
         #endregion
 
         /*------------------------------------------------------------------------------------------------*/

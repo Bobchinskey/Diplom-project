@@ -74,6 +74,7 @@
     <Compile Include="Models\Client\ListClient.cs" />
     <Compile Include="Models\Client\ListClientProcedure.cs" />
     <Compile Include="Models\Client\ListNaturalPersonAdditionalData.cs" />
+    <Compile Include="Models\Rate\AdditionalServices\MainListAdditionalServices.cs" />
     <Compile Include="Models\Rate\ListRateInformation.cs" />
     <Compile Include="Models\Rate\ListRateStatic.cs" />
     <Compile Include="Models\Vehicle\ListVehicle.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\AdditionalDataClientWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\EditClientNaturapPersonViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\ListClientWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\Rates\AdditionalServices\AdditionalServicesViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rates\EditRateWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rates\RateWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\VehicleWindow\AddVehicleWindowViewModel.cs" />
@@ -98,6 +100,9 @@
     </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\ClientWindow\ListClientWindow.xaml.cs">
       <DependentUpon>ListClientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\Rates\AdditionalServices\AdditionalServicesWindow.xaml.cs">
+      <DependentUpon>AdditionalServicesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\Rates\EditRateWindow.xaml.cs">
       <DependentUpon>EditRateWindow.xaml</DependentUpon>
@@ -201,6 +206,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Windows\MainWindowInteraction\ClientWindow\ListClientWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\Rates\AdditionalServices\AdditionalServicesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

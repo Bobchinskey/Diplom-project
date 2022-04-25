@@ -8,6 +8,7 @@ using Partner.Views.Windows;
 using Partner.Views.Windows.InformativeWindows;
 using Partner.Views.Windows.MainWindowInteraction.ClientWindow;
 using Partner.Views.Windows.MainWindowInteraction.Rates;
+using Partner.Views.Windows.MainWindowInteraction.Rates.AdditionalServices;
 using Partner.Views.Windows.MainWindowInteraction.VehicleWindow;
 using Partner.Views.Windows.Settings;
 using System;
@@ -161,6 +162,22 @@ namespace Partner.ViewModels.Views.Maneger
 
         #endregion
 
+        #region Команда вызова окна "Тарифы"
+
+        public ICommand OpenListAdditionalServicesWindowCommand { get; }
+
+        private bool CanOpenListAdditionalServicesWindowCommandExecute(object p) => true;
+
+        private void OnOpenListAdditionalServicesWindowCommandExecuted(object p)
+        {
+            AdditionalServicesWindow additionalServicesWindow = new AdditionalServicesWindow();
+            additionalServicesWindow.ShowDialog();
+
+            UpdatePageCommand.Execute(null);
+        }
+
+        #endregion
+
         #endregion
 
         /*------------------------------------------------------------------------------------------------*/
@@ -185,6 +202,8 @@ namespace Partner.ViewModels.Views.Maneger
             OpenListClientWindowCommand = new LamdaCommand(OnOpenListClientWindowCommandExecuted, CanOpenListClientWindowCommandExecute);
 
             OpenListRateWindowCommand = new LamdaCommand(OnOpenListRateWindowCommandExecuted, CanOpenListRateWindowCommandExecute);
+
+            OpenListAdditionalServicesWindowCommand = new LamdaCommand(OnOpenListAdditionalServicesWindowCommandExecuted, CanOpenListAdditionalServicesWindowCommandExecute);
 
             #endregion
         }
