@@ -1,6 +1,7 @@
 ﻿using Partner.Infrastructure.Commands;
 using Partner.Models.Rate.AdditionalServices;
 using Partner.ViewModels.Base;
+using Partner.Views.Windows.MainWindowInteraction.Rates.AdditionalServices;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -226,6 +227,49 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rates.AdditionalServi
 
         #endregion
 
+        #region Команда добавление дополнительных услуг
+        public ICommand AddAdditionalServicesCommand { get; }
+
+        private bool CanAddAdditionalServicesCommandExecute(object p) => true;
+
+        private void OnAddAdditionalServicesCommandExecuted(object p)
+        {
+            AddListData.title = "Добавление дополнительной услуги";
+            AddListData.name_additional_services = "";
+            AddListData.type_additional_services = "";
+            AddListData.cost_additional_services = "";
+
+            AddAdditionalServicesWindow addAdditionalServicesWindow = new AddAdditionalServicesWindow();
+            addAdditionalServicesWindow.ShowDialog();
+
+            FilterAdditionalServicesStatusCommand.Execute(null);
+        }
+
+        /*------------------------------------------------------------------------------------------------*/
+
+        #endregion Команды
+
+        #region Команда редактирование дополнительных услуг
+        public ICommand EditAdditionalServicesCommand { get; }
+
+        private bool CanEditAdditionalServicesCommandExecute(object p) => SelectedAdditionalServices > -1;
+
+        private void OnEditAdditionalServicesCommandExecuted(object p)
+        {
+            AddListData.title = "Редактирвание дополнительной услуги";
+            AddListData.id_additional_services = MainListAdditionalServices[SelectedAdditionalServices].id_additional_services;
+            AddListData.name_additional_services = MainListAdditionalServices[SelectedAdditionalServices].name_additional_services;
+            AddListData.type_additional_services = MainListAdditionalServices[SelectedAdditionalServices].type_additional_services;
+            AddListData.cost_additional_services = MainListAdditionalServices[SelectedAdditionalServices].cost_additional_services;
+
+            AddAdditionalServicesWindow addAdditionalServicesWindow = new AddAdditionalServicesWindow();
+            addAdditionalServicesWindow.ShowDialog();
+
+            FilterAdditionalServicesStatusCommand.Execute(null);
+        }
+
+        #endregion
+
         #endregion
 
         /*------------------------------------------------------------------------------------------------*/
@@ -239,6 +283,10 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rates.AdditionalServi
             DropAdditionalServicesCommand = new LamdaCommand(OnDropAdditionalServicesCommandExecuted, CanDropAdditionalServicesCommandExecute);
 
             RepeatAdditionalServicesCommand = new LamdaCommand(OnRepeatAdditionalServicesCommandExecuted, CanRepeatAdditionalServicesCommandExecute);
+
+            AddAdditionalServicesCommand = new LamdaCommand(OnAddAdditionalServicesCommandExecuted, CanAddAdditionalServicesCommandExecute);
+
+            EditAdditionalServicesCommand = new LamdaCommand(OnEditAdditionalServicesCommandExecuted, CanEditAdditionalServicesCommandExecute);
 
             #endregion
 

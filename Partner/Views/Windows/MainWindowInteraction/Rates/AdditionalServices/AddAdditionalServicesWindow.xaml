@@ -1,0 +1,48 @@
+﻿<Window x:Class="Partner.Views.Windows.MainWindowInteraction.Rates.AdditionalServices.AddAdditionalServicesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:local="clr-namespace:Partner.Views.Windows.MainWindowInteraction.Rates.AdditionalServices"
+        xmlns:Datacontext="clr-namespace:Partner.ViewModels.Windows.MainWindowInteraction.Rates.AdditionalServices"
+        mc:Ignorable="d"
+        Title="{Binding Title}" 
+        Height="200" Width="700"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Window.DataContext>
+        <Datacontext:AddAdditionalServicesViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <WrapPanel Grid.Row="0" Background="BlueViolet">
+            <TextBlock Margin="10" Text="{Binding Title}" Foreground="White" FontSize="18"/>
+        </WrapPanel>
+        <WrapPanel Grid.Row="1" VerticalAlignment="Center">
+            <StackPanel VerticalAlignment="Center" Margin="5">
+                <TextBlock Text="Наименование услуги" TextAlignment="Center" FontSize="14"/>
+                <TextBox Text="{Binding NameAdditionalServices, UpdateSourceTrigger=PropertyChanged}" Margin="10" Width="150"/>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" Margin="5">
+                <TextBlock Text="Тип услуги" TextAlignment="Center" FontSize="14"/>
+                <TextBox Text="{Binding TypeAdditionalServices, UpdateSourceTrigger=PropertyChanged}" Margin="10" Width="150"/>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" Margin="5">
+                <TextBlock Text="Стоимость" TextAlignment="Center" FontSize="14"/>
+                <TextBox Text="{Binding CostAdditionalServices, UpdateSourceTrigger=PropertyChanged}" Margin="10" Width="150"/>
+            </StackPanel>
+            <Button Command="{Binding AddAdditionalServicesCommand}" Style="{StaticResource ButtonStroge}" Background="White" Width="120" Height="30">
+                <Button.Content>
+                    <Grid HorizontalAlignment="Stretch" Width="120">
+                        <fa:ImageAwesome Icon="Save" HorizontalAlignment="Left" Height="20" Margin="5,0" Foreground="Black"/>
+                        <TextBlock Text="Сохранить" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                </Button.Content>
+            </Button>
+        </WrapPanel>
+    </Grid>
+</Window>

@@ -335,6 +335,25 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
         }
 
         #endregion
+        
+        #region Команда вызывающая окно "Добавить юридическое лицо"
+
+        public ICommand OpenAddLegalEntityWindowCommand { get; }
+
+        private bool CanOpenAddLegalEntityWindowCommandExecute(object p) => true;
+
+        private void OnOpenAddLegalEntityWindowCommandExecuted(object p)
+        {
+
+
+            AddLegalEntityWindow addLegalEntityWindow = new AddLegalEntityWindow();
+            addLegalEntityWindow.ShowDialog();
+
+            FilterClientStatusCommand.Execute(null);
+        }
+
+        #endregion
+
 
         #region Команда вызывающая окно "Редактирование информации о клиенте"
 
@@ -406,6 +425,8 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
             FilterClientStatusCommand = new LamdaCommand(OnFilterClientStatusCommandExecuted, CanFilterClientStatusCommandExecute);
 
             OpenAddClientWindowCommand = new LamdaCommand(OnOpenAddClientWindowCommandExecuted, CanOpenAddClientWindowCommandExecute);
+
+            OpenAddLegalEntityWindowCommand = new LamdaCommand(OnOpenAddLegalEntityWindowCommandExecuted, CanOpenAddLegalEntityWindowCommandExecute);
 
             OpenEditClientWindowCommand = new LamdaCommand(OnOpenEditClientWindowCommandExecuted, CanOpenEditClientWindowCommandExecute);
 

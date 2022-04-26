@@ -55,7 +55,7 @@
                                     <fa:ImageAwesome Margin="1,2,1,0" Icon="Plus" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Foreground="Black"/>
                                 </MenuItem.Header>
                                 <MenuItem Header="Физическое лицо" FontSize="12" Command="{Binding OpenAddClientWindowCommand}"/>
-                                <MenuItem Header="Юридическое лицо" FontSize="12"/>
+                                <MenuItem Header="Юридическое лицо" FontSize="12" Command="{Binding OpenAddLegalEntityWindowCommand}"/>
                             </MenuItem>
                         </Menu>
                     </Grid>

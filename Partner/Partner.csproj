@@ -74,6 +74,7 @@
     <Compile Include="Models\Client\ListClient.cs" />
     <Compile Include="Models\Client\ListClientProcedure.cs" />
     <Compile Include="Models\Client\ListNaturalPersonAdditionalData.cs" />
+    <Compile Include="Models\Rate\AdditionalServices\AddListData.cs" />
     <Compile Include="Models\Rate\AdditionalServices\MainListAdditionalServices.cs" />
     <Compile Include="Models\Rate\ListRateInformation.cs" />
     <Compile Include="Models\Rate\ListRateStatic.cs" />
@@ -81,8 +82,10 @@
     <Compile Include="Models\Vehicle\VehicleDataModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\AddClientNaturapPersonViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\AdditionalDataClientWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\AddLegalEntityViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\EditClientNaturapPersonViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\ListClientWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\Rates\AdditionalServices\AddAdditionalServicesViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rates\AdditionalServices\AdditionalServicesViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rates\EditRateWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rates\RateWindowViewModel.cs" />
@@ -95,11 +98,17 @@
     <Compile Include="Views\Windows\MainWindowInteraction\ClientWindow\AdditionalDataClientWindow.xaml.cs">
       <DependentUpon>AdditionalDataClientWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\ClientWindow\AddLegalEntityWindow.xaml.cs">
+      <DependentUpon>AddLegalEntityWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\ClientWindow\EditClientWindow.xaml.cs">
       <DependentUpon>EditClientWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\ClientWindow\ListClientWindow.xaml.cs">
       <DependentUpon>ListClientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\Rates\AdditionalServices\AddAdditionalServicesWindow.xaml.cs">
+      <DependentUpon>AddAdditionalServicesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\Rates\AdditionalServices\AdditionalServicesWindow.xaml.cs">
       <DependentUpon>AdditionalServicesWindow.xaml</DependentUpon>
@@ -201,11 +210,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\ClientWindow\AddLegalEntityWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\MainWindowInteraction\ClientWindow\EditClientWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Windows\MainWindowInteraction\ClientWindow\ListClientWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\Rates\AdditionalServices\AddAdditionalServicesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
