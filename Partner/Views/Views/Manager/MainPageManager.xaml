@@ -44,16 +44,6 @@
                 </MenuItem>
                 <MenuItem Header="Отчеты">
                 </MenuItem>
-                <MenuItem Header="Журналы">
-                    <MenuItem Header="Список удаленных аренд..." FontSize="14"/>
-                    <MenuItem Header="Список удаленных броней..." FontSize="14"/>
-                    <MenuItem Header="Список удаленных ТО..." FontSize="14"/>
-                    <Separator/>
-                    <MenuItem Header="Список удаленных автомобилей..." FontSize="14"/>
-                    <MenuItem Header="Список удаленных клиентов..." FontSize="14"/>
-                    <Separator/>
-                    <MenuItem Header="Список удаленных пользователей..." FontSize="14"/>
-                </MenuItem>
                 <MenuItem Background="White">
                     <MenuItem.Header>
                         <TextBlock>

@@ -13,14 +13,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Partner.Views.Windows.MainWindowInteraction.Rates.AdditionalServices
+namespace Partner.Views.Windows.MainWindowInteraction.ClientWindow
 {
     /// <summary>
-    /// Логика взаимодействия для AddAdditionalServicesWindow.xaml
+    /// Логика взаимодействия для RepresentativesOrganizationsWindow.xaml
     /// </summary>
-    public partial class AddAdditionalServicesWindow : Window
+    public partial class RepresentativesOrganizationsWindow : Window
     {
-        public AddAdditionalServicesWindow()
+        public RepresentativesOrganizationsWindow()
         {
             InitializeComponent();
         }

@@ -360,7 +360,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
         #endregion
 
-
         #region Команда Добавления дополнительного телефона
 
         public ICommand AddAdditionalDataCommand { get; }

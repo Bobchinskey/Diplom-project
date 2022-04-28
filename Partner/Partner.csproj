@@ -74,6 +74,7 @@
     <Compile Include="Models\Client\ListClient.cs" />
     <Compile Include="Models\Client\ListClientProcedure.cs" />
     <Compile Include="Models\Client\ListNaturalPersonAdditionalData.cs" />
+    <Compile Include="Models\Client\ListRepresentativesOrganizations.cs" />
     <Compile Include="Models\Rate\AdditionalServices\AddListData.cs" />
     <Compile Include="Models\Rate\AdditionalServices\MainListAdditionalServices.cs" />
     <Compile Include="Models\Rate\ListRateInformation.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\AddLegalEntityViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\EditClientNaturapPersonViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\ListClientWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\RepresentativesOrganizationsWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rates\AdditionalServices\AddAdditionalServicesViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rates\AdditionalServices\AdditionalServicesViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rates\EditRateWindowViewModel.cs" />
@@ -106,6 +108,9 @@
     </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\ClientWindow\ListClientWindow.xaml.cs">
       <DependentUpon>ListClientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\ClientWindow\RepresentativesOrganizationsWindow.xaml.cs">
+      <DependentUpon>RepresentativesOrganizationsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\Rates\AdditionalServices\AddAdditionalServicesWindow.xaml.cs">
       <DependentUpon>AddAdditionalServicesWindow.xaml</DependentUpon>
@@ -222,6 +227,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\ClientWindow\RepresentativesOrganizationsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\MainWindowInteraction\Rates\AdditionalServices\AddAdditionalServicesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -297,6 +306,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Pictures\UserNullImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Pictures\NullLegalEntity.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

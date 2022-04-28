@@ -10,11 +10,201 @@
         Title="Добавление юридического лица" 
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Height="450" Width="800">
+        Height="820" Width="1000">
     <Window.DataContext>
         <Datacontext:AddLegalEntityViewModel/>
     </Window.DataContext>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <WrapPanel Grid.Row="0" Background="BlueViolet">
+            <TextBlock Margin="10" Text="Добавление юридического лица" Foreground="White" FontSize="25"/>
+        </WrapPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Margin="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="1.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Margin="0,10">
+                        <TextBlock Text="Полное наименование:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,10"/>
+                        <TextBlock Text="Сокращенное наименование:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,12"/>
+                        <TextBlock Text="Фамилия руководителя:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,8"/>
+                        <TextBlock Text="Имя руководителя:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,16"/>
+                        <TextBlock Text="Отчество руководителя:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,4"/>
+                        <TextBlock Text="Юридический адрес:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,18"/>
+                        <TextBlock Text="Фактический адрес:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,4"/>
+                        <TextBlock Text="Email:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,18"/>
+                        <TextBlock Text="Факс:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,4"/>
+                        <TextBlock Text="Номер телефона:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,18"/>
+                        <TextBlock Text="Сайт:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,2"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Margin="10,10">
+                        <TextBox Text="{Binding FullNameOrganization, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox Text="{Binding AbbreviatedNameOrganization, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox Text="{Binding Patronymic, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox Text="{Binding LegalAddress, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox Text="{Binding ActualLegalAddress, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox Text="{Binding Fax, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox PreviewTextInput="NumberValidationTextBox" Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10" MaxLength="11"/>
+                        <TextBox Text="{Binding Website, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                    </StackPanel>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="50"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid SelectedIndex="{Binding SelectAdditionalPhoneNumber}" ItemsSource="{Binding AdditionalDataLegalEntityPhoneNumber}" Height="200" Grid.Column="0" CanUserResizeColumns="False" AutoGenerateColumns="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Дополнительный номер телефона" Binding="{Binding phone_number}"/>
+                            <DataGridTextColumn Header="Описание" Binding="{Binding other}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Grid.Column="1">
+                        <Button Margin="0,25,0,0" Command="{Binding AddAdditionalDataCommand}" Background="White" Width="30" Height="30">
+                            <Button.Content>
+                                <Grid>
+                                    <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
+                                </Grid>
+                            </Button.Content>
+                            <Button.ToolTip>
+                                <ToolTip>
+                                    <TextBlock Text="Добавить"/>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Command="{Binding EditAdditionalDataCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
+                            <Button.Content>
+                                <Grid>
+                                    <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
+                                </Grid>
+                            </Button.Content>
+                            <Button.ToolTip>
+                                <ToolTip>
+                                    <TextBlock Text="Редактировать"/>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Command="{Binding DropAdditionalDataCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
+                            <Button.Content>
+                                <Grid>
+                                    <fa:ImageAwesome Icon="Trash" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
+                                </Grid>
+                            </Button.Content>
+                            <Button.ToolTip>
+                                <ToolTip>
+                                    <TextBlock Text="Удалить"/>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Margin="10.2,10,9.6,68.8">
+                <Border Margin="10,10,20,10" BorderBrush="Black" BorderThickness="1">
+                    <Grid HorizontalAlignment="Center">
+                        <Image Margin="10" x:Name="ProfileImage" Width="400" Height="156">
+                            <Image.Source>
+                                <Binding Path="Image">
+                                    <Binding.TargetNullValue>
+                                        <ImageSource>/Resources/Pictures/NullLegalEntity.png</ImageSource>
+                                    </Binding.TargetNullValue>
+                                </Binding>
+                            </Image.Source>
+                        </Image>
+                    </Grid>
+                </Border>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="1.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Margin="0,10">
+                        <TextBlock Text="ИНН:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,10"/>
+                        <TextBlock Text="КПП:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,12"/>
+                        <TextBlock Text="ОГРН:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,8"/>
+                        <TextBlock Text="Расчетный счет:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,16"/>
+                        <TextBlock Text="БИК:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,4"/>
+
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Margin="10,10">
+                        <TextBox MaxLength="10" PreviewTextInput="NumberValidationTextBox" Text="{Binding INN, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox MaxLength="9" PreviewTextInput="NumberValidationTextBox" Text="{Binding KPP, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox MaxLength="15" PreviewTextInput="NumberValidationTextBox" Text="{Binding OGRN, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox MaxLength="20" PreviewTextInput="NumberValidationTextBox" Text="{Binding PaymentAccount, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox MaxLength="9" PreviewTextInput="NumberValidationTextBox" Text="{Binding BIK, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Margin="0,28,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="50"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid SelectedIndex="{Binding SelectRepresentativesOrganizations}" ItemsSource="{Binding RepresentativesOrganizations}" Height="200" Grid.Column="0" CanUserResizeColumns="False" AutoGenerateColumns="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Представители организации" Binding="{Binding FIO}"/>
+                            <DataGridTextColumn Header="Должность" Binding="{Binding Post}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Grid.Column="1">
+                        <Button Margin="0,25,0,0" Command="{Binding AddRepresentativesOrganizationsCommand}" Background="White" Width="30" Height="30">
+                            <Button.Content>
+                                <Grid>
+                                    <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
+                                </Grid>
+                            </Button.Content>
+                            <Button.ToolTip>
+                                <ToolTip>
+                                    <TextBlock Text="Редактировать"/>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Command="{Binding EditRepresentativesOrganizationsCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
+                            <Button.Content>
+                                <Grid>
+                                    <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
+                                </Grid>
+                            </Button.Content>
+                            <Button.ToolTip>
+                                <ToolTip>
+                                    <TextBlock Text="Редактировать"/>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Command="{Binding DropRepresentativesOrganizationsCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
+                            <Button.Content>
+                                <Grid>
+                                    <fa:ImageAwesome Icon="Trash" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
+                                </Grid>
+                            </Button.Content>
+                            <Button.ToolTip>
+                                <ToolTip>
+                                    <TextBlock Text="Удалить"/>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <Button Grid.Column="1" Command="{Binding AddLegalEntityCommand}" Style="{StaticResource ButtonStroge}" Background="White" Width="120" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">
+                <Button.Content>
+                    <Grid HorizontalAlignment="Stretch" Width="120">
+                        <fa:ImageAwesome Icon="Save" HorizontalAlignment="Left" Height="20" Margin="5,0" Foreground="Black"/>
+                        <TextBlock Text="Сохранить" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                </Button.Content>
+            </Button>
+        </Grid>
     </Grid>
 </Window>

@@ -294,7 +294,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
         #endregion
 
-        #region Данные дополнительных телефонныйх номеров : AdditionalDataClientPhoneNumber
+        #region Данные дополнительных телефонных номеров : AdditionalDataClientPhoneNumber
 
         private DataTable _AdditionalDataClientPhoneNumber;
 
@@ -346,12 +346,15 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
             AdditionalDataClientWindow additionalDataClientWindow = new AdditionalDataClientWindow();
             additionalDataClientWindow.ShowDialog();
 
-            row = AdditionalDataClientPhoneNumberDelivery.NewRow();
-            row["phone_number"] = EditorAdd.phone_number;
-            row["other"] = EditorAdd.other;
-            AdditionalDataClientPhoneNumberDelivery.Rows.Add(row);
+            if (EditorAdd.editoradd == "Прошло успешно")
+            {
+                row = AdditionalDataClientPhoneNumberDelivery.NewRow();
+                row["phone_number"] = EditorAdd.phone_number;
+                row["other"] = EditorAdd.other;
+                AdditionalDataClientPhoneNumberDelivery.Rows.Add(row);
 
-            AdditionalDataClientPhoneNumber = AdditionalDataClientPhoneNumberDelivery;
+                AdditionalDataClientPhoneNumber = AdditionalDataClientPhoneNumberDelivery;
+            }
         }
 
         #endregion
@@ -389,7 +392,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
         {
             DataRow b = AdditionalDataClientPhoneNumber.Rows[SelectAdditionalPhoneNumber];
             AdditionalDataClientPhoneNumberDelivery.Rows.Remove(b);
-            AdditionalDataClientPhoneNumber.Rows.Remove(b);
+            AdditionalDataClientPhoneNumber = AdditionalDataClientPhoneNumberDelivery;
         }
 
         #endregion

@@ -72,6 +72,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
         private void OnAddAdditionalDataCommandExecuted(object p)
         {
+            EditorAdd.editoradd = "Прошло успешно";
             EditorAdd.phone_number = Numberphone;
             EditorAdd.other = Other;
 
