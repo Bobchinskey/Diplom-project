@@ -345,7 +345,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
         private void OnOpenAddLegalEntityWindowCommandExecuted(object p)
         {
 
-
             AddLegalEntityWindow addLegalEntityWindow = new AddLegalEntityWindow();
             addLegalEntityWindow.ShowDialog();
 
@@ -353,7 +352,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
         }
 
         #endregion
-
 
         #region Команда вызывающая окно "Редактирование информации о клиенте"
 
@@ -406,6 +404,45 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
                 EditClientWindow editClientWindow = new EditClientWindow();
                 editClientWindow.ShowDialog();
+
+                FilterClientStatusCommand.Execute(null);
+            }
+            else
+            {
+                ListClientProcedure.id_natural_person = MainListClient[SelectedClient].id_legal_entity;
+
+                string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
+                SqlConnection ThisConnection = new SqlConnection(connectionString);
+                ThisConnection.Open();
+                SqlCommand thisCommand = ThisConnection.CreateCommand();
+                thisCommand.CommandText = "select * from [legal_entity] where id_legal_entity=" + ListClientProcedure.id_natural_person;
+                SqlDataReader thisReader = thisCommand.ExecuteReader();
+                thisReader.Read();
+                if (thisReader.HasRows)
+                {
+                    ListLegalEntity.id_legal_entity = Convert.ToInt32(thisReader["id_legal_entity"].ToString());
+                    ListLegalEntity.name_organization = thisReader["name_organization"].ToString();
+                    ListLegalEntity.abbreviated_name_organization = thisReader["abbreviated_name_organization"].ToString();
+                    ListLegalEntity.surname_director = thisReader["surname_director"].ToString();
+                    ListLegalEntity.name_director = thisReader["name_director"].ToString();
+                    ListLegalEntity.patronymic_director = thisReader["patronymic_director"].ToString();
+                    ListLegalEntity.legal_address = thisReader["legal_address"].ToString();
+                    ListLegalEntity.actual_legal_address = thisReader["actual_legal_address"].ToString();
+                    ListLegalEntity.INN = thisReader["INN"].ToString();
+                    ListLegalEntity.KPP = thisReader["KPP"].ToString();
+                    ListLegalEntity.OGRN = thisReader["OGRN"].ToString();
+                    ListLegalEntity.payment_account = thisReader["payment_account"].ToString();
+                    ListLegalEntity.BIK = thisReader["BIK"].ToString();
+                    ListLegalEntity.email = thisReader["email"].ToString();
+                    ListLegalEntity.fax = thisReader["fax"].ToString();
+                    ListLegalEntity.phone_number = thisReader["phone_number"].ToString();
+                    ListLegalEntity.website = thisReader["website"].ToString();
+                }
+                thisReader.Close();
+                ThisConnection.Close();
+
+                EditLegalEntityWindow editLegalEntityWindow = new EditLegalEntityWindow();
+                editLegalEntityWindow.ShowDialog();
 
                 FilterClientStatusCommand.Execute(null);
             }

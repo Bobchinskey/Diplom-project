@@ -181,8 +181,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
             ListRepresentativesOrganizations.SeriesPassport = SeriesPassport;
             ListRepresentativesOrganizations.NumberPassport = NumberPassport;
             ListRepresentativesOrganizations.PhoneNumber = PhoneNumber;
-            ListRepresentativesOrganizations.who_add_system = UserDataModel.id_user;
-            ListRepresentativesOrganizations.date_add_system = DateTime.Today;
 
             foreach (System.Windows.Window window in System.Windows.Application.Current.Windows)
             {

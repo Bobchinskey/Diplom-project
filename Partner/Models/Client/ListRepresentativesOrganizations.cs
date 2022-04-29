@@ -22,7 +22,5 @@ namespace Partner.Models.Client
         public static string SeriesPassport { get; set; }
         public static string NumberPassport { get; set; }
         public static string PhoneNumber { get; set; }
-        public static int who_add_system { get; set; }
-        public static DateTime date_add_system { get; set; }
     }
 }

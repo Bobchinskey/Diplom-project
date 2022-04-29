@@ -305,7 +305,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
         #endregion
 
-
         #endregion
 
         /*------------------------------------------------------------------------------------------------*/
@@ -318,7 +317,8 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
         private bool CanAddLegalEntityCommandExecute(object p)
         {
-            if ((FullNameOrganization != "") && (AbbreviatedNameOrganization != "") && (Name != "") && (Surname != "") && (Patronymic != "") && (LegalAddress != "") && (ActualLegalAddress != "") && (Email != "") && (Fax != "") && (PhoneNumber != "") && (Website != "") && (INN != "") && (KPP != "") && (OGRN != "") && (PaymentAccount != "") && (BIK != ""))
+            if ((FullNameOrganization != "") && (AbbreviatedNameOrganization != "") && (Name != "") && (Surname != "") && (Patronymic != "") && (LegalAddress != "") && (ActualLegalAddress != "") && (Email != "") && (Fax != "") && (PhoneNumber != "") && (Website != "") && (INN != "") && (KPP != "") && (OGRN != "") && (PaymentAccount != "") && (BIK != "")
+                && (INN.Length == 10) && (KPP.Length == 9) && (OGRN.Length == 15) && (PaymentAccount.Length == 20) && (BIK.Length == 9))
                 return true;
             else return false;
         }
@@ -367,24 +367,24 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
             ThisConnection.Close();
 
             ThisConnection.Open();
-
-            if (AdditionalDataLegalEntityPhoneNumber.Rows.Count >= 1)
+            
+            if (AdditionalDataLegalEntityPhoneNumberDelivery.Rows.Count >= 1)
             {
-                for (int i = 1; i <= AdditionalDataLegalEntityPhoneNumber.Rows.Count; i++)
+                for (int i = 1; i <= AdditionalDataLegalEntityPhoneNumberDelivery.Rows.Count; i++)
                 {
                     var command2 = ThisConnection.CreateCommand();
                     command2.CommandType = CommandType.StoredProcedure;
                     command2.CommandText = "Add_additional_phone_numbers_legal_entity";
                     command2.Parameters.AddWithValue("@id_legal_entity", LegalEntity);
-                    command2.Parameters.AddWithValue("@phone_number", Convert.ToString(AdditionalDataLegalEntityPhoneNumber.Rows[i - 1]["phone_number"]));
-                    command2.Parameters.AddWithValue("@description", Convert.ToString(AdditionalDataLegalEntityPhoneNumber.Rows[i - 1]["other"]));
+                    command2.Parameters.AddWithValue("@phone_number", Convert.ToString(AdditionalDataLegalEntityPhoneNumberDelivery.Rows[i - 1]["phone_number"]));
+                    command2.Parameters.AddWithValue("@description", Convert.ToString(AdditionalDataLegalEntityPhoneNumberDelivery.Rows[i - 1]["other"]));
                     command2.ExecuteNonQuery();
                 }
             }
 
-            if (RepresentativesOrganizations.Rows.Count >= 1)
+            if (RepresentativesOrganizationsDelivery.Rows.Count >= 1)
             {
-                for (int i = 1; i <= RepresentativesOrganizations.Rows.Count; i++)
+                for (int i = 1; i <= RepresentativesOrganizationsDelivery.Rows.Count; i++)
                 {
                     var command2 = ThisConnection.CreateCommand();
                     command2.CommandType = CommandType.StoredProcedure;
@@ -586,6 +586,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
         public AddLegalEntityViewModel()
         {
+
             #region Команды
 
             AddLegalEntityCommand = new LamdaCommand(OnAddLegalEntityCommandExecuted, CanAddLegalEntityCommandExecute);
