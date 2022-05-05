@@ -7,6 +7,7 @@ using Partner.Views.Views.Manager.Pages;
 using Partner.Views.Windows;
 using Partner.Views.Windows.InformativeWindows;
 using Partner.Views.Windows.MainWindowInteraction.ClientWindow;
+using Partner.Views.Windows.MainWindowInteraction.Insurances;
 using Partner.Views.Windows.MainWindowInteraction.Rates;
 using Partner.Views.Windows.MainWindowInteraction.Rates.AdditionalServices;
 using Partner.Views.Windows.MainWindowInteraction.VehicleWindow;
@@ -178,6 +179,22 @@ namespace Partner.ViewModels.Views.Maneger
 
         #endregion
 
+        #region Команда вызова окна "Страхование"
+        
+        public ICommand OpenInsurancesInformationWindowCommand { get; }
+
+        private bool CanOpenInsurancesInformationWindowCommandExecute(object p) => true;
+
+        private void OnOpenInsurancesInformationWindowCommandExecuted(object p)
+        {
+            InsurancesInformationWindow insurancesInformationWindow = new InsurancesInformationWindow();
+            insurancesInformationWindow.ShowDialog();
+
+            UpdatePageCommand.Execute(null);
+        }
+
+        #endregion
+
         #endregion
 
         /*------------------------------------------------------------------------------------------------*/
@@ -204,6 +221,8 @@ namespace Partner.ViewModels.Views.Maneger
             OpenListRateWindowCommand = new LamdaCommand(OnOpenListRateWindowCommandExecuted, CanOpenListRateWindowCommandExecute);
 
             OpenListAdditionalServicesWindowCommand = new LamdaCommand(OnOpenListAdditionalServicesWindowCommandExecuted, CanOpenListAdditionalServicesWindowCommandExecute);
+
+            OpenInsurancesInformationWindowCommand = new LamdaCommand(OnOpenInsurancesInformationWindowCommandExecuted, CanOpenInsurancesInformationWindowCommandExecute);
 
             #endregion
         }

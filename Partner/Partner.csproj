@@ -77,6 +77,8 @@
     <Compile Include="Models\Client\ListNaturalPersonAdditionalData.cs" />
     <Compile Include="Models\Client\ListRepresentativesOrganizations.cs" />
     <Compile Include="Models\Client\ListRepresentativesOrganizationsData.cs" />
+    <Compile Include="Models\Insurances\EditOrAddInsurancesModel.cs" />
+    <Compile Include="Models\Insurances\ListMainInsuranceData.cs" />
     <Compile Include="Models\Rate\AdditionalServices\AddListData.cs" />
     <Compile Include="Models\Rate\AdditionalServices\MainListAdditionalServices.cs" />
     <Compile Include="Models\Rate\ListRateInformation.cs" />
@@ -90,6 +92,8 @@
     <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\EditLegalEntityViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\ListClientWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\RepresentativesOrganizationsWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\Insurances\InsurancesInformationWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\Insurances\OSAGOWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rates\AdditionalServices\AddAdditionalServicesViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rates\AdditionalServices\AdditionalServicesViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rates\EditRateWindowViewModel.cs" />
@@ -117,6 +121,12 @@
     </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\ClientWindow\RepresentativesOrganizationsWindow.xaml.cs">
       <DependentUpon>RepresentativesOrganizationsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\Insurances\InsurancesInformationWindow.xaml.cs">
+      <DependentUpon>InsurancesInformationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\Insurances\OSAGOWindow.xaml.cs">
+      <DependentUpon>OSAGOWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\Rates\AdditionalServices\AddAdditionalServicesWindow.xaml.cs">
       <DependentUpon>AddAdditionalServicesWindow.xaml</DependentUpon>
@@ -238,6 +248,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Windows\MainWindowInteraction\ClientWindow\RepresentativesOrganizationsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\Insurances\InsurancesInformationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\Insurances\OSAGOWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
