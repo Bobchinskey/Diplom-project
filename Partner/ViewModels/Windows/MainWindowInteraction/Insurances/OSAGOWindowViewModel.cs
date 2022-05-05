@@ -70,8 +70,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Insurances
             set => Set(ref _vehicle, value);
         }
         public DataTable vehicleDelivery = new DataTable("vehicleDelivery");
-        DataColumn column;
-        DataRow row;
 
         #endregion
 
@@ -141,6 +139,18 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Insurances
 
         #endregion
 
+        #region Активность Combobox : ActionCombobox 
+
+        private bool _ActionCombobox = EditOrAddInsurancesModel.ActionCombobox;
+
+        /// <summary>ActionCombobox</summary>
+        public bool ActionCombobox
+        {
+            get => _ActionCombobox;
+            set => Set(ref _ActionCombobox, value);
+        }
+
+        #endregion
 
         #endregion
 
@@ -162,18 +172,17 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Insurances
                 {
                     if (SelectedVehicleProperty != "")
                     {
-
-                        int id = 0;
-                        for (int i = 0; vehicle.Rows.Count >= i + 1; i++)
-                        {
-                            if (status[i] == SelectedVehicleProperty)
-                            {
-                                id = Convert.ToInt32(vehicle.Rows[i][0]);
-                            }
-                        }
-
                         if (Title == "Добавление страховки")
                         {
+
+                            int id = 0;
+                            for (int i = 0; vehicle.Rows.Count >= i + 1; i++)
+                            {
+                                if (status[i] == SelectedVehicleProperty)
+                                {
+                                    id = Convert.ToInt32(vehicle.Rows[i][0]);
+                                }
+                            }
                             if (Type == "ОСАГО")
                             {
                                 string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
@@ -189,16 +198,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Insurances
                                 command.Parameters.AddWithValue("@end_date", EndDate);
                                 command.ExecuteNonQuery();
                                 ThisConnection.Close();
-
-                                MessageBox.Show("Даннае добавлены");
-
-                                foreach (System.Windows.Window window in System.Windows.Application.Current.Windows)
-                                {
-                                    if (window.DataContext == this)
-                                    {
-                                        window.Close();
-                                    }
-                                }
                             }
                             else
                             {
@@ -207,7 +206,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Insurances
                                 ThisConnection.Open();
                                 var command = ThisConnection.CreateCommand();
                                 command.CommandType = CommandType.StoredProcedure;
-                                command.CommandText = "Add_KASKO";
+                                command.CommandText = "Add_KASKO"; 
                                 command.Parameters.AddWithValue("@id_vehicle", id);
                                 command.Parameters.AddWithValue("@series", Series);
                                 command.Parameters.AddWithValue("@number", Number);
@@ -215,21 +214,52 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Insurances
                                 command.Parameters.AddWithValue("@end_date", EndDate);
                                 command.ExecuteNonQuery();
                                 ThisConnection.Close();
-
-                                MessageBox.Show("Даннае добавлены");
-
-                                foreach (System.Windows.Window window in System.Windows.Application.Current.Windows)
-                                {
-                                    if (window.DataContext == this)
-                                    {
-                                        window.Close();
-                                    }
-                                }
                             }
                         }
                         else
                         {
+                            if (Type == "ОСАГО")
+                            {
+                                string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
+                                SqlConnection ThisConnection = new SqlConnection(connectionString);
+                                ThisConnection.Open();
+                                var command = ThisConnection.CreateCommand();
+                                command.CommandType = CommandType.StoredProcedure;
+                                command.CommandText = "Edit_OSAGO";
+                                command.Parameters.AddWithValue("@id_osago", EditOrAddInsurancesModel.ID);
+                                command.Parameters.AddWithValue("@series", Series);
+                                command.Parameters.AddWithValue("@number", Number);
+                                command.Parameters.AddWithValue("@start_date", StartDate);
+                                command.Parameters.AddWithValue("@end_date", EndDate);
+                                command.ExecuteNonQuery();
+                                ThisConnection.Close();
+                            }
+                            else
+                            {
+                                string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
+                                SqlConnection ThisConnection = new SqlConnection(connectionString);
+                                ThisConnection.Open();
+                                var command = ThisConnection.CreateCommand();
+                                command.CommandType = CommandType.StoredProcedure;
+                                command.CommandText = "Edit_KASKO";
+                                command.Parameters.AddWithValue("@id_kasko", EditOrAddInsurancesModel.ID);
+                                command.Parameters.AddWithValue("@series", Series);
+                                command.Parameters.AddWithValue("@number", Number);
+                                command.Parameters.AddWithValue("@start_date", StartDate);
+                                command.Parameters.AddWithValue("@end_date", EndDate);
+                                command.ExecuteNonQuery();
+                                ThisConnection.Close();
+                            }
+                        }
 
+                        MessageBox.Show("Даннае добавлены");
+
+                        foreach (System.Windows.Window window in System.Windows.Application.Current.Windows)
+                        {
+                            if (window.DataContext == this)
+                            {
+                                window.Close();
+                            }
                         }
                     }
                     else MessageBox.Show("Выберите автомобиль");
@@ -256,54 +286,63 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Insurances
 
             #region Заполнение данных "Автомобили"
 
-            if (EditOrAddInsurancesModel.Type == "ОСАГО")
+            if (EditOrAddInsurancesModel.Title == "Добавление страховки")
             {
-                DataTable dt = new DataTable();
-
-                string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
-                SqlConnection ThisConnection = new SqlConnection(connectionString);
-                ThisConnection.Open();
-                SqlCommand thisCommand = ThisConnection.CreateCommand();
-                thisCommand.CommandText = "Select id_vehicle, make_model + ' (' + vehicle.state_number + ')' as make_model from vehicle where status!='Архив' EXCEPT Select vehicle.id_vehicle, make_model + ' (' + vehicle.state_number + ')' as make_model from vehicle, OSAGO, KASKO where vehicle.id_vehicle = OSAGO.id_vehicle and OSAGO.reality != 'Архив'";
-                SqlDataReader thisReader = thisCommand.ExecuteReader();
-                dt.Load(thisReader);
-                ThisConnection.Close();
-
-                string[] ds = new string[dt.Rows.Count];
-
-                for (int i = 1; dt.Rows.Count >= i; i++)
+                if (EditOrAddInsurancesModel.Type == "ОСАГО")
                 {
-                    ds[i - 1] = Convert.ToString(dt.Rows[i - 1][1]);
+                    DataTable dt = new DataTable();
+
+                    string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
+                    SqlConnection ThisConnection = new SqlConnection(connectionString);
+                    ThisConnection.Open();
+                    SqlCommand thisCommand = ThisConnection.CreateCommand();
+                    thisCommand.CommandText = "Select id_vehicle, make_model + ' (' + vehicle.state_number + ')' as make_model from vehicle where status!='Архив' EXCEPT Select vehicle.id_vehicle, make_model + ' (' + vehicle.state_number + ')' as make_model from vehicle, OSAGO, KASKO where vehicle.id_vehicle = OSAGO.id_vehicle and OSAGO.reality != 'Архив'";
+                    SqlDataReader thisReader = thisCommand.ExecuteReader();
+                    dt.Load(thisReader);
+                    ThisConnection.Close();
+
+                    string[] ds = new string[dt.Rows.Count];
+
+                    for (int i = 1; dt.Rows.Count >= i; i++)
+                    {
+                        ds[i - 1] = Convert.ToString(dt.Rows[i - 1][1]);
+                    }
+
+                    status = ds;
+
+                    vehicle = dt;
                 }
+                else
+                {
+                    DataTable dt = new DataTable();
 
-                status = ds;
+                    string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
+                    SqlConnection ThisConnection = new SqlConnection(connectionString);
+                    ThisConnection.Open();
+                    SqlCommand thisCommand = ThisConnection.CreateCommand();
+                    thisCommand.CommandText = "Select id_vehicle, make_model + ' (' + vehicle.state_number + ')' as make_model from vehicle where status!='Архив' EXCEPT Select vehicle.id_vehicle, make_model + ' (' + vehicle.state_number + ')' as make_model from vehicle, KASKO where vehicle.id_vehicle = KASKO.id_vehicle and KASKO.reality != 'Архив'";
+                    SqlDataReader thisReader = thisCommand.ExecuteReader();
+                    dt.Load(thisReader);
+                    ThisConnection.Close();
 
-                vehicle = dt;
+                    string[] ds = new string[dt.Rows.Count];
+
+                    for (int i = 1; dt.Rows.Count >= i; i++)
+                    {
+                        ds[i - 1] = Convert.ToString(dt.Rows[i - 1][1]);
+                    }
+
+                    status = ds;
+
+                    vehicle = dt;
+                }
             }
             else
             {
-                DataTable dt = new DataTable();
-
-                string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
-                SqlConnection ThisConnection = new SqlConnection(connectionString);
-                ThisConnection.Open();
-                SqlCommand thisCommand = ThisConnection.CreateCommand();
-                thisCommand.CommandText = "Select id_vehicle, make_model + ' (' + vehicle.state_number + ')' as make_model from vehicle where status!='Архив' EXCEPT Select vehicle.id_vehicle, make_model + ' (' + vehicle.state_number + ')' as make_model from vehicle, KASKO where vehicle.id_vehicle = KASKO.id_vehicle and KASKO.reality != 'Архив'";
-                SqlDataReader thisReader = thisCommand.ExecuteReader();
-                dt.Load(thisReader);
-                ThisConnection.Close();
-
-                string[] ds = new string[dt.Rows.Count];
-
-                for (int i = 1; dt.Rows.Count >= i; i++)
-                {
-                    ds[i - 1] = Convert.ToString(dt.Rows[i - 1][1]);
-                }
-
+                string[] ds = { EditOrAddInsurancesModel.make_model };
                 status = ds;
-
-                vehicle = dt;
             }
+            
             #endregion
         }
     }

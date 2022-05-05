@@ -28,7 +28,7 @@
             <WrapPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel Margin="20">
                     <TextBlock Text="Автомобиль" TextAlignment="Center" FontSize="16"/>
-                    <ComboBox FontSize="16" Margin="0,5" ItemsSource="{Binding status}" SelectedValue="{Binding SelectedVehicleProperty}" Width="180" Height="30"/>
+                    <ComboBox IsEnabled="{Binding ActionCombobox}" FontSize="16" Margin="0,5" ItemsSource="{Binding status}" SelectedItem="{Binding SelectedVehicleProperty}" Width="180" Height="30"/>
                 </StackPanel>
                 <StackPanel Margin="20">
                     <TextBlock Text="Тип страховки" TextAlignment="Center" FontSize="16"/>

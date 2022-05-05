@@ -191,6 +191,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Insurances
 
         private void OnOpenAddOSAGOWindowCommandExecuted(object p)
         {
+            EditOrAddInsurancesModel.ActionCombobox = true;
             EditOrAddInsurancesModel.Title = "Добавление страховки";
             EditOrAddInsurancesModel.Type = "ОСАГО";
             EditOrAddInsurancesModel.Series = "";
@@ -215,6 +216,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Insurances
 
         private void OnOpenAddKASKOWindowCommandExecuted(object p)
         {
+            EditOrAddInsurancesModel.ActionCombobox = true;
             EditOrAddInsurancesModel.Title = "Добавление страховки";
             EditOrAddInsurancesModel.Type = "КАСКО";
             EditOrAddInsurancesModel.Series = "";
@@ -222,6 +224,52 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Insurances
             EditOrAddInsurancesModel.make_model = "";
             EditOrAddInsurancesModel.start_date = DateTime.Today;
             EditOrAddInsurancesModel.end_dete = DateTime.Today;
+
+            OSAGOWindow oSAGOWindow = new OSAGOWindow();
+            oSAGOWindow.ShowDialog();
+
+            FilterInsurancesStatusCommand.Execute(null);
+        }
+
+        #endregion
+
+        #region Команда вызова окна "Редактирование страховок"
+
+        public ICommand OpenEditOSAGOWindowCommand { get; }
+
+        private bool CanOpenEditOSAGOWindowCommandExecute(object p) 
+        {
+            if ((SelectedInsurance > -1) && (MainListInsurance[SelectedInsurance].reality != "Архив"))
+                return true;
+            else return false;
+        }  
+
+        private void OnOpenEditOSAGOWindowCommandExecuted(object p)
+        {
+            if (MainListInsurance[SelectedInsurance].type == "Осаго")
+            {
+                EditOrAddInsurancesModel.ActionCombobox = false;
+                EditOrAddInsurancesModel.ID = MainListInsurance[SelectedInsurance].id_osago;
+                EditOrAddInsurancesModel.Title = "Редактирование страховки";
+                EditOrAddInsurancesModel.Type = "ОСАГО";
+                EditOrAddInsurancesModel.Series = MainListInsurance[SelectedInsurance].series;
+                EditOrAddInsurancesModel.Number = MainListInsurance[SelectedInsurance].number;
+                EditOrAddInsurancesModel.make_model = MainListInsurance[SelectedInsurance].make_model;
+                EditOrAddInsurancesModel.start_date = MainListInsurance[SelectedInsurance].start_date;
+                EditOrAddInsurancesModel.end_dete = MainListInsurance[SelectedInsurance].end_date;
+            }
+            else
+            {
+                EditOrAddInsurancesModel.ActionCombobox = false;
+                EditOrAddInsurancesModel.ID = MainListInsurance[SelectedInsurance].id_osago;
+                EditOrAddInsurancesModel.Title = "Редактирование страховки";
+                EditOrAddInsurancesModel.Type = "КАСКО";
+                EditOrAddInsurancesModel.Series = MainListInsurance[SelectedInsurance].series;
+                EditOrAddInsurancesModel.Number = MainListInsurance[SelectedInsurance].number;
+                EditOrAddInsurancesModel.make_model = MainListInsurance[SelectedInsurance].make_model;
+                EditOrAddInsurancesModel.start_date = MainListInsurance[SelectedInsurance].start_date;
+                EditOrAddInsurancesModel.end_dete = MainListInsurance[SelectedInsurance].end_date;
+            }
 
             OSAGOWindow oSAGOWindow = new OSAGOWindow();
             oSAGOWindow.ShowDialog();
@@ -245,6 +293,8 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Insurances
             OpenAddOSAGOWindowCommand = new LamdaCommand(OnOpenAddOSAGOWindowCommandExecuted, CanOpenAddOSAGOWindowCommandExecute);
 
             OpenAddKASKOWindowCommand = new LamdaCommand(OnOpenAddKASKOWindowCommandExecuted, CanOpenAddKASKOWindowCommandExecute);
+
+            OpenEditOSAGOWindowCommand = new LamdaCommand(OnOpenEditOSAGOWindowCommandExecuted, CanOpenEditOSAGOWindowCommandExecute);
 
             #endregion
 

@@ -8,6 +8,7 @@ namespace Partner.Models.Insurances
 {
     class EditOrAddInsurancesModel
     {
+        public static bool ActionCombobox { get; set; }
         public static string Title { get; set;}
         public static int ID { get; set; }
         public static int id_vehicle { get; set; }
