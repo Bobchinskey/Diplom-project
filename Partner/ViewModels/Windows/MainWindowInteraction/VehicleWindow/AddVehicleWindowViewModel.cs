@@ -528,6 +528,41 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
 
         #endregion
 
+        #region Команда открытия окна "Техническое состояние ТС"
+
+        public ICommand OpenTechnicalConditionCommand { get; }
+
+        private bool CanOpenTechnicalConditionCommandExecute(object p)
+        {
+            if (VehicleDataModel.EditOrAdd == "Редактировать автомобиль")
+                return true;
+            else
+                return false;
+        }
+
+        private void OnOpenTechnicalConditionCommandExecuted(object p)
+        {
+            DataTable dt = new DataTable();
+
+            string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
+            SqlConnection ThisConnection = new SqlConnection(connectionString);
+            ThisConnection.Open();
+            SqlCommand thisCommand = ThisConnection.CreateCommand();
+            thisCommand.CommandText = "select mileage,fuel,condition,description from technical_condition where id_vehicle = " + VehicleDataModel.id_vehicle;
+            SqlDataReader thisReader = thisCommand.ExecuteReader();
+            dt.Load(thisReader);
+            ThisConnection.Close();
+
+            if (Convert.ToString(dt.Rows[0][0]) == "") dt.Rows[0][0] = "Не указан";
+            if (Convert.ToString(dt.Rows[0][1]) == "") dt.Rows[0][1] = "Не указано";
+            if (Convert.ToString(dt.Rows[0][2]) == "") dt.Rows[0][2] = "Не указано";
+            if (Convert.ToString(dt.Rows[0][3]) == "") dt.Rows[0][3] = "Не указано";
+            MessageBox.Show("Техническое состояние транспортного средства: \n Пробег: " + dt.Rows[0][0] + "\n Топливо: " + dt.Rows[0][1] + "\n Состояние: " + dt.Rows[0][2] + "\n Описание: " + dt.Rows[0][3], "Техническое состояние транспортного средства");
+        }
+
+        #endregion
+
+
         #endregion
 
         /*------------------------------------------------------------------------------------------------*/
@@ -538,6 +573,8 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
             #region Команды
 
             AddVehicleCommand = new LamdaCommand(OnAddVehicleCommandExecuted, CanAddVehicleCommandExecute);
+
+            OpenTechnicalConditionCommand = new LamdaCommand(OnOpenTechnicalConditionCommandExecuted, CanOpenTechnicalConditionCommandExecute);
 
             #endregion
 

@@ -242,7 +242,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Insurances
             if ((SelectedInsurance > -1) && (MainListInsurance[SelectedInsurance].reality != "Архив"))
                 return true;
             else return false;
-        }  
+        }
 
         private void OnOpenEditOSAGOWindowCommandExecuted(object p)
         {

@@ -22,6 +22,7 @@
         </Grid.RowDefinitions>
         <WrapPanel Grid.Row="0" Background="BlueViolet">
             <TextBlock Margin="10" Text="{Binding Title}" Foreground="White" FontSize="25"/>
+            <Button Content="Техническое состояние" Command="{Binding OpenTechnicalConditionCommand}" Style="{StaticResource ButtonStroge}" Background="White" Height="25" Width="150"/>
         </WrapPanel>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
