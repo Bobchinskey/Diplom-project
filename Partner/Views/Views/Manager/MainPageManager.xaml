@@ -36,6 +36,7 @@
                     <Separator/>
                     <MenuItem Header="Автомобили..." Command="{Binding OpenListVehicleWindowCommand}" FontSize="14"/>
                     <MenuItem Header="Страхование..." Command="{Binding OpenInsurancesInformationWindowCommand}" FontSize="14"/>
+                    <MenuItem Header="Техническое обслуживание..." Command="{Binding OpeMaintenanceWindowCommand}" FontSize="14"/>
                     <Separator/>
                     <MenuItem Header="Список штрафов..." FontSize="14"/>
                     <Separator/>

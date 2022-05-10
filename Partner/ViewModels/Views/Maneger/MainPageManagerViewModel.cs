@@ -8,6 +8,7 @@ using Partner.Views.Windows;
 using Partner.Views.Windows.InformativeWindows;
 using Partner.Views.Windows.MainWindowInteraction.ClientWindow;
 using Partner.Views.Windows.MainWindowInteraction.Insurances;
+using Partner.Views.Windows.MainWindowInteraction.Maintenances;
 using Partner.Views.Windows.MainWindowInteraction.Rates;
 using Partner.Views.Windows.MainWindowInteraction.Rates.AdditionalServices;
 using Partner.Views.Windows.MainWindowInteraction.VehicleWindow;
@@ -195,6 +196,22 @@ namespace Partner.ViewModels.Views.Maneger
 
         #endregion
 
+        #region Команда вызова окна "Техническое обслуживание"
+
+        public ICommand OpeMaintenanceWindowCommand { get; }
+
+        private bool CanOpenMaintenanceWindowCommandExecute(object p) => true;
+
+        private void OnOpenMaintenanceWindowCommandExecuted(object p)
+        {
+            SelectVehicleMaintenanceWindow selectVehicleMaintenanceWindow = new SelectVehicleMaintenanceWindow();
+            selectVehicleMaintenanceWindow.ShowDialog();
+
+            UpdatePageCommand.Execute(null);
+        }
+
+        #endregion
+
         #endregion
 
         /*------------------------------------------------------------------------------------------------*/
@@ -223,6 +240,8 @@ namespace Partner.ViewModels.Views.Maneger
             OpenListAdditionalServicesWindowCommand = new LamdaCommand(OnOpenListAdditionalServicesWindowCommandExecuted, CanOpenListAdditionalServicesWindowCommandExecute);
 
             OpenInsurancesInformationWindowCommand = new LamdaCommand(OnOpenInsurancesInformationWindowCommandExecuted, CanOpenInsurancesInformationWindowCommandExecute);
+
+            OpeMaintenanceWindowCommand = new LamdaCommand(OnOpenMaintenanceWindowCommandExecuted, CanOpenMaintenanceWindowCommandExecute);
 
             #endregion
         }

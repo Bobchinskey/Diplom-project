@@ -41,13 +41,16 @@
                             </WrapPanel>
                         </Button.Content>
                     </Button>
-                    <Button Margin="0,15" Style="{StaticResource ButtonStroge}" Background="White" HorizontalAlignment="Center" Width="180" Height="35">
+                    <Button Command="{Binding OpeMaintenanceWindowCommand}" Margin="0,15" Style="{StaticResource ButtonStroge}" Background="White" HorizontalAlignment="Center" Width="180" Height="35">
                         <Button.Content>
                             <WrapPanel HorizontalAlignment="Stretch" Width="170">
                                 <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
-                                <TextBlock Margin="10,0,0,0" FontSize="16" Text="Новое ТО..." HorizontalAlignment="Right"/>
+                                <TextBlock Margin="10,0,0,0" FontSize="16" Text="Техническое обл..." HorizontalAlignment="Right"/>
                             </WrapPanel>
                         </Button.Content>
+                        <Button.ToolTip>
+                            <TextBlock Text="Техническое обслуживание"/>
+                        </Button.ToolTip>
                     </Button>
                     <Button Margin="0,40,0,15" Style="{StaticResource ButtonStroge}" Background="White" HorizontalAlignment="Center" Width="180" Height="35">
                         <Button.Content>

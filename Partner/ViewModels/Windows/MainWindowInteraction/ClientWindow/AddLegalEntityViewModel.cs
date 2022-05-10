@@ -434,10 +434,13 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
             AdditionalDataClientWindow additionalDataClientWindow = new AdditionalDataClientWindow();
             additionalDataClientWindow.ShowDialog();
 
-            row = AdditionalDataLegalEntityPhoneNumberDelivery.NewRow();
-            row["phone_number"] = EditorAdd.phone_number;
-            row["other"] = EditorAdd.other;
-            AdditionalDataLegalEntityPhoneNumberDelivery.Rows.Add(row);
+            if (EditorAdd.editoradd == "Прошло успешно")
+            {
+                row = AdditionalDataLegalEntityPhoneNumberDelivery.NewRow();
+                row["phone_number"] = EditorAdd.phone_number;
+                row["other"] = EditorAdd.other;
+                AdditionalDataLegalEntityPhoneNumberDelivery.Rows.Add(row);
+            }
 
             AdditionalDataLegalEntityPhoneNumber = AdditionalDataLegalEntityPhoneNumberDelivery;
         }
@@ -474,8 +477,11 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
             AdditionalDataClientWindow additionalDataClientWindow = new AdditionalDataClientWindow();
             additionalDataClientWindow.ShowDialog();
 
-            AdditionalDataLegalEntityPhoneNumberDelivery.Rows[SelectAdditionalPhoneNumber]["phone_number"] = EditorAdd.phone_number;
-            AdditionalDataLegalEntityPhoneNumberDelivery.Rows[SelectAdditionalPhoneNumber]["other"] = EditorAdd.other;
+            if (EditorAdd.editoradd == "Прошло успешно")
+            {
+                AdditionalDataLegalEntityPhoneNumberDelivery.Rows[SelectAdditionalPhoneNumber]["phone_number"] = EditorAdd.phone_number;
+                AdditionalDataLegalEntityPhoneNumberDelivery.Rows[SelectAdditionalPhoneNumber]["other"] = EditorAdd.other;
+            }
 
             AdditionalDataLegalEntityPhoneNumber = AdditionalDataLegalEntityPhoneNumberDelivery;
         }
