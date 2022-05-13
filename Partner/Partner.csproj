@@ -80,7 +80,6 @@
     <Compile Include="Models\Insurances\EditOrAddInsurancesModel.cs" />
     <Compile Include="Models\Insurances\ListMainInsuranceData.cs" />
     <Compile Include="Models\Maintenances\CompletedWorks.cs" />
-    <Compile Include="Models\Maintenances\ListDataMaintenance.cs" />
     <Compile Include="Models\Rate\AdditionalServices\AddListData.cs" />
     <Compile Include="Models\Rate\AdditionalServices\MainListAdditionalServices.cs" />
     <Compile Include="Models\Rate\ListRateInformation.cs" />
@@ -104,6 +103,8 @@
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rates\AdditionalServices\AdditionalServicesViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rates\EditRateWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rates\RateWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\ListRentalWindowVeiwModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\SelectVehicleRentalWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\VehicleWindow\AddVehicleWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\VehicleWindow\ListVehicleWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\Settings\AuthorizationWindowViewModel.cs" />
@@ -157,6 +158,12 @@
     </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\Rates\RateWindow.xaml.cs">
       <DependentUpon>RateWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\Rental\ListRentalWindow.xaml.cs">
+      <DependentUpon>ListRentalWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\Rental\SelectVehicleRentalWindow.xaml.cs">
+      <DependentUpon>SelectVehicleRentalWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\VehicleWindow\AddVehicleWindow.xaml.cs">
       <DependentUpon>AddVehicleWindow.xaml</DependentUpon>
@@ -306,6 +313,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Windows\MainWindowInteraction\Rates\RateWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\Rental\ListRentalWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\Rental\SelectVehicleRentalWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -11,6 +11,7 @@ using Partner.Views.Windows.MainWindowInteraction.Insurances;
 using Partner.Views.Windows.MainWindowInteraction.Maintenances;
 using Partner.Views.Windows.MainWindowInteraction.Rates;
 using Partner.Views.Windows.MainWindowInteraction.Rates.AdditionalServices;
+using Partner.Views.Windows.MainWindowInteraction.Rental;
 using Partner.Views.Windows.MainWindowInteraction.VehicleWindow;
 using Partner.Views.Windows.Settings;
 using System;
@@ -39,8 +40,6 @@ namespace Partner.ViewModels.Views.Maneger
         }
 
         #endregion
-
-
 
         /*------------------------------------------------------------------------------------------------*/
 
@@ -212,6 +211,22 @@ namespace Partner.ViewModels.Views.Maneger
 
         #endregion
 
+        #region Команда вызова окна "Аренды"
+
+        public ICommand OpenRentalWindowCommand { get; }
+
+        private bool CanOpenRentalWindowCommandExecute(object p) => true;
+
+        private void OnOpenRentalWindowCommandExecuted(object p)
+        {
+            SelectVehicleRentalWindow selectVehicleRentalWindow = new SelectVehicleRentalWindow();
+            selectVehicleRentalWindow.ShowDialog();
+
+            UpdatePageCommand.Execute(null);
+        }
+
+        #endregion
+
         #endregion
 
         /*------------------------------------------------------------------------------------------------*/
@@ -242,6 +257,8 @@ namespace Partner.ViewModels.Views.Maneger
             OpenInsurancesInformationWindowCommand = new LamdaCommand(OnOpenInsurancesInformationWindowCommandExecuted, CanOpenInsurancesInformationWindowCommandExecute);
 
             OpeMaintenanceWindowCommand = new LamdaCommand(OnOpenMaintenanceWindowCommandExecuted, CanOpenMaintenanceWindowCommandExecute);
+
+            OpenRentalWindowCommand = new LamdaCommand(OnOpenRentalWindowCommandExecuted, CanOpenRentalWindowCommandExecute);
 
             #endregion
         }

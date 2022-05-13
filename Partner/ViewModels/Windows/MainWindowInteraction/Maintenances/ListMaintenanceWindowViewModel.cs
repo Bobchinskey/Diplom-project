@@ -37,10 +37,9 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Maintenances
 
         #endregion
 
-        #region Переменные row, column
+        #region Переменная column
 
         DataColumn column;
-        DataRow row;
 
         #endregion
 
