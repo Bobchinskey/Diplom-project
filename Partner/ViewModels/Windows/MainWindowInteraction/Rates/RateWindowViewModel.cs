@@ -77,7 +77,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rates
 
         #endregion
 
-
         #region Команда вызывающая окно "Редактирование тарифа"
 
         public ICommand OpenEditRateWindowCommand { get; }

@@ -1,0 +1,54 @@
+﻿<Window x:Class="Partner.Views.Windows.MainWindowInteraction.Rental.AddRental.SelectedDateRentalWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:Datacontext="clr-namespace:Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental"        
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:local="clr-namespace:Partner.Views.Windows.MainWindowInteraction.Rental.AddRental"
+        mc:Ignorable="d"
+        Title="Выбор даты аренды" Height="200" Width="400"
+        ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <Datacontext:SelectedDateRentalWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="BlueViolet">
+            <TextBlock Margin="5" Text="Выбор даты аренды" HorizontalAlignment="Center" TextAlignment="Center" Foreground="White" FontSize="20"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Дата начала аренды" TextAlignment="Center"/>
+                <DatePicker SelectedDate="{Binding StartDateRental}" Margin="0,10" Width="120"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Дата окончания аренды" TextAlignment="Center"/>
+                <DatePicker SelectedDate="{Binding EndDateRental}" Margin="0,10" Width="120"/>
+            </StackPanel>
+            <Rectangle Grid.Row="1" Grid.Column="0" Height="1" Stroke="Black"/>
+            <Rectangle Grid.Row="1" Grid.Column="1" Height="1" Stroke="Black"/>
+        </Grid>
+        <Button Command="{Binding OpenSelectedClientWindowWindowCommand}" Grid.Row="2" Background="White" Margin="10" HorizontalAlignment="Right" Style="{StaticResource ButtonStroge}">
+            <Button.Content>
+                <Grid HorizontalAlignment="Stretch" Width="100">
+                    <fa:ImageAwesome Icon="CaretRight" HorizontalAlignment="Right" Height="18" Margin="5,2,5,0" Foreground="Black"/>
+                    <TextBlock Text="Далее" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+            </Button.Content>
+        </Button>
+    </Grid>
+</Window>

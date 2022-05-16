@@ -1,0 +1,43 @@
+﻿<Window x:Class="Partner.Views.Windows.MainWindowInteraction.Rental.AddRental.AddAdditionalRatesRentalWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:Datacontext="clr-namespace:Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental"                
+        xmlns:local="clr-namespace:Partner.Views.Windows.MainWindowInteraction.Rental.AddRental"
+        mc:Ignorable="d"
+        Title="Выбор дополнительного тарифа" Height="500" Width="1000"
+        MinHeight="500" MinWidth="1000"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Window.DataContext>
+        <Datacontext:AddAdditionalRatesRentalWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid Margin="5,5,5,5" SelectedIndex="{Binding SelectedAdditionalServices}" ItemsSource="{Binding MainListAdditionalServices}" IsReadOnly="True" Grid.Row="1" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№" Binding="{Binding num}"/>
+                <DataGridTextColumn Header="Наименование дополнительной услуги" Binding="{Binding name_additional_services}"/>
+                <DataGridTextColumn Header="Тип оплаты" Binding="{Binding type_additional_services}"/>
+                <DataGridTextColumn Header="Стоимость" Width="*" Binding="{Binding cost_additional_services}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Margin="5,23,10,0" Grid.Row="1" Grid.Column="1">
+            <Button Command="{Binding AddAdditionalRatesRentalCommand}" Background="White" Width="50" Height="50" Margin="0,5">
+                <Button.ToolTip>
+                    <ToolTip>
+                        <TextBlock Text="Далее"/>
+                    </ToolTip>
+                </Button.ToolTip>
+                <Button.Content>
+                    <fa:ImageAwesome Icon="CaretRight" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Foreground="Black"/>
+                </Button.Content>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

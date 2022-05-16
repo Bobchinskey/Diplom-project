@@ -136,29 +136,43 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rates
 
         private void OnEditRateCommandExecuted(object p)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
-            SqlConnection ThisConnection = new SqlConnection(connectionString);
-            ThisConnection.Open();
-            var command = ThisConnection.CreateCommand();
-            command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "Update_rate";
-            command.Parameters.AddWithValue("@id_vehicle", IdVehicle);
-            command.Parameters.AddWithValue("@1_3_day", Rate1_3);
-            command.Parameters.AddWithValue("@4_9_day", Rate4_9);
-            command.Parameters.AddWithValue("@10_29_day", Rate10_29);
-            command.Parameters.AddWithValue("@30_day", Rate30);
-            command.Parameters.AddWithValue("@Deposit", Deposit);
-            command.Parameters.AddWithValue("@excess_mileage", ExcessMileage);
-            command.ExecuteNonQuery();
-            ThisConnection.Close();
-
-            MessageBox.Show("Даннае обновлены");
-
-            foreach (System.Windows.Window window in System.Windows.Application.Current.Windows)
+            if ((Rate1_3 == null) || (Rate4_9 == null) || (Rate10_29 == null) || (Rate30 == null) || (Deposit == null) || (ExcessMileage == null))
             {
-                if (window.DataContext == this)
+                MessageBox.Show("Заполните все данные", "Внимание!");
+            }
+            else
+            {
+                if ((Rate1_3 == "") || (Rate4_9 == "") || (Rate10_29 == "") || (Rate30 == "") || (Deposit == "") || (ExcessMileage == ""))
                 {
-                    window.Close();
+                    MessageBox.Show("Заполните все данные", "Внимание!");
+                }
+                else 
+                {
+                    string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
+                    SqlConnection ThisConnection = new SqlConnection(connectionString);
+                    ThisConnection.Open();
+                    var command = ThisConnection.CreateCommand();
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "Update_rate";
+                    command.Parameters.AddWithValue("@id_vehicle", IdVehicle);
+                    command.Parameters.AddWithValue("@1_3_day", Rate1_3);
+                    command.Parameters.AddWithValue("@4_9_day", Rate4_9);
+                    command.Parameters.AddWithValue("@10_29_day", Rate10_29);
+                    command.Parameters.AddWithValue("@30_day", Rate30);
+                    command.Parameters.AddWithValue("@Deposit", Deposit);
+                    command.Parameters.AddWithValue("@excess_mileage", ExcessMileage);
+                    command.ExecuteNonQuery();
+                    ThisConnection.Close();
+
+                    MessageBox.Show("Даннае обновлены");
+
+                    foreach (System.Windows.Window window in System.Windows.Application.Current.Windows)
+                    {
+                        if (window.DataContext == this)
+                        {
+                            window.Close();
+                        }
+                    }
                 }
             }
         }

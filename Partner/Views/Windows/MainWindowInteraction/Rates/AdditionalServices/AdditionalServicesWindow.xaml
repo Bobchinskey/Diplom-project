@@ -35,8 +35,9 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№" Binding="{Binding num}"/>
                 <DataGridTextColumn Header="Наименование дополнительной услуги" Binding="{Binding name_additional_services}"/>
+                <DataGridTextColumn Header="Тип оплаты" Binding="{Binding type_additional_services}"/>
                 <DataGridTextColumn Header="Стоимость" Binding="{Binding cost_additional_services}"/>
-                <DataGridTextColumn Header="Статус" Binding="{Binding reality}"/>
+                <DataGridTextColumn Header="Статус" Width="*" Binding="{Binding reality}"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Margin="5,0,10,0" Grid.Row="1" Grid.Column="1">

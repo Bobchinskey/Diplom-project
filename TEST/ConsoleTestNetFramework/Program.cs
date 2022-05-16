@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Microsoft.Office.Interop.Word;
 
-namespace ConsoleTest
+namespace ConsoleTestNetFramework
 {
     class Program
     {
@@ -13,7 +17,7 @@ namespace ConsoleTest
             //Загружаем документ
             Microsoft.Office.Interop.Word.Document doc = null;
 
-            object fileName = @"C:\\Users\aleks\Downloads\ДОГОВОР аренды  654-.doc";
+            object fileName = @"C:\\Users\aleks\Downloads\22.doc";
             object falseValue = false;
             object trueValue = true;
             object missing = Type.Missing;
@@ -30,7 +34,7 @@ namespace ConsoleTest
             app.Selection.Find.Replacement.ClearFormatting();
 
             //Задаём параметры замены и выполняем замену.
-            object findText = "<Что меняем>";
+            object findText = "Договор";
             object replaceWith = "<На что меняем>";
             object replace = 2;
 

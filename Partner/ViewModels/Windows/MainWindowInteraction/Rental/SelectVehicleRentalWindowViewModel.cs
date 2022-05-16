@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental
@@ -85,12 +86,30 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental
 
         private void OnOpenListRentalWindowCommandExecuted(object p)
         {
-            VehicleDataModel.id_vehicle = MainListVehicle[SelectedVehicle].id_vehicle;
+            DataTable dt = new DataTable();
 
-            ListRentalWindow listRentalWindow = new ListRentalWindow();
-            listRentalWindow.ShowDialog();
+            string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
+            SqlConnection ThisConnection = new SqlConnection(connectionString);
+            ThisConnection.Open();
+            SqlCommand thisCommand = ThisConnection.CreateCommand();
+            thisCommand.CommandText = "Select * from [rate] where rate.id_vehicle = " + MainListVehicle[SelectedVehicle].id_vehicle;
+            SqlDataReader thisReader = thisCommand.ExecuteReader();
+            dt.Load(thisReader);
+            ThisConnection.Close();
 
-            ReturnListRentalWindowCommand.Execute(null);
+            if ((Convert.ToString(dt.Rows[0][2]) == "") || (Convert.ToString(dt.Rows[0][3]) == "") || (Convert.ToString(dt.Rows[0][4]) == "") || (Convert.ToString(dt.Rows[0][5]) == "") || (Convert.ToString(dt.Rows[0][6]) == "") || (Convert.ToString(dt.Rows[0][7]) == ""))
+            {
+                MessageBox.Show("Для данного автомобиля, не заполненны тарифы","Ошибка");
+            }
+            else
+            {
+                VehicleDataModel.id_vehicle = MainListVehicle[SelectedVehicle].id_vehicle;
+
+                ListRentalWindow listRentalWindow = new ListRentalWindow();
+                listRentalWindow.ShowDialog();
+
+                ReturnListRentalWindowCommand.Execute(null);
+            }
         }
 
         #endregion

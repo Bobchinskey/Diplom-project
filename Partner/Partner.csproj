@@ -84,6 +84,8 @@
     <Compile Include="Models\Rate\AdditionalServices\MainListAdditionalServices.cs" />
     <Compile Include="Models\Rate\ListRateInformation.cs" />
     <Compile Include="Models\Rate\ListRateStatic.cs" />
+    <Compile Include="Models\Rental\DataAdditionalServices.cs" />
+    <Compile Include="Models\Rental\DataStaticRental.cs" />
     <Compile Include="Models\Vehicle\ListVehicle.cs" />
     <Compile Include="Models\Vehicle\VehicleDataModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\AddClientNaturapPersonViewModel.cs" />
@@ -103,6 +105,11 @@
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rates\AdditionalServices\AdditionalServicesViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rates\EditRateWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rates\RateWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\AddRental\AddAdditionalRatesRentalWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\AddRental\AddRentalWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\AddRental\SelectedClientWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\AddRental\SelectedDateRentalWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\ListBookingWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\ListRentalWindowVeiwModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\SelectVehicleRentalWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\VehicleWindow\AddVehicleWindowViewModel.cs" />
@@ -158,6 +165,21 @@
     </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\Rates\RateWindow.xaml.cs">
       <DependentUpon>RateWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\Rental\AddRental\AddAdditionalRatesRentalWindow.xaml.cs">
+      <DependentUpon>AddAdditionalRatesRentalWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\Rental\AddRental\AddRentalWindow.xaml.cs">
+      <DependentUpon>AddRentalWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\Rental\AddRental\SelectedClientWindow.xaml.cs">
+      <DependentUpon>SelectedClientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\Rental\AddRental\SelectedDateRentalWindow.xaml.cs">
+      <DependentUpon>SelectedDateRentalWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\Rental\ListBookingWindow.xaml.cs">
+      <DependentUpon>ListBookingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\Rental\ListRentalWindow.xaml.cs">
       <DependentUpon>ListRentalWindow.xaml</DependentUpon>
@@ -313,6 +335,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Windows\MainWindowInteraction\Rates\RateWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\Rental\AddRental\AddAdditionalRatesRentalWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\Rental\AddRental\AddRentalWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\Rental\AddRental\SelectedClientWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\Rental\AddRental\SelectedDateRentalWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\Rental\ListBookingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

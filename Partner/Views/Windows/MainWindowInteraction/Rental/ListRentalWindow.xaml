@@ -12,6 +12,9 @@
         Height="450" Width="800"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
+    <Window.DataContext>
+        <Datacontext:ListRentalWindowVeiwModel/>
+    </Window.DataContext>
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -23,27 +26,28 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <ComboBox Margin="5,0,5,0" ItemsSource="{Binding status}" SelectedItem="{Binding SelectedVehicleProperty,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" Width="100">
+                <Button Command="{Binding OpenListBookingWindowCommand}" Content="Брони" Style="{StaticResource ButtonStroge}" Height="20" Width="100" Background="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <ComboBox Margin="5,0,5,0" ItemsSource="{Binding status}" SelectedItem="{Binding SelectedRentalProperty,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" Width="135">
                     <i1:Interaction.Triggers>
                         <i1:EventTrigger EventName="SelectionChanged">
-                            <i1:InvokeCommandAction Command="{Binding FilterVehicleStatusCommand}"/>
+                            <i1:InvokeCommandAction Command="{Binding FilterRantalStatusCommand}"/>
                         </i1:EventTrigger>
                     </i1:Interaction.Triggers>
                 </ComboBox>
             </Grid>
-            <DataGrid Margin="5,5,5,5" SelectedIndex="{Binding SelectedVehicle}" ItemsSource="{Binding MainListMaintenance}" IsReadOnly="True" Grid.Row="1" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
+            <DataGrid Margin="5,5,5,5" SelectedIndex="{Binding SelectedRental}" ItemsSource="{Binding MainListRental}" IsReadOnly="True" Grid.Row="1" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="№" Binding="{Binding num}"/>
-                    <DataGridTextColumn Header="Наименование" Binding="{Binding name_maintenance}"/>
-                    <DataGridTextColumn Header="Тип" Binding="{Binding name_maintenance}"/>
-                    <DataGridTextColumn Header="Дата начала" Binding="{Binding start_date_maintenance, StringFormat={}{0:dd\.}{0:MM\.}{0:yyyy}}"/>
-                    <DataGridTextColumn Header="Дата окончания" Binding="{Binding end_date_maintenance, StringFormat={}{0:dd\.}{0:MM\.}{0:yyyy}}"/>
-                    <DataGridTextColumn Header="Состояние" Binding="{Binding end_date_maintenance, StringFormat={}{0:dd\.}{0:MM\.}{0:yyyy}}"/>
+                    <DataGridTextColumn Header="Наименование" Binding="{Binding name}"/>
+                    <DataGridTextColumn Header="Тип" Binding="{Binding type}"/>
+                    <DataGridTextColumn Header="Дата начала" Binding="{Binding start_date_rental}"/>
+                    <DataGridTextColumn Header="Дата окончания" Binding="{Binding end_date_rental}"/>
+                    <DataGridTextColumn Header="Стратус" Binding="{Binding condition}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
         <StackPanel Margin="5,22,5,0" Grid.Column="1">
-            <Button Background="White" Margin="0,5" Width="50" Height="50" Command="{Binding AddMaintenanceWindowCommand}">
+            <Button Style="{StaticResource ButtonStroge}" Background="White" Margin="0,5" Width="50" Height="50" Command="{Binding OpenSelectedDateRentalWindowCommand}">
                 <Button.Content>
                     <Grid>
                         <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
@@ -55,7 +59,7 @@
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button Command="{Binding OpenEditVehicleWindowCommand}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
+            <Button Style="{StaticResource ButtonStroge}" Command="{Binding OpenEditVehicleWindowCommand}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
                 <Button.Content>
                     <Grid>
                         <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
@@ -67,19 +71,7 @@
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button Command="{Binding DropMaintenanceCommand}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
-                <Button.Content>
-                    <Grid>
-                        <fa:ImageAwesome Icon="Trash" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
-                    </Grid>
-                </Button.Content>
-                <Button.ToolTip>
-                    <ToolTip>
-                        <TextBlock Text="Удалить"/>
-                    </ToolTip>
-                </Button.ToolTip>
-            </Button>
-            <Button Margin="0,30,0,0" Background="White" Width="50" Height="50">
+            <Button Style="{StaticResource ButtonStroge}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
                 <Button.Content>
                     <Grid>
                         <fa:ImageAwesome Icon="FileExcelOutline" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
