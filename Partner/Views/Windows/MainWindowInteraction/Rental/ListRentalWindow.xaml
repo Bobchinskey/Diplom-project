@@ -40,8 +40,8 @@
                     <DataGridTextColumn Header="№" Binding="{Binding num}"/>
                     <DataGridTextColumn Header="Наименование" Binding="{Binding name}"/>
                     <DataGridTextColumn Header="Тип" Binding="{Binding type}"/>
-                    <DataGridTextColumn Header="Дата начала" Binding="{Binding start_date_rental}"/>
-                    <DataGridTextColumn Header="Дата окончания" Binding="{Binding end_date_rental}"/>
+                    <DataGridTextColumn Header="Дата начала" Binding="{Binding start_date_rental, StringFormat={}{0:dd\.}{0:MM\.}{0:yyyy}}"/>
+                    <DataGridTextColumn Header="Дата окончания" Binding="{Binding end_date_rental, StringFormat={}{0:dd\.}{0:MM\.}{0:yyyy}}"/>
                     <DataGridTextColumn Header="Стратус" Binding="{Binding condition}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>

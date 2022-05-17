@@ -188,12 +188,24 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
 
         private void OnOpenAddRentalWindowCommandExecute(object p)
         {
-            DataStaticRental.IDClient = MainListClient[SelectedClient].id_legal_entity;
-            DataStaticRental.Type = MainListClient[SelectedClient].type;
-            DataStaticRental.Title = "Добавление аренды";
+            if (MainListClient[SelectedClient].type == "Физическое лицо")
+            {
+                DataStaticRental.IDClient = MainListClient[SelectedClient].id_legal_entity;
+                DataStaticRental.Type = MainListClient[SelectedClient].type;
+                DataStaticRental.Title = "Добавление аренды";
 
-            AddRentalWindow addRentalWindow = new AddRentalWindow();
-            addRentalWindow.Show();
+                AddRentalWindow addRentalWindow = new AddRentalWindow();
+                addRentalWindow.Show();
+            }
+            else
+            {
+                DataStaticRental.IDClient = MainListClient[SelectedClient].id_legal_entity;
+                DataStaticRental.Type = MainListClient[SelectedClient].type;
+                DataStaticRental.Title = "Добавление аренды";
+
+                SelectedRepresentativesOrganizationWindow selectedRepresentativesOrganizationWindow = new SelectedRepresentativesOrganizationWindow();
+                selectedRepresentativesOrganizationWindow.Show();
+            }
 
             foreach (System.Windows.Window window in System.Windows.Application.Current.Windows)
             {

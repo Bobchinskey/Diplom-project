@@ -109,6 +109,7 @@
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\AddRental\AddRentalWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\AddRental\SelectedClientWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\AddRental\SelectedDateRentalWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\AddRental\SelectedRepresentativesOrganizationWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\ListBookingWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\ListRentalWindowVeiwModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\SelectVehicleRentalWindowViewModel.cs" />
@@ -177,6 +178,9 @@
     </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\Rental\AddRental\SelectedDateRentalWindow.xaml.cs">
       <DependentUpon>SelectedDateRentalWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\Rental\AddRental\SelectedRepresentativesOrganizationWindow.xaml.cs">
+      <DependentUpon>SelectedRepresentativesOrganizationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\Rental\ListBookingWindow.xaml.cs">
       <DependentUpon>ListBookingWindow.xaml</DependentUpon>
@@ -354,6 +358,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\Rental\AddRental\SelectedRepresentativesOrganizationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\MainWindowInteraction\Rental\ListBookingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -402,6 +410,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\Document\RentalContract.doc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -428,6 +439,35 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Pictures\NullLegalEntity.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Word">
+      <Guid>{00020905-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>8</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

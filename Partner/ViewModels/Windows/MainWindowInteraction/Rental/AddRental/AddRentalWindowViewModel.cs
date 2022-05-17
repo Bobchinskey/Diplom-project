@@ -238,6 +238,730 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
 
         #endregion
 
+        #region Команда Сохранить документ Word : ExportContractWordCommand
+
+        public ICommand ExportContractWordCommand { get; }
+
+        private bool CanExportContractWordCommandExecute(object p) => true;
+
+        private void OnExportContractWordCommandExecuted(object p)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
+            SqlConnection ThisConnection = new SqlConnection(connectionString);
+            ThisConnection.Open();
+
+            if (DataStaticRental.Type == "Физическое лицо")
+            {
+                #region Процедуры добавления данных в БД
+
+                var command = ThisConnection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "Add_rental";
+                command.Parameters.AddWithValue("@id_vehicle", VehicleDataModel.id_vehicle);
+                command.Parameters.AddWithValue("@start_date_rental", StartDateRental);
+                command.Parameters.AddWithValue("@end_date_rental", EndDateRental);
+                command.Parameters.AddWithValue("@cost", Cost);
+                command.ExecuteNonQuery();
+
+                int IdRental;
+
+                SqlCommand thisCommand = ThisConnection.CreateCommand();
+                thisCommand.CommandText = "select Max(id_rental) as id_rental from rental";
+                SqlDataReader thisReader = thisCommand.ExecuteReader();
+                thisReader.Read();
+
+                IdRental = Convert.ToInt32(thisReader["id_rental"].ToString());
+
+                thisReader.Close();
+
+                command = ThisConnection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "Add_contract_natural_person";
+                command.Parameters.AddWithValue("@id_rental", IdRental);
+                command.Parameters.AddWithValue("@id_natural_person", DataStaticRental.IDClient);
+                command.ExecuteNonQuery();
+
+                #endregion
+
+                #region Экспорт в Word
+
+                //Создаём новый Word.Application
+                Microsoft.Office.Interop.Word.Application app = new Microsoft.Office.Interop.Word.Application();
+
+                //Загружаем документ
+                Microsoft.Office.Interop.Word.Document doc = null;
+
+                object fileName = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName)
+                             + "//Resources/Document/RentalContract.doc";
+                object falseValue = false;
+                object trueValue = true;
+                object missing = Type.Missing;
+
+                doc = app.Documents.Open(ref fileName, ref missing, ref trueValue,
+                ref missing, ref missing, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing);
+
+                //Теперь у нас есть документ который мы будем менять.
+
+                //Очищаем параметры поиска
+                app.Selection.Find.ClearFormatting();
+                app.Selection.Find.Replacement.ClearFormatting();
+
+                //Задаём параметры замены и выполняем замену.
+                object findText = "<ID>";
+                object replaceWith = Convert.ToString(IdRental);
+                object replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                string Day, Month;
+
+                if (StartDateRental.Day < 10)
+                {
+                    Day = "0" + Convert.ToString(StartDateRental.Day);
+                }
+                else
+                {
+                    Day = Convert.ToString(StartDateRental.Day);
+                }
+
+                if (EndDateRental.Month < 10)
+                {
+                    Month = "0" + Convert.ToString(StartDateRental.Month);
+                }
+                else
+                {
+                    Month = Convert.ToString(StartDateRental.Month);
+                }
+
+                findText = "<Day>";
+                replaceWith = Day;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<Month>";
+                replaceWith = Month;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<Year>";
+                replaceWith = Convert.ToString(DateTime.Today.Year);
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<FIO>";
+                replaceWith = Client;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<NameOrganization>";
+                replaceWith = "";
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                #region Получение данных о транспортном средстве из БД
+
+                string MakeModel,VIN,StateNumber,TypeVehicle,YearManufacture,EngineNumber,ChassisNumber,BodyNumber,Color,SeriesPTS,NumberPTS;
+
+                thisCommand = ThisConnection.CreateCommand();
+                thisCommand.CommandText = "select * from vehicle where id_vehicle = " + VehicleDataModel.id_vehicle;
+                thisReader = thisCommand.ExecuteReader();
+                thisReader.Read();
+
+                VIN = thisReader["VIN"].ToString();
+                StateNumber = thisReader["state_number"].ToString();
+                TypeVehicle = thisReader["type_vehicle"].ToString();
+                YearManufacture = thisReader["year_manufacture"].ToString();
+                EngineNumber = thisReader["engine_number"].ToString();
+                ChassisNumber = thisReader["сhassis_number"].ToString();
+                BodyNumber = thisReader["body_number"].ToString();
+                Color = thisReader["color"].ToString();
+                SeriesPTS = thisReader["series_PTS"].ToString();
+                NumberPTS = thisReader["number_PTS"].ToString();
+                MakeModel = thisReader["make_model"].ToString();
+
+                thisReader.Close();
+
+                string Registration, INN, SeriesPassport, NumberPassport, WhoIssuedPassport, DateIssuedPassport, Gender;
+
+
+                thisCommand = ThisConnection.CreateCommand();
+                thisCommand.CommandText = "select * from natural_person where id_natural_person = " + DataStaticRental.IDClient;
+                thisReader = thisCommand.ExecuteReader();
+                thisReader.Read();
+
+                INN = thisReader["INN"].ToString();
+                Registration = thisReader["registration"].ToString();
+                SeriesPassport = thisReader["series_passport"].ToString();
+                NumberPassport = thisReader["number_passport"].ToString();
+                WhoIssuedPassport = thisReader["who_issued_passport"].ToString();
+                DateIssuedPassport = thisReader["date_issued_passport"].ToString();
+                Gender = thisReader["gender"].ToString();
+
+                thisReader.Close();
+
+
+                #endregion
+                
+                if (Gender == "Мужской")
+                {
+                    Gender = "именуемый";
+                }
+                else
+                {
+                    Gender = "именуемая";
+                }
+
+                findText = "<Declination>";
+                replaceWith = Gender;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<Post>";
+                replaceWith = "";
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<ClientInfo>";
+                replaceWith = Client + ", адрес прописки: " + Registration + ", ИНН " + INN + ", Серия/Номер паспорта " + SeriesPassport + "/" + NumberPassport + ", Дата выдачи: " + DateIssuedPassport + ", Кем выдан: " + WhoIssuedPassport;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<VIN>";
+                replaceWith = VIN;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<MakeModel>";
+                replaceWith = MakeModel;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<Type>";
+                replaceWith = TypeVehicle;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<StateNumber>";
+                replaceWith = StateNumber;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<YearManufacture>";
+                replaceWith = YearManufacture;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<NumberEngine>";
+                replaceWith = EngineNumber;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<NumberChassis>";
+                replaceWith = ChassisNumber;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<NumberBody>";
+                replaceWith = BodyNumber;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<Color>";
+                replaceWith = Color;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<SeriesPTS>";
+                replaceWith = SeriesPTS;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<NumberPTS>";
+                replaceWith = NumberPTS;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<Cost>";
+                replaceWith = Cost;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                string EndDay, EndMonth;
+
+                if (EndDateRental.Day < 10)
+                {
+                    EndDay = "0" + Convert.ToString(EndDateRental.Day);
+                }
+                else
+                {
+                    EndDay = Convert.ToString(EndDateRental.Day);
+                }
+
+                if (EndDateRental.Month < 10)
+                {
+                    EndMonth = "0" + Convert.ToString(EndDateRental.Month);
+                }
+                else
+                {
+                    EndMonth = Convert.ToString(EndDateRental.Month);
+                }
+
+                findText = "<EndDay>";
+                replaceWith = EndDay;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<EndMonth>";
+                replaceWith = EndMonth;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<EndYear>";
+                replaceWith = Convert.ToString(EndDateRental.Year);
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                //Открываем документ для просмотра.
+                app.Visible = true;
+
+                #endregion
+            }
+            else
+            {
+                #region Процедуры добавления данных в БД
+
+                var command = ThisConnection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "Add_rental";
+                command.Parameters.AddWithValue("@id_vehicle", VehicleDataModel.id_vehicle);
+                command.Parameters.AddWithValue("@start_date_rental", StartDateRental);
+                command.Parameters.AddWithValue("@end_date_rental", EndDateRental);
+                command.Parameters.AddWithValue("@cost", Cost);
+                command.ExecuteNonQuery();
+
+                int IdRental;
+
+                SqlCommand thisCommand = ThisConnection.CreateCommand();
+                thisCommand.CommandText = "select Max(id_rental) as id_rental from rental";
+                SqlDataReader thisReader = thisCommand.ExecuteReader();
+                thisReader.Read();
+
+                IdRental = Convert.ToInt32(thisReader["id_rental"].ToString());
+
+                thisReader.Close();
+
+                command = ThisConnection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "Add_contract_legal_entity";
+                command.Parameters.AddWithValue("@id_rental", IdRental);
+                command.Parameters.AddWithValue("@id_legal_entity", DataStaticRental.IDClient);
+                command.ExecuteNonQuery();
+
+                #endregion
+
+                #region Экспорт в Word
+
+                //Создаём новый Word.Application
+                Microsoft.Office.Interop.Word.Application app = new Microsoft.Office.Interop.Word.Application();
+
+                //Загружаем документ
+                Microsoft.Office.Interop.Word.Document doc = null;
+
+                object fileName = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName)
+             + "//Resources/Document/RentalContract.doc";
+                object falseValue = false;
+                object trueValue = true;
+                object missing = Type.Missing;
+
+                doc = app.Documents.Open(ref fileName, ref missing, ref trueValue,
+                ref missing, ref missing, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing);
+
+                //Теперь у нас есть документ который мы будем менять.
+
+                //Очищаем параметры поиска
+                app.Selection.Find.ClearFormatting();
+                app.Selection.Find.Replacement.ClearFormatting();
+
+                //Задаём параметры замены и выполняем замену.
+                object findText = "<ID>";
+                object replaceWith = Convert.ToString(IdRental);
+                object replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                string Day, Month;
+
+                if (StartDateRental.Day < 10)
+                {
+                    Day = "0" + Convert.ToString(StartDateRental.Day);
+                }
+                else
+                {
+                    Day = Convert.ToString(StartDateRental.Day);
+                }
+
+                if (EndDateRental.Month < 10)
+                {
+                    Month = "0" + Convert.ToString(StartDateRental.Month);
+                }
+                else
+                {
+                    Month = Convert.ToString(StartDateRental.Month);
+                }
+
+                findText = "<Day>";
+                replaceWith = Day;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<Month>";
+                replaceWith = Month;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<Year>";
+                replaceWith = Convert.ToString(DateTime.Today.Year);
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<FIO>";
+                replaceWith = Client;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<NameOrganization>";
+                replaceWith = "";
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                #region Получение данных о транспортном средстве из БД
+
+                string MakeModel, VIN, StateNumber, TypeVehicle, YearManufacture, EngineNumber, ChassisNumber, BodyNumber, Color, SeriesPTS, NumberPTS;
+
+                thisCommand = ThisConnection.CreateCommand();
+                thisCommand.CommandText = "select * from vehicle where id_vehicle = " + VehicleDataModel.id_vehicle;
+                thisReader = thisCommand.ExecuteReader();
+                thisReader.Read();
+
+                VIN = thisReader["VIN"].ToString();
+                StateNumber = thisReader["state_number"].ToString();
+                TypeVehicle = thisReader["type_vehicle"].ToString();
+                YearManufacture = thisReader["year_manufacture"].ToString();
+                EngineNumber = thisReader["engine_number"].ToString();
+                ChassisNumber = thisReader["сhassis_number"].ToString();
+                BodyNumber = thisReader["body_number"].ToString();
+                Color = thisReader["color"].ToString();
+                SeriesPTS = thisReader["series_PTS"].ToString();
+                NumberPTS = thisReader["number_PTS"].ToString();
+                MakeModel = thisReader["make_model"].ToString();
+
+                thisReader.Close();
+
+                string Registration, INN, SeriesPassport, NumberPassport, WhoIssuedPassport, DateIssuedPassport, Gender;
+
+
+                thisCommand = ThisConnection.CreateCommand();
+                thisCommand.CommandText = "select * from natural_person where id_natural_person = " + DataStaticRental.IDClient;
+                thisReader = thisCommand.ExecuteReader();
+                thisReader.Read();
+
+                INN = thisReader["INN"].ToString();
+                Registration = thisReader["registration"].ToString();
+                SeriesPassport = thisReader["series_passport"].ToString();
+                NumberPassport = thisReader["number_passport"].ToString();
+                WhoIssuedPassport = thisReader["who_issued_passport"].ToString();
+                DateIssuedPassport = thisReader["date_issued_passport"].ToString();
+                Gender = thisReader["gender"].ToString();
+
+                thisReader.Close();
+
+
+                #endregion
+
+                if (Gender == "Мужской")
+                {
+                    Gender = "именуемый";
+                }
+                else
+                {
+                    Gender = "именуемая";
+                }
+
+                findText = "<Declination>";
+                replaceWith = Gender;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<Post>";
+                replaceWith = "";
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<ClientInfo>";
+                replaceWith = Client + ", адрес прописки: " + Registration + ", ИНН " + INN + ", Серия/Номер паспорта " + SeriesPassport + "/" + NumberPassport + ", Дата выдачи: " + DateIssuedPassport + ", Кем выдан: " + WhoIssuedPassport;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<VIN>";
+                replaceWith = VIN;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<MakeModel>";
+                replaceWith = MakeModel;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<Type>";
+                replaceWith = TypeVehicle;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<StateNumber>";
+                replaceWith = StateNumber;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<YearManufacture>";
+                replaceWith = YearManufacture;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<NumberEngine>";
+                replaceWith = EngineNumber;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<NumberChassis>";
+                replaceWith = ChassisNumber;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<NumberBody>";
+                replaceWith = BodyNumber;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<Color>";
+                replaceWith = Color;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<SeriesPTS>";
+                replaceWith = SeriesPTS;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<NumberPTS>";
+                replaceWith = NumberPTS;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<Cost>";
+                replaceWith = Cost;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                string EndDay, EndMonth;
+
+                if (EndDateRental.Day < 10)
+                {
+                    EndDay = "0" + Convert.ToString(EndDateRental.Day);
+                }
+                else
+                {
+                    EndDay = Convert.ToString(EndDateRental.Day);
+                }
+
+                if (EndDateRental.Month < 10)
+                {
+                    EndMonth = "0" + Convert.ToString(EndDateRental.Month);
+                }
+                else
+                {
+                    EndMonth = Convert.ToString(EndDateRental.Month);
+                }
+
+                findText = "<EndDay>";
+                replaceWith = EndDay;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<EndMonth>";
+                replaceWith = EndMonth;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<EndYear>";
+                replaceWith = Convert.ToString(EndDateRental.Year);
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                //Открываем документ для просмотра.
+                app.Visible = true;
+
+                #endregion
+
+            }
+
+            ThisConnection.Close();
+
+            foreach (System.Windows.Window window in System.Windows.Application.Current.Windows)
+            {
+                if (window.DataContext == this)
+                {
+                    window.Close();
+                }
+            }
+        }
+
+        #endregion
 
         #endregion
 
@@ -252,6 +976,8 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
             DropAdditionalServicesCommand = new LamdaCommand(OnDropAdditionalServicesCommandExecuted, CanDropAdditionalServicesCommandExecute);
 
             UpdateCostCommand = new LamdaCommand(OnUpdateCostCommandExecuted, CanUpdateCostCommandExecute);
+
+            ExportContractWordCommand = new LamdaCommand(OnExportContractWordCommandExecuted, CanExportContractWordCommandExecute);
 
             #endregion
 
@@ -276,7 +1002,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
             thisReader.Read();
             Client = thisReader["name"].ToString();
             thisReader.Close();
-            thisCommand.CommandText = "Select make_model + ' (' + vehicle.state_number + ')' as make_model from vehicle  where id_vehicle=" +  VehicleDataModel.id_vehicle;
+            thisCommand.CommandText = "Select make_model + ' (' + vehicle.state_number + ')' as make_model from vehicle  where id_vehicle=" + VehicleDataModel.id_vehicle;
             thisReader = thisCommand.ExecuteReader();
             thisReader.Read();
             Vehicle = thisReader["make_model"].ToString();

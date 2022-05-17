@@ -9,6 +9,7 @@ namespace Partner.Models.Rental
     class DataStaticRental
     {
         public static int IDClient { get; set; }
+        public static int IDRepresentativesOrganization { get; set; }
         public static string Title { get; set; }
         public static DateTime StartDateRental { get; set; }
         public static DateTime EndDateRental { get; set; }

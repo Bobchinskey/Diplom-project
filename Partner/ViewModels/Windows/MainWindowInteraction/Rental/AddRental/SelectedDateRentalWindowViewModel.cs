@@ -116,6 +116,8 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
 
         #endregion
 
+
+
         #endregion
 
         /*------------------------------------------------------------------------------------------------*/

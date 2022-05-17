@@ -9,6 +9,7 @@ namespace Partner.Models.Client
     class ListRepresentativesOrganizationsData
     {
         public int id_representatives_organizations { get; set; }
+        public int num { get; set; }
         public string FIO { get; set; }
         public string Surname { get; set; }
         public string Name { get; set; }
