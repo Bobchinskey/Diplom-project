@@ -183,7 +183,7 @@
                             </WrapPanel>
                         </Button.Content>
                     </Button>
-                    <Button Margin="0,15" Style="{StaticResource ButtonStroge}" Background="White" HorizontalAlignment="Center" Width="180" Height="35">
+                    <Button Command="{Binding OpenListBookingWindowCommand}" Margin="0,15" Style="{StaticResource ButtonStroge}" Background="White" HorizontalAlignment="Center" Width="180" Height="35">
                         <Button.Content>
                             <WrapPanel HorizontalAlignment="Stretch" Width="170">
                                 <fa:ImageAwesome Icon="List" HorizontalAlignment="Left" Height="18" Foreground="Black"/>

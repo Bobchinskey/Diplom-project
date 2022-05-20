@@ -1,0 +1,34 @@
+﻿<Window x:Class="Partner.Views.Windows.MainWindowInteraction.Booking.ListRentalInformationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Datacontext="clr-namespace:Partner.ViewModels.Windows.MainWindowInteraction.Booking"                
+        xmlns:local="clr-namespace:Partner.Views.Windows.MainWindowInteraction.Booking"
+        mc:Ignorable="d"
+        Title="Аренды" 
+        Height="450" Width="700"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Window.DataContext>
+        <Datacontext:ListRentalInformationWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="BlueViolet">
+            <TextBlock Margin="10" Text="Аренда транспортных средств" HorizontalAlignment="Center" Foreground="White" FontSize="25"/>
+        </Grid>
+        <DataGrid Margin="5,5,5,5" ItemsSource="{Binding MainListRental}" IsReadOnly="True" Grid.Row="1" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№" Binding="{Binding num}"/>
+                <DataGridTextColumn Header="Наименование" Binding="{Binding name}"/>
+                <DataGridTextColumn Header="Дата начала" Binding="{Binding start_date_rental, StringFormat={}{0:dd\.}{0:MM\.}{0:yyyy}}"/>
+                <DataGridTextColumn Header="Дата окончания" Binding="{Binding end_date_rental, StringFormat={}{0:dd\.}{0:MM\.}{0:yyyy}}"/>
+                <DataGridTextColumn Header="Тип" Binding="{Binding type}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

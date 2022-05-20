@@ -65,14 +65,14 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="50"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid SelectedIndex="{Binding SelectAdditionalPhoneNumber}" ItemsSource="{Binding AdditionalDataLegalEntityPhoneNumber}" Height="200" Grid.Column="0" CanUserResizeColumns="False" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid CanUserSortColumns="False" SelectedIndex="{Binding SelectAdditionalPhoneNumber}" ItemsSource="{Binding AdditionalDataLegalEntityPhoneNumber}" Height="200" Grid.Column="0" CanUserResizeColumns="False" AutoGenerateColumns="False" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Дополнительный номер телефона" Binding="{Binding phone_number}"/>
                             <DataGridTextColumn Header="Описание" Binding="{Binding other}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <StackPanel Grid.Column="1">
-                        <Button Margin="0,25,0,0" Command="{Binding AddAdditionalDataCommand}" Background="White" Width="30" Height="30">
+                        <Button Style="{StaticResource ButtonStroge}" Margin="0,25,0,0" Command="{Binding AddAdditionalDataCommand}" Background="White" Width="30" Height="30">
                             <Button.Content>
                                 <Grid>
                                     <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
@@ -84,7 +84,7 @@
                                 </ToolTip>
                             </Button.ToolTip>
                         </Button>
-                        <Button Command="{Binding EditAdditionalDataCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
+                        <Button Style="{StaticResource ButtonStroge}" Command="{Binding EditAdditionalDataCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
                             <Button.Content>
                                 <Grid>
                                     <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
@@ -96,7 +96,7 @@
                                 </ToolTip>
                             </Button.ToolTip>
                         </Button>
-                        <Button Command="{Binding DropAdditionalDataCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
+                        <Button Style="{StaticResource ButtonStroge}" Command="{Binding DropAdditionalDataCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
                             <Button.Content>
                                 <Grid>
                                     <fa:ImageAwesome Icon="Trash" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
@@ -151,14 +151,14 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="50"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid SelectedIndex="{Binding SelectRepresentativesOrganizations}" ItemsSource="{Binding RepresentativesOrganizations}" Height="200" Grid.Column="0" CanUserResizeColumns="False" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid CanUserSortColumns="False" SelectedIndex="{Binding SelectRepresentativesOrganizations}" ItemsSource="{Binding RepresentativesOrganizations}" Height="200" Grid.Column="0" CanUserResizeColumns="False" AutoGenerateColumns="False" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Представители организации" Binding="{Binding FIO}"/>
                             <DataGridTextColumn Header="Должность" Binding="{Binding Post}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <StackPanel Grid.Column="1">
-                        <Button Margin="0,25,0,0" Command="{Binding AddRepresentativesOrganizationsCommand}" Background="White" Width="30" Height="30">
+                        <Button Style="{StaticResource ButtonStroge}" Margin="0,25,0,0" Command="{Binding AddRepresentativesOrganizationsCommand}" Background="White" Width="30" Height="30">
                             <Button.Content>
                                 <Grid>
                                     <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
@@ -170,7 +170,7 @@
                                 </ToolTip>
                             </Button.ToolTip>
                         </Button>
-                        <Button Command="{Binding EditRepresentativesOrganizationsCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
+                        <Button Style="{StaticResource ButtonStroge}" Command="{Binding EditRepresentativesOrganizationsCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
                             <Button.Content>
                                 <Grid>
                                     <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
@@ -182,7 +182,7 @@
                                 </ToolTip>
                             </Button.ToolTip>
                         </Button>
-                        <Button Command="{Binding DropRepresentativesOrganizationsCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
+                        <Button Style="{StaticResource ButtonStroge}" Command="{Binding DropRepresentativesOrganizationsCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
                             <Button.Content>
                                 <Grid>
                                     <fa:ImageAwesome Icon="Trash" HorizontalAlignment="Left" Height="20" Foreground="Black"/>

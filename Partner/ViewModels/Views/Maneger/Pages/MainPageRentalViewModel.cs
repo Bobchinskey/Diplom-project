@@ -175,6 +175,8 @@ namespace Partner.ViewModels.Views.Maneger.Pages
 
         private void OnOpeListRentalWindowCommandExecuted(object p)
         {
+            VehicleDataModel.EditOrAdd = "Аренда";
+
             SelectVehicleRentalWindow selectVehicleRentalWindow = new SelectVehicleRentalWindow();
             selectVehicleRentalWindow.ShowDialog();
 
@@ -295,6 +297,23 @@ namespace Partner.ViewModels.Views.Maneger.Pages
 
         #endregion
 
+        #region Команда вызова окна "Бронирование" : OpenListBookingWindowCommand
+
+        public ICommand OpenListBookingWindowCommand { get; }
+
+        private bool CanOpenListBookingWindowCommandExecute(object p) => true;
+
+        private void OnOpenListBookingWindowCommandExecuted(object p)
+        {
+            VehicleDataModel.EditOrAdd = "Бронирование";
+
+            SelectVehicleRentalWindow selectVehicleRentalWindow = new SelectVehicleRentalWindow();
+            selectVehicleRentalWindow.ShowDialog();
+
+            ReturnWindowCommand.Execute(null);
+        }
+
+        #endregion
 
         #endregion
 
@@ -303,6 +322,8 @@ namespace Partner.ViewModels.Views.Maneger.Pages
         public MainPageRentalViewModel()
         {
             #region Команды
+
+            OpenListBookingWindowCommand = new LamdaCommand(OnOpenListBookingWindowCommandExecuted, CanOpenListBookingWindowCommandExecute);
 
             OpeMaintenanceWindowCommand = new LamdaCommand(OnOpenMaintenanceWindowCommandExecuted, CanOpenMaintenanceWindowCommandExecute);
 

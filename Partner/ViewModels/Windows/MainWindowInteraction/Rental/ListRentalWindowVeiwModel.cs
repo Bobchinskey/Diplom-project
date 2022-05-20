@@ -240,6 +240,114 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental
 
         #endregion
 
+        #region Команда Экспорт информации о арендах в Excel : ExcelCommand
+        public ICommand ExcelCommand { get; }
+
+        private bool CanExcelCommandExecute(object p) => true;
+
+        private void OnExcelCommandExecuted(object p)
+        {
+            System.Data.DataTable ExcelDataTable = new System.Data.DataTable("ExcelDataTable");
+            DataColumn column;
+            DataRow row;
+
+            #region Создание колонок: ExcelDataTable
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "№";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Наименование";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Тип";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Дата начала";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Дата окончания";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Статус";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            #endregion
+
+            #region Заполнение ExcelDataTable
+
+            for (int i = 0; i < MainListRental.Rows.Count; i++)
+            {
+                row = ExcelDataTable.NewRow();
+                row["№"] = MainListRental.Rows[i]["num"];
+                row["Наименование"] = MainListRental.Rows[i]["name"]; 
+                row["Тип"] = MainListRental.Rows[i]["type"];
+                row["Дата начала"] = MainListRental.Rows[i]["start_date_rental"];
+                row["Дата окончания"] = MainListRental.Rows[i]["end_date_rental"];
+                row["Статус"] = MainListRental.Rows[i]["condition"];
+                ExcelDataTable.Rows.Add(row);
+            }
+
+            #endregion
+
+            Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+            excel.Visible = true;
+            Microsoft.Office.Interop.Excel.Workbook workbook = excel.Workbooks.Add(System.Reflection.Missing.Value);
+            Microsoft.Office.Interop.Excel.Worksheet sheet1 = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Sheets[1];
+            for (int j = 0; j < ExcelDataTable.Columns.Count; j++)
+            {
+                Microsoft.Office.Interop.Excel.Range myRange =
+                    (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[1, j + 1];
+                sheet1.Cells[1, j + 1].font.bold = true;
+                myRange.Value2 = ExcelDataTable.Columns[j].ColumnName;
+            }
+            for (int i = 0; i < ExcelDataTable.Columns.Count; i++)
+            {
+                for (int j = 0; j < ExcelDataTable.Rows.Count; j++)
+                {
+                    string b;
+
+                    if ((i != 3) && (i != 4))
+                    {
+                        b = Convert.ToString(ExcelDataTable.Rows[j][i]);
+                    }
+                    else
+                    {
+                        b = Convert.ToString(Convert.ToDateTime(ExcelDataTable.Rows[j][i]).ToShortDateString());
+                    }
+                    Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[j + 2, i + 1];
+                    if (b != null)
+                        myRange.Value2 = b;
+                }
+                sheet1.Columns.AutoFit();
+            }
+        }
+
+        #endregion
+
         #endregion
 
         /*------------------------------------------------------------------------------------------------*/
@@ -255,6 +363,8 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental
             OpenSelectedDateRentalWindowCommand = new LamdaCommand(OnOpenSelectedDateRentalWindowCommandExecuted, CanOpenSelectedDateRentalWindowCommandExecute);
 
             OpenEditDateRentalWindowCommand = new LamdaCommand(OnOpenEditDateRentalWindowCommandExecuted, CanOpenEditDateRentalWindowCommandExecute);
+
+            ExcelCommand = new LamdaCommand(OnExcelCommandExecuted, CanExcelCommandExecute);
 
             #endregion
 

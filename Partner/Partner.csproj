@@ -90,6 +90,8 @@
     <Compile Include="Models\Rental\DataStaticRental.cs" />
     <Compile Include="Models\Vehicle\ListVehicle.cs" />
     <Compile Include="Models\Vehicle\VehicleDataModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\Booking\ListRentalInformationWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\Booking\MainListBookingWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\AddClientNaturapPersonViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\AdditionalDataClientWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\AddLegalEntityViewModel.cs" />
@@ -120,6 +122,12 @@
     <Compile Include="ViewModels\Windows\MainWindowInteraction\VehicleWindow\AddVehicleWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\VehicleWindow\ListVehicleWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\Settings\AuthorizationWindowViewModel.cs" />
+    <Compile Include="Views\Windows\MainWindowInteraction\Booking\ListRentalInformationWindow.xaml.cs">
+      <DependentUpon>ListRentalInformationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\Booking\MainListBookingWindow.xaml.cs">
+      <DependentUpon>MainListBookingWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\ClientWindow\AddClientWindow.xaml.cs">
       <DependentUpon>AddClientWindow.xaml</DependentUpon>
     </Compile>
@@ -276,6 +284,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Windows\MainWindowInteraction\Booking\ListRentalInformationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\Booking\MainListBookingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\MainWindowInteraction\ClientWindow\AddClientWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

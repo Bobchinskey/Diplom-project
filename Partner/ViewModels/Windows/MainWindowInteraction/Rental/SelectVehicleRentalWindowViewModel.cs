@@ -1,6 +1,7 @@
 ﻿using Partner.Infrastructure.Commands;
 using Partner.Models.Vehicle;
 using Partner.ViewModels.Base;
+using Partner.Views.Windows.MainWindowInteraction.Booking;
 using Partner.Views.Windows.MainWindowInteraction.Rental;
 using System;
 using System.Collections.Generic;
@@ -105,8 +106,16 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental
             {
                 VehicleDataModel.id_vehicle = MainListVehicle[SelectedVehicle].id_vehicle;
 
-                ListRentalWindow listRentalWindow = new ListRentalWindow();
-                listRentalWindow.ShowDialog();
+                if (VehicleDataModel.EditOrAdd == "Бронирование")
+                {
+                    MainListBookingWindow mainListBookingWindow = new MainListBookingWindow();
+                    mainListBookingWindow.ShowDialog();
+                }
+                else if(VehicleDataModel.EditOrAdd == "Аренда")
+                {
+                    ListRentalWindow listRentalWindow = new ListRentalWindow();
+                    listRentalWindow.ShowDialog();
+                }
 
                 ReturnListRentalWindowCommand.Execute(null);
             }
@@ -120,7 +129,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental
 
         public SelectVehicleRentalWindowViewModel()
         {
-
             #region Команды
 
             OpenListRentalWindowCommand = new LamdaCommand(OnOpenListRentalWindowCommandExecuted, CanOpenListRentalWindowCommandExecute);
@@ -128,6 +136,8 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental
             ReturnListRentalWindowCommand = new LamdaCommand(OnReturnListRentalWindowCommandExecuted, CanReturnListRentalWindowCommandExecute);
 
             #endregion
+
+            #region Данные
 
             DataTable dt = new DataTable();
 
@@ -145,6 +155,8 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental
             {
                 MainListVehicle[i].num = i + 1;
             }
+
+            #endregion
         }
     }
 }

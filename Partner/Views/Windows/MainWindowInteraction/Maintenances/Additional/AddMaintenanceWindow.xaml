@@ -67,14 +67,14 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
-                <DataGrid  SelectedIndex="{Binding SelectCompletedWorks}" ItemsSource="{Binding DataCompletedWorks}" Grid.Column="0" CanUserResizeColumns="False" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid CanUserSortColumns="False" SelectedIndex="{Binding SelectCompletedWorks}" ItemsSource="{Binding DataCompletedWorks}" Grid.Column="0" CanUserResizeColumns="False" AutoGenerateColumns="False" IsReadOnly="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Наименование работ" Binding="{Binding Name}"/>
                         <DataGridTextColumn Header="Стоимость" Binding="{Binding Cost}"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <StackPanel Grid.Column="1">
-                    <Button Margin="0,25,0,0" Command="{Binding AddCompletedWorksCommand}" Background="White" Width="30" Height="30">
+                    <Button Style="{StaticResource ButtonStroge}" Margin="0,25,0,0" Command="{Binding AddCompletedWorksCommand}" Background="White" Width="30" Height="30">
                         <Button.Content>
                             <Grid>
                                 <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
@@ -86,7 +86,7 @@
                             </ToolTip>
                         </Button.ToolTip>
                     </Button>
-                    <Button Command="{Binding EditCompletedWorksCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
+                    <Button Style="{StaticResource ButtonStroge}" Command="{Binding EditCompletedWorksCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
                         <Button.Content>
                             <Grid>
                                 <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
@@ -98,7 +98,7 @@
                             </ToolTip>
                         </Button.ToolTip>
                     </Button>
-                    <Button Command="{Binding DropCompletedWorksCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
+                    <Button Style="{StaticResource ButtonStroge}" Command="{Binding DropCompletedWorksCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
                         <Button.Content>
                             <Grid>
                                 <fa:ImageAwesome Icon="Trash" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
@@ -117,14 +117,14 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
-                <DataGrid SelectedIndex="{Binding SelectSpareParts}" ItemsSource="{Binding DataSpareParts}" Grid.Column="0" CanUserResizeColumns="False" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid CanUserSortColumns="False" SelectedIndex="{Binding SelectSpareParts}" ItemsSource="{Binding DataSpareParts}" Grid.Column="0" CanUserResizeColumns="False" AutoGenerateColumns="False" IsReadOnly="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Наименование запчасти" Binding="{Binding Name}"/>
                         <DataGridTextColumn Header="Стоимость" Binding="{Binding Cost}"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <StackPanel Grid.Column="1">
-                    <Button Margin="0,25,0,0" Command="{Binding AddDataSparePartsCommand}" Background="White" Width="30" Height="30">
+                    <Button Style="{StaticResource ButtonStroge}" Margin="0,25,0,0" Command="{Binding AddDataSparePartsCommand}" Background="White" Width="30" Height="30">
                         <Button.Content>
                             <Grid>
                                 <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
@@ -136,7 +136,7 @@
                             </ToolTip>
                         </Button.ToolTip>
                     </Button>
-                    <Button Command="{Binding EditDataSparePartsCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
+                    <Button Style="{StaticResource ButtonStroge}" Command="{Binding EditDataSparePartsCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
                         <Button.Content>
                             <Grid>
                                 <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
@@ -148,7 +148,7 @@
                             </ToolTip>
                         </Button.ToolTip>
                     </Button>
-                    <Button Command="{Binding DropDataSparePartsCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
+                    <Button Style="{StaticResource ButtonStroge}" Command="{Binding DropDataSparePartsCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
                         <Button.Content>
                             <Grid>
                                 <fa:ImageAwesome Icon="Trash" HorizontalAlignment="Left" Height="20" Foreground="Black"/>

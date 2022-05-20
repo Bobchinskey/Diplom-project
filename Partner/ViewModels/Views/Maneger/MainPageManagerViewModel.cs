@@ -1,5 +1,6 @@
 ﻿using Partner.Infrastructure.Commands;
 using Partner.Models.PersonalData;
+using Partner.Models.Vehicle;
 using Partner.ViewModels.Base;
 using Partner.ViewModels.Windows;
 using Partner.Views.Views.Manager;
@@ -205,6 +206,26 @@ namespace Partner.ViewModels.Views.Maneger
 
         private void OnOpenRentalWindowCommandExecuted(object p)
         {
+            VehicleDataModel.EditOrAdd = "Аренда";
+
+            SelectVehicleRentalWindow selectVehicleRentalWindow = new SelectVehicleRentalWindow();
+            selectVehicleRentalWindow.ShowDialog();
+
+            UpdatePageCommand.Execute(null);
+        }
+
+        #endregion
+
+        #region Команда вызова окна "Бронирование" : OpenListBookingWindowCommand
+
+        public ICommand OpenListBookingWindowCommand { get; }
+
+        private bool CanOpenListBookingWindowCommandExecute(object p) => true;
+
+        private void OnOpenListBookingWindowCommandExecuted(object p)
+        {
+            VehicleDataModel.EditOrAdd = "Бронирование";
+
             SelectVehicleRentalWindow selectVehicleRentalWindow = new SelectVehicleRentalWindow();
             selectVehicleRentalWindow.ShowDialog();
 
@@ -219,7 +240,6 @@ namespace Partner.ViewModels.Views.Maneger
 
         public MainPageManagerViewModel()
         {
-
             #region Команды
 
             ChangeUserCommand = new LamdaCommand(OnChangeUserCommandExecuted, CanChangeUserCommandExecute);
@@ -243,6 +263,8 @@ namespace Partner.ViewModels.Views.Maneger
             OpeMaintenanceWindowCommand = new LamdaCommand(OnOpenMaintenanceWindowCommandExecuted, CanOpenMaintenanceWindowCommandExecute);
 
             OpenRentalWindowCommand = new LamdaCommand(OnOpenRentalWindowCommandExecuted, CanOpenRentalWindowCommandExecute);
+
+            OpenListBookingWindowCommand = new LamdaCommand(OnOpenListBookingWindowCommandExecuted, CanOpenListBookingWindowCommandExecute);
 
             #endregion
         }

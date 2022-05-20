@@ -31,7 +31,7 @@
                 <MenuItem Header="Списки">
                     <MenuItem Header="Клиенты..." Command="{Binding OpenListClientWindowCommand}" FontSize="14"/>
                     <MenuItem Header="Аренды..." Command="{Binding OpenRentalWindowCommand}" FontSize="14"/>
-                    <MenuItem Header="Брони..." Command="{Binding}" FontSize="14"/>
+                    <MenuItem Header="Брони..." Command="{Binding OpenListBookingWindowCommand}" FontSize="14"/>
                     <Separator/>
                     <MenuItem Header="Автомобили..." Command="{Binding OpenListVehicleWindowCommand}" FontSize="14"/>
                     <MenuItem Header="Страхование..." Command="{Binding OpenInsurancesInformationWindowCommand}" FontSize="14"/>

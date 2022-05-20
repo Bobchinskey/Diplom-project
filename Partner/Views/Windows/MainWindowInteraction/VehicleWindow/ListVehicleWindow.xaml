@@ -31,7 +31,7 @@
                 </i1:EventTrigger>
             </i1:Interaction.Triggers>
         </ComboBox>
-        <DataGrid Margin="5,5,5,5" SelectedIndex="{Binding SelectedVehicle}" ItemsSource="{Binding MainListVehicle}" IsReadOnly="True" Grid.Row="1" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
+        <DataGrid CanUserSortColumns="False" Margin="5,5,5,5" SelectedIndex="{Binding SelectedVehicle}" ItemsSource="{Binding MainListVehicle}" IsReadOnly="True" Grid.Row="1" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№" Binding="{Binding num}"/>
                 <DataGridTextColumn Header="Наименование" Binding="{Binding MakeModel}"/>
@@ -41,7 +41,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Margin="5,0,10,0" Grid.Row="1" Grid.Column="1">
-            <Button Background="White" Margin="0,5" Width="50" Height="50" Command="{Binding OpenAddVehicleWindowCommand}">
+            <Button Style="{StaticResource ButtonStroge}" Background="White" Margin="0,5" Width="50" Height="50" Command="{Binding OpenAddVehicleWindowCommand}">
                 <Button.Content>
                     <Grid>
                         <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
@@ -53,7 +53,7 @@
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button Command="{Binding OpenEditVehicleWindowCommand}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
+            <Button Style="{StaticResource ButtonStroge}" Command="{Binding OpenEditVehicleWindowCommand}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
                 <Button.Content>
                     <Grid>
                         <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
@@ -65,7 +65,7 @@
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button Command="{Binding DropVehicleCommand}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
+            <Button Style="{StaticResource ButtonStroge}" Command="{Binding DropVehicleCommand}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
                 <Button.Content>
                     <Grid>
                         <fa:ImageAwesome Icon="Trash" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
@@ -77,7 +77,7 @@
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button Margin="0,30,0,0" Background="White" Width="50" Height="50">
+            <Button Style="{StaticResource ButtonStroge}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
                 <Button.Content>
                     <Grid>
                         <fa:ImageAwesome Icon="Money" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
@@ -89,7 +89,7 @@
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button Command="{Binding ExcelCommand}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
+            <Button Style="{StaticResource ButtonStroge}" Command="{Binding ExcelCommand}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
                 <Button.Content>
                     <Grid>
                         <fa:ImageAwesome Icon="FileExcelOutline" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
@@ -101,7 +101,7 @@
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button Margin="0,30,0,0" Background="White" Width="50" Height="50" Command="{Binding RepeatVehicleCommand}" Visibility="{Binding VisibleRecoverButton}">
+            <Button Style="{StaticResource ButtonStroge}" Margin="0,30,0,0" Background="White" Width="50" Height="50" Command="{Binding RepeatVehicleCommand}" Visibility="{Binding VisibleRecoverButton}">
                 <Button.Content>
                     <Grid>
                         <fa:ImageAwesome Icon="Repeat" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
