@@ -15,7 +15,7 @@ namespace Partner.ViewModels.Windows
     class AuthorizationWindowViewModel : ViewModelBase
     {
 
-        #region Данные Авторизации
+        #region Данные
 
         #region Login : TextBox
 
@@ -50,7 +50,7 @@ namespace Partner.ViewModels.Windows
 
         #region Команды
 
-        #region Команда авторизации пользователя
+        #region Команда авторизации пользователя : AuthorizationModuleCommand
 
         public ICommand AuthorizationModuleCommand { get; }
 
@@ -75,9 +75,7 @@ namespace Partner.ViewModels.Windows
                         else if (UserDataModel.access_lavel == "Менеджер")
                             UserDataModel.page = new MainPageManager();
                         MainWindow mainWindow = new MainWindow();
-                    mainWindow.Show();
-                        StartingInformationWindow maiStartingInformationWindow = new StartingInformationWindow();
-                        maiStartingInformationWindow.Show();
+                        mainWindow.Show();
                         foreach (System.Windows.Window window in System.Windows.Application.Current.Windows)
                         {
                             if (window.DataContext == this)

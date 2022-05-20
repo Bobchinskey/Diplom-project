@@ -76,7 +76,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Insurances
 
         #region Команды
 
-        #region Команда фильтрации страховок по их статусу
+        #region Команда фильтрации страховок по их статусу : FilterInsurancesStatusCommand
 
         public ICommand FilterInsurancesStatusCommand { get; }
 
@@ -183,7 +183,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Insurances
 
         #endregion
 
-        #region Команда вызова окна "Добавление ОСАГО"
+        #region Команда вызова окна "Добавление ОСАГО" : OpenAddOSAGOWindowCommand
 
         public ICommand OpenAddOSAGOWindowCommand { get; }
 
@@ -208,7 +208,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Insurances
 
         #endregion
 
-        #region Команда вызова окна "Добавление КАСКО"
+        #region Команда вызова окна "Добавление КАСКО" : OpenAddOSAGOWindowCommand
 
         public ICommand OpenAddKASKOWindowCommand { get; }
 
@@ -233,7 +233,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Insurances
 
         #endregion
 
-        #region Команда вызова окна "Редактирование страховок"
+        #region Команда вызова окна "Редактирование страховок" : OpenAddOSAGOWindowCommand
 
         public ICommand OpenEditOSAGOWindowCommand { get; }
 
@@ -279,6 +279,121 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Insurances
 
         #endregion
 
+        #region Команда экспорт информации о страховках в Excel : ExcelCommand
+        public ICommand ExcelCommand { get; }
+
+        private bool CanExcelCommandExecute(object p) => true;
+
+        private void OnExcelCommandExecuted(object p)
+        {
+            System.Data.DataTable ExcelDataTable = new System.Data.DataTable("ExcelDataTable");
+            DataColumn column;
+            DataRow row;
+
+            #region Создание колонок: ExcelDataTable
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Автомобиль";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Тип страховки";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Серия";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Номер";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Дата страхования";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Дата окончания";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Статус";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            #endregion
+
+            #region Заполнение ExcelDataTable
+
+            for (int i = 0; i < MainListInsurance.Count; i++)
+            {
+                row = ExcelDataTable.NewRow();
+                row["Автомобиль"] = MainListInsurance[i].make_model;
+                row["Тип страховки"] = MainListInsurance[i].type;
+                row["Серия"] = MainListInsurance[i].series;
+                row["Номер"] = MainListInsurance[i].number;
+                row["Дата страхования"] = MainListInsurance[i].start_date;
+                row["Дата окончания"] = MainListInsurance[i].end_date;
+                row["Статус"] = MainListInsurance[i].reality;
+                ExcelDataTable.Rows.Add(row);
+            }
+
+            #endregion
+
+            Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+            excel.Visible = true;
+            Microsoft.Office.Interop.Excel.Workbook workbook = excel.Workbooks.Add(System.Reflection.Missing.Value);
+            Microsoft.Office.Interop.Excel.Worksheet sheet1 = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Sheets[1];
+            for (int j = 0; j < ExcelDataTable.Columns.Count; j++)
+            {
+                Microsoft.Office.Interop.Excel.Range myRange =
+                    (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[1, j + 1];
+                sheet1.Cells[1, j + 1].font.bold = true;
+                myRange.Value2 = ExcelDataTable.Columns[j].ColumnName;
+            }
+            for (int i = 0; i < ExcelDataTable.Columns.Count; i++)
+            {
+                for (int j = 0; j < ExcelDataTable.Rows.Count; j++)
+                {
+                    string b;
+
+                    if ((i != 4) && (i != 5))
+                    {
+                       b = Convert.ToString(ExcelDataTable.Rows[j][i]);
+                    }
+                    else
+                    {
+                        b = Convert.ToString(Convert.ToDateTime(ExcelDataTable.Rows[j][i]).ToShortDateString());
+                    }
+                    Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[j + 2, i + 1];
+                    if (b != null)
+                        myRange.Value2 = b;
+                }
+                sheet1.Columns.AutoFit();
+            }
+        }
+
+        #endregion
 
         #endregion
 
@@ -295,6 +410,8 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Insurances
             OpenAddKASKOWindowCommand = new LamdaCommand(OnOpenAddKASKOWindowCommandExecuted, CanOpenAddKASKOWindowCommandExecute);
 
             OpenEditOSAGOWindowCommand = new LamdaCommand(OnOpenEditOSAGOWindowCommandExecuted, CanOpenEditOSAGOWindowCommandExecute);
+
+            ExcelCommand = new LamdaCommand(OnExcelCommandExecuted, CanExcelCommandExecute);
 
             #endregion
 

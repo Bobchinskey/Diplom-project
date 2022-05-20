@@ -45,7 +45,7 @@ namespace Partner.ViewModels.Views.Maneger
 
         #region Команды
 
-        #region Команда смены пользователя
+        #region Команда смены пользователя : ChangeUserCommand
 
         public ICommand ChangeUserCommand { get; }
 
@@ -59,7 +59,7 @@ namespace Partner.ViewModels.Views.Maneger
 
         #endregion
 
-        #region Команда обновления данных
+        #region Команда обновления данных : UpdatePageCommand
 
         public ICommand UpdatePageCommand { get; }
 
@@ -73,21 +73,7 @@ namespace Partner.ViewModels.Views.Maneger
 
         #endregion
 
-        #region Команда вызова новостей
-
-        public ICommand OpenNewsPageCommand { get; }
-
-        private bool CanOpenNewsPageCommandExecute(object p) => true;
-
-        private void OnOpenNewsPageCommandExecuted(object p)
-        {
-            StartingInformationWindow startingInformationWindow = new StartingInformationWindow();
-            startingInformationWindow.Show();
-        }
-
-        #endregion
-
-        #region Команда вызова окна "О программе"
+        #region Команда вызова окна "О программе" : OpenAboutProgramCommand
 
         public ICommand OpenAboutProgramCommand { get; }
 
@@ -101,7 +87,7 @@ namespace Partner.ViewModels.Views.Maneger
 
         #endregion
 
-        #region Команда вызова окна "Пользовательские настройки"
+        #region Команда вызова окна "Пользовательские настройки" : OpenUserSettingsWindowCommand
 
         public ICommand OpenUserSettingsWindowCommand { get; }
 
@@ -115,7 +101,7 @@ namespace Partner.ViewModels.Views.Maneger
 
         #endregion
 
-        #region Команда вызова окна "Автомобили"
+        #region Команда вызова окна "Автомобили" : OpenListVehicleWindowCommand
 
         public ICommand OpenListVehicleWindowCommand { get; }
 
@@ -131,7 +117,7 @@ namespace Partner.ViewModels.Views.Maneger
 
         #endregion
 
-        #region Команда вызова окна "Клиенты"
+        #region Команда вызова окна "Клиенты" : OpenListClientWindowCommand
 
         public ICommand OpenListClientWindowCommand { get; }
 
@@ -147,7 +133,7 @@ namespace Partner.ViewModels.Views.Maneger
 
         #endregion
 
-        #region Команда вызова окна "Тарифы"
+        #region Команда вызова окна "Тарифы" : OpenListRateWindowCommand
 
         public ICommand OpenListRateWindowCommand { get; }
 
@@ -163,7 +149,7 @@ namespace Partner.ViewModels.Views.Maneger
 
         #endregion
 
-        #region Команда вызова окна "Тарифы"
+        #region Команда вызова окна "Дополнительные услуги" : OpenListAdditionalServicesWindowCommand
 
         public ICommand OpenListAdditionalServicesWindowCommand { get; }
 
@@ -179,8 +165,8 @@ namespace Partner.ViewModels.Views.Maneger
 
         #endregion
 
-        #region Команда вызова окна "Страхование"
-        
+        #region Команда вызова окна "Страхование" : OpenInsurancesInformationWindowCommand
+
         public ICommand OpenInsurancesInformationWindowCommand { get; }
 
         private bool CanOpenInsurancesInformationWindowCommandExecute(object p) => true;
@@ -195,7 +181,7 @@ namespace Partner.ViewModels.Views.Maneger
 
         #endregion
 
-        #region Команда вызова окна "Техническое обслуживание"
+        #region Команда вызова окна "Техническое обслуживание" : OpeMaintenanceWindowCommand
 
         public ICommand OpeMaintenanceWindowCommand { get; }
 
@@ -211,7 +197,7 @@ namespace Partner.ViewModels.Views.Maneger
 
         #endregion
 
-        #region Команда вызова окна "Аренды"
+        #region Команда вызова окна "Аренды" : OpenRentalWindowCommand
 
         public ICommand OpenRentalWindowCommand { get; }
 
@@ -239,8 +225,6 @@ namespace Partner.ViewModels.Views.Maneger
             ChangeUserCommand = new LamdaCommand(OnChangeUserCommandExecuted, CanChangeUserCommandExecute);
 
             UpdatePageCommand = new LamdaCommand(OnUpdatePageCommandExecuted, CanUpdatePageCommandExecute);
-
-            OpenNewsPageCommand = new LamdaCommand(OnOpenNewsPageCommandExecuted, CanOpenNewsPageCommandExecute);
 
             OpenAboutProgramCommand = new LamdaCommand(OnAboutProgramCommandExecuted, CanAboutProgramCommandExecute);
 

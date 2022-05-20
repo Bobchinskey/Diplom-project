@@ -246,9 +246,12 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
 
         private void OnExportContractWordCommandExecuted(object p)
         {
+            int IdRental;
             string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
             SqlConnection ThisConnection = new SqlConnection(connectionString);
             ThisConnection.Open();
+            SqlCommand thisCommand;
+            SqlDataReader thisReader;
 
             if (DataStaticRental.Type == "Физическое лицо")
             {
@@ -263,11 +266,9 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
                 command.Parameters.AddWithValue("@cost", Cost);
                 command.ExecuteNonQuery();
 
-                int IdRental;
-
-                SqlCommand thisCommand = ThisConnection.CreateCommand();
+                thisCommand = ThisConnection.CreateCommand();
                 thisCommand.CommandText = "select Max(id_rental) as id_rental from rental";
-                SqlDataReader thisReader = thisCommand.ExecuteReader();
+                thisReader = thisCommand.ExecuteReader();
                 thisReader.Read();
 
                 IdRental = Convert.ToInt32(thisReader["id_rental"].ToString());
@@ -281,6 +282,19 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
                 command.Parameters.AddWithValue("@id_natural_person", DataStaticRental.IDClient);
                 command.ExecuteNonQuery();
 
+                if (AdditionalRateRentalDelivery.Rows.Count >= 1)
+            {
+                for (int i = 1; i <= AdditionalRateRentalDelivery.Rows.Count; i++)
+                {
+                    var command2 = ThisConnection.CreateCommand();
+                    command2.CommandType = CommandType.StoredProcedure;
+                    command2.CommandText = "Add_additional_services_rental";
+                    command2.Parameters.AddWithValue("@id_additional_services", Convert.ToInt32(AdditionalRateRentalDelivery.Rows[i - 1]["ID"]));
+                    command2.Parameters.AddWithValue("@id_rental", IdRental);
+                    command2.ExecuteNonQuery();
+                }
+            }
+
                 #endregion
 
                 #region Экспорт в Word
@@ -292,7 +306,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
                 Microsoft.Office.Interop.Word.Document doc = null;
 
                 object fileName = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName)
-                             + "//Resources/Document/RentalContract.doc";
+                             + "//Resources/Document/RentalContract1.doc";
                 object falseValue = false;
                 object trueValue = true;
                 object missing = Type.Missing;
@@ -328,7 +342,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
                     Day = Convert.ToString(StartDateRental.Day);
                 }
 
-                if (EndDateRental.Month < 10)
+                if (StartDateRental.Month < 10)
                 {
                     Month = "0" + Convert.ToString(StartDateRental.Month);
                 }
@@ -354,7 +368,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
                 ref replace, ref missing, ref missing, ref missing, ref missing);
 
                 findText = "<Year>";
-                replaceWith = Convert.ToString(DateTime.Today.Year);
+                replaceWith = Convert.ToString(StartDateRental.Year);
                 replace = 2;
 
                 app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
@@ -370,7 +384,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
                 ref replace, ref missing, ref missing, ref missing, ref missing);
 
                 findText = "<NameOrganization>";
-                replaceWith = "";
+                replaceWith = Client;
                 replace = 2;
 
                 app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
@@ -402,7 +416,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
 
                 string Registration, INN, SeriesPassport, NumberPassport, WhoIssuedPassport, DateIssuedPassport, Gender;
 
-
                 thisCommand = ThisConnection.CreateCommand();
                 thisCommand.CommandText = "select * from natural_person where id_natural_person = " + DataStaticRental.IDClient;
                 thisReader = thisCommand.ExecuteReader();
@@ -417,7 +430,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
                 Gender = thisReader["gender"].ToString();
 
                 thisReader.Close();
-
 
                 #endregion
                 
@@ -612,11 +624,9 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
                 command.Parameters.AddWithValue("@cost", Cost);
                 command.ExecuteNonQuery();
 
-                int IdRental;
-
-                SqlCommand thisCommand = ThisConnection.CreateCommand();
+                thisCommand = ThisConnection.CreateCommand();
                 thisCommand.CommandText = "select Max(id_rental) as id_rental from rental";
-                SqlDataReader thisReader = thisCommand.ExecuteReader();
+                thisReader = thisCommand.ExecuteReader();
                 thisReader.Read();
 
                 IdRental = Convert.ToInt32(thisReader["id_rental"].ToString());
@@ -630,6 +640,19 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
                 command.Parameters.AddWithValue("@id_legal_entity", DataStaticRental.IDClient);
                 command.ExecuteNonQuery();
 
+                if (AdditionalRateRentalDelivery.Rows.Count >= 1)
+                {
+                    for (int i = 1; i <= AdditionalRateRentalDelivery.Rows.Count; i++)
+                    {
+                        var command2 = ThisConnection.CreateCommand();
+                        command2.CommandType = CommandType.StoredProcedure;
+                        command2.CommandText = "Add_additional_services_rental";
+                        command2.Parameters.AddWithValue("@id_additional_services", Convert.ToInt32(AdditionalRateRentalDelivery.Rows[i - 1]["ID"]));
+                        command2.Parameters.AddWithValue("@id_rental", IdRental);
+                        command2.ExecuteNonQuery();
+                    }
+                }
+
                 #endregion
 
                 #region Экспорт в Word
@@ -641,7 +664,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
                 Microsoft.Office.Interop.Word.Document doc = null;
 
                 object fileName = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName)
-             + "//Resources/Document/RentalContract.doc";
+             + "//Resources/Document/RentalContract1.doc";
                 object falseValue = false;
                 object trueValue = true;
                 object missing = Type.Missing;
@@ -711,7 +734,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
                 ref replace, ref missing, ref missing, ref missing, ref missing);
 
                 findText = "<FIO>";
-                replaceWith = Client;
+                replaceWith = DataStaticRental.FIORepresentativesOrganization;
                 replace = 2;
 
                 app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
@@ -719,7 +742,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
                 ref replace, ref missing, ref missing, ref missing, ref missing);
 
                 findText = "<NameOrganization>";
-                replaceWith = "";
+                replaceWith = Client;
                 replace = 2;
 
                 app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
@@ -749,34 +772,35 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
 
                 thisReader.Close();
 
-                string Registration, INN, SeriesPassport, NumberPassport, WhoIssuedPassport, DateIssuedPassport, Gender;
-
+                string LegalAddress, INN, KPP, PaymentAccount, BIK;
 
                 thisCommand = ThisConnection.CreateCommand();
-                thisCommand.CommandText = "select * from natural_person where id_natural_person = " + DataStaticRental.IDClient;
+                thisCommand.CommandText = "select * from legal_entity where id_legal_entity = " + DataStaticRental.IDClient;
                 thisReader = thisCommand.ExecuteReader();
                 thisReader.Read();
 
+                LegalAddress = thisReader["legal_address"].ToString();
                 INN = thisReader["INN"].ToString();
-                Registration = thisReader["registration"].ToString();
-                SeriesPassport = thisReader["series_passport"].ToString();
-                NumberPassport = thisReader["number_passport"].ToString();
-                WhoIssuedPassport = thisReader["who_issued_passport"].ToString();
-                DateIssuedPassport = thisReader["date_issued_passport"].ToString();
-                Gender = thisReader["gender"].ToString();
+                KPP = thisReader["KPP"].ToString();
+                PaymentAccount = thisReader["payment_account"].ToString();
+                BIK = thisReader["BIK"].ToString();
 
                 thisReader.Close();
 
-
                 #endregion
 
-                if (Gender == "Мужской")
+                string Gender;
+                string s1 = Client;
+                string ch = "ИП ";
+                int indexOfChar = s1.IndexOf(ch); // равно 4
+
+                if (indexOfChar >= 0)
                 {
                     Gender = "именуемый";
                 }
                 else
                 {
-                    Gender = "именуемая";
+                    Gender = "именуемое";
                 }
 
                 findText = "<Declination>";
@@ -788,7 +812,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
                 ref replace, ref missing, ref missing, ref missing, ref missing);
 
                 findText = "<Post>";
-                replaceWith = "";
+                replaceWith = DataStaticRental.PostRepresentativesOrganization;
                 replace = 2;
 
                 app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
@@ -796,7 +820,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
                 ref replace, ref missing, ref missing, ref missing, ref missing);
 
                 findText = "<ClientInfo>";
-                replaceWith = Client + ", адрес прописки: " + Registration + ", ИНН " + INN + ", Серия/Номер паспорта " + SeriesPassport + "/" + NumberPassport + ", Дата выдачи: " + DateIssuedPassport + ", Кем выдан: " + WhoIssuedPassport;
+                replaceWith = Client + ", адрес: " + LegalAddress + ", ИНН/КПП " + INN + "/" + KPP + ", р/с " + PaymentAccount + ", БИК: " + BIK;
                 replace = 2;
 
                 app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
@@ -949,6 +973,8 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
                 #endregion
 
             }
+
+            
 
             ThisConnection.Close();
 

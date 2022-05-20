@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Partner.Views.Windows.InformativeWindows
+namespace Partner.Views.Windows.MainWindowInteraction.Rental.AddRental
 {
     /// <summary>
-    /// Логика взаимодействия для StartingInformationWindow.xaml
+    /// Логика взаимодействия для EditRentalWindow.xaml
     /// </summary>
-    public partial class StartingInformationWindow : Window
+    public partial class EditRentalWindow : Window
     {
-        public StartingInformationWindow()
+        public EditRentalWindow()
         {
             InitializeComponent();
         }

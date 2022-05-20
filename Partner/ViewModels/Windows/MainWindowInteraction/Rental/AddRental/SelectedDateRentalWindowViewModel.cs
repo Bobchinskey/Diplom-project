@@ -70,7 +70,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
                 SqlConnection ThisConnection = new SqlConnection(connectionString);
                 ThisConnection.Open();
                 SqlCommand thisCommand = ThisConnection.CreateCommand();
-                thisCommand.CommandText = "(Select vehicle.id_vehicle, rental.start_date_rental,rental.end_date_rental from contract_natural_person, rental,natural_person,vehicle where rental.id_rental = contract_natural_person.id_rental and contract_natural_person.id_natural_person=natural_person.id_natural_person and vehicle.id_vehicle = rental.id_vehicle and vehicle.id_vehicle = '" + VehicleDataModel.id_vehicle + "') Union ((Select vehicle.id_vehicle, booking_natural_person.start_date_booking, booking_natural_person.end_date_booking from booking_natural_person, natural_person, vehicle where booking_natural_person.id_natural_person = natural_person.id_natural_person and vehicle.id_vehicle = booking_natural_person.id_vehicle and booking_natural_person.reality != 'Отменено' and booking_natural_person.reality != 'Закрыта' and vehicle.id_vehicle = '" + VehicleDataModel.id_vehicle + "') Union (Select vehicle.id_vehicle, booking_legal_entity.start_date_booking, booking_legal_entity.end_date_booking from booking_legal_entity, legal_entity, vehicle where booking_legal_entity.id_legal_entity = legal_entity.id_legal_entity and vehicle.id_vehicle = booking_legal_entity.id_vehicle and booking_legal_entity.reality != 'Отменено' and booking_legal_entity.reality != 'Закрыта' and vehicle.id_vehicle='" + VehicleDataModel.id_vehicle + "'))";
+                thisCommand.CommandText = "(Select vehicle.id_vehicle, rental.start_date_rental,rental.end_date_rental from rental,natural_person,vehicle where vehicle.id_vehicle = rental.id_vehicle and vehicle.id_vehicle = '" + VehicleDataModel.id_vehicle + "') Union ((Select vehicle.id_vehicle, booking_natural_person.start_date_booking, booking_natural_person.end_date_booking from booking_natural_person, natural_person, vehicle where booking_natural_person.id_natural_person = natural_person.id_natural_person and vehicle.id_vehicle = booking_natural_person.id_vehicle and booking_natural_person.reality != 'Отменено' and booking_natural_person.reality != 'Закрыта' and vehicle.id_vehicle = '" + VehicleDataModel.id_vehicle + "') Union (Select vehicle.id_vehicle, booking_legal_entity.start_date_booking, booking_legal_entity.end_date_booking from booking_legal_entity, legal_entity, vehicle where booking_legal_entity.id_legal_entity = legal_entity.id_legal_entity and vehicle.id_vehicle = booking_legal_entity.id_vehicle and booking_legal_entity.reality != 'Отменено' and booking_legal_entity.reality != 'Закрыта' and vehicle.id_vehicle='" + VehicleDataModel.id_vehicle + "'))";
                 SqlDataReader thisReader = thisCommand.ExecuteReader();
                 dt.Load(thisReader);
                 ThisConnection.Close();
@@ -115,8 +115,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
         }
 
         #endregion
-
-
 
         #endregion
 

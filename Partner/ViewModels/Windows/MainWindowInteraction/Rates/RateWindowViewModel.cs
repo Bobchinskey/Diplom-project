@@ -49,7 +49,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rates
 
         #region Команды
 
-        #region Команда обновления окна
+        #region Команда обновления окна : RepeatRateWindowCommand
 
         public ICommand RepeatRateWindowCommand { get; }
 
@@ -77,7 +77,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rates
 
         #endregion
 
-        #region Команда вызывающая окно "Редактирование тарифа"
+        #region Команда вызывающая окно "Редактирование тарифа" : OpenEditRateWindowCommand
 
         public ICommand OpenEditRateWindowCommand { get; }
 
@@ -103,20 +103,139 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rates
 
         #endregion
 
+        #region Команда экспорт в Excel автомобилей : ExcelCommand
+
+        public ICommand ExcelCommand { get; }
+
+        private bool CanExcelCommandExecute(object p) => true;
+
+        private void OnExcelCommandExecuted(object p)
+        {
+            System.Data.DataTable ExcelDataTable = new System.Data.DataTable("ExcelDataTable");
+            DataColumn column;
+            DataRow row;
+
+            #region Создание колонок: ExcelDataTable
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "№";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Автомобиль";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "1-3 дня, сутки";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "4-9 дня, сутки";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "10-29 дней, сутки";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "от 30 дней, сутки";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Залог";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Стоимость перепробега 1 км";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            #endregion
+
+            #region Заполнение ExcelDataTable
+
+            for (int i = 0; i < MainListRate.Count; i++)
+            {
+                row = ExcelDataTable.NewRow();
+                row["№"] = MainListRate[i].num;
+                row["Автомобиль"] = MainListRate[i].make_model;
+                row["1-3 дня, сутки"] = MainListRate[i].Rate1_3;
+                row["4-9 дня, сутки"] = MainListRate[i].Rate4_9;
+                row["10-29 дней, сутки"] = MainListRate[i].Rate10_29;
+                row["от 30 дней, сутки"] = MainListRate[i].Rate30;
+                row["Залог"] = MainListRate[i].Deposit;
+                row["Стоимость перепробега 1 км"] = MainListRate[i].excess_mileage;
+                ExcelDataTable.Rows.Add(row);
+            }
+
+            #endregion
+
+            Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+            excel.Visible = true;
+            Microsoft.Office.Interop.Excel.Workbook workbook = excel.Workbooks.Add(System.Reflection.Missing.Value);
+            Microsoft.Office.Interop.Excel.Worksheet sheet1 = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Sheets[1];
+            for (int j = 0; j < ExcelDataTable.Columns.Count; j++)
+            {
+                Microsoft.Office.Interop.Excel.Range myRange =
+                    (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[1, j + 1];
+                sheet1.Cells[1, j + 1].font.bold = true;
+                myRange.Value2 = ExcelDataTable.Columns[j].ColumnName;
+            }
+            for (int i = 0; i < ExcelDataTable.Columns.Count; i++)
+            {
+                for (int j = 0; j < ExcelDataTable.Rows.Count; j++)
+                {
+                    string b = Convert.ToString(ExcelDataTable.Rows[j][i]);
+                    Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[j + 2, i + 1];
+                    if (b != null)
+                        myRange.Value2 = b;
+                }
+                sheet1.Columns.AutoFit();
+            }
+        }
+
+        #endregion
+
         #endregion
 
         /*------------------------------------------------------------------------------------------------*/
 
         public RateWindowViewModel()
         {
-
             #region Команды
 
             OpenEditRateWindowCommand = new LamdaCommand(OnOpenEditRateWindowCommandExecuted, CanOpenEditRateWindowCommandExecute);
 
             RepeatRateWindowCommand = new LamdaCommand(OnRepeatRateWindowCommandExecuted, CanRepeatRateWindowCommandExecute);
 
+            ExcelCommand = new LamdaCommand(OnExcelCommandExecuted, CanExcelCommandExecute);
+
             #endregion
+
+            #region Данные
 
             DataTable dt = new DataTable();
 
@@ -134,6 +253,8 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rates
             {
                 MainListRate[i].num = i + 1;
             }
+
+            #endregion
         }
     }
 }

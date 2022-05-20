@@ -59,7 +59,7 @@
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button Style="{StaticResource ButtonStroge}" Command="{Binding OpenEditVehicleWindowCommand}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
+            <Button Style="{StaticResource ButtonStroge}" Command="{Binding OpenEditDateRentalWindowCommand}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
                 <Button.Content>
                     <Grid>
                         <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="30" Foreground="Black"/>

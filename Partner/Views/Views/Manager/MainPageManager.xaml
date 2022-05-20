@@ -24,7 +24,6 @@
             <Menu Background="White" DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="16">
                 <MenuItem Header="Программа" VerticalAlignment="Center">
                     <MenuItem Header="Обновить..." Command="{Binding UpdatePageCommand}" FontSize="14"/>
-                    <MenuItem Header="Новости..." Command="{Binding OpenNewsPageCommand}" FontSize="14"/>
                     <MenuItem Header="Войти как..." Command="{Binding ChangeUserCommand}" FontSize="14"/>
                     <Separator/>
                     <MenuItem Header="Выход" Command="{StaticResource CloseApplicationCommand}" FontSize="14"/>
@@ -32,6 +31,7 @@
                 <MenuItem Header="Списки">
                     <MenuItem Header="Клиенты..." Command="{Binding OpenListClientWindowCommand}" FontSize="14"/>
                     <MenuItem Header="Аренды..." Command="{Binding OpenRentalWindowCommand}" FontSize="14"/>
+                    <MenuItem Header="Брони..." Command="{Binding}" FontSize="14"/>
                     <Separator/>
                     <MenuItem Header="Автомобили..." Command="{Binding OpenListVehicleWindowCommand}" FontSize="14"/>
                     <MenuItem Header="Страхование..." Command="{Binding OpenInsurancesInformationWindowCommand}" FontSize="14"/>

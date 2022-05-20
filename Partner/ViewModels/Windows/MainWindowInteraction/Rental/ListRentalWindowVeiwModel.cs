@@ -1,4 +1,5 @@
 ﻿using Partner.Infrastructure.Commands;
+using Partner.Models.Rental;
 using Partner.Models.Vehicle;
 using Partner.ViewModels.Base;
 using Partner.Views.Windows.MainWindowInteraction.Rental;
@@ -176,7 +177,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental
 
         #endregion
 
-        #region Команда Добавления аренды
+        #region Команда Добавления аренды : OpenSelectedDateRentalWindowCommand
 
         public ICommand OpenSelectedDateRentalWindowCommand { get; }
 
@@ -186,6 +187,47 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental
         {
             SelectedDateRentalWindow selectedDateRentalWindow = new SelectedDateRentalWindow();
             selectedDateRentalWindow.Show();
+
+            foreach (System.Windows.Window window in System.Windows.Application.Current.Windows)
+            {
+                if (window.DataContext == this)
+                {
+                    window.Close();
+                }
+            }
+        }
+
+        #endregion
+
+        #region Команда Редактирования аренды : OpenEditDateRentalWindowCommand
+
+        public ICommand OpenEditDateRentalWindowCommand { get; }
+
+        private bool CanOpenEditDateRentalWindowCommandExecute(object p)
+        {
+            if ((SelectedRental > -1) && (SelectedRentalProperty != "Завершенные"))
+                return true;
+            else
+                return false;
+        }
+
+        private void OnOpenEditDateRentalWindowCommandExecuted(object p)
+        {
+            DataStaticRental.IDClient = Convert.ToInt32(MainListRentalDelivery.Rows[SelectedRental][2]);
+            DataStaticRental.IDContract = Convert.ToInt32(MainListRentalDelivery.Rows[SelectedRental][0]);
+            DataStaticRental.Type = Convert.ToString(MainListRentalDelivery.Rows[SelectedRental][7]);
+
+            if (Convert.ToString(MainListRentalDelivery.Rows[SelectedRental][6]) == "В ожидание начала срока аренды")
+            {
+                DataStaticRental.Title = Convert.ToString(MainListRentalDelivery.Rows[SelectedRental][6]);
+            }
+            else if (Convert.ToString(MainListRentalDelivery.Rows[SelectedRental][6]) == "В аренде")
+            {
+                DataStaticRental.Title = Convert.ToString(MainListRentalDelivery.Rows[SelectedRental][6]);
+            }
+
+            EditRentalWindow editRentalWindow = new EditRentalWindow();
+            editRentalWindow.Show();
 
             foreach (System.Windows.Window window in System.Windows.Application.Current.Windows)
             {
@@ -212,6 +254,8 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental
 
             OpenSelectedDateRentalWindowCommand = new LamdaCommand(OnOpenSelectedDateRentalWindowCommandExecuted, CanOpenSelectedDateRentalWindowCommandExecute);
 
+            OpenEditDateRentalWindowCommand = new LamdaCommand(OnOpenEditDateRentalWindowCommandExecuted, CanOpenEditDateRentalWindowCommandExecute);
+
             #endregion
 
             #region Данные
@@ -222,7 +266,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental
             SqlConnection ThisConnection = new SqlConnection(connectionString);
             ThisConnection.Open();
             SqlCommand thisCommand = ThisConnection.CreateCommand();
-            thisCommand.CommandText = "(Select id_contract,vehicle.id_vehicle,contract_natural_person.id_natural_person,natural_person.surname + ' '  + natural_person.name + ' ' + natural_person.patronymic as name,rental.start_date_rental,rental.end_date_rental,rental.condition,'Физическое лицо' as type from contract_natural_person, rental,natural_person,vehicle where rental.id_rental = contract_natural_person.id_rental and contract_natural_person.id_natural_person=natural_person.id_natural_person and vehicle.id_vehicle = rental.id_vehicle and rental.id_vehicle = '" + VehicleDataModel.id_vehicle + "') Union (Select id_contract, vehicle.id_vehicle, contract_legal_entity.id_legal_entity, legal_entity.name_organization as name, rental.start_date_rental, rental.end_date_rental, rental.condition, 'Юридическое лицо' as type from contract_legal_entity, rental, legal_entity, vehicle where rental.id_rental = contract_legal_entity.id_rental and contract_legal_entity.id_legal_entity = legal_entity.id_legal_entity and vehicle.id_vehicle = rental.id_vehicle and rental.id_vehicle = '" + VehicleDataModel.id_vehicle + "') ORDER BY name";
+            thisCommand.CommandText = "(Select id_contract,vehicle.id_vehicle,contract_natural_person.id_natural_person,natural_person.surname + ' '  + natural_person.name + ' ' + natural_person.patronymic as name,rental.start_date_rental,rental.end_date_rental,rental.condition,'Физическое лицо' as type from contract_natural_person, rental,natural_person,vehicle where rental.id_rental = contract_natural_person.id_rental and contract_natural_person.id_natural_person=natural_person.id_natural_person and vehicle.id_vehicle = rental.id_vehicle and rental.id_vehicle = '" + VehicleDataModel.id_vehicle + "' and rental.condition!='Завершенна') Union (Select id_contract, vehicle.id_vehicle, contract_legal_entity.id_legal_entity, legal_entity.name_organization as name, rental.start_date_rental, rental.end_date_rental, rental.condition, 'Юридическое лицо' as type from contract_legal_entity, rental, legal_entity, vehicle where rental.id_rental = contract_legal_entity.id_rental and contract_legal_entity.id_legal_entity = legal_entity.id_legal_entity and vehicle.id_vehicle = rental.id_vehicle and rental.id_vehicle = '" + VehicleDataModel.id_vehicle + "' and rental.condition!='Завершенна') ORDER BY name";
             SqlDataReader thisReader = thisCommand.ExecuteReader();
             dt.Load(thisReader);
             ThisConnection.Close();

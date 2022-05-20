@@ -17,7 +17,116 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
-        <DataGrid FontSize="18" Grid.Column="0" ItemsSource="{Binding rentalTable}" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False"/>
+        <Grid Background="White" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="0">
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" Text="Новости"/>
+                    <Viewbox Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
+                        <ListView Grid.Column="0" ItemsSource="{Binding News}" 
+                              Margin="0,10,0,0" 
+                              HorizontalAlignment="Stretch">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Focusable" Value="false"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Stretch">
+                                        <Border BorderBrush="Black" BorderThickness="0.5" HorizontalAlignment="Stretch">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Margin="5,0" Grid.Row="0" FontSize="8" Text="{Binding date_publication,StringFormat={}{0:dd.MM.yyyy}}"
+                                               HorizontalAlignment="Left"/>
+                                                <TextBlock Grid.Row="1" FontSize="16" Text="{Binding heading}"
+                                                       TextAlignment="Center"
+                                                       HorizontalAlignment="Center"
+                                                       TextWrapping="Wrap"
+                                                       FontWeight="Bold"
+                                                       Width="250"/>
+                                                <TextBlock Grid.Row="2" FontSize="10" Text="{Binding news}" 
+                                                       TextWrapping="Wrap" 
+                                                       Width="250"
+                                                       HorizontalAlignment="Left"
+                                                       Margin="5,0,0,5"/>
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Viewbox>
+                </Grid>
+            </Border>
+            <Image Grid.Column="1" 
+               HorizontalAlignment="Center" VerticalAlignment="Center"
+               Source="/Resources/Pictures/MainPicture.jpg"
+               Width="auto" Height="auto"
+               Margin="20"/>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="2">
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" Text="Важная информация"/>
+                    <Viewbox Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
+                        <ListView Grid.Column="0" ItemsSource="{Binding ImportantInformation}" 
+                              Margin="0,10,0,0" 
+                              HorizontalAlignment="Stretch">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Focusable" Value="false"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Stretch">
+                                        <Border BorderBrush="Black" BorderThickness="0.5" HorizontalAlignment="Stretch">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Margin="5,0" Grid.Row="0" FontSize="8" Text="{Binding date_publication,StringFormat={}{0:dd.MM.yyyy}}"
+                                               HorizontalAlignment="Left"/>
+                                                <TextBlock Grid.Row="1" FontSize="16" Text="{Binding heading}"
+                                                       TextAlignment="Center"
+                                                       HorizontalAlignment="Center"
+                                                       TextWrapping="Wrap"
+                                                       FontWeight="Bold"
+                                                       Width="250"/>
+                                                <TextBlock Grid.Row="2" FontSize="10" Text="{Binding important_information}" 
+                                                        TextWrapping="Wrap" 
+                                                        Width="250"
+                                                        HorizontalAlignment="Left"
+                                                        Margin="5,0,0,5"/>
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Viewbox>
+                </Grid>
+            </Border>
+        </Grid>
         <Border Grid.Column="1" BorderBrush="Black" BorderThickness="3">
             <Grid Background="BlueViolet">
                 <Grid.RowDefinitions>
@@ -25,21 +134,35 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0" Width="200" >
-                    <Button Margin="0,15" Style="{StaticResource ButtonStroge}" Background="White" HorizontalAlignment="Center" Width="180" Height="35">
+                    <Button Command="{Binding OpenAddVehicleWindowCommand}" Margin="0,15" Style="{StaticResource ButtonStroge}" Background="White" HorizontalAlignment="Center" Width="180" Height="35">
                         <Button.Content>
                             <WrapPanel HorizontalAlignment="Stretch" Width="170">
                                 <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
-                                <TextBlock Margin="10,0,0,0" FontSize="16" Text="Новая аренда..." HorizontalAlignment="Right"/>
+                                <TextBlock Margin="10,0,0,0" FontSize="16" Text="Новое транспорт..." HorizontalAlignment="Right"/>
                             </WrapPanel>
                         </Button.Content>
+                        <Button.ToolTip>
+                            <TextBlock Text="Новые транспортное средство"/>
+                        </Button.ToolTip>
                     </Button>
                     <Button Margin="0,15" Style="{StaticResource ButtonStroge}" Background="White" HorizontalAlignment="Center" Width="180" Height="35">
                         <Button.Content>
-                            <WrapPanel HorizontalAlignment="Stretch" Width="170">
-                                <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
-                                <TextBlock Margin="10,0,0,0" FontSize="16" Text="Новая бронь..." HorizontalAlignment="Right"/>
-                            </WrapPanel>
+                            <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Menu Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <MenuItem HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <MenuItem.Header>
+                                            <WrapPanel HorizontalAlignment="Stretch" Width="170">
+                                                <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
+                                                <TextBlock Margin="10,0,0,0" FontSize="16" Text="Новый клиент..." HorizontalAlignment="Right"/>
+                                            </WrapPanel>
+                                        </MenuItem.Header>
+                                        <MenuItem Header="Физическое лицо" FontSize="12" Command="{Binding OpenAddClientWindowCommand}"/>
+                                        <MenuItem Header="Юридическое лицо" FontSize="12" Command="{Binding OpenAddLegalEntityWindowCommand}"/>
+                                    </MenuItem>
+                                </Menu>
+                            </Grid>
                         </Button.Content>
+                        
                     </Button>
                     <Button Command="{Binding OpeMaintenanceWindowCommand}" Margin="0,15" Style="{StaticResource ButtonStroge}" Background="White" HorizontalAlignment="Center" Width="180" Height="35">
                         <Button.Content>
@@ -52,7 +175,7 @@
                             <TextBlock Text="Техническое обслуживание"/>
                         </Button.ToolTip>
                     </Button>
-                    <Button Margin="0,40,0,15" Style="{StaticResource ButtonStroge}" Background="White" HorizontalAlignment="Center" Width="180" Height="35">
+                    <Button Command="{Binding OpeListRentalWindowCommand}" Margin="0,40,0,15" Style="{StaticResource ButtonStroge}" Background="White" HorizontalAlignment="Center" Width="180" Height="35">
                         <Button.Content>
                             <WrapPanel HorizontalAlignment="Stretch" Width="170">
                                 <fa:ImageAwesome Icon="List" HorizontalAlignment="Left" Height="18" Foreground="Black"/>
@@ -68,11 +191,11 @@
                             </WrapPanel>
                         </Button.Content>
                     </Button>
-                    <Button Margin="0,15" Style="{StaticResource ButtonStroge}" Background="White" HorizontalAlignment="Center" Width="180" Height="35">
+                    <Button Command="{Binding OpenListRateWindowCommand}" Margin="0,15" Style="{StaticResource ButtonStroge}" Background="White" HorizontalAlignment="Center" Width="180" Height="35">
                         <Button.Content>
                             <WrapPanel HorizontalAlignment="Stretch" Width="170">
                                 <fa:ImageAwesome Icon="List" HorizontalAlignment="Left" Height="18" Foreground="Black"/>
-                                <TextBlock Margin="10,0,0,0" FontSize="16" Text="Список штрафов..." HorizontalAlignment="Right"/>
+                                <TextBlock Margin="10,0,0,0" FontSize="16" Text="Список тарифов..." HorizontalAlignment="Right"/>
                             </WrapPanel>
                         </Button.Content>
                     </Button>

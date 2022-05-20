@@ -1,4 +1,6 @@
-﻿using Partner.Infrastructure.Commands;
+﻿using Microsoft.Office.Interop.Excel;
+using Partner.Data;
+using Partner.Infrastructure.Commands;
 using Partner.Models.Vehicle;
 using Partner.ViewModels.Base;
 using Partner.Views.Windows.MainWindowInteraction.VehicleWindow;
@@ -8,6 +10,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,7 +20,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
 {
     class ListVehicleWindowViewModel : ViewModelBase
     {
-
         #region Данные
 
         #region List данных автомобилей : MainListVehicle
@@ -71,7 +73,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
 
         #endregion
 
-
         #region Массив данных фильтрующих элементов : status
 
         private string[] _status = { "В автопарке", "Архив", "Все" };
@@ -92,7 +93,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
 
         #region Команды
 
-        #region Команда фильтрации автомобилей по их статусу
+        #region Команда фильтрации автомобилей по их статусу : FilterVehicleStatusCommand
 
         public ICommand FilterVehicleStatusCommand { get; }
 
@@ -104,7 +105,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
             {
                 VisibleRecoverButton = "Hidden";
 
-                DataTable dt = new DataTable();
+                System.Data.DataTable dt = new System.Data.DataTable();
 
                 string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
                 SqlConnection ThisConnection = new SqlConnection(connectionString);
@@ -125,7 +126,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
             {
                 VisibleRecoverButton = "Visible";
 
-                DataTable dt = new DataTable();
+                System.Data.DataTable dt = new System.Data.DataTable();
 
                 string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
                 SqlConnection ThisConnection = new SqlConnection(connectionString);
@@ -146,7 +147,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
             {
                 VisibleRecoverButton = "Hidden";
 
-                DataTable dt = new DataTable();
+                System.Data.DataTable dt = new System.Data.DataTable();
 
                 string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
                 SqlConnection ThisConnection = new SqlConnection(connectionString);
@@ -167,7 +168,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
 
         #endregion
 
-        #region Команда вызывающая окно "Добавить автомобиль"
+        #region Команда вызывающая окно "Добавить автомобиль" : OpenAddVehicleWindowCommand
 
         public ICommand OpenAddVehicleWindowCommand { get; }
 
@@ -175,7 +176,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
 
         private void OnOpenAddVehicleWindowCommandExecuted(object p)
         {
-
             VehicleDataModel.MakeModel = "";
             VehicleDataModel.VIN = "";
             VehicleDataModel.StateNumber = "";
@@ -202,8 +202,8 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
             VehicleDataModel.WhoIssuedSTS = "";
             VehicleDataModel.Image = null;
             VehicleDataModel.EditOrAdd = "Добавить автомобиль";
-            AddVehicleWindow addVehicleWindow = new AddVehicleWindow();
 
+            AddVehicleWindow addVehicleWindow = new AddVehicleWindow();
             addVehicleWindow.ShowDialog();
 
             FilterVehicleStatusCommand.Execute(null);
@@ -211,7 +211,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
 
         #endregion
 
-        #region Команда вызывающая окно "Редактировать автомобиль"
+        #region Команда вызывающая окно "Редактировать автомобиль" : OpenEditVehicleWindowCommand
 
         public ICommand OpenEditVehicleWindowCommand { get; }
 
@@ -258,7 +258,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
 
         #endregion
 
-        #region Команда удаления автомобиля
+        #region Команда удаления автомобиля : DropVehicleCommand
         public ICommand DropVehicleCommand { get; }
 
         private bool CanDropVehicleCommandExecute(object p) => SelectedVehicle >= 0;
@@ -288,7 +288,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
 
         #endregion
 
-        #region Команда востановление удаленного автомобиля
+        #region Команда востановление удаленного автомобиля : RepeatVehicleCommand
         public ICommand RepeatVehicleCommand { get; }
 
         private bool CanRepeatVehicleCommandExecute(object p) => SelectedVehicle >= 0;
@@ -314,13 +314,95 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
 
         #endregion
 
+        #region Команда экспорт в Excel автомобилей : ExcelCommand
+        public ICommand ExcelCommand { get; }
+
+        private bool CanExcelCommandExecute(object p) => true;
+
+        private void OnExcelCommandExecuted(object p)
+        {
+            System.Data.DataTable ExcelDataTable = new System.Data.DataTable("ExcelDataTable");
+            DataColumn column;
+            DataRow row;
+
+            #region Создание колонок: ExcelDataTable
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Наименование";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Гос. Номер";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Категория";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Статус";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            #endregion
+
+            #region Заполнение ExcelDataTable
+
+            for (int i = 0; i < MainListVehicle.Count; i++)
+            {
+                row = ExcelDataTable.NewRow();
+                row["Наименование"] = MainListVehicle[i].MakeModel;
+                row["Гос. Номер"] = MainListVehicle[i].StateNumber;
+                row["Категория"] = MainListVehicle[i].SelectCategory;
+                row["Статус"] = MainListVehicle[i].Status;
+                ExcelDataTable.Rows.Add(row);
+            }
+
+            #endregion
+
+            Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+            excel.Visible = true;
+            Microsoft.Office.Interop.Excel.Workbook workbook = excel.Workbooks.Add(System.Reflection.Missing.Value);
+            Microsoft.Office.Interop.Excel.Worksheet sheet1 = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Sheets[1];
+            for (int j = 0; j < ExcelDataTable.Columns.Count; j++)
+            {
+                Microsoft.Office.Interop.Excel.Range myRange =
+                    (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[1, j + 1];
+                sheet1.Cells[1, j + 1].font.bold = true;
+                myRange.Value2 = ExcelDataTable.Columns[j].ColumnName;
+            }
+            for (int i = 0; i < ExcelDataTable.Columns.Count; i++)
+            {
+                for (int j = 0; j < ExcelDataTable.Rows.Count; j++)
+                {
+                    string b = Convert.ToString(ExcelDataTable.Rows[j][i]);
+                    Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[j + 2, i + 1];
+                    if (b != null)
+                        myRange.Value2 = b;
+                }
+                sheet1.Columns.AutoFit();
+            }
+        }
+
+        #endregion
+
         #endregion
 
         /*------------------------------------------------------------------------------------------------*/
 
         public ListVehicleWindowViewModel()
         {
-
             #region Команды
 
             FilterVehicleStatusCommand = new LamdaCommand(OnFilterVehicleStatusCommandExecuted, CanFilterVehicleStatusCommandExecute);
@@ -333,9 +415,13 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
 
             RepeatVehicleCommand = new LamdaCommand(OnRepeatVehicleCommandExecuted, CanRepeatVehicleCommandExecute);
 
+            ExcelCommand = new LamdaCommand(OnExcelCommandExecuted, CanExcelCommandExecute);
+
             #endregion
 
-            DataTable dt = new DataTable();
+            #region Данные
+
+            System.Data.DataTable dt = new System.Data.DataTable();
 
             string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
             SqlConnection ThisConnection = new SqlConnection(connectionString);
@@ -351,6 +437,8 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
             {
                 MainListVehicle[i].num = i + 1;
             }
+
+            #endregion
         }
     }
 }

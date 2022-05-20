@@ -61,11 +61,22 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
 
         private void OnOpenAddRentalWindowCommandExecute(object p)
         {
-            
-            DataStaticRental.IDRepresentativesOrganization = ListRepresentativesOrganization[SelectRepresentativesOrganizations].id_representatives_organizations;
+            if (DataStaticRental.Edit == "Выбор представителя для подписания акта выдачи")
+            {
+                DataStaticRental.Edit = "Прошло успешно";
+                DataStaticRental.IDRepresentativesOrganization = ListRepresentativesOrganization[SelectRepresentativesOrganizations].id_representatives_organizations;
+                DataStaticRental.FIORepresentativesOrganization = ListRepresentativesOrganization[SelectRepresentativesOrganizations].FIO;
+                DataStaticRental.PostRepresentativesOrganization = ListRepresentativesOrganization[SelectRepresentativesOrganizations].Post;
+            }
+            else
+            {
+                DataStaticRental.IDRepresentativesOrganization = ListRepresentativesOrganization[SelectRepresentativesOrganizations].id_representatives_organizations;
+                DataStaticRental.FIORepresentativesOrganization = ListRepresentativesOrganization[SelectRepresentativesOrganizations].FIO;
+                DataStaticRental.PostRepresentativesOrganization = ListRepresentativesOrganization[SelectRepresentativesOrganizations].Post;
 
-            AddRentalWindow addRentalWindow = new AddRentalWindow();
-            addRentalWindow.Show();
+                AddRentalWindow addRentalWindow = new AddRentalWindow();
+                addRentalWindow.Show();
+            }
             
             foreach (System.Windows.Window window in System.Windows.Application.Current.Windows)
             {
@@ -180,11 +191,12 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
             SqlConnection ThisConnection2 = new SqlConnection(connectionString2);
             ThisConnection2.Open();
             SqlCommand thisCommand2 = ThisConnection2.CreateCommand();
-            thisCommand2.CommandText = "Select * from [representatives_organizations] where [id_legal_entity]=" + DataStaticRental.IDClient;
+            thisCommand2.CommandText = "(Select id_representatives_organizations,surname,name,patronymic,post,phone_number from [representatives_organizations] where  [representatives_organizations].[id_legal_entity] = " + DataStaticRental.IDClient + ") UNION (Select - 1, surname_director, name_director, patronymic_director, 'Директор' as post, phone_number from legal_entity where [id_legal_entity] = " + DataStaticRental.IDClient + ")";
             SqlDataReader thisReader2 = thisCommand2.ExecuteReader();
             dt2.Load(thisReader2);
-            ListRepresentativesOrganization = dt2.AsEnumerable().Select(se => new ListRepresentativesOrganizationsData() { id_representatives_organizations = se.Field<int>("id_representatives_organizations"), Surname = se.Field<string>("surname"), Name = se.Field<string>("name"), Patronymic = se.Field<string>("patronymic"), Post = se.Field<string>("post"), Gender = se.Field<string>("gender"), SeriesPassport = se.Field<string>("series_passport"), NumberPassport = se.Field<string>("number_passport"), PhoneNumber = se.Field<string>("phone_number") }).ToList();
+            ListRepresentativesOrganization = dt2.AsEnumerable().Select(se => new ListRepresentativesOrganizationsData() { id_representatives_organizations = se.Field<int>("id_representatives_organizations"), Surname = se.Field<string>("surname"), Name = se.Field<string>("name"), Patronymic = se.Field<string>("patronymic"), Post = se.Field<string>("post"),PhoneNumber = se.Field<string>("phone_number") }).ToList();
             ThisConnection2.Close();
+
             for (int i = 0; ListRepresentativesOrganization.Count > i; i++)
             {
                 ListRepresentativesOrganization[i].num = i + 1;

@@ -90,7 +90,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
         #region Команды
 
-        #region Команда фильтрации клиентов по их статусу
+        #region Команда фильтрации клиентов по их статусу : FilterClientStatusCommand
 
         public ICommand FilterClientStatusCommand { get; }
 
@@ -207,7 +207,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
         #endregion
 
-        #region Команда удаления клиента
+        #region Команда удаления клиента : DropClientCommand
         public ICommand DropClientCommand { get; }
 
         private bool CanDropClientCommandExecute(object p)
@@ -256,7 +256,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
         #endregion
 
-        #region Команда востановления удаленной записи
+        #region Команда востановления удаленной записи : RepeatClientCommand
         public ICommand RepeatClientCommand { get; }
 
         private bool CanRepeatClientCommandExecute(object p) => SelectedClient >= 0;
@@ -300,7 +300,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
         #endregion
 
-        #region Команда вызывающая окно "Добавить клиента"
+        #region Команда вызывающая окно "Добавить клиента" : OpenAddClientWindowCommand
 
         public ICommand OpenAddClientWindowCommand { get; }
 
@@ -335,8 +335,8 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
         }
 
         #endregion
-        
-        #region Команда вызывающая окно "Добавить юридическое лицо"
+
+        #region Команда вызывающая окно "Добавить юридическое лицо" : OpenAddLegalEntityWindowCommand
 
         public ICommand OpenAddLegalEntityWindowCommand { get; }
 
@@ -353,7 +353,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
         #endregion
 
-        #region Команда вызывающая окно "Редактирование информации о клиенте"
+        #region Команда вызывающая окно "Редактирование информации о клиенте" : OpenEditClientWindowCommand
 
         public ICommand OpenEditClientWindowCommand { get; }
 
@@ -450,13 +450,95 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
         #endregion
 
+        #region Команда экспорт информации о клиентах в Excel : ExcelCommand
+        public ICommand ExcelCommand { get; }
+
+        private bool CanExcelCommandExecute(object p) => true;
+
+        private void OnExcelCommandExecuted(object p)
+        {
+            System.Data.DataTable ExcelDataTable = new System.Data.DataTable("ExcelDataTable");
+            DataColumn column;
+            DataRow row;
+
+            #region Создание колонок: ExcelDataTable
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Клиент";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Номер телефона";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Тип";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Статус";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            #endregion
+
+            #region Заполнение ExcelDataTable
+
+            for (int i = 0; i < MainListClient.Count; i++)
+            {
+                row = ExcelDataTable.NewRow();
+                row["Клиент"] = MainListClient[i].name;
+                row["Номер телефона"] = MainListClient[i].phone_number;
+                row["Тип"] = MainListClient[i].type;
+                row["Статус"] = MainListClient[i].reality;
+                ExcelDataTable.Rows.Add(row);
+            }
+
+            #endregion
+
+            Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+            excel.Visible = true;
+            Microsoft.Office.Interop.Excel.Workbook workbook = excel.Workbooks.Add(System.Reflection.Missing.Value);
+            Microsoft.Office.Interop.Excel.Worksheet sheet1 = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Sheets[1];
+            for (int j = 0; j < ExcelDataTable.Columns.Count; j++)
+            {
+                Microsoft.Office.Interop.Excel.Range myRange =
+                    (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[1, j + 1];
+                sheet1.Cells[1, j + 1].font.bold = true;
+                myRange.Value2 = ExcelDataTable.Columns[j].ColumnName;
+            }
+            for (int i = 0; i < ExcelDataTable.Columns.Count; i++)
+            {
+                for (int j = 0; j < ExcelDataTable.Rows.Count; j++)
+                {
+                    string b = Convert.ToString(ExcelDataTable.Rows[j][i]);
+                    Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[j + 2, i + 1];
+                    if (b != null)
+                        myRange.Value2 = b;
+                }
+                sheet1.Columns.AutoFit();
+            }
+        }
+
+        #endregion
+
         #endregion
 
         /*------------------------------------------------------------------------------------------------*/
 
         public ListClientWindowViewModel()
         {
-
             #region Команды
 
             FilterClientStatusCommand = new LamdaCommand(OnFilterClientStatusCommandExecuted, CanFilterClientStatusCommandExecute);
@@ -471,7 +553,11 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
 
             RepeatClientCommand = new LamdaCommand(OnRepeatClientCommandExecuted, CanRepeatClientCommandExecute);
 
+            ExcelCommand = new LamdaCommand(OnExcelCommandExecuted, CanExcelCommandExecute);
+
             #endregion
+
+            #region Данные
 
             DataTable dt = new DataTable();
 
@@ -489,6 +575,8 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
             {
                 MainListClient[i].num = i + 1;
             }
+
+            #endregion
         }
 
     }

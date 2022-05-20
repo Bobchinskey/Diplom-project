@@ -37,7 +37,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>IconMainProgram.ico</ApplicationIcon>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
@@ -71,6 +71,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\ListtoDataTableConverter.cs" />
     <Compile Include="Models\Client\ListClient.cs" />
     <Compile Include="Models\Client\ListClientProcedure.cs" />
     <Compile Include="Models\Client\ListLegalEntity.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Models\Insurances\EditOrAddInsurancesModel.cs" />
     <Compile Include="Models\Insurances\ListMainInsuranceData.cs" />
     <Compile Include="Models\Maintenances\CompletedWorks.cs" />
+    <Compile Include="Models\Maintenances\EditMaintenancesData.cs" />
     <Compile Include="Models\Rate\AdditionalServices\AddListData.cs" />
     <Compile Include="Models\Rate\AdditionalServices\MainListAdditionalServices.cs" />
     <Compile Include="Models\Rate\ListRateInformation.cs" />
@@ -99,6 +101,7 @@
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Insurances\OSAGOWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Maintenances\Additional\AddCompletedWorksCommandWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Maintenances\Additional\AddMaintenanceWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\Maintenances\Additional\EditMaintenanceWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Maintenances\ListMaintenanceWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Maintenances\SelectVehicleMaintenanceWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rates\AdditionalServices\AddAdditionalServicesViewModel.cs" />
@@ -107,6 +110,7 @@
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rates\RateWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\AddRental\AddAdditionalRatesRentalWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\AddRental\AddRentalWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\AddRental\EditRentalWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\AddRental\SelectedClientWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\AddRental\SelectedDateRentalWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\AddRental\SelectedRepresentativesOrganizationWindowViewModel.cs" />
@@ -149,6 +153,9 @@
     <Compile Include="Views\Windows\MainWindowInteraction\Maintenances\Additional\AddMaintenanceWindow.xaml.cs">
       <DependentUpon>AddMaintenanceWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\Maintenances\Additional\EditMaintenanceWindow.xaml.cs">
+      <DependentUpon>EditMaintenanceWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\Maintenances\ListMaintenanceWindow.xaml.cs">
       <DependentUpon>ListMaintenanceWindow.xaml</DependentUpon>
     </Compile>
@@ -172,6 +179,9 @@
     </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\Rental\AddRental\AddRentalWindow.xaml.cs">
       <DependentUpon>AddRentalWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\Rental\AddRental\EditRentalWindow.xaml.cs">
+      <DependentUpon>EditRentalWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\Rental\AddRental\SelectedClientWindow.xaml.cs">
       <DependentUpon>SelectedClientWindow.xaml</DependentUpon>
@@ -228,10 +238,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Windows\InformativeWindows\StartingInformationWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -253,7 +259,6 @@
     <Compile Include="ViewModels\Views\Maneger\Pages\MainPageRentalViewModel.cs" />
     <Compile Include="ViewModels\Windows\AuthorizationWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\InformativeWindows\AboutProgramViewModel.cs" />
-    <Compile Include="ViewModels\Windows\InformativeWindows\StartingInformationWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowViewModel.cs" />
     <Compile Include="Views\Views\Manager\MainPageManager.xaml.cs">
       <DependentUpon>MainPageManager.xaml</DependentUpon>
@@ -266,9 +271,6 @@
     </Compile>
     <Compile Include="Views\Windows\InformativeWindows\AboutPprogram.xaml.cs">
       <DependentUpon>AboutPprogram.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Windows\InformativeWindows\StartingInformationWindow.xaml.cs">
-      <DependentUpon>StartingInformationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -318,6 +320,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\Maintenances\Additional\EditMaintenanceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\MainWindowInteraction\Maintenances\ListMaintenanceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -347,6 +353,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Windows\MainWindowInteraction\Rental\AddRental\AddRentalWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\Rental\AddRental\EditRentalWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -410,7 +420,8 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Resources\Document\RentalContract.doc">
+    <None Include="Resources\Document\ActReceivingTransfer.doc" />
+    <None Include="Resources\Document\RentalContract1.doc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -450,6 +461,15 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>9</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
     <COMReference Include="Microsoft.Office.Interop.Word">
       <Guid>{00020905-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>8</VersionMajor>
@@ -468,6 +488,15 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IconMainProgramBlueViolet.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IconMainProgramVioletBlue.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

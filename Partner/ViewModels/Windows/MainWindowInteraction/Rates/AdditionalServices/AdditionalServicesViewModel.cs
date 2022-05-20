@@ -90,7 +90,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rates.AdditionalServi
 
         #region Команды
 
-        #region Команда фильтрации клиентов по их статусу
+        #region Команда фильтрации дополнительных услуг по их статусу : FilterAdditionalServicesStatusCommand
 
         public ICommand FilterAdditionalServicesStatusCommand { get; }
 
@@ -165,7 +165,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rates.AdditionalServi
 
         #endregion
 
-        #region Команда удаления дополнительных услуг
+        #region Команда удаления дополнительных услуг : DropAdditionalServicesCommand
         public ICommand DropAdditionalServicesCommand { get; }
 
         private bool CanDropAdditionalServicesCommandExecute(object p)
@@ -196,7 +196,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rates.AdditionalServi
 
         #endregion
 
-        #region Команда востановление дополнительных услуг
+        #region Команда востановление дополнительных услуг : RepeatAdditionalServicesCommand
         public ICommand RepeatAdditionalServicesCommand { get; }
 
         private bool CanRepeatAdditionalServicesCommandExecute(object p)
@@ -227,7 +227,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rates.AdditionalServi
 
         #endregion
 
-        #region Команда добавление дополнительных услуг
+        #region Команда добавление дополнительных услуг : AddAdditionalServicesCommand
         public ICommand AddAdditionalServicesCommand { get; }
 
         private bool CanAddAdditionalServicesCommandExecute(object p) => true;
@@ -249,7 +249,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rates.AdditionalServi
 
         #endregion Команды
 
-        #region Команда редактирование дополнительных услуг
+        #region Команда редактирование дополнительных услуг : EditAdditionalServicesCommand
         public ICommand EditAdditionalServicesCommand { get; }
 
         private bool CanEditAdditionalServicesCommandExecute(object p) => SelectedAdditionalServices > -1;
@@ -266,6 +266,98 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rates.AdditionalServi
             addAdditionalServicesWindow.ShowDialog();
 
             FilterAdditionalServicesStatusCommand.Execute(null);
+        }
+
+        #endregion
+
+        #region Команда экспорт в Excel автомобилей : ExcelCommand
+
+        public ICommand ExcelCommand { get; }
+
+        private bool CanExcelCommandExecute(object p) => true;
+
+        private void OnExcelCommandExecuted(object p)
+        {
+            System.Data.DataTable ExcelDataTable = new System.Data.DataTable("ExcelDataTable");
+            DataColumn column;
+            DataRow row;
+
+            #region Создание колонок: ExcelDataTable
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "№";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Наименование дополнительной услуги";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Тип оплаты";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Стоимость";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Статус";
+            column.ReadOnly = false;
+            column.Unique = false;
+            ExcelDataTable.Columns.Add(column);
+
+            #endregion
+
+            #region Заполнение ExcelDataTable
+
+            for (int i = 0; i < MainListAdditionalServices.Count; i++)
+            {
+                row = ExcelDataTable.NewRow();
+                row["№"] = MainListAdditionalServices[i].num;
+                row["Наименование дополнительной услуги"] = MainListAdditionalServices[i].name_additional_services;
+                row["Тип оплаты"] = MainListAdditionalServices[i].type_additional_services;
+                row["Стоимость"] = MainListAdditionalServices[i].cost_additional_services;
+                row["Статус"] = MainListAdditionalServices[i].reality;
+                ExcelDataTable.Rows.Add(row);
+            }
+
+            #endregion
+
+            Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+            excel.Visible = true;
+            Microsoft.Office.Interop.Excel.Workbook workbook = excel.Workbooks.Add(System.Reflection.Missing.Value);
+            Microsoft.Office.Interop.Excel.Worksheet sheet1 = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Sheets[1];
+            for (int j = 0; j < ExcelDataTable.Columns.Count; j++)
+            {
+                Microsoft.Office.Interop.Excel.Range myRange =
+                    (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[1, j + 1];
+                sheet1.Cells[1, j + 1].font.bold = true;
+                myRange.Value2 = ExcelDataTable.Columns[j].ColumnName;
+            }
+            for (int i = 0; i < ExcelDataTable.Columns.Count; i++)
+            {
+                for (int j = 0; j < ExcelDataTable.Rows.Count; j++)
+                {
+                    string b = Convert.ToString(ExcelDataTable.Rows[j][i]);
+                    Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[j + 2, i + 1];
+                    if (b != null)
+                        myRange.Value2 = b;
+                }
+                sheet1.Columns.AutoFit();
+            }
         }
 
         #endregion
@@ -288,7 +380,11 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rates.AdditionalServi
 
             EditAdditionalServicesCommand = new LamdaCommand(OnEditAdditionalServicesCommandExecuted, CanEditAdditionalServicesCommandExecute);
 
+            ExcelCommand = new LamdaCommand(OnExcelCommandExecuted, CanExcelCommandExecute);
+
             #endregion
+
+            #region Данные
 
             DataTable dt = new DataTable();
 
@@ -306,6 +402,8 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rates.AdditionalServi
             {
                 MainListAdditionalServices[i].num = i + 1;
             }
+
+            #endregion
         }
     }
 }

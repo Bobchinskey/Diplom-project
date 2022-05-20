@@ -19,7 +19,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Maintenances.Addition
 {
     class AddMaintenanceWindowViewModel : ViewModelBase
     {
-
         #region Данные
 
         #region Наименование технического обслуживания : NameMaintenance 
@@ -156,7 +155,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Maintenances.Addition
 
         #region Команды
 
-        #region Команда Добавления выполненных работ
+        #region Команда Добавления выполненных работ : AddCompletedWorksCommand
 
         public ICommand AddCompletedWorksCommand { get; }
 
@@ -184,7 +183,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Maintenances.Addition
 
         #endregion
 
-        #region Команда Редактирования выполненных работ
+        #region Команда Редактирования выполненных работ : EditCompletedWorksCommand
 
         public ICommand EditCompletedWorksCommand { get; }
 
@@ -210,7 +209,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Maintenances.Addition
 
         #endregion
 
-        #region Команда Удаления выполненных работ
+        #region Команда Удаления выполненных работ : DropCompletedWorksCommand
 
         public ICommand DropCompletedWorksCommand { get; }
 
@@ -225,8 +224,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Maintenances.Addition
 
         #endregion
 
-        #region Команда Добавления закупленных запчастей
-
+        #region Команда Добавления закупленных запчастей : AddDataSparePartsCommand
         public ICommand AddDataSparePartsCommand { get; }
 
         private bool CanAddDataSparePartsCommandExecute(object p) => true;
@@ -253,7 +251,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Maintenances.Addition
 
         #endregion
 
-        #region Команда Редактирования закупленных запчастей
+        #region Команда Редактирования закупленных запчастей : EditDataSparePartsCommand
 
         public ICommand EditDataSparePartsCommand { get; }
 
@@ -279,7 +277,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Maintenances.Addition
 
         #endregion
 
-        #region Команда Удаления закупленных запчастей
+        #region Команда Удаления закупленных запчастей : DropDataSparePartsCommand
 
         public ICommand DropDataSparePartsCommand { get; }
 
@@ -294,7 +292,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Maintenances.Addition
 
         #endregion
 
-        #region Команда Отображения даты окончания технического обслуживания
+        #region Команда Отображения даты окончания технического обслуживания : VisibleCommand
 
         public ICommand VisibleCommand { get; }
 
@@ -310,7 +308,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Maintenances.Addition
 
         #endregion
 
-        #region Команда Добавления Технического обслуживания
+        #region Команда Добавления Технического обслуживания : AddMaintenanceCommand
 
         public ICommand AddMaintenanceCommand { get; }
 
