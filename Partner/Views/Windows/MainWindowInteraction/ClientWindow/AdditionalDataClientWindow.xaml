@@ -32,8 +32,8 @@
                 <TextBlock Margin="10" Text="Описание:" HorizontalAlignment="Right"/>
             </StackPanel>
             <StackPanel Grid.Column="1">
-                <TextBox PreviewTextInput="NumberValidationTextBox" Text="{Binding Numberphone, UpdateSourceTrigger=PropertyChanged}" Margin="10" HorizontalAlignment="Left" MaxLength="11" Width="120"/>
-                <TextBox Text="{Binding Other}" Margin="10,10" HorizontalAlignment="Left" Width="200"/>
+                <TextBox Style="{StaticResource TextBoxStroge}" PreviewTextInput="NumberValidationTextBox" Text="{Binding Numberphone, UpdateSourceTrigger=PropertyChanged}" Margin="10" HorizontalAlignment="Left" MaxLength="11" Width="120"/>
+                <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding Other}" Margin="10,10" HorizontalAlignment="Left" Width="200"/>
             </StackPanel>
         </Grid>
         <Button Command="{Binding AddAdditionalDataCommand}" Grid.Row="2" Background="White" Margin="10" HorizontalAlignment="Right" Style="{StaticResource ButtonStroge}">

@@ -32,8 +32,8 @@
                 <TextBlock Margin="10" Text="Стоимость:" HorizontalAlignment="Right"/>
             </StackPanel>
             <StackPanel Grid.Column="1">
-                <TextBox Text="{Binding NameWork, UpdateSourceTrigger=PropertyChanged}" Margin="10" HorizontalAlignment="Left" Width="220"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox"  Text="{Binding CostWork, UpdateSourceTrigger=PropertyChanged}" Margin="10,10" HorizontalAlignment="Left" Width="220"/>
+                <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding NameWork, UpdateSourceTrigger=PropertyChanged}" Margin="10" HorizontalAlignment="Left" Width="220"/>
+                <TextBox Style="{StaticResource TextBoxStroge}" PreviewTextInput="NumberValidationTextBox"  Text="{Binding CostWork, UpdateSourceTrigger=PropertyChanged}" Margin="10,10" HorizontalAlignment="Left" Width="220"/>
             </StackPanel>
         </Grid>
         <Button Command="{Binding AddCompletedWorkCommand}" Grid.Row="2" Background="White" Margin="10" HorizontalAlignment="Right" Style="{StaticResource ButtonStroge}">

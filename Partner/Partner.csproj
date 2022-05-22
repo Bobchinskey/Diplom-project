@@ -105,6 +105,8 @@
     <Compile Include="Models\Rental\DataStaticRental.cs" />
     <Compile Include="Models\Vehicle\ListVehicle.cs" />
     <Compile Include="Models\Vehicle\VehicleDataModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\Booking\AddBooking\AddBookingWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\Booking\AddBooking\EditBookingWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Booking\ListRentalInformationWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Booking\MainListBookingWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\AddClientNaturapPersonViewModel.cs" />
@@ -137,6 +139,12 @@
     <Compile Include="ViewModels\Windows\MainWindowInteraction\VehicleWindow\AddVehicleWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\VehicleWindow\ListVehicleWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\Settings\AuthorizationWindowViewModel.cs" />
+    <Compile Include="Views\Windows\MainWindowInteraction\Booking\AddBooking\AddBookingWindow.xaml.cs">
+      <DependentUpon>AddBookingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\Booking\AddBooking\EditBookingWindow.xaml.cs">
+      <DependentUpon>EditBookingWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\Booking\ListRentalInformationWindow.xaml.cs">
       <DependentUpon>ListRentalInformationWindow.xaml</DependentUpon>
     </Compile>
@@ -241,7 +249,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\Styles\DatePickerStroge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Styles\HyperlinkButtons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\PasswordBoxStroge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\TextBoxStroge.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -299,6 +319,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Windows\MainWindowInteraction\Booking\AddBooking\AddBookingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\Booking\AddBooking\EditBookingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\MainWindowInteraction\Booking\ListRentalInformationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

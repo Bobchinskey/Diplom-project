@@ -185,6 +185,8 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental
 
         private void OnOpenSelectedDateRentalWindowCommandExecuted(object p)
         {
+            DataStaticRental.TypeActions = "Аренда"; 
+
             SelectedDateRentalWindow selectedDateRentalWindow = new SelectedDateRentalWindow();
             selectedDateRentalWindow.Show();
 

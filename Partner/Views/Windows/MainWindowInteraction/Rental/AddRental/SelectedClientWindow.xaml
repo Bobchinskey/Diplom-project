@@ -22,7 +22,7 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <WrapPanel Grid.Row="0" Grid.Column="0" Margin="10">
-            <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" FontSize="16" Width="350" Height="30"/>
+            <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" FontSize="16" Width="350" Height="30"/>
             <Button Command="{Binding ScreachCommand}" Background="White" Style="{StaticResource ButtonStroge}" Width="100">
                 <Button.Content>
                     <Grid Width="80">

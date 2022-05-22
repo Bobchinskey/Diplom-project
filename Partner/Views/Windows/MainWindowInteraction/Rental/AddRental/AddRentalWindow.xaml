@@ -33,8 +33,8 @@
                     <TextBlock Text="Транспортное средство:" Margin="10" TextAlignment="Right"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1" HorizontalAlignment="Left">
-                    <TextBox Text="{Binding Client}" Width="200" IsEnabled="False" Margin="10,0,10,10"/>
-                    <TextBox Text="{Binding Vehicle}" Width="200" IsEnabled="False" Margin="10"/>
+                    <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding Client}" Width="200" IsEnabled="False" Margin="10,0,10,10"/>
+                    <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding Vehicle}" Width="200" IsEnabled="False" Margin="10"/>
                 </StackPanel>
             </Grid>
             <Grid  Margin="10">
@@ -44,11 +44,11 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" HorizontalAlignment="Center">
                     <TextBlock Text="Дата начала аренды"/>
-                    <DatePicker SelectedDate="{Binding StartDateRental}" Margin="0,5,0,0" IsEnabled="False"/>
+                    <DatePicker Style="{StaticResource DatePickerStroge}" SelectedDate="{Binding StartDateRental}" Margin="0,5,0,0" IsEnabled="False"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1" HorizontalAlignment="Center">
                     <TextBlock Text="Дата Окончания аренды"/>
-                    <DatePicker SelectedDate="{Binding EndDateRental}" Margin="0,5,0,0" IsEnabled="False"/>
+                    <DatePicker Style="{StaticResource DatePickerStroge}" SelectedDate="{Binding EndDateRental}" Margin="0,5,0,0" IsEnabled="False"/>
                 </StackPanel>
             </Grid>
             <Grid Margin="10">
@@ -64,7 +64,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <StackPanel Grid.Column="1">
-                    <Button Margin="0,25,0,0" Command="{Binding OpenAddAdditionalRatesRentalCommand}" Background="White" Width="30" Height="30">
+                    <Button Style="{StaticResource ButtonStroge}" Margin="0,25,0,0" Command="{Binding OpenAddAdditionalRatesRentalCommand}" Background="White" Width="30" Height="30">
                         <Button.Content>
                             <Grid>
                                 <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
@@ -76,7 +76,7 @@
                             </ToolTip>
                         </Button.ToolTip>
                     </Button>
-                    <Button Command="{Binding DropAdditionalServicesCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
+                    <Button Style="{StaticResource ButtonStroge}" Command="{Binding DropAdditionalServicesCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
                         <Button.Content>
                             <Grid>
                                 <fa:ImageAwesome Icon="Trash" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
@@ -92,11 +92,11 @@
             </Grid>
             <WrapPanel Margin="10">
                 <TextBlock Text="Итоговая стоимость:"/>
-                <TextBox Text="{Binding Cost}" Width="150" Margin="10,0" IsEnabled="False"/>
+                <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding Cost}" Width="150" Margin="10,0" IsEnabled="False"/>
             </WrapPanel>
             <WrapPanel Margin="10">
                 <TextBlock Text="Залог:"/>
-                <TextBox Text="{Binding Deposit}" Width="100" Margin="10,0" IsEnabled="False"/>
+                <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding Deposit}" Width="100" Margin="10,0" IsEnabled="False"/>
             </WrapPanel>
         </StackPanel>
         <Button Grid.Row="1" Command="{Binding ExportContractWordCommand}" Style="{StaticResource ButtonStroge}" Background="White" Width="140" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">

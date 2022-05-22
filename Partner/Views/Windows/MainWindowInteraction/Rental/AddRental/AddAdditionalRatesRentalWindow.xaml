@@ -28,7 +28,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Margin="5,23,10,0" Grid.Row="1" Grid.Column="1">
-            <Button Command="{Binding AddAdditionalRatesRentalCommand}" Background="White" Width="50" Height="50" Margin="0,5">
+            <Button Style="{StaticResource ButtonStroge}" Command="{Binding AddAdditionalRatesRentalCommand}" Background="White" Width="50" Height="50" Margin="0,5">
                 <Button.ToolTip>
                     <ToolTip>
                         <TextBlock Text="Далее"/>

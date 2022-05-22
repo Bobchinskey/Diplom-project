@@ -209,7 +209,7 @@
                         </Button.Content>
                     </Button>
                 </StackPanel>
-                <Border Margin="10,0,10,5" Grid.Row="1" BorderBrush="Black" BorderThickness="1">
+                <Border CornerRadius="3" Margin="10,0,10,5" Grid.Row="1" BorderBrush="Black" BorderThickness="1">
                     <Grid VerticalAlignment="Bottom" Grid.Column="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>

@@ -25,15 +25,15 @@
         <WrapPanel Grid.Row="1" VerticalAlignment="Center">
             <StackPanel VerticalAlignment="Center" Margin="5">
                 <TextBlock Text="Наименование услуги" TextAlignment="Center" FontSize="14"/>
-                <TextBox Text="{Binding NameAdditionalServices, UpdateSourceTrigger=PropertyChanged}" Margin="10" Width="150"/>
+                <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding NameAdditionalServices, UpdateSourceTrigger=PropertyChanged}" Margin="10" Width="150"/>
             </StackPanel>
             <StackPanel VerticalAlignment="Center" Margin="5">
                 <TextBlock Text="Тип услуги" TextAlignment="Center" FontSize="14"/>
-                <TextBox Text="{Binding TypeAdditionalServices, UpdateSourceTrigger=PropertyChanged}" Margin="10" Width="150"/>
+                <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding TypeAdditionalServices, UpdateSourceTrigger=PropertyChanged}" Margin="10" Width="150"/>
             </StackPanel>
             <StackPanel VerticalAlignment="Center" Margin="5">
                 <TextBlock Text="Стоимость" TextAlignment="Center" FontSize="14"/>
-                <TextBox MaxLength="7" PreviewTextInput="NumberValidationTextBox" Text="{Binding CostAdditionalServices, UpdateSourceTrigger=PropertyChanged}" Margin="10" Width="150"/>
+                <TextBox Style="{StaticResource TextBoxStroge}" MaxLength="7" PreviewTextInput="NumberValidationTextBox" Text="{Binding CostAdditionalServices, UpdateSourceTrigger=PropertyChanged}" Margin="10" Width="150"/>
             </StackPanel>
             <Button Command="{Binding AddAdditionalServicesCommand}" Style="{StaticResource ButtonStroge}" Background="White" Width="120" Height="30">
                 <Button.Content>

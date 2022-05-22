@@ -32,25 +32,25 @@
                 </StackPanel>
                 <StackPanel Margin="20">
                     <TextBlock Text="Тип страховки" TextAlignment="Center" FontSize="16"/>
-                    <TextBox IsReadOnly="True" FontSize="16" Margin="0,5" Text="{Binding Type,UpdateSourceTrigger=PropertyChanged}" Width="180" Height="30"/>
+                    <TextBox Style="{StaticResource TextBoxStroge}" IsReadOnly="True" FontSize="16" Margin="0,5" Text="{Binding Type,UpdateSourceTrigger=PropertyChanged}" Width="180" Height="30"/>
                 </StackPanel>
                 <StackPanel Margin="20">
                     <TextBlock Text="Серия" TextAlignment="Center" FontSize="16"/>
-                    <TextBox Text="{Binding Series, UpdateSourceTrigger=PropertyChanged}" FontSize="16" Margin="0,5" MaxLength="4" Width="100" Height="30"/>
+                    <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding Series, UpdateSourceTrigger=PropertyChanged}" FontSize="16" Margin="0,5" MaxLength="4" Width="100" Height="30"/>
                 </StackPanel>
                 <StackPanel Margin="20">
                     <TextBlock Text="Номер" TextAlignment="Center" FontSize="16"/>
-                    <TextBox Text="{Binding Number, UpdateSourceTrigger=PropertyChanged}" FontSize="16" Margin="0,5" MaxLength="6" Width="180" Height="30"/>
+                    <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding Number, UpdateSourceTrigger=PropertyChanged}" FontSize="16" Margin="0,5" MaxLength="6" Width="180" Height="30"/>
                 </StackPanel>
             </WrapPanel>
             <WrapPanel Grid.Row="1" HorizontalAlignment="Center">
                 <StackPanel Margin="20">
                     <TextBlock Text="Дата страхования" TextAlignment="Center" FontSize="16"/>
-                    <DatePicker SelectedDate="{Binding StartDate}" FontSize="16" Margin="0,5" Width="180" Height="30"/>
+                    <DatePicker Style="{StaticResource DatePickerStroge}" SelectedDate="{Binding StartDate}" FontSize="16" Margin="0,5" Width="180" Height="30"/>
                 </StackPanel>
                 <StackPanel Margin="20">
                     <TextBlock Text="Дата окончания" TextAlignment="Center" FontSize="16"/>
-                    <DatePicker SelectedDate="{Binding EndDate}" FontSize="16" Margin="0,5" Width="180" Height="30"/>
+                    <DatePicker Style="{StaticResource DatePickerStroge}" SelectedDate="{Binding EndDate}" FontSize="16" Margin="0,5" Width="180" Height="30"/>
                 </StackPanel>
             </WrapPanel>
         </Grid>

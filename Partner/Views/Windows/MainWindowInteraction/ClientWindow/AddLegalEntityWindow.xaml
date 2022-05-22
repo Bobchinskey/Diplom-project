@@ -47,17 +47,17 @@
                         <TextBlock Text="Сайт:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,2"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="10,10">
-                        <TextBox Text="{Binding FullNameOrganization, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
-                        <TextBox Text="{Binding AbbreviatedNameOrganization, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
-                        <TextBox Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
-                        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
-                        <TextBox Text="{Binding Patronymic, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
-                        <TextBox Text="{Binding LegalAddress, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
-                        <TextBox Text="{Binding ActualLegalAddress, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
-                        <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
-                        <TextBox Text="{Binding Fax, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
-                        <TextBox PreviewTextInput="NumberValidationTextBox" Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10" MaxLength="11"/>
-                        <TextBox Text="{Binding Website, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding FullNameOrganization, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding AbbreviatedNameOrganization, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding Patronymic, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding LegalAddress, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding ActualLegalAddress, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding Fax, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" PreviewTextInput="NumberValidationTextBox" Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10" MaxLength="11"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding Website, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
                     </StackPanel>
                 </Grid>
                 <Grid>
@@ -112,7 +112,7 @@
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Column="1" Margin="10.2,10,9.6,68.8">
-                <Border Margin="10,10,20,10" BorderBrush="Black" BorderThickness="1">
+                <Border CornerRadius="3" Margin="10,10,20,10" BorderBrush="Black" BorderThickness="1">
                     <Grid HorizontalAlignment="Center">
                         <Image Margin="10" x:Name="ProfileImage" Width="400" Height="156">
                             <Image.Source>
@@ -139,11 +139,11 @@
 
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="10,10">
-                        <TextBox MaxLength="10" PreviewTextInput="NumberValidationTextBox" Text="{Binding INN, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
-                        <TextBox MaxLength="9" PreviewTextInput="NumberValidationTextBox" Text="{Binding KPP, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
-                        <TextBox MaxLength="15" PreviewTextInput="NumberValidationTextBox" Text="{Binding OGRN, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
-                        <TextBox MaxLength="20" PreviewTextInput="NumberValidationTextBox" Text="{Binding PaymentAccount, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
-                        <TextBox MaxLength="9" PreviewTextInput="NumberValidationTextBox" Text="{Binding BIK, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" MaxLength="10" PreviewTextInput="NumberValidationTextBox" Text="{Binding INN, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" MaxLength="9" PreviewTextInput="NumberValidationTextBox" Text="{Binding KPP, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" MaxLength="15" PreviewTextInput="NumberValidationTextBox" Text="{Binding OGRN, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" MaxLength="20" PreviewTextInput="NumberValidationTextBox" Text="{Binding PaymentAccount, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" MaxLength="9" PreviewTextInput="NumberValidationTextBox" Text="{Binding BIK, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
                     </StackPanel>
                 </Grid>
                 <Grid Margin="0,28,0,0">

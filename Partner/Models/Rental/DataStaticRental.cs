@@ -18,5 +18,6 @@ namespace Partner.Models.Rental
         public static DateTime EndDateRental { get; set; }
         public static string Type { get; set; }
         public static string Edit { get; set; }
+        public static string TypeActions { get; set; } 
     }
 }

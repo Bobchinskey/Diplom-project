@@ -974,8 +974,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
 
             }
 
-            
-
             ThisConnection.Close();
 
             foreach (System.Windows.Window window in System.Windows.Application.Current.Windows)

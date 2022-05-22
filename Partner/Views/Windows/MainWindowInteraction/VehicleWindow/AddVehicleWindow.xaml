@@ -40,8 +40,8 @@
                         <TextBlock Margin="0,10" Text="VIN номер:" TextAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,10">
-                        <TextBox Margin="20,10,20,10" Width="280" Text="{Binding MakeModel, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBox Margin="20,10" Width="280" MaxLength="17" Text="{Binding VIN, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" Margin="20,10,20,10" Width="280" Text="{Binding MakeModel, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" Margin="20,10" Width="280" MaxLength="17" Text="{Binding VIN, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                 </Grid>
                 <Grid Margin="10,5,10,0">
@@ -50,7 +50,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
-                        <TextBox HorizontalAlignment="Right" Margin="10,0" Width="100" MaxLength="9" Text="{Binding StateNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" HorizontalAlignment="Right" Margin="10,0" Width="100" MaxLength="9" Text="{Binding StateNumber, UpdateSourceTrigger=PropertyChanged}"/>
                         <TextBlock Text="Гос. номер:" HorizontalAlignment="Left" Margin="47,0,0,0" Width="80"/>
                     </Grid>
                     <Grid Grid.Column="1">
@@ -64,7 +64,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
-                        <TextBox PreviewTextInput="NumberValidationTextBox" MaxLength="4" HorizontalAlignment="Right" Margin="10,0" Width="100" Text="{Binding YearManufacture, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" PreviewTextInput="NumberValidationTextBox" MaxLength="4" HorizontalAlignment="Right" Margin="10,0" Width="100" Text="{Binding YearManufacture, UpdateSourceTrigger=PropertyChanged}"/>
                         <TextBlock Text="Год изготовления:" Width="100" HorizontalAlignment="Left" Margin="10,0,0,0"/>
                     </Grid>
                     <Grid Grid.Column="1">
@@ -83,9 +83,9 @@
                         <TextBlock Margin="0,10" Text="Номер кузова(прицепа):" TextAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,10">
-                        <TextBox Margin="20,10" Width="280" Text="{Binding NumberEngine, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBox Margin="20,10" Width="280" MaxLength="17" Text="{Binding ChassisNumber, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBox Margin="20,10" Width="280" MaxLength="17" Text="{Binding BodyNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" Margin="20,10" Width="280" Text="{Binding NumberEngine, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" Margin="20,10" Width="280" MaxLength="17" Text="{Binding ChassisNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" Margin="20,10" Width="280" MaxLength="17" Text="{Binding BodyNumber, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                 </Grid>
                 <Grid Margin="10,15">
@@ -95,11 +95,11 @@
                     </Grid.ColumnDefinitions>
                     <WrapPanel Grid.Column="0">
                         <TextBlock Text="Цвет кузова:" Margin="10,0,0,0"/>
-                        <TextBox Margin="10,0" Width="100" MaxLength="9" Text="{Binding Color, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" Margin="10,0" Width="100" MaxLength="9" Text="{Binding Color, UpdateSourceTrigger=PropertyChanged}"/>
                     </WrapPanel>
                     <WrapPanel Grid.Column="1">
                         <TextBlock Text="Экологический класс:" Margin="5,0,0,0"/>
-                        <TextBox Margin="7,0" Width="100" Text="{Binding EnvironmentalClass, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" Margin="7,0" Width="100" Text="{Binding EnvironmentalClass, UpdateSourceTrigger=PropertyChanged}"/>
                     </WrapPanel>
                 </Grid>
                 <Grid>
@@ -116,27 +116,27 @@
                     </StackPanel>
                     <StackPanel Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,10">
                         <WrapPanel>
-                            <TextBox MaxLength="4" PreviewTextInput="NumberValidationTextBox" Margin="20,10,5,10" Width="150" HorizontalAlignment="Left" Text="{Binding PowerEngine}"/>
+                            <TextBox Style="{StaticResource TextBoxStroge}" MaxLength="4" PreviewTextInput="NumberValidationTextBox" Margin="20,10,5,10" Width="150" HorizontalAlignment="Left" Text="{Binding PowerEngine}"/>
                             <TextBlock Text="Л.С." VerticalAlignment="Center"/>
                         </WrapPanel>
                         <WrapPanel>
-                            <TextBox MaxLength="5" PreviewTextInput="NumberValidationTextBox" Margin="20,10,5,10" Width="150" HorizontalAlignment="Left" Text="{Binding DisplacementEngine}"/>
+                            <TextBox Style="{StaticResource TextBoxStroge}" MaxLength="5" PreviewTextInput="NumberValidationTextBox" Margin="20,10,5,10" Width="150" HorizontalAlignment="Left" Text="{Binding DisplacementEngine}"/>
                             <TextBlock Text="Куб. см" VerticalAlignment="Center"/>
                         </WrapPanel>
-                        <TextBox Margin="20,10" Width="280" MaxLength="17" Text="{Binding TypeEngine}"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" Margin="20,10" Width="280" MaxLength="17" Text="{Binding TypeEngine}"/>
                         <WrapPanel>
-                            <TextBox PreviewTextInput="NumberValidationTextBox" Margin="20,6,5,10" Width="150" HorizontalAlignment="Left" MaxLength="6" Text="{Binding WeightWithoutLoad}"/>
+                            <TextBox Style="{StaticResource TextBoxStroge}" PreviewTextInput="NumberValidationTextBox" Margin="20,6,5,10" Width="150" HorizontalAlignment="Left" MaxLength="6" Text="{Binding WeightWithoutLoad}"/>
                             <TextBlock Text="КГ" VerticalAlignment="Center"/>
                         </WrapPanel>
                         <WrapPanel>
-                            <TextBox PreviewTextInput="NumberValidationTextBox" Margin="20,6,5,10" Width="150" HorizontalAlignment="Left" MaxLength="6" Text="{Binding PermittedMaximumMass}"/>
+                            <TextBox Style="{StaticResource TextBoxStroge}" PreviewTextInput="NumberValidationTextBox" Margin="20,6,5,10" Width="150" HorizontalAlignment="Left" MaxLength="6" Text="{Binding PermittedMaximumMass}"/>
                             <TextBlock Text="КГ" VerticalAlignment="Center"/>
                         </WrapPanel>
                     </StackPanel>
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Column="1">
-                <Border Margin="10,10,20,10" BorderBrush="Black" BorderThickness="1">
+                <Border CornerRadius="3" Margin="10,10,20,10" BorderBrush="Black" BorderThickness="1">
                     <Grid HorizontalAlignment="Center">
                         <Image Margin="10" x:Name="ProfileImage" Width="400" Height="156" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image.Source>
@@ -156,11 +156,11 @@
                     </Grid.ColumnDefinitions>
                     <WrapPanel Grid.Column="0" Margin="10,0,0,0">
                         <TextBlock Text="Серия ПТС:" Margin="10,0,0,0"/>
-                        <TextBox PreviewTextInput="NumberValidationTextBox" Margin="10,0" Width="100" MaxLength="4" Text="{Binding SeriesPTS, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" PreviewTextInput="NumberValidationTextBox" Margin="10,0" Width="100" MaxLength="4" Text="{Binding SeriesPTS, UpdateSourceTrigger=PropertyChanged}"/>
                     </WrapPanel>
                     <WrapPanel Grid.Column="1" Margin="10,0,20,0">
                         <TextBlock Text="Номер ПТС:" Margin="5,0,0,0"/>
-                        <TextBox PreviewTextInput="NumberValidationTextBox" Margin="10,0" Width="100" MaxLength="6" Text="{Binding NumberPTS, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" PreviewTextInput="NumberValidationTextBox" Margin="10,0" Width="100" MaxLength="6" Text="{Binding NumberPTS, UpdateSourceTrigger=PropertyChanged}"/>
                     </WrapPanel>
                 </Grid>
                 <Grid>
@@ -169,8 +169,8 @@
                         <TextBlock Margin="0,10" Text="Когда выдан:" TextAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" HorizontalAlignment="Right" Margin="10,10,10,10">
-                        <TextBox Margin="20,10" Width="280" Text="{Binding WhoIssuedPTS, UpdateSourceTrigger=PropertyChanged}"/>
-                        <DatePicker Margin="20,10" Width="280" SelectedDate="{Binding DateIssuedPTS, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" Margin="20,10" Width="280" Text="{Binding WhoIssuedPTS, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DatePicker Style="{StaticResource DatePickerStroge}" HorizontalAlignment="Left" Margin="20,10" Width="100" SelectedDate="{Binding DateIssuedPTS, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                 </Grid>
                 <Grid>
@@ -180,11 +180,11 @@
                     </Grid.ColumnDefinitions>
                     <WrapPanel Grid.Column="0" Margin="10,0,0,0">
                         <TextBlock Text="Серия СТС:" Margin="10,0,0,0"/>
-                        <TextBox PreviewTextInput="NumberValidationTextBox" Margin="10,0" Width="100" MaxLength="4" Text="{Binding SeriesSTS, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" PreviewTextInput="NumberValidationTextBox" Margin="10,0" Width="100" MaxLength="4" Text="{Binding SeriesSTS, UpdateSourceTrigger=PropertyChanged}"/>
                     </WrapPanel>
                     <WrapPanel Grid.Column="1" Margin="10,0,20,0">
                         <TextBlock Text="Номер СТС:" Margin="5,0,0,0"/>
-                        <TextBox PreviewTextInput="NumberValidationTextBox" Margin="10,0" Width="100" MaxLength="6" Text="{Binding NumberSTS, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" PreviewTextInput="NumberValidationTextBox" Margin="10,0" Width="100" MaxLength="6" Text="{Binding NumberSTS, UpdateSourceTrigger=PropertyChanged}"/>
                     </WrapPanel>
                 </Grid>
                 <Grid>
@@ -193,8 +193,8 @@
                         <TextBlock Margin="0,10" Text="Когда выдан:" TextAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" HorizontalAlignment="Right" Margin="10,10,10,10">
-                        <TextBox Margin="20,10" Width="280" Text="{Binding WhoIssuedSTS, UpdateSourceTrigger=PropertyChanged}"/>
-                        <DatePicker Margin="20,10" Width="280" SelectedDate="{Binding DateIssuedSTS, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" Margin="20,10" Width="280" Text="{Binding WhoIssuedSTS, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DatePicker Style="{StaticResource DatePickerStroge}" HorizontalAlignment="Left" Margin="20,10" Width="100" SelectedDate="{Binding DateIssuedSTS, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                 </Grid>
             </StackPanel>

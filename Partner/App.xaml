@@ -9,6 +9,9 @@
                 <ResourceDictionary Source="Resources/Styles/Buttons.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/ButtonStroge.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/HyperlinkButtons.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/TextBoxStroge.xaml"/> 
+                <ResourceDictionary Source="Resources/Styles/PasswordBoxStroge.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/DatePickerStroge.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

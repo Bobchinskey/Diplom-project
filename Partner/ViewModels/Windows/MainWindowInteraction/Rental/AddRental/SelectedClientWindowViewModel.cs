@@ -2,6 +2,7 @@
 using Partner.Models.Client;
 using Partner.Models.Rental;
 using Partner.ViewModels.Base;
+using Partner.Views.Windows.MainWindowInteraction.Booking.AddBooking;
 using Partner.Views.Windows.MainWindowInteraction.ClientWindow;
 using Partner.Views.Windows.MainWindowInteraction.Rental.AddRental;
 using System;
@@ -188,25 +189,39 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
 
         private void OnOpenAddRentalWindowCommandExecute(object p)
         {
-            if (MainListClient[SelectedClient].type == "Физическое лицо")
+            if (DataStaticRental.TypeActions == "Аренда")
             {
-                DataStaticRental.IDClient = MainListClient[SelectedClient].id_legal_entity;
-                DataStaticRental.Type = MainListClient[SelectedClient].type;
-                DataStaticRental.Title = "Добавление аренды";
+                if (MainListClient[SelectedClient].type == "Физическое лицо")
+                {
+                    DataStaticRental.IDClient = MainListClient[SelectedClient].id_legal_entity;
+                    DataStaticRental.Type = MainListClient[SelectedClient].type;
+                    DataStaticRental.Title = "Добавление аренды";
 
-                AddRentalWindow addRentalWindow = new AddRentalWindow();
-                addRentalWindow.Show();
+                    AddRentalWindow addRentalWindow = new AddRentalWindow();
+                    addRentalWindow.Show();
+                }
+                else
+                {
+                    DataStaticRental.IDClient = MainListClient[SelectedClient].id_legal_entity;
+                    DataStaticRental.Type = MainListClient[SelectedClient].type;
+                    DataStaticRental.Title = "Добавление аренды";
+
+                    SelectedRepresentativesOrganizationWindow selectedRepresentativesOrganizationWindow = new SelectedRepresentativesOrganizationWindow();
+                    selectedRepresentativesOrganizationWindow.Show();
+                }
             }
             else
             {
-                DataStaticRental.IDClient = MainListClient[SelectedClient].id_legal_entity;
-                DataStaticRental.Type = MainListClient[SelectedClient].type;
-                DataStaticRental.Title = "Добавление аренды";
+                if (DataStaticRental.TypeActions == "Бронирование")
+                {
+                    DataStaticRental.IDClient = MainListClient[SelectedClient].id_legal_entity;
+                    DataStaticRental.Type = MainListClient[SelectedClient].type;
+                    DataStaticRental.Title = "Добавление бронирования";
 
-                SelectedRepresentativesOrganizationWindow selectedRepresentativesOrganizationWindow = new SelectedRepresentativesOrganizationWindow();
-                selectedRepresentativesOrganizationWindow.Show();
+                    AddBookingWindow addBookingWindow = new AddBookingWindow();
+                    addBookingWindow.Show();
+                }
             }
-
             foreach (System.Windows.Window window in System.Windows.Application.Current.Windows)
             {
                 if (window.DataContext == this)
