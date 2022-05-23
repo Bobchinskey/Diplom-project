@@ -9,16 +9,17 @@
         mc:Ignorable="d"
         Title="Выбор представителя организации" 
         Height="400" Width="700"
-        ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource BackgroundColor}">
     <Window.DataContext>
         <Datacontext:SelectedRepresentativesOrganizationWindowViewModel/>
     </Window.DataContext>
-    <Grid>
+    <Grid Background="{DynamicResource BackgroundColor}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
-        <DataGrid Margin="5,5,5,5" SelectedIndex="{Binding SelectRepresentativesOrganizations}" ItemsSource="{Binding ListRepresentativesOrganization}" IsReadOnly="True" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
+        <DataGrid Background="{DynamicResource BackgroundColor}" Margin="5,5,5,5" SelectedIndex="{Binding SelectRepresentativesOrganizations}" ItemsSource="{Binding ListRepresentativesOrganization}" IsReadOnly="True" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№" Binding="{Binding num}"/>
                 <DataGridTextColumn Header="Представитель" Binding="{Binding FIO}"/>
@@ -27,7 +28,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Margin="5,20,10,0" Grid.Column="1">
-            <Button Width="50" Height="50" Command="{Binding OpenAddRentalWindowCommand}" Grid.Row="2" Grid.Column="1" Background="White" Margin="10" HorizontalAlignment="Right" Style="{StaticResource ButtonStroge}">
+            <Button Width="50" Height="50" Command="{Binding OpenAddRentalWindowCommand}" Grid.Row="2" Grid.Column="1" Background="{DynamicResource BackgroundColor}" Margin="10" HorizontalAlignment="Right" Style="{StaticResource ButtonStroge}">
                 <Button.ToolTip>
                     <ToolTip>
                         <TextBlock Text="Далее"/>
@@ -35,11 +36,11 @@
                 </Button.ToolTip>
                 <Button.Content>
                     <Grid HorizontalAlignment="Stretch">
-                        <fa:ImageAwesome Icon="CaretRight" HorizontalAlignment="Right" Height="30" Foreground="Black"/>
+                        <fa:ImageAwesome Icon="CaretRight" HorizontalAlignment="Right" Height="30" Foreground="{DynamicResource ForegroundMainText}"/>
                     </Grid>
                 </Button.Content>
             </Button>
-            <Button Command="{Binding AddRepresentativesOrganizationsCommand}" Background="White" Margin="0,5" Width="50" Height="50" Style="{StaticResource ButtonStroge}">
+            <Button Command="{Binding AddRepresentativesOrganizationsCommand}" Background="{DynamicResource BackgroundColor}" Margin="0,5" Width="50" Height="50" Style="{StaticResource ButtonStroge}">
                 <Button.ToolTip>
                     <ToolTip>
                         <TextBlock Text="Добавить"/>
@@ -47,7 +48,7 @@
                 </Button.ToolTip>
                 <Button.Content>
                     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Foreground="Black"/>
+                        <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Foreground="{DynamicResource ForegroundMainText}"/>
                     </Grid>
                 </Button.Content>
             </Button>

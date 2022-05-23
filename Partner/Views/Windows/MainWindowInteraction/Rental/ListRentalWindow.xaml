@@ -11,11 +11,12 @@
         Title="Аренды" 
         Height="450" Width="1000"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Background="{DynamicResource BackgroundColor}">
     <Window.DataContext>
         <Datacontext:ListRentalWindowVeiwModel/>
     </Window.DataContext>
-    <Grid Margin="10">
+    <Grid Margin="10" Background="{DynamicResource BackgroundColor}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
@@ -26,7 +27,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <Button Command="{Binding OpenListBookingWindowCommand}" Content="Брони" Style="{StaticResource ButtonStroge}" Height="20" Width="100" Background="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Button Command="{Binding OpenListBookingWindowCommand}" Foreground="{DynamicResource ForegroundMainText}" Content="Брони" Style="{StaticResource ButtonStroge}" Height="20" Width="100" Background="{DynamicResource BackgroundColor}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <ComboBox Margin="5,0,5,0" ItemsSource="{Binding status}" SelectedItem="{Binding SelectedRentalProperty,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" Width="135">
                     <i1:Interaction.Triggers>
                         <i1:EventTrigger EventName="SelectionChanged">
@@ -35,7 +36,7 @@
                     </i1:Interaction.Triggers>
                 </ComboBox>
             </Grid>
-            <DataGrid Margin="5,5,5,5" SelectedIndex="{Binding SelectedRental}" ItemsSource="{Binding MainListRental}" IsReadOnly="True" Grid.Row="1" SelectionMode="Single" CanUserReorderColumns="False" CanUserSortColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
+            <DataGrid Background="{DynamicResource BackgroundColor}" Margin="5,5,5,5" SelectedIndex="{Binding SelectedRental}" ItemsSource="{Binding MainListRental}" IsReadOnly="True" Grid.Row="1" SelectionMode="Single" CanUserReorderColumns="False" CanUserSortColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="№" Binding="{Binding num}"/>
                     <DataGridTextColumn Header="Наименование" Binding="{Binding name}"/>
@@ -47,10 +48,10 @@
             </DataGrid>
         </Grid>
         <StackPanel Margin="5,22,5,0" Grid.Column="1">
-            <Button Style="{StaticResource ButtonStroge}" Background="White" Margin="0,5" Width="50" Height="50" Command="{Binding OpenSelectedDateRentalWindowCommand}">
+            <Button Style="{StaticResource ButtonStroge}" Background="{DynamicResource BackgroundColor}" Margin="0,5" Width="50" Height="50" Command="{Binding OpenSelectedDateRentalWindowCommand}">
                 <Button.Content>
                     <Grid>
-                        <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
+                        <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="30" Foreground="{DynamicResource ForegroundMainText}"/>
                     </Grid>
                 </Button.Content>
                 <Button.ToolTip>
@@ -59,10 +60,10 @@
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button Style="{StaticResource ButtonStroge}" Command="{Binding OpenEditDateRentalWindowCommand}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
+            <Button Style="{StaticResource ButtonStroge}" Command="{Binding OpenEditDateRentalWindowCommand}" Margin="0,30,0,0" Background="{DynamicResource BackgroundColor}" Width="50" Height="50">
                 <Button.Content>
                     <Grid>
-                        <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
+                        <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="30" Foreground="{DynamicResource ForegroundMainText}"/>
                     </Grid>
                 </Button.Content>
                 <Button.ToolTip>
@@ -71,10 +72,10 @@
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button Command="{Binding ExcelCommand}" Style="{StaticResource ButtonStroge}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
+            <Button Command="{Binding ExcelCommand}" Style="{StaticResource ButtonStroge}" Margin="0,30,0,0" Background="{DynamicResource BackgroundColor}" Width="50" Height="50">
                 <Button.Content>
                     <Grid>
-                        <fa:ImageAwesome Icon="FileExcelOutline" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
+                        <fa:ImageAwesome Icon="FileExcelOutline" HorizontalAlignment="Left" Height="30" Foreground="{DynamicResource ForegroundMainText}"/>
                     </Grid>
                 </Button.Content>
                 <Button.ToolTip>

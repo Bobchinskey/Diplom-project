@@ -464,9 +464,9 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow
             thisReader.Close();
             ThisConnection.Close();
 
-            if (AdditionalDataClientPhoneNumber.Rows.Count >= 1)
+            if (AdditionalDataClientPhoneNumberDelivery.Rows.Count >= 1)
             {
-                for (int i = 1; i <= AdditionalDataClientPhoneNumber.Rows.Count; i++)
+                for (int i = 1; i <= AdditionalDataClientPhoneNumberDelivery.Rows.Count; i++)
                 {
                     ThisConnection.Open();
                     var command2 = ThisConnection.CreateCommand();

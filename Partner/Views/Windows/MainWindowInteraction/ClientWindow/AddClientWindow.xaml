@@ -11,7 +11,8 @@
         Title="{Binding Title}" 
         Height="610" Width="100"
         MinHeight="610" MinWidth="1000"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Background="{DynamicResource BackgroundColor}">
     <Window.DataContext>
         <Datacontext:AddClientNaturapPersonViewModel/>
     </Window.DataContext>
@@ -20,17 +21,17 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <WrapPanel Grid.Row="0" Background="BlueViolet">
+        <WrapPanel Grid.Row="0" Background="{DynamicResource MainColor}">
             <TextBlock Margin="10" Text="{Binding Title}" Foreground="White" FontSize="25"/>
         </WrapPanel>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Background="{DynamicResource BackgroundColor}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Margin="10">
                 <WrapPanel Margin="0,10,0,0" Height="20">
-                    <TextBlock VerticalAlignment="Center" Margin="32,0,0,0" Text="ФИО:" HorizontalAlignment="Left"/>
+                    <TextBlock Foreground="{DynamicResource ForegroundMainText}" VerticalAlignment="Center" Margin="32,0,0,0" Text="ФИО:" HorizontalAlignment="Left"/>
                     <TextBox Style="{StaticResource TextBoxStroge}" Margin="10,0,5,0" Width="140" Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBox Style="{StaticResource TextBoxStroge}" Margin="10,0,5,0" Width="100" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBox Style="{StaticResource TextBoxStroge}" Margin="10,0,0,0" Width="130" Text="{Binding Patronymic, UpdateSourceTrigger=PropertyChanged}"/>
@@ -41,19 +42,18 @@
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Margin="10,10,0,10" Grid.Column="0">
-                        
-                        <TextBlock Margin="0,10" Text="Пол:" HorizontalAlignment="Right"/>
-                        <TextBlock Margin="0,10" Text="Дата рождения:" HorizontalAlignment="Right"/>
-                        <TextBlock Margin="0,17,0,10" Text="Место рождения:" HorizontalAlignment="Right"/>
-                        <TextBlock Margin="0,12,0,10" Text="Номер телефона:" HorizontalAlignment="Right"/>
-                        <TextBlock Margin="0,11,0,10" Text="Email:" HorizontalAlignment="Right"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Margin="0,10" Text="Пол:" HorizontalAlignment="Right"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Margin="0,10" Text="Дата рождения:" HorizontalAlignment="Right"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Margin="0,17,0,10" Text="Место рождения:" HorizontalAlignment="Right"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Margin="0,12,0,10" Text="Номер телефона:" HorizontalAlignment="Right"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Margin="0,11,0,10" Text="Email:" HorizontalAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Margin="10,10,0,10" Grid.Column="1">
                         <WrapPanel Margin="5,10">
-                            <RadioButton Content="Мужской" IsChecked="{Binding IsCheckedMan, UpdateSourceTrigger=PropertyChanged}" />
-                            <RadioButton Margin="10,0" Content="Женский" />
+                            <RadioButton Foreground="{DynamicResource ForegroundMainText}" Content="Мужской" IsChecked="{Binding IsCheckedMan, UpdateSourceTrigger=PropertyChanged}" />
+                            <RadioButton Foreground="{DynamicResource ForegroundMainText}" Margin="10,0" Content="Женский" />
                         </WrapPanel>
-                        <DatePicker Style="{StaticResource DatePickerStroge}" SelectedDate="{Binding Birthday, UpdateSourceTrigger=PropertyChanged}" Margin="5,10" Width="120" HorizontalAlignment="Left"/>
+                        <DatePicker Background="{DynamicResource BackgroundColor}" Style="{StaticResource DatePickerStroge}" SelectedDate="{Binding Birthday, UpdateSourceTrigger=PropertyChanged}" Margin="5,10" Width="120" HorizontalAlignment="Left"/>
                         <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding PlaceBirthday, UpdateSourceTrigger=PropertyChanged}" Margin="5,10" Width="310" HorizontalAlignment="Left"/>
                         <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Margin="5,10" Width="120" MaxLength="11" HorizontalAlignment="Left" PreviewTextInput="NumberValidationTextBox"/>
                         <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Margin="5,10" Width="200" HorizontalAlignment="Left"/>
@@ -64,17 +64,17 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="50"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid CanUserSortColumns="False" SelectedIndex="{Binding SelectAdditionalPhoneNumber}" ItemsSource="{Binding AdditionalDataClientPhoneNumber}" Height="220" Grid.Column="0" CanUserResizeColumns="False" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid Background="{DynamicResource BackgroundColor}" CanUserSortColumns="False" SelectedIndex="{Binding SelectAdditionalPhoneNumber}" ItemsSource="{Binding AdditionalDataClientPhoneNumber}" Height="220" Grid.Column="0" CanUserResizeColumns="False" AutoGenerateColumns="False" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Дополнительный номер телефона" Binding="{Binding phone_number}"/>
                             <DataGridTextColumn Header="Описание" Binding="{Binding other}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <StackPanel Grid.Column="1">
-                        <Button Style="{StaticResource ButtonStroge}" Margin="0,25,0,0" Command="{Binding AddAdditionalDataCommand}" Background="White" Width="30" Height="30">
+                        <Button Background="{DynamicResource BackgroundColor}" Style="{StaticResource ButtonStroge}" Margin="0,25,0,0" Command="{Binding AddAdditionalDataCommand}" Width="30" Height="30">
                             <Button.Content>
                                 <Grid>
-                                    <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
+                                    <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="20" Foreground="{DynamicResource ForegroundMainText}"/>
                                 </Grid>
                             </Button.Content>
                             <Button.ToolTip>
@@ -83,10 +83,10 @@
                                 </ToolTip>
                             </Button.ToolTip>
                         </Button>
-                        <Button Style="{StaticResource ButtonStroge}" Command="{Binding EditAdditionalDataCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
+                        <Button Background="{DynamicResource BackgroundColor}" Style="{StaticResource ButtonStroge}" Command="{Binding EditAdditionalDataCommand}" Margin="0,10,0,0" Width="30" Height="30">
                             <Button.Content>
                                 <Grid>
-                                    <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
+                                    <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="20" Foreground="{DynamicResource ForegroundMainText}"/>
                                 </Grid>
                             </Button.Content>
                             <Button.ToolTip>
@@ -95,10 +95,10 @@
                                 </ToolTip>
                             </Button.ToolTip>
                         </Button>
-                        <Button Style="{StaticResource ButtonStroge}" Command="{Binding DropAdditionalDataCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
+                        <Button Background="{DynamicResource BackgroundColor}" Style="{StaticResource ButtonStroge}" Command="{Binding DropAdditionalDataCommand}" Margin="0,10,0,0" Width="30" Height="30">
                             <Button.Content>
                                 <Grid>
-                                    <fa:ImageAwesome Icon="Trash" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
+                                    <fa:ImageAwesome Icon="Trash" HorizontalAlignment="Left" Height="20" Foreground="{DynamicResource ForegroundMainText}"/>
                                 </Grid>
                             </Button.Content>
                             <Button.ToolTip>
@@ -132,16 +132,16 @@
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Margin="10,10,0,0" Grid.Column="0">
-                        <TextBlock Margin="0,0,0,10" Text="ИНН:" HorizontalAlignment="Right"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Margin="0,0,0,10" Text="ИНН:" HorizontalAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Margin="10,10,10,0" Grid.Column="1">
                         <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding INN, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10" HorizontalAlignment="Left" Width="120" MaxLength="12" PreviewTextInput="NumberValidationTextBox"/>
                     </StackPanel>
                     <StackPanel Margin="10,10,0,0" Grid.Column="2">
-                        <TextBlock Margin="0,0,0,0" Text="Дата получения паспорта:" HorizontalAlignment="Right"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Margin="0,0,0,0" Text="Дата получения паспорта:" HorizontalAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Margin="10,6,10,0" Grid.Column="3">
-                        <DatePicker Style="{StaticResource DatePickerStroge}" SelectedDate="{Binding DateIssuedPassport}" Margin="0,0,0,10" HorizontalAlignment="Left" Width="120" Height="25"/>
+                        <DatePicker Background="{DynamicResource BackgroundColor}" Style="{StaticResource DatePickerStroge}" SelectedDate="{Binding DateIssuedPassport}" Margin="0,0,0,10" HorizontalAlignment="Left" Width="120" Height="25"/>
                     </StackPanel>
                 </Grid>
                 <Grid Margin="0,10">
@@ -150,11 +150,11 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <WrapPanel Grid.Column="0" Margin="10,0,0,0">
-                        <TextBlock Text="Серия паспорта:" Margin="10,0,0,0"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Серия паспорта:" Margin="10,0,0,0"/>
                         <TextBox Style="{StaticResource TextBoxStroge}" PreviewTextInput="NumberValidationTextBox" Margin="10,0" Width="100" MaxLength="4" Text="{Binding SeriesPassport, UpdateSourceTrigger=PropertyChanged}"/>
                     </WrapPanel>
                     <WrapPanel Grid.Column="1" Margin="5,0,20,0">
-                        <TextBlock Text="Номер паспорта:" Margin="5,0,0,0"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Номер паспорта:" Margin="5,0,0,0"/>
                         <TextBox Style="{StaticResource TextBoxStroge}" PreviewTextInput="NumberValidationTextBox" Margin="10,0" Width="100" MaxLength="6" Text="{Binding NumberPassport, UpdateSourceTrigger=PropertyChanged}"/>
                     </WrapPanel>
                 </Grid>
@@ -164,26 +164,26 @@
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Margin="0,10" Grid.Column="0">
-                        <TextBlock Margin="0,0,0,10" Text="Прописка:" HorizontalAlignment="Right"/>
-                        <TextBlock Margin="0,10" Text="Фактическое место проживания:" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Right"/>
-                        <TextBlock Margin="0,10" Text="Номер карты:" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Right"/>
-                        <TextBlock Margin="0,10" Text="Действительна до:" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Right"/>
-                        <TextBlock Margin="0,10" Text="Код безопасности:" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Right"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Margin="0,0,0,10" Text="Прописка:" HorizontalAlignment="Right"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Margin="0,10" Text="Фактическое место проживания:" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Right"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Margin="0,10" Text="Номер карты:" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Right"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Margin="0,10" Text="Действительна до:" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Right"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Margin="0,10" Text="Код безопасности:" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Margin="0,10" Grid.Column="1">
                         <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding Registration, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,30.2,0"/>
                         <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding ActualPlaceResidence, UpdateSourceTrigger=PropertyChanged}" Margin="10,27,30.2,10"/>
                         <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding NumberCard, UpdateSourceTrigger=PropertyChanged}" Margin="10,17,30.2,10" PreviewTextInput="NumberValidationTextBox" MaxLength="13" />
-                        <DatePicker Style="{StaticResource DatePickerStroge}" SelectedDate="{Binding ValidityPeriodCard}" Margin="10,5,30.2,10" Width="120" HorizontalAlignment="Left"/>
+                        <DatePicker Background="{DynamicResource BackgroundColor}" Style="{StaticResource DatePickerStroge}" SelectedDate="{Binding ValidityPeriodCard}" Margin="10,5,30.2,10" Width="120" HorizontalAlignment="Left"/>
                         <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding CVC2, UpdateSourceTrigger=PropertyChanged}" Margin="10,6,30.2,10" Width="120" HorizontalAlignment="Left" PreviewTextInput="NumberValidationTextBox" MaxLength="3" />
                     </StackPanel>
                 </Grid>
             </StackPanel>
-            <Button Grid.Column="1" Command="{Binding AddClientCommand}" Style="{StaticResource ButtonStroge}" Background="White" Width="120" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">
+            <Button Background="{DynamicResource BackgroundColor}" Grid.Column="1" Command="{Binding AddClientCommand}" Style="{StaticResource ButtonStroge}" Width="120" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">
                 <Button.Content>
                     <Grid HorizontalAlignment="Stretch" Width="120">
-                        <fa:ImageAwesome Icon="Save" HorizontalAlignment="Left" Height="20" Margin="5,0" Foreground="Black"/>
-                        <TextBlock Text="Сохранить" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <fa:ImageAwesome Icon="Save" HorizontalAlignment="Left" Height="20" Margin="5,0" Foreground="{DynamicResource ForegroundMainText}"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Сохранить" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
                 </Button.Content>
             </Button>

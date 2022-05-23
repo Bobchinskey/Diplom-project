@@ -8,16 +8,17 @@
         xmlns:Datacontext="clr-namespace:Partner.ViewModels.Windows.MainWindowInteraction.Insurances"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="{Binding Title}" Height="300" Width="1000">
+        Title="{Binding Title}" Height="300" Width="1000"
+        Background="{DynamicResource BackgroundColor}">
     <Window.DataContext>
         <Datacontext:OSAGOWindowViewModel/>
     </Window.DataContext>
-    <Grid>
+    <Grid Background="{DynamicResource BackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <WrapPanel Grid.Row="0" Background="BlueViolet">
+        <WrapPanel Grid.Row="0" Background="{DynamicResource MainColor}">
             <TextBlock Margin="10" Text="{Binding Title}" Foreground="White" FontSize="20"/>
         </WrapPanel>
         <Grid Grid.Row="1">
@@ -27,38 +28,38 @@
             </Grid.RowDefinitions>
             <WrapPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel Margin="20">
-                    <TextBlock Text="Автомобиль" TextAlignment="Center" FontSize="16"/>
+                    <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Автомобиль" TextAlignment="Center" FontSize="16"/>
                     <ComboBox IsEnabled="{Binding ActionCombobox}" FontSize="16" Margin="0,5" ItemsSource="{Binding status}" SelectedItem="{Binding SelectedVehicleProperty}" Width="180" Height="30"/>
                 </StackPanel>
                 <StackPanel Margin="20">
-                    <TextBlock Text="Тип страховки" TextAlignment="Center" FontSize="16"/>
+                    <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Тип страховки" TextAlignment="Center" FontSize="16"/>
                     <TextBox Style="{StaticResource TextBoxStroge}" IsReadOnly="True" FontSize="16" Margin="0,5" Text="{Binding Type,UpdateSourceTrigger=PropertyChanged}" Width="180" Height="30"/>
                 </StackPanel>
                 <StackPanel Margin="20">
-                    <TextBlock Text="Серия" TextAlignment="Center" FontSize="16"/>
+                    <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Серия" TextAlignment="Center" FontSize="16"/>
                     <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding Series, UpdateSourceTrigger=PropertyChanged}" FontSize="16" Margin="0,5" MaxLength="4" Width="100" Height="30"/>
                 </StackPanel>
                 <StackPanel Margin="20">
-                    <TextBlock Text="Номер" TextAlignment="Center" FontSize="16"/>
+                    <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Номер" TextAlignment="Center" FontSize="16"/>
                     <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding Number, UpdateSourceTrigger=PropertyChanged}" FontSize="16" Margin="0,5" MaxLength="6" Width="180" Height="30"/>
                 </StackPanel>
             </WrapPanel>
             <WrapPanel Grid.Row="1" HorizontalAlignment="Center">
                 <StackPanel Margin="20">
-                    <TextBlock Text="Дата страхования" TextAlignment="Center" FontSize="16"/>
-                    <DatePicker Style="{StaticResource DatePickerStroge}" SelectedDate="{Binding StartDate}" FontSize="16" Margin="0,5" Width="180" Height="30"/>
+                    <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Дата страхования" TextAlignment="Center" FontSize="16"/>
+                    <DatePicker Background="{DynamicResource BackgroundColor}" Style="{StaticResource DatePickerStroge}" SelectedDate="{Binding StartDate}" FontSize="16" Margin="0,5" Width="180" Height="30"/>
                 </StackPanel>
                 <StackPanel Margin="20">
-                    <TextBlock Text="Дата окончания" TextAlignment="Center" FontSize="16"/>
-                    <DatePicker Style="{StaticResource DatePickerStroge}" SelectedDate="{Binding EndDate}" FontSize="16" Margin="0,5" Width="180" Height="30"/>
+                    <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Дата окончания" TextAlignment="Center" FontSize="16"/>
+                    <DatePicker Background="{DynamicResource BackgroundColor}" Style="{StaticResource DatePickerStroge}" SelectedDate="{Binding EndDate}" FontSize="16" Margin="0,5" Width="180" Height="30"/>
                 </StackPanel>
             </WrapPanel>
         </Grid>
-        <Button Grid.Row="1" Command="{Binding SaveCommand}" Style="{StaticResource ButtonStroge}" Background="White" Width="120" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">
+        <Button Grid.Row="1" Command="{Binding SaveCommand}" Style="{StaticResource ButtonStroge}" Background="{DynamicResource BackgroundColor}" Width="120" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">
             <Button.Content>
                 <Grid HorizontalAlignment="Stretch" Width="120">
-                    <fa:ImageAwesome Icon="Save" HorizontalAlignment="Left" Height="20" Margin="5,0" Foreground="Black"/>
-                    <TextBlock Text="Сохранить" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <fa:ImageAwesome Icon="Save" HorizontalAlignment="Left" Height="20" Margin="5,0" Foreground="{DynamicResource ForegroundMainText}"/>
+                    <TextBlock Text="Сохранить" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundMainText}"/>
                 </Grid>
             </Button.Content>
         </Button>

@@ -10,19 +10,20 @@
         Title="Редактирование юридического лица" 
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Height="820" Width="1000">
+        Height="820" Width="1000"
+        Background="{DynamicResource BackgroundColor}">
     <Window.DataContext>
         <Datacontext:EditLegalEntityViewModel/>
     </Window.DataContext>
-    <Grid>
+    <Grid Background="{DynamicResource BackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <WrapPanel Grid.Row="0" Background="BlueViolet">
+        <WrapPanel Grid.Row="0" Background="{DynamicResource MainColor}">
             <TextBlock Margin="10" Text="Редактирование юридического лица" Foreground="White" FontSize="25"/>
         </WrapPanel>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Background="{DynamicResource BackgroundColor}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -34,17 +35,17 @@
                         <ColumnDefinition Width="1.5*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Margin="0,10">
-                        <TextBlock Text="Полное наименование:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,10"/>
-                        <TextBlock Text="Сокращенное наименование:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,12"/>
-                        <TextBlock Text="Фамилия руководителя:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,8"/>
-                        <TextBlock Text="Имя руководителя:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,16"/>
-                        <TextBlock Text="Отчество руководителя:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,4"/>
-                        <TextBlock Text="Юридический адрес:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,18"/>
-                        <TextBlock Text="Фактический адрес:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,4"/>
-                        <TextBlock Text="Email:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,18"/>
-                        <TextBlock Text="Факс:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,4"/>
-                        <TextBlock Text="Номер телефона:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,18"/>
-                        <TextBlock Text="Сайт:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,2"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Полное наименование:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,10"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Сокращенное наименование:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,12"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Фамилия руководителя:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,8"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Имя руководителя:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,16"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Отчество руководителя:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,4"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Юридический адрес:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,18"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Фактический адрес:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,4"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Email:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,18"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Факс:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,4"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Номер телефона:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,18"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Сайт:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,2"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="10,10">
                         <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding FullNameOrganization, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
@@ -65,17 +66,17 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="50"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid CanUserSortColumns="False" SelectedIndex="{Binding SelectAdditionalPhoneNumber}" ItemsSource="{Binding ListAdditionalData}" Height="200" Grid.Column="0" CanUserResizeColumns="False" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid Background="{DynamicResource BackgroundColor}" CanUserSortColumns="False" SelectedIndex="{Binding SelectAdditionalPhoneNumber}" ItemsSource="{Binding ListAdditionalData}" Height="200" Grid.Column="0" CanUserResizeColumns="False" AutoGenerateColumns="False" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Дополнительный номер телефона" Binding="{Binding phone_number}"/>
                             <DataGridTextColumn Header="Описание" Binding="{Binding other}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <StackPanel Grid.Column="1">
-                        <Button Style="{StaticResource ButtonStroge}" Margin="0,25,0,0" Command="{Binding AddAdditionalDataCommand}" Background="White" Width="30" Height="30">
+                        <Button Style="{StaticResource ButtonStroge}" Margin="0,25,0,0" Command="{Binding AddAdditionalDataCommand}" Background="{DynamicResource BackgroundColor}" Width="30" Height="30">
                             <Button.Content>
                                 <Grid>
-                                    <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
+                                    <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="20" Foreground="{DynamicResource ForegroundMainText}"/>
                                 </Grid>
                             </Button.Content>
                             <Button.ToolTip>
@@ -84,10 +85,10 @@
                                 </ToolTip>
                             </Button.ToolTip>
                         </Button>
-                        <Button Style="{StaticResource ButtonStroge}" Command="{Binding EditAdditionalDataCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
+                        <Button Style="{StaticResource ButtonStroge}" Command="{Binding EditAdditionalDataCommand}" Margin="0,10,0,0" Background="{DynamicResource BackgroundColor}" Width="30" Height="30">
                             <Button.Content>
                                 <Grid>
-                                    <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
+                                    <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="20" Foreground="{DynamicResource ForegroundMainText}"/>
                                 </Grid>
                             </Button.Content>
                             <Button.ToolTip>
@@ -96,10 +97,10 @@
                                 </ToolTip>
                             </Button.ToolTip>
                         </Button>
-                        <Button Style="{StaticResource ButtonStroge}" Command="{Binding DropAdditionalDataCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
+                        <Button Style="{StaticResource ButtonStroge}" Command="{Binding DropAdditionalDataCommand}" Margin="0,10,0,0" Background="{DynamicResource BackgroundColor}" Width="30" Height="30">
                             <Button.Content>
                                 <Grid>
-                                    <fa:ImageAwesome Icon="Trash" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
+                                    <fa:ImageAwesome Icon="Trash" HorizontalAlignment="Left" Height="20" Foreground="{DynamicResource ForegroundMainText}"/>
                                 </Grid>
                             </Button.Content>
                             <Button.ToolTip>
@@ -131,11 +132,11 @@
                         <ColumnDefinition Width="1.5*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Margin="0,10">
-                        <TextBlock Text="ИНН:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,10"/>
-                        <TextBlock Text="КПП:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,12"/>
-                        <TextBlock Text="ОГРН:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,8"/>
-                        <TextBlock Text="Расчетный счет:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,16"/>
-                        <TextBlock Text="БИК:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,4"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="ИНН:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,10"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="КПП:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,12"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="ОГРН:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,8"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Расчетный счет:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,16"/>
+                        <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="БИК:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,4"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="10,10">
                         <TextBox Style="{StaticResource TextBoxStroge}" MaxLength="10" PreviewTextInput="NumberValidationTextBox" Text="{Binding INN, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="0,10"/>
@@ -150,17 +151,17 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="50"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid CanUserSortColumns="False" SelectedIndex="{Binding SelectRepresentativesOrganizations}" ItemsSource="{Binding ListRepresentativesOrganization}" Height="200" Grid.Column="0" CanUserResizeColumns="False" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid Background="{DynamicResource BackgroundColor}" CanUserSortColumns="False" SelectedIndex="{Binding SelectRepresentativesOrganizations}" ItemsSource="{Binding ListRepresentativesOrganization}" Height="200" Grid.Column="0" CanUserResizeColumns="False" AutoGenerateColumns="False" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Представители организации" Binding="{Binding FIO}"/>
                             <DataGridTextColumn Header="Должность" Binding="{Binding Post}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <StackPanel Grid.Column="1">
-                        <Button Style="{StaticResource ButtonStroge}" Margin="0,25,0,0" Command="{Binding AddRepresentativesOrganizationsCommand}" Background="White" Width="30" Height="30">
+                        <Button Style="{StaticResource ButtonStroge}" Margin="0,25,0,0" Command="{Binding AddRepresentativesOrganizationsCommand}" Background="{DynamicResource BackgroundColor}" Width="30" Height="30">
                             <Button.Content>
                                 <Grid>
-                                    <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
+                                    <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="20" Foreground="{DynamicResource ForegroundMainText}"/>
                                 </Grid>
                             </Button.Content>
                             <Button.ToolTip>
@@ -169,10 +170,10 @@
                                 </ToolTip>
                             </Button.ToolTip>
                         </Button>
-                        <Button Style="{StaticResource ButtonStroge}" Command="{Binding EditRepresentativesOrganizationsCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
+                        <Button Style="{StaticResource ButtonStroge}" Command="{Binding EditRepresentativesOrganizationsCommand}" Margin="0,10,0,0" Background="{DynamicResource BackgroundColor}" Width="30" Height="30">
                             <Button.Content>
                                 <Grid>
-                                    <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
+                                    <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="20" Foreground="{DynamicResource ForegroundMainText}"/>
                                 </Grid>
                             </Button.Content>
                             <Button.ToolTip>
@@ -181,10 +182,10 @@
                                 </ToolTip>
                             </Button.ToolTip>
                         </Button>
-                        <Button Style="{StaticResource ButtonStroge}" Command="{Binding DropRepresentativesOrganizationsCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
+                        <Button Style="{StaticResource ButtonStroge}" Command="{Binding DropRepresentativesOrganizationsCommand}" Margin="0,10,0,0" Background="{DynamicResource BackgroundColor}" Width="30" Height="30">
                             <Button.Content>
                                 <Grid>
-                                    <fa:ImageAwesome Icon="Trash" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
+                                    <fa:ImageAwesome Icon="Trash" HorizontalAlignment="Left" Height="20" Foreground="{DynamicResource ForegroundMainText}"/>
                                 </Grid>
                             </Button.Content>
                             <Button.ToolTip>
@@ -196,11 +197,11 @@
                     </StackPanel>
                 </Grid>
             </StackPanel>
-            <Button Grid.Column="1" Command="{Binding EditLegalEntityCommand}" Style="{StaticResource ButtonStroge}" Background="White" Width="120" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">
+            <Button Grid.Column="1" Command="{Binding EditLegalEntityCommand}" Style="{StaticResource ButtonStroge}" Background="{DynamicResource BackgroundColor}" Width="120" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">
                 <Button.Content>
                     <Grid HorizontalAlignment="Stretch" Width="120">
-                        <fa:ImageAwesome Icon="Save" HorizontalAlignment="Left" Height="20" Margin="5,0" Foreground="Black"/>
-                        <TextBlock Text="Сохранить" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <fa:ImageAwesome Icon="Save" HorizontalAlignment="Left" Height="20" Margin="5,0" Foreground="{DynamicResource ForegroundMainText}"/>
+                        <TextBlock Text="Сохранить" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundMainText}"/>
                     </Grid>
                 </Button.Content>
             </Button>

@@ -10,16 +10,17 @@
         Title="Выбор дополнительного тарифа" Height="500" Width="1000"
         MinHeight="500" MinWidth="1000"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Background="{DynamicResource BackgroundColor}">
     <Window.DataContext>
         <Datacontext:AddAdditionalRatesRentalWindowViewModel/>
     </Window.DataContext>
-    <Grid>
+    <Grid Background="{DynamicResource BackgroundColor}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
-        <DataGrid Margin="5,5,5,5" SelectedIndex="{Binding SelectedAdditionalServices}" ItemsSource="{Binding MainListAdditionalServices}" IsReadOnly="True" Grid.Row="1" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
+        <DataGrid Background="{DynamicResource BackgroundColor}" Margin="5,5,5,5" SelectedIndex="{Binding SelectedAdditionalServices}" ItemsSource="{Binding MainListAdditionalServices}" IsReadOnly="True" Grid.Row="1" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№" Binding="{Binding num}"/>
                 <DataGridTextColumn Header="Наименование дополнительной услуги" Binding="{Binding name_additional_services}"/>
@@ -28,14 +29,14 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Margin="5,23,10,0" Grid.Row="1" Grid.Column="1">
-            <Button Style="{StaticResource ButtonStroge}" Command="{Binding AddAdditionalRatesRentalCommand}" Background="White" Width="50" Height="50" Margin="0,5">
+            <Button Style="{StaticResource ButtonStroge}" Command="{Binding AddAdditionalRatesRentalCommand}" Background="{DynamicResource BackgroundColor}" Width="50" Height="50" Margin="0,5">
                 <Button.ToolTip>
                     <ToolTip>
                         <TextBlock Text="Далее"/>
                     </ToolTip>
                 </Button.ToolTip>
                 <Button.Content>
-                    <fa:ImageAwesome Icon="CaretRight" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Foreground="Black"/>
+                    <fa:ImageAwesome Icon="CaretRight" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Foreground="{DynamicResource ForegroundMainText}"/>
                 </Button.Content>
             </Button>
         </StackPanel>

@@ -5,10 +5,13 @@ using Partner.Models.PersonalData;
 using Partner.ViewModels.Base;
 using Partner.Views.Views.Manager;
 using Partner.Views.Windows.InformativeWindows;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Security;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Partner.ViewModels.Windows
 {
@@ -67,6 +70,27 @@ namespace Partner.ViewModels.Windows
                     UserData userData = new UserData(Login, password);
                     if (UserDataModel.id_user != -1)
                     {
+                        string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
+                        SqlConnection ThisConnection = new SqlConnection(connectionString);
+                        ThisConnection.Open();
+
+                        SqlCommand thisCommand = ThisConnection.CreateCommand();
+                        thisCommand.CommandText = "select Status from [user] where id_user=" + UserDataModel.id_user;
+                        SqlDataReader thisReader = thisCommand.ExecuteReader();
+                        thisReader.Read();
+
+                        if (thisReader["Status"].ToString() == "Темная")
+                        {
+                            Application.Current.Resources["ForegroundMainText"] = new SolidColorBrush(Colors.White);
+                            Application.Current.Resources["ForegroundAdditionalText"] = new SolidColorBrush(Colors.Black);
+                            Application.Current.Resources["BackgroundColor"] = new SolidColorBrush(Color.FromRgb(39,39,39));
+                            Application.Current.Resources["MainColor"] = new SolidColorBrush(Color.FromRgb(109,109,109));
+                        }
+
+                        thisReader.Close();
+
+                        ThisConnection.Close();
+
                         MessageBox.Show(UserDataModel.name + " " + UserDataModel.surname + "\nДобро пожаловать в программу 'ООО Партнер'\nУдачного рабочего дня!", "Авторизация", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                         password = null;
                         HistoryUserInputBackUpProcedure mHistoryUserInputBackUpProcedure = new HistoryUserInputBackUpProcedure(UserDataModel.id_user);

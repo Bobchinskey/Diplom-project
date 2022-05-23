@@ -10,21 +10,22 @@
         Title="{Binding Title}" 
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Height="380" Width="550">
+        Height="380" Width="550"
+        Background="{DynamicResource BackgroundColor}">
     <Window.DataContext>
         <Datacontext:RepresentativesOrganizationsWindowViewModel/>
     </Window.DataContext>
-    <Grid>
+    <Grid Background="{DynamicResource BackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <WrapPanel Grid.Row="0" Background="BlueViolet">
+        <WrapPanel Grid.Row="0" Background="{DynamicResource MainColor}">
             <TextBlock Margin="10" Text="{Binding Title}" Foreground="White" FontSize="25"/>
         </WrapPanel>
         <StackPanel Margin="10" Grid.Row="1">
             <WrapPanel Margin="0,10,0,0" Height="20">
-                <TextBlock VerticalAlignment="Center" Margin="32,0,0,0" Text="ФИО:" HorizontalAlignment="Left"/>
+                <TextBlock Foreground="{DynamicResource ForegroundMainText}" VerticalAlignment="Center" Margin="32,0,0,0" Text="ФИО:" HorizontalAlignment="Left"/>
                 <TextBox Style="{StaticResource TextBoxStroge}" Margin="10,0,5,0" Width="140" Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBox Style="{StaticResource TextBoxStroge}" Margin="10,0,5,0" Width="100" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBox Style="{StaticResource TextBoxStroge}" Margin="10,0,0,0" Width="130" Text="{Binding Patronymic, UpdateSourceTrigger=PropertyChanged}"/>
@@ -35,14 +36,14 @@
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Margin="10,10,0,10" Grid.Column="0">
-                    <TextBlock Margin="0,10" Text="Пол:" HorizontalAlignment="Right"/>
-                    <TextBlock Margin="0,17,0,10" Text="Должность:" HorizontalAlignment="Right"/>
-                    <TextBlock Margin="0,12,0,10" Text="Номер телефона:" HorizontalAlignment="Right"/>
+                    <TextBlock Foreground="{DynamicResource ForegroundMainText}" Margin="0,10" Text="Пол:" HorizontalAlignment="Right"/>
+                    <TextBlock Foreground="{DynamicResource ForegroundMainText}" Margin="0,17,0,10" Text="Должность:" HorizontalAlignment="Right"/>
+                    <TextBlock Foreground="{DynamicResource ForegroundMainText}" Margin="0,12,0,10" Text="Номер телефона:" HorizontalAlignment="Right"/>
                 </StackPanel>
                 <StackPanel Margin="10,10,0,10" Grid.Column="1">
                     <WrapPanel Margin="5,10">
-                        <RadioButton Content="Мужской" IsChecked="{Binding IsCheckedMan, UpdateSourceTrigger=PropertyChanged}"/>
-                        <RadioButton Margin="10,0" IsChecked="{Binding IsCheckedWoman, UpdateSourceTrigger=PropertyChanged}" Content="Женский"/>
+                        <RadioButton Foreground="{DynamicResource ForegroundMainText}" Content="Мужской" IsChecked="{Binding IsCheckedMan, UpdateSourceTrigger=PropertyChanged}"/>
+                        <RadioButton Foreground="{DynamicResource ForegroundMainText}" Margin="10,0" IsChecked="{Binding IsCheckedWoman, UpdateSourceTrigger=PropertyChanged}" Content="Женский"/>
                     </WrapPanel>
                     <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding Post, UpdateSourceTrigger=PropertyChanged}" Margin="5,18" Width="310" HorizontalAlignment="Left"/>
                     <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Margin="5,2" Width="120" MaxLength="11" HorizontalAlignment="Left" PreviewTextInput="NumberValidationTextBox"/>
@@ -54,20 +55,20 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <WrapPanel Grid.Column="0" Margin="10,0,0,0">
-                    <TextBlock Text="Серия паспорта:" Margin="10,0,0,0"/>
+                    <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Серия паспорта:" Margin="10,0,0,0"/>
                     <TextBox Style="{StaticResource TextBoxStroge}" PreviewTextInput="NumberValidationTextBox" Margin="5,0" Width="100" MaxLength="4" Text="{Binding SeriesPassport, UpdateSourceTrigger=PropertyChanged}"/>
                 </WrapPanel>
                 <WrapPanel Grid.Column="1" Margin="5,0,20,0">
-                    <TextBlock Text="Номер паспорта:" Margin="5,0,0,0"/>
+                    <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Номер паспорта:" Margin="5,0,0,0"/>
                     <TextBox Style="{StaticResource TextBoxStroge}" PreviewTextInput="NumberValidationTextBox" Margin="5,0" Width="100" MaxLength="6" Text="{Binding NumberPassport, UpdateSourceTrigger=PropertyChanged}"/>
                 </WrapPanel>
             </Grid>
         </StackPanel>
-        <Button Grid.Row="1" Command="{Binding AddAdditionalDataCommand}" Style="{StaticResource ButtonStroge}" Background="White" Width="120" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">
+        <Button Grid.Row="1" Command="{Binding AddAdditionalDataCommand}" Style="{StaticResource ButtonStroge}" Background="{DynamicResource BackgroundColor}" Width="120" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">
             <Button.Content>
                 <Grid HorizontalAlignment="Stretch" Width="120">
-                    <fa:ImageAwesome Icon="Save" HorizontalAlignment="Left" Height="20" Margin="5,0" Foreground="Black"/>
-                    <TextBlock Text="Сохранить" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <fa:ImageAwesome Icon="Save" HorizontalAlignment="Left" Height="20" Margin="5,0" Foreground="{DynamicResource ForegroundMainText}"/>
+                    <TextBlock Text="Сохранить" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundMainText}"/>
                 </Grid>
             </Button.Content>
         </Button>

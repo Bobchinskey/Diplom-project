@@ -8,11 +8,26 @@
         xmlns:local="clr-namespace:Partner.Views.Windows.MainWindowInteraction.Rental.AddRental"
         mc:Ignorable="d"
         Title="Выбор клиента арендующего транспортное средство" Height="500" Width="1000"
-        ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource BackgroundColor}">
     <Window.DataContext>
         <Datacontext:SelectedClientWindowViewModel/>
     </Window.DataContext>
-    <Grid>
+    <Window.Resources>
+        <ControlTemplate x:Key="{x:Static MenuItem.TopLevelHeaderTemplateKey}" TargetType="{x:Type MenuItem}">
+            <Border Name="Border" >
+                <Grid>
+                    <ContentPresenter Margin="6,3,6,3" ContentSource="Header" RecognizesAccessKey="True" />
+                    <Popup Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsSubmenuOpen}" AllowsTransparency="True" Focusable="False" PopupAnimation="Fade">
+                        <Border Name="SubmenuBorder" SnapsToDevicePixels="True" Background="{DynamicResource BackgroundColor}">
+                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
+                        </Border>
+                    </Popup>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+    </Window.Resources>
+    <Grid Background="{DynamicResource BackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -23,16 +38,16 @@
         </Grid.ColumnDefinitions>
         <WrapPanel Grid.Row="0" Grid.Column="0" Margin="10">
             <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" FontSize="16" Width="350" Height="30"/>
-            <Button Command="{Binding ScreachCommand}" Background="White" Style="{StaticResource ButtonStroge}" Width="100">
+            <Button Command="{Binding ScreachCommand}" Background="{DynamicResource BackgroundColor}" Style="{StaticResource ButtonStroge}" Width="100">
                 <Button.Content>
                     <Grid Width="80">
-                        <TextBlock HorizontalAlignment="Center" Text="Поиск"/>
-                        <fa:ImageAwesome Icon="Search" HorizontalAlignment="Right" Height="15" Foreground="Black" />
+                        <TextBlock HorizontalAlignment="Center" Text="Поиск" Foreground="{DynamicResource ForegroundMainText}"/>
+                        <fa:ImageAwesome Icon="Search" HorizontalAlignment="Right" Height="15" Foreground="{DynamicResource ForegroundMainText}"/>
                     </Grid>
                 </Button.Content>
             </Button>
         </WrapPanel>
-        <DataGrid Margin="5,5,5,5" SelectedIndex="{Binding SelectedClient}" ItemsSource="{Binding MainListClient}" IsReadOnly="True" Grid.Row="1" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
+        <DataGrid Background="{DynamicResource BackgroundColor}" Margin="5,5,5,5" SelectedIndex="{Binding SelectedClient}" ItemsSource="{Binding MainListClient}" IsReadOnly="True" Grid.Row="1" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№" Binding="{Binding num}"/>
                 <DataGridTextColumn Header="Клиент" Binding="{Binding name}"/>
@@ -41,7 +56,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Margin="5,0,10,0" Grid.Row="1" Grid.Column="1">
-            <Button Width="50" Height="50" Command="{Binding OpenAddRentalWindowCommand}" Grid.Row="2" Grid.Column="1" Background="White" Margin="10" HorizontalAlignment="Right" Style="{StaticResource ButtonStroge}">
+            <Button Background="{DynamicResource BackgroundColor}" Width="50" Height="50" Command="{Binding OpenAddRentalWindowCommand}" Grid.Row="2" Grid.Column="1" Margin="10" HorizontalAlignment="Right" Style="{StaticResource ButtonStroge}">
                 <Button.ToolTip>
                     <ToolTip>
                         <TextBlock Text="Далее"/>
@@ -49,11 +64,11 @@
                 </Button.ToolTip>
                 <Button.Content>
                     <Grid HorizontalAlignment="Stretch">
-                        <fa:ImageAwesome Icon="CaretRight" HorizontalAlignment="Right" Height="30" Foreground="Black"/>
+                        <fa:ImageAwesome Icon="CaretRight" HorizontalAlignment="Right" Height="30" Foreground="{DynamicResource ForegroundMainText}"/>
                     </Grid>
                 </Button.Content>
             </Button>
-            <Button Background="White" Margin="0,5" Width="50" Height="50" Style="{StaticResource ButtonStroge}">
+            <Button Background="{DynamicResource BackgroundColor}" Margin="0,5" Width="50" Height="50" Style="{StaticResource ButtonStroge}">
                 <Button.ToolTip>
                     <ToolTip>
                         <TextBlock Text="Добавить"/>
@@ -61,13 +76,13 @@
                 </Button.ToolTip>
                 <Button.Content>
                     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Menu Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Menu Background="{DynamicResource BackgroundColor}" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <MenuItem HorizontalAlignment="Center" VerticalAlignment="Center" Width="48" Height="48">
                                 <MenuItem.Header>
-                                    <fa:ImageAwesome Margin="1,2,1,0" Icon="Plus" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Foreground="Black"/>
+                                    <fa:ImageAwesome Margin="1,2,1,0" Icon="Plus" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Foreground="{DynamicResource ForegroundMainText}"/>
                                 </MenuItem.Header>
-                                <MenuItem Header="Физическое лицо" FontSize="12" Command="{Binding OpenAddClientWindowCommand}"/>
-                                <MenuItem Header="Юридическое лицо" FontSize="12" Command="{Binding OpenAddLegalEntityWindowCommand}"/>
+                                <MenuItem Foreground="{DynamicResource ForegroundMainText}" Background="{DynamicResource BackgroundColor}" Header="Физическое лицо" FontSize="12" Command="{Binding OpenAddClientWindowCommand}"/>
+                                <MenuItem Foreground="{DynamicResource ForegroundMainText}" Background="{DynamicResource BackgroundColor}" Header="Юридическое лицо" FontSize="12" Command="{Binding OpenAddLegalEntityWindowCommand}"/>
                             </MenuItem>
                         </Menu>
                     </Grid>

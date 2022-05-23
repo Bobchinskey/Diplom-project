@@ -11,11 +11,12 @@
         Title="Дополнительные услуги" Height="500" Width="1000"
         MinHeight="500" MinWidth="1000"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Background="{DynamicResource BackgroundColor}">
     <Window.DataContext>
         <Datacontext:AdditionalServicesViewModel/>
     </Window.DataContext>
-    <Grid>
+    <Grid Background="{DynamicResource BackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -31,7 +32,7 @@
                 </i1:EventTrigger>
             </i1:Interaction.Triggers>
         </ComboBox>
-        <DataGrid CanUserSortColumns="False" Margin="5,5,5,5" SelectedIndex="{Binding SelectedAdditionalServices}" ItemsSource="{Binding MainListAdditionalServices}" IsReadOnly="True" Grid.Row="1" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
+        <DataGrid Background="{DynamicResource BackgroundColor}" CanUserSortColumns="False" Margin="5,5,5,5" SelectedIndex="{Binding SelectedAdditionalServices}" ItemsSource="{Binding MainListAdditionalServices}" IsReadOnly="True" Grid.Row="1" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№" Binding="{Binding num}"/>
                 <DataGridTextColumn Header="Наименование дополнительной услуги" Binding="{Binding name_additional_services}"/>
@@ -41,20 +42,20 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Margin="5,0,10,0" Grid.Row="1" Grid.Column="1">
-            <Button Style="{StaticResource ButtonStroge}" Command="{Binding AddAdditionalServicesCommand}" Background="White" Width="50" Height="50" Margin="0,5">
+            <Button Style="{StaticResource ButtonStroge}" Command="{Binding AddAdditionalServicesCommand}" Background="{DynamicResource BackgroundColor}" Width="50" Height="50" Margin="0,5">
                 <Button.ToolTip>
                     <ToolTip>
                         <TextBlock Text="Добавить"/>
                     </ToolTip>
                 </Button.ToolTip>
                 <Button.Content>
-                    <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Foreground="Black"/>
+                    <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Foreground="{DynamicResource ForegroundMainText}"/>
                 </Button.Content>
             </Button>
-            <Button Style="{StaticResource ButtonStroge}" Command="{Binding EditAdditionalServicesCommand}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
+            <Button Style="{StaticResource ButtonStroge}" Command="{Binding EditAdditionalServicesCommand}" Margin="0,30,0,0" Background="{DynamicResource BackgroundColor}" Width="50" Height="50">
                 <Button.Content>
                     <Grid>
-                        <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
+                        <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="30" Foreground="{DynamicResource ForegroundMainText}"/>
                     </Grid>
                 </Button.Content>
                 <Button.ToolTip>
@@ -63,10 +64,10 @@
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button Style="{StaticResource ButtonStroge}" Command="{Binding DropAdditionalServicesCommand}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
+            <Button Style="{StaticResource ButtonStroge}" Command="{Binding DropAdditionalServicesCommand}" Margin="0,30,0,0" Background="{DynamicResource BackgroundColor}" Width="50" Height="50">
                 <Button.Content>
                     <Grid>
-                        <fa:ImageAwesome Icon="Trash" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
+                        <fa:ImageAwesome Icon="Trash" HorizontalAlignment="Left" Height="30" Foreground="{DynamicResource ForegroundMainText}"/>
                     </Grid>
                 </Button.Content>
                 <Button.ToolTip>
@@ -75,10 +76,10 @@
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button Style="{StaticResource ButtonStroge}" Command="{Binding ExcelCommand}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
+            <Button Style="{StaticResource ButtonStroge}" Command="{Binding ExcelCommand}" Margin="0,30,0,0" Background="{DynamicResource BackgroundColor}" Width="50" Height="50">
                 <Button.Content>
                     <Grid>
-                        <fa:ImageAwesome Icon="FileExcelOutline" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
+                        <fa:ImageAwesome Icon="FileExcelOutline" HorizontalAlignment="Left" Height="30" Foreground="{DynamicResource ForegroundMainText}"/>
                     </Grid>
                 </Button.Content>
                 <Button.ToolTip>
@@ -87,10 +88,10 @@
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button Style="{StaticResource ButtonStroge}" Margin="0,30,0,0" Background="White" Width="50" Height="50" Command="{Binding RepeatAdditionalServicesCommand}" Visibility="{Binding VisibleRecoverButton}">
+            <Button Style="{StaticResource ButtonStroge}" Margin="0,30,0,0" Background="{DynamicResource BackgroundColor}" Width="50" Height="50" Command="{Binding RepeatAdditionalServicesCommand}" Visibility="{Binding VisibleRecoverButton}">
                 <Button.Content>
                     <Grid>
-                        <fa:ImageAwesome Icon="Repeat" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
+                        <fa:ImageAwesome Icon="Repeat" HorizontalAlignment="Left" Height="30" Foreground="{DynamicResource ForegroundMainText}"/>
                     </Grid>
                 </Button.Content>
                 <Button.ToolTip>

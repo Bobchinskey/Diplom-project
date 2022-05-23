@@ -3,12 +3,52 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Datacontext="clr-namespace:Partner.ViewModels.Windows.Settings"
         xmlns:local="clr-namespace:Partner.Views.Windows.Settings"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        ResizeMode="NoResize"
+        Title="Пользовательские настройки"
+        Height="320" Width="500"
+        MinHeight="300" MinWidth="500"
         WindowStartupLocation="CenterScreen"
-        Title="Пользовательские настройки" Height="300" Width="500">
-    <Grid>
-        
+        ResizeMode="NoResize"
+        Background="{DynamicResource BackgroundColor}">
+    <Window.DataContext>
+        <Datacontext:AuthorizationWindowViewModel/>
+    </Window.DataContext>
+    <Grid Background="{DynamicResource BackgroundColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="{DynamicResource MainColor}">
+            <TextBlock Text="Пользовательские настройки" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="10"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.8*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" HorizontalAlignment="Right">
+                <TextBlock Margin="5,15" Text="Фамилия: " Foreground="{DynamicResource ForegroundMainText}" TextAlignment="Right"/>
+                <TextBlock Margin="5,15" Text="Имя: " Foreground="{DynamicResource ForegroundMainText}" TextAlignment="Right"/>
+                <TextBlock Margin="5,15" Text="Отчестово: " Foreground="{DynamicResource ForegroundMainText}" TextAlignment="Right"/>
+                <TextBlock Margin="5,15" Text="Оформление приложения: " Foreground="{DynamicResource ForegroundMainText}" TextAlignment="Right"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" HorizontalAlignment="Left">
+                <TextBox Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" Margin="5,14" Style="{StaticResource TextBoxStroge}" Width="200" Height="20"/>
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="5,13" Style="{StaticResource TextBoxStroge}" Width="200" Height="20"/>
+                <TextBox Text="{Binding Patronymic, UpdateSourceTrigger=PropertyChanged}" Margin="5,13" Style="{StaticResource TextBoxStroge}" Width="200" Height="20"/>
+                <ComboBox SelectedItem="{Binding SelectedApplicationDesignProperty}" ItemsSource="{Binding status}" Margin="5,13" Width="130" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </Grid>
+        <Button Margin="10" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding SaveDataUserSettingsCommand}" Style="{StaticResource ButtonStroge}" Background="{DynamicResource BackgroundColor}" Width="120" Height="30">
+            <Button.Content>
+                <Grid HorizontalAlignment="Stretch" Width="120">
+                    <fa:ImageAwesome Icon="Save" HorizontalAlignment="Left" Height="20" Margin="5,0" Foreground="{DynamicResource ForegroundMainText}"/>
+                    <TextBlock Text="Сохранить" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundMainText}"/>
+                </Grid>
+            </Button.Content>
+        </Button>
     </Grid>
 </Window>

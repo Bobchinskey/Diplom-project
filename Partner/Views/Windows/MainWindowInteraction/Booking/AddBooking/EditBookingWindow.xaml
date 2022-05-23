@@ -14,12 +14,12 @@
     <Window.DataContext>
         <Datacontext:EditBookingWindowViewModel/>
     </Window.DataContext>
-    <Grid>
+    <Grid Background="{DynamicResource BackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="BlueViolet">
+        <Grid Grid.Row="0" Background="{DynamicResource MainColor}">
             <TextBlock Margin="10" Text="{Binding Title}" Foreground="White" FontSize="25" HorizontalAlignment="Center"/>
         </Grid>
         <StackPanel Grid.Row="1"  Margin="10,20">
@@ -29,8 +29,8 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" HorizontalAlignment="Right">
-                    <TextBlock Text="Заказчик:" Margin="10,0,10,10" TextAlignment="Right"/>
-                    <TextBlock Text="Транспортное средство:" Margin="10" TextAlignment="Right"/>
+                    <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Заказчик:" Margin="10,0,10,10" TextAlignment="Right"/>
+                    <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Транспортное средство:" Margin="10" TextAlignment="Right"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1" HorizontalAlignment="Left">
                     <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding Client}" Width="200" IsEnabled="False" Margin="10,0,10,10"/>
@@ -43,36 +43,36 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" HorizontalAlignment="Center">
-                    <TextBlock Text="Дата начала аренды"/>
-                    <DatePicker Style="{StaticResource DatePickerStroge}" SelectedDate="{Binding StartDateRental}" Margin="0,5,0,0" IsEnabled="False"/>
+                    <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Дата начала аренды"/>
+                    <DatePicker Background="{DynamicResource BackgroundColor}" Style="{StaticResource DatePickerStroge}" SelectedDate="{Binding StartDateRental}" Margin="0,5,0,0" IsEnabled="False"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1" HorizontalAlignment="Center">
-                    <TextBlock Text="Дата Окончания аренды"/>
-                    <DatePicker Style="{StaticResource DatePickerStroge}" SelectedDate="{Binding EndDateRental}" Margin="0,5,0,0" IsEnabled="False"/>
+                    <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Дата Окончания аренды"/>
+                    <DatePicker Background="{DynamicResource BackgroundColor}" Style="{StaticResource DatePickerStroge}" SelectedDate="{Binding EndDateRental}" Margin="0,5,0,0" IsEnabled="False"/>
                 </StackPanel>
             </Grid>
             <WrapPanel Margin="10,20">
-                <TextBlock Text="Итоговая стоимость:"/>
+                <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Итоговая стоимость:"/>
                 <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding Cost}" Width="150" Margin="10,0" IsEnabled="False"/>
             </WrapPanel>
             <WrapPanel Margin="10">
-                <TextBlock Text="Залог:"/>
+                <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Залог:"/>
                 <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding Deposit}" Width="100" Margin="10,0" IsEnabled="False"/>
             </WrapPanel>
         </StackPanel>
-        <Button Grid.Row="1" Command="{Binding EditCloseBookingCommand}" Style="{StaticResource ButtonStroge}" Background="White" Width="140" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">
+        <Button Background="{DynamicResource BackgroundColor}" Grid.Row="1" Command="{Binding EditCloseBookingCommand}" Style="{StaticResource ButtonStroge}" Width="140" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">
             <Button.Content>
                 <Grid HorizontalAlignment="Stretch" Width="140">
-                    <fa:ImageAwesome Icon="CaretRight" HorizontalAlignment="Right" Height="20" Margin="5,0" Foreground="Black"/>
-                    <TextBlock Margin="0,0,0,0" Text="Закрыть бронь" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <fa:ImageAwesome Foreground="{DynamicResource ForegroundMainText}" Icon="CaretRight" HorizontalAlignment="Right" Height="20" Margin="5,0"/>
+                    <TextBlock Foreground="{DynamicResource ForegroundMainText}" Margin="0,0,0,0" Text="Закрыть бронь" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
             </Button.Content>
         </Button>
-        <Button Grid.Row="1" Command="{Binding EditCancelBookingCommand}" Style="{StaticResource ButtonStroge}" Background="White" Width="140" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20">
+        <Button Background="{DynamicResource BackgroundColor}" Grid.Row="1" Command="{Binding EditCancelBookingCommand}" Style="{StaticResource ButtonStroge}" Width="140" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20">
             <Button.Content>
                 <Grid HorizontalAlignment="Stretch" Width="140">
-                    <fa:ImageAwesome Icon="Close" HorizontalAlignment="Left" Height="20" Margin="5,0" Foreground="Black"/>
-                    <TextBlock Margin="15,0,0,0" Text="Отменить бронь" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <fa:ImageAwesome Foreground="{DynamicResource ForegroundMainText}" Icon="Close" HorizontalAlignment="Left" Height="20" Margin="5,0"/>
+                    <TextBlock Foreground="{DynamicResource ForegroundMainText}" Margin="15,0,0,0" Text="Отменить бронь" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
             </Button.Content>
         </Button>

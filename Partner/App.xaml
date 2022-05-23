@@ -5,11 +5,16 @@
              StartupUri="Views/Windows/AuthorizationWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            <SolidColorBrush x:Key="MainColor" Color="BlueViolet"/>
+            <SolidColorBrush x:Key="BackgroundColor" Color="White"/>
+            <SolidColorBrush x:Key="ForegroundMainText" Color="Black"/>
+            <SolidColorBrush x:Key="ForegroundAdditionalText" Color="White"/>
+            <Page x:Key="Content"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Buttons.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/ButtonStroge.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/HyperlinkButtons.xaml"/>
-                <ResourceDictionary Source="Resources/Styles/TextBoxStroge.xaml"/> 
+                <ResourceDictionary Source="Resources/Styles/TextBoxStroge.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/PasswordBoxStroge.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/DatePickerStroge.xaml"/>
             </ResourceDictionary.MergedDictionaries>

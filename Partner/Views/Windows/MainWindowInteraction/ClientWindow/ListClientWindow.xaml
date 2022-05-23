@@ -11,11 +11,26 @@
         Title="Клиенты"
         WindowStartupLocation="CenterScreen"
         Height="550" Width="1000"
-        MinHeight="550" MinWidth="1000">
+        MinHeight="550" MinWidth="1000"
+        Background="{DynamicResource BackgroundColor}">
+    <Window.Resources>
+        <ControlTemplate x:Key="{x:Static MenuItem.TopLevelHeaderTemplateKey}" TargetType="{x:Type MenuItem}">
+            <Border Name="Border" >
+                <Grid>
+                    <ContentPresenter Margin="6,3,6,3" ContentSource="Header" RecognizesAccessKey="True" />
+                    <Popup Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsSubmenuOpen}" AllowsTransparency="True" Focusable="False" PopupAnimation="Fade">
+                        <Border Name="SubmenuBorder" SnapsToDevicePixels="True" Background="{DynamicResource BackgroundColor}">
+                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
+                        </Border>
+                    </Popup>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+    </Window.Resources>
     <Window.DataContext>
         <Datacontext:ListClientWindowViewModel/>
     </Window.DataContext>
-    <Grid>
+    <Grid Background="{DynamicResource BackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -31,7 +46,7 @@
                 </i1:EventTrigger>
             </i1:Interaction.Triggers>
         </ComboBox>
-        <DataGrid CanUserSortColumns="False" Margin="5,5,5,5" SelectedIndex="{Binding SelectedClient}" ItemsSource="{Binding MainListClient}" IsReadOnly="True" Grid.Row="1" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
+        <DataGrid Background="{DynamicResource BackgroundColor}" CanUserSortColumns="False" Margin="5,5,5,5" SelectedIndex="{Binding SelectedClient}" ItemsSource="{Binding MainListClient}" IsReadOnly="True" Grid.Row="1" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№" Binding="{Binding num}"/>
                 <DataGridTextColumn Header="Клиент" Binding="{Binding name}"/>
@@ -41,7 +56,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Margin="5,0,10,0" Grid.Row="1" Grid.Column="1">
-            <Button Style="{StaticResource ButtonStroge}" Background="White" Margin="0,5" Width="50" Height="50">
+            <Button Background="{DynamicResource BackgroundColor}" Style="{StaticResource ButtonStroge}" Margin="0,5" Width="50" Height="50">
                 <Button.ToolTip>
                     <ToolTip>
                         <TextBlock Text="Добавить"/>
@@ -49,22 +64,22 @@
                 </Button.ToolTip>
                 <Button.Content>
                     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Menu Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <MenuItem HorizontalAlignment="Center" VerticalAlignment="Center" Width="48" Height="48">
+                        <Menu Background="{DynamicResource BackgroundColor}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <MenuItem Background="{DynamicResource BackgroundColor}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="48" Height="48">
                                 <MenuItem.Header>
-                                    <fa:ImageAwesome Margin="1,2,1,0" Icon="Plus" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Foreground="Black"/>
+                                    <fa:ImageAwesome Margin="1,2,1,0" Icon="Plus" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Foreground="{DynamicResource ForegroundMainText}"/>
                                 </MenuItem.Header>
-                                <MenuItem Header="Физическое лицо" FontSize="12" Command="{Binding OpenAddClientWindowCommand}"/>
-                                <MenuItem Header="Юридическое лицо" FontSize="12" Command="{Binding OpenAddLegalEntityWindowCommand}"/>
+                                <MenuItem Foreground="{DynamicResource ForegroundMainText}" Header="Физическое лицо" FontSize="12" Command="{Binding OpenAddClientWindowCommand}"/>
+                                <MenuItem Foreground="{DynamicResource ForegroundMainText}" Header="Юридическое лицо" FontSize="12" Command="{Binding OpenAddLegalEntityWindowCommand}"/>
                             </MenuItem>
                         </Menu>
                     </Grid>
                 </Button.Content>
             </Button>
-            <Button Command="{Binding OpenEditClientWindowCommand}" Style="{StaticResource ButtonStroge}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
+            <Button Command="{Binding OpenEditClientWindowCommand}" Style="{StaticResource ButtonStroge}" Margin="0,30,0,0" Background="{DynamicResource BackgroundColor}" Width="50" Height="50">
                 <Button.Content>
                     <Grid>
-                        <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
+                        <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="30" Foreground="{DynamicResource ForegroundMainText}"/>
                     </Grid>
                 </Button.Content>
                 <Button.ToolTip>
@@ -73,10 +88,10 @@
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button Command="{Binding DropClientCommand}" Style="{StaticResource ButtonStroge}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
+            <Button Command="{Binding DropClientCommand}" Style="{StaticResource ButtonStroge}" Margin="0,30,0,0" Background="{DynamicResource BackgroundColor}" Width="50" Height="50">
                 <Button.Content>
                     <Grid>
-                        <fa:ImageAwesome Icon="Trash" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
+                        <fa:ImageAwesome Icon="Trash" HorizontalAlignment="Left" Height="30" Foreground="{DynamicResource ForegroundMainText}"/>
                     </Grid>
                 </Button.Content>
                 <Button.ToolTip>
@@ -85,10 +100,10 @@
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button Command="{Binding ExcelCommand}" Style="{StaticResource ButtonStroge}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
+            <Button Command="{Binding ExcelCommand}" Style="{StaticResource ButtonStroge}" Margin="0,30,0,0" Background="{DynamicResource BackgroundColor}" Width="50" Height="50">
                 <Button.Content>
                     <Grid>
-                        <fa:ImageAwesome Icon="FileExcelOutline" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
+                        <fa:ImageAwesome Icon="FileExcelOutline" HorizontalAlignment="Left" Height="30" Foreground="{DynamicResource ForegroundMainText}"/>
                     </Grid>
                 </Button.Content>
                 <Button.ToolTip>
@@ -97,10 +112,10 @@
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button Style="{StaticResource ButtonStroge}" Margin="0,30,0,0" Background="White" Width="50" Height="50" Command="{Binding RepeatClientCommand}" Visibility="{Binding VisibleRecoverButton}">
+            <Button Style="{StaticResource ButtonStroge}" Margin="0,30,0,0" Background="{DynamicResource BackgroundColor}" Width="50" Height="50" Command="{Binding RepeatClientCommand}" Visibility="{Binding VisibleRecoverButton}">
                 <Button.Content>
                     <Grid>
-                        <fa:ImageAwesome Icon="Repeat" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
+                        <fa:ImageAwesome Icon="Repeat" HorizontalAlignment="Left" Height="30" Foreground="{DynamicResource ForegroundMainText}"/>
                     </Grid>
                 </Button.Content>
                 <Button.ToolTip>

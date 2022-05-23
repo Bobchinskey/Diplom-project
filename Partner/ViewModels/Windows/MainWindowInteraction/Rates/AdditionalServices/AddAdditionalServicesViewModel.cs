@@ -58,19 +58,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rates.AdditionalServi
 
         #endregion
 
-        #region Тип дополнительной услуги : TypeAdditionalServices 
-
-        private string _TypeAdditionalServices = AddListData.type_additional_services;
-
-        /// <summary>TypeAdditionalServices</summary>
-        public string TypeAdditionalServices
-        {
-            get => _TypeAdditionalServices;
-            set => Set(ref _TypeAdditionalServices, value);
-        }
-
-        #endregion
-
         #region Стоимость дополнительной услуги : CostAdditionalServices 
 
         private string _CostAdditionalServices = AddListData.cost_additional_services;
@@ -80,6 +67,33 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rates.AdditionalServi
         {
             get => _CostAdditionalServices;
             set => Set(ref _CostAdditionalServices, value);
+        }
+
+        #endregion
+
+        #region Выбранный элемент Combobox свойства тип оплаты : SelectedAdditionalServicesProperty
+
+        private string _SelectedAdditionalServicesProperty = "Разовая";
+
+        /// <summary>SelectedAdditionalServicesProperty</summary>
+        public string SelectedAdditionalServicesProperty
+        {
+            get => _SelectedAdditionalServicesProperty;
+            set => Set(ref _SelectedAdditionalServicesProperty, value);
+        }
+
+        #endregion
+
+        #region Массив данных фильтрующих элементов : status
+
+        private string[] _status = { "Разовая", "По дням" };
+
+        /// <summary>status</summary>
+
+        public string[] status
+        {
+            get => _status;
+            set => Set(ref _status, value);
         }
 
         #endregion
@@ -95,7 +109,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rates.AdditionalServi
 
         private bool CanAddAdditionalServicesCommandExecute(object p)
         {
-            if ((NameAdditionalServices != "") && (CostAdditionalServices != "") && (TypeAdditionalServices != ""))
+            if ((NameAdditionalServices != "") && (CostAdditionalServices != ""))
                 return true;
             else
                 return false;
@@ -113,7 +127,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rates.AdditionalServi
                 command.CommandText = "Add_additional_services";
                 command.Parameters.AddWithValue("@name_additional_services", NameAdditionalServices);
                 command.Parameters.AddWithValue("@cost_additional_services", CostAdditionalServices);
-                command.Parameters.AddWithValue("@type_additional_services", TypeAdditionalServices);
+                command.Parameters.AddWithValue("@type_additional_services", SelectedAdditionalServicesProperty);
                 command.ExecuteNonQuery();
                 ThisConnection.Close();
 
@@ -138,7 +152,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rates.AdditionalServi
                 command.Parameters.AddWithValue("@id_additional_services", IdAdditionalServices);
                 command.Parameters.AddWithValue("@name_additional_services", NameAdditionalServices);
                 command.Parameters.AddWithValue("@cost_additional_services", CostAdditionalServices);
-                command.Parameters.AddWithValue("@type_additional_services", TypeAdditionalServices);
+                command.Parameters.AddWithValue("@type_additional_services", SelectedAdditionalServicesProperty);
                 command.ExecuteNonQuery();
                 ThisConnection.Close();
 

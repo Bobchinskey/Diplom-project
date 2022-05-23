@@ -362,6 +362,5 @@ namespace Partner.ViewModels.Views.Maneger.Pages
 
             #endregion
         }
-
     }
 }

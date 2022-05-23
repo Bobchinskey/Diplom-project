@@ -9,19 +9,20 @@
         Title="Брони" 
         Height="450" Width="700"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Background="{DynamicResource BackgroundColor}">
     <Window.DataContext>
         <Datacontext:ListBookingWindowViewModel/>
     </Window.DataContext>
-    <Grid>
+    <Grid Background="{DynamicResource BackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="BlueViolet">
+        <Grid Grid.Row="0" Background="{DynamicResource MainColor}">
             <TextBlock Margin="10" Text="Бронирование транспортных средств" HorizontalAlignment="Center" Foreground="White" FontSize="25"/>
         </Grid>
-        <DataGrid Margin="5,5,5,5" ItemsSource="{Binding MainListBooking}" IsReadOnly="True" Grid.Row="1" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
+        <DataGrid Background="{DynamicResource BackgroundColor}" Margin="5,5,5,5" ItemsSource="{Binding MainListBooking}" IsReadOnly="True" Grid.Row="1" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№" Binding="{Binding num}"/>
                 <DataGridTextColumn Header="Наименование" Binding="{Binding name}"/>

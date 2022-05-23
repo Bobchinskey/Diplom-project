@@ -9,17 +9,18 @@
         mc:Ignorable="d"
         Title="{Binding Title}" Height="200" Width="400"
         ResizeMode="NoResize" 
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource BackgroundColor}">
     <Window.DataContext>
         <Datacontext:AdditionalDataClientWindowViewModel/>
     </Window.DataContext>
-    <Grid>
+    <Grid Background="{DynamicResource BackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="BlueViolet">
+        <Grid Grid.Row="0" Background="{DynamicResource MainColor}">
             <TextBlock Margin="5" Text="{Binding Title}" HorizontalAlignment="Center" TextAlignment="Center" Foreground="White" FontSize="20"/>
         </Grid>
         <Grid Grid.Row="1">
@@ -28,19 +29,19 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
-                <TextBlock Margin="10" Text="Номер телефона:" HorizontalAlignment="Right"/>
-                <TextBlock Margin="10" Text="Описание:" HorizontalAlignment="Right"/>
+                <TextBlock Foreground="{DynamicResource ForegroundMainText}" Margin="10" Text="Номер телефона:" HorizontalAlignment="Right"/>
+                <TextBlock Foreground="{DynamicResource ForegroundMainText}" Margin="10" Text="Описание:" HorizontalAlignment="Right"/>
             </StackPanel>
             <StackPanel Grid.Column="1">
                 <TextBox Style="{StaticResource TextBoxStroge}" PreviewTextInput="NumberValidationTextBox" Text="{Binding Numberphone, UpdateSourceTrigger=PropertyChanged}" Margin="10" HorizontalAlignment="Left" MaxLength="11" Width="120"/>
                 <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding Other}" Margin="10,10" HorizontalAlignment="Left" Width="200"/>
             </StackPanel>
         </Grid>
-        <Button Command="{Binding AddAdditionalDataCommand}" Grid.Row="2" Background="White" Margin="10" HorizontalAlignment="Right" Style="{StaticResource ButtonStroge}">
+        <Button Background="{DynamicResource BackgroundColor}" Command="{Binding AddAdditionalDataCommand}" Grid.Row="2" Margin="10" HorizontalAlignment="Right" Style="{StaticResource ButtonStroge}">
             <Button.Content>
-                <Grid HorizontalAlignment="Stretch" Width="120">
-                    <fa:ImageAwesome Icon="Save" HorizontalAlignment="Left" Height="20" Margin="5,2,5,0" Foreground="Black"/>
-                    <TextBlock Text="Сохранить" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Grid Background="{DynamicResource BackgroundColor}" HorizontalAlignment="Stretch" Width="120">
+                    <fa:ImageAwesome Icon="Save" HorizontalAlignment="Left" Height="20" Margin="5,2,5,0" Foreground="{DynamicResource ForegroundMainText}"/>
+                    <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Сохранить" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
             </Button.Content>
         </Button>

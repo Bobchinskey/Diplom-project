@@ -503,6 +503,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Maintenances.Addition
             thisReader.Close();
 
             ThisConnection.Close();
+
             #endregion
         }
     }

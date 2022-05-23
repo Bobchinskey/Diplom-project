@@ -13,15 +13,15 @@
     <Window.DataContext>
         <Datacontext:ListRentalInformationWindowViewModel/>
     </Window.DataContext>
-    <Grid>
+    <Grid Background="{DynamicResource BackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="BlueViolet">
+        <Grid Background="{DynamicResource MainColor}" Grid.Row="0">
             <TextBlock Margin="10" Text="Аренда транспортных средств" HorizontalAlignment="Center" Foreground="White" FontSize="25"/>
         </Grid>
-        <DataGrid Margin="5,5,5,5" ItemsSource="{Binding MainListRental}" IsReadOnly="True" Grid.Row="1" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
+        <DataGrid Background="{DynamicResource BackgroundColor}" Margin="5,5,5,5" ItemsSource="{Binding MainListRental}" IsReadOnly="True" Grid.Row="1" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№" Binding="{Binding num}"/>
                 <DataGridTextColumn Header="Наименование" Binding="{Binding name}"/>

@@ -10,16 +10,17 @@
         Title="Техническое обслуживание" 
         Height="450" Width="800"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Background="{DynamicResource BackgroundColor}">
     <Window.DataContext>
         <Datacontext:ListMaintenanceWindowViewModel/>
     </Window.DataContext>
-    <Grid Margin="10">
+    <Grid Margin="10" Background="{DynamicResource BackgroundColor}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
-        <DataGrid CanUserSortColumns="False" Margin="5,5,5,5" SelectedIndex="{Binding SelectedVehicle}" ItemsSource="{Binding MainListMaintenance}" IsReadOnly="True" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
+        <DataGrid Background="{DynamicResource BackgroundColor}" CanUserSortColumns="False" Margin="5,5,5,5" SelectedIndex="{Binding SelectedVehicle}" ItemsSource="{Binding MainListMaintenance}" IsReadOnly="True" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№" Binding="{Binding num}"/>
                 <DataGridTextColumn Header="Наименование" Binding="{Binding name_maintenance}"/>
@@ -28,10 +29,10 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Margin="5,0" Grid.Column="1">
-            <Button Style="{StaticResource ButtonStroge}" Background="White" Margin="0,5" Width="50" Height="50" Command="{Binding AddMaintenanceWindowCommand}">
+            <Button Style="{StaticResource ButtonStroge}" Background="{DynamicResource BackgroundColor}" Margin="0,5" Width="50" Height="50" Command="{Binding AddMaintenanceWindowCommand}">
                 <Button.Content>
                     <Grid>
-                        <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
+                        <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="30" Foreground="{DynamicResource ForegroundMainText}"/>
                     </Grid>
                 </Button.Content>
                 <Button.ToolTip>
@@ -40,10 +41,10 @@
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button Style="{StaticResource ButtonStroge}" Command="{Binding EditMaintenanceWindowCommand}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
+            <Button Style="{StaticResource ButtonStroge}" Command="{Binding EditMaintenanceWindowCommand}" Margin="0,30,0,0" Background="{DynamicResource BackgroundColor}" Width="50" Height="50">
                 <Button.Content>
                     <Grid>
-                        <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
+                        <fa:ImageAwesome Icon="Pencil" HorizontalAlignment="Left" Height="30" Foreground="{DynamicResource ForegroundMainText}"/>
                     </Grid>
                 </Button.Content>
                 <Button.ToolTip>
@@ -52,10 +53,10 @@
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button Style="{StaticResource ButtonStroge}" Command="{Binding DropMaintenanceCommand}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
+            <Button Style="{StaticResource ButtonStroge}" Command="{Binding DropMaintenanceCommand}" Margin="0,30,0,0" Background="{DynamicResource BackgroundColor}" Width="50" Height="50">
                 <Button.Content>
                     <Grid>
-                        <fa:ImageAwesome Icon="Trash" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
+                        <fa:ImageAwesome Icon="Trash" HorizontalAlignment="Left" Height="30" Foreground="{DynamicResource ForegroundMainText}"/>
                     </Grid>
                 </Button.Content>
                 <Button.ToolTip>
@@ -64,10 +65,10 @@
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button Style="{StaticResource ButtonStroge}" Command="{Binding ExcelCommand}" Margin="0,30,0,0" Background="White" Width="50" Height="50">
+            <Button Style="{StaticResource ButtonStroge}" Command="{Binding ExcelCommand}" Margin="0,30,0,0" Background="{DynamicResource BackgroundColor}" Width="50" Height="50">
                 <Button.Content>
                     <Grid>
-                        <fa:ImageAwesome Icon="FileExcelOutline" HorizontalAlignment="Left" Height="30" Foreground="Black"/>
+                        <fa:ImageAwesome Icon="FileExcelOutline" HorizontalAlignment="Left" Height="30" Foreground="{DynamicResource ForegroundMainText}"/>
                     </Grid>
                 </Button.Content>
                 <Button.ToolTip>

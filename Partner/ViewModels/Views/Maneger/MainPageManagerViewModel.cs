@@ -68,8 +68,7 @@ namespace Partner.ViewModels.Views.Maneger
 
         private void OnUpdatePageCommandExecuted(object p)
         {
-            UserDataModel.page = new MainPageRental();
-            StartPage = UserDataModel.page;
+            Application.Current.Resources["Content"] = new MainPageRental();
         }
 
         #endregion
@@ -97,7 +96,7 @@ namespace Partner.ViewModels.Views.Maneger
         private void OnOpenUserSettingsWindowCommandExecuted(object p)
         {
             UserSettingsWindow userSettingsWindow = new UserSettingsWindow();
-            userSettingsWindow.Show();
+            userSettingsWindow.ShowDialog();
         }
 
         #endregion
@@ -267,6 +266,12 @@ namespace Partner.ViewModels.Views.Maneger
             OpenListBookingWindowCommand = new LamdaCommand(OnOpenListBookingWindowCommandExecuted, CanOpenListBookingWindowCommandExecute);
 
             #endregion
+
+            #region Данные 
+
+            Application.Current.Resources["Content"] = new MainPageRental();
+
+            #endregion 
         }
     }
 }

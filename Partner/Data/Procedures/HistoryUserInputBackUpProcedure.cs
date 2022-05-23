@@ -27,13 +27,13 @@ namespace Partner.Data.Procedures
             thisCommand.CommandText = "select TOP(1) Date_BACKUP from [BACKUP_DataBase] ORDER BY Date_BACKUP DESC";
             SqlDataReader thisReader = thisCommand.ExecuteReader();
             thisReader.Read();
-            if (thisReader["Date_BACKUP"].ToString() == "")
+            if (thisReader.HasRows)
             {
-                dateBackup = DateTime.Today;
+                dateBackup = Convert.ToDateTime(thisReader["Date_BACKUP"].ToString());
             }
             else
             {
-                dateBackup = Convert.ToDateTime(thisReader["Date_BACKUP"].ToString());
+                dateBackup = DateTime.Today;
             }
             thisReader.Close();
 

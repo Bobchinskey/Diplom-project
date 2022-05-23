@@ -10,16 +10,17 @@
         Title="{Binding Title}" Height="600" Width="500"
         MinHeight="600" MinWidth="500"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource BackgroundColor}">
     <Window.DataContext>
         <Datacontext:AddRentalWindowViewModel/>
     </Window.DataContext>
-    <Grid>
+    <Grid Background="{DynamicResource BackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="BlueViolet">
+        <Grid Grid.Row="0" Background="{DynamicResource MainColor}">
             <TextBlock Margin="10" Text="{Binding Title}" Foreground="White" FontSize="25" HorizontalAlignment="Center"/>
         </Grid>
         <StackPanel Grid.Row="1"  Margin="10,20">
@@ -29,8 +30,8 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" HorizontalAlignment="Right">
-                    <TextBlock Text="Заказчик:" Margin="10,0,10,10" TextAlignment="Right"/>
-                    <TextBlock Text="Транспортное средство:" Margin="10" TextAlignment="Right"/>
+                    <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Заказчик:" Margin="10,0,10,10" TextAlignment="Right"/>
+                    <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Транспортное средство:" Margin="10" TextAlignment="Right"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1" HorizontalAlignment="Left">
                     <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding Client}" Width="200" IsEnabled="False" Margin="10,0,10,10"/>
@@ -43,12 +44,12 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" HorizontalAlignment="Center">
-                    <TextBlock Text="Дата начала аренды"/>
-                    <DatePicker Style="{StaticResource DatePickerStroge}" SelectedDate="{Binding StartDateRental}" Margin="0,5,0,0" IsEnabled="False"/>
+                    <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Дата начала аренды"/>
+                    <DatePicker Background="{DynamicResource BackgroundColor}" Style="{StaticResource DatePickerStroge}" SelectedDate="{Binding StartDateRental}" Margin="0,5,0,0" IsEnabled="False"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1" HorizontalAlignment="Center">
-                    <TextBlock Text="Дата Окончания аренды"/>
-                    <DatePicker Style="{StaticResource DatePickerStroge}" SelectedDate="{Binding EndDateRental}" Margin="0,5,0,0" IsEnabled="False"/>
+                    <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Дата Окончания аренды"/>
+                    <DatePicker Background="{DynamicResource BackgroundColor}" Style="{StaticResource DatePickerStroge}" SelectedDate="{Binding EndDateRental}" Margin="0,5,0,0" IsEnabled="False"/>
                 </StackPanel>
             </Grid>
             <Grid Margin="10">
@@ -56,7 +57,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
-                <DataGrid SelectedIndex="{Binding SelectAdditionalRateRental}" ItemsSource="{Binding AdditionalRateRental}" Height="200" Grid.Column="0" CanUserResizeColumns="False" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid Background="{DynamicResource BackgroundColor}" SelectedIndex="{Binding SelectAdditionalRateRental}" ItemsSource="{Binding AdditionalRateRental}" Height="200" Grid.Column="0" CanUserResizeColumns="False" AutoGenerateColumns="False" IsReadOnly="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Дополнительные услуги" Binding="{Binding NameRental}"/>
                         <DataGridTextColumn Header="Тип оплаты" Binding="{Binding TypePayment}"/>
@@ -64,10 +65,10 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <StackPanel Grid.Column="1">
-                    <Button Style="{StaticResource ButtonStroge}" Margin="0,25,0,0" Command="{Binding OpenAddAdditionalRatesRentalCommand}" Background="White" Width="30" Height="30">
+                    <Button Style="{StaticResource ButtonStroge}" Margin="0,25,0,0" Command="{Binding OpenAddAdditionalRatesRentalCommand}" Background="{DynamicResource BackgroundColor}" Width="30" Height="30">
                         <Button.Content>
                             <Grid>
-                                <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
+                                <fa:ImageAwesome Icon="Plus" HorizontalAlignment="Left" Height="20" Foreground="{DynamicResource ForegroundMainText}"/>
                             </Grid>
                         </Button.Content>
                         <Button.ToolTip>
@@ -76,7 +77,7 @@
                             </ToolTip>
                         </Button.ToolTip>
                     </Button>
-                    <Button Style="{StaticResource ButtonStroge}" Command="{Binding DropAdditionalServicesCommand}" Margin="0,10,0,0" Background="White" Width="30" Height="30">
+                    <Button Style="{StaticResource ButtonStroge}" Command="{Binding DropAdditionalServicesCommand}" Margin="0,10,0,0" Background="{DynamicResource BackgroundColor}" Width="30" Height="30">
                         <Button.Content>
                             <Grid>
                                 <fa:ImageAwesome Icon="Trash" HorizontalAlignment="Left" Height="20" Foreground="Black"/>
@@ -91,19 +92,19 @@
                 </StackPanel>
             </Grid>
             <WrapPanel Margin="10">
-                <TextBlock Text="Итоговая стоимость:"/>
+                <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Итоговая стоимость:"/>
                 <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding Cost}" Width="150" Margin="10,0" IsEnabled="False"/>
             </WrapPanel>
             <WrapPanel Margin="10">
-                <TextBlock Text="Залог:"/>
+                <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Залог:"/>
                 <TextBox Style="{StaticResource TextBoxStroge}" Text="{Binding Deposit}" Width="100" Margin="10,0" IsEnabled="False"/>
             </WrapPanel>
         </StackPanel>
-        <Button Grid.Row="1" Command="{Binding ExportContractWordCommand}" Style="{StaticResource ButtonStroge}" Background="White" Width="140" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">
+        <Button Grid.Row="1" Command="{Binding ExportContractWordCommand}" Style="{StaticResource ButtonStroge}" Background="{DynamicResource BackgroundColor}" Width="140" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">
             <Button.Content>
                 <Grid HorizontalAlignment="Stretch" Width="140">
-                    <fa:ImageAwesome Icon="FileWordOutline" HorizontalAlignment="Left" Height="20" Margin="5,0" Foreground="Black"/>
-                    <TextBlock Margin="15,0,0,0" Text="Сохранить в Word" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <fa:ImageAwesome Icon="FileWordOutline" HorizontalAlignment="Left" Height="20" Margin="5,0" Foreground="{DynamicResource ForegroundMainText}"/>
+                    <TextBlock Margin="15,0,0,0" Text="Сохранить в Word" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundMainText}"/>
                 </Grid>
             </Button.Content>
         </Button>
