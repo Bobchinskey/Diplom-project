@@ -1,0 +1,48 @@
+﻿<Window x:Class="Partner.Views.Windows.MainWindowInteraction.News.AddNewsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"             
+        xmlns:local="clr-namespace:Partner.Views.Windows.MainWindowInteraction.News"
+        xmlns:Datacontext="clr-namespace:Partner.ViewModels.Windows.MainWindowInteraction.News"        
+        mc:Ignorable="d"
+        Title="{Binding Title}" Height="360" Width="350"
+        Background="{DynamicResource BackgroundColor}"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Window.DataContext>
+        <Datacontext:AddNewsWindowViewModel/>
+    </Window.DataContext>
+    <Grid Background="{DynamicResource BackgroundColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <WrapPanel Grid.Row="0" Background="{DynamicResource MainColor}">
+            <TextBlock Margin="10" Text="{Binding Title}" Foreground="White" FontSize="25"/>
+        </WrapPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" HorizontalAlignment="Right">
+                <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Заголовок: " TextAlignment="Right" Margin="5,30,5,50"/>
+                <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Описание: " TextAlignment="Right" Margin="5,43"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" HorizontalAlignment="Left">
+                <TextBox Text="{Binding Header,UpdateSourceTrigger=PropertyChanged}" Width="200" Style="{StaticResource TextBoxStroge}" Margin="5,30,5,50"/>
+                <TextBox Text="{Binding Description,UpdateSourceTrigger=PropertyChanged}" Width="200" Style="{StaticResource TextBoxStroge}" Margin="5,0" TextWrapping="Wrap" Height="100"/>
+            </StackPanel>
+        </Grid>
+        <Button Grid.Row="1" Command="{Binding AddNewsDataCommand}" Style="{StaticResource ButtonStroge}" Background="{DynamicResource BackgroundColor}" Width="120" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">
+            <Button.Content>
+                <Grid HorizontalAlignment="Stretch" Width="120">
+                    <fa:ImageAwesome Icon="Save" HorizontalAlignment="Left" Height="20" Margin="5,0" Foreground="{DynamicResource ForegroundMainText}"/>
+                    <TextBlock Text="Сохранить" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundMainText}"/>
+                </Grid>
+            </Button.Content>
+        </Button>
+    </Grid>
+</Window>

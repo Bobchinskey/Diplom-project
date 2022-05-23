@@ -6,6 +6,7 @@ using Partner.Views.Windows.InformativeWindows;
 using Partner.Views.Windows.MainWindowInteraction.ClientWindow;
 using Partner.Views.Windows.MainWindowInteraction.Insurances;
 using Partner.Views.Windows.MainWindowInteraction.Maintenances;
+using Partner.Views.Windows.MainWindowInteraction.News;
 using Partner.Views.Windows.MainWindowInteraction.Rates;
 using Partner.Views.Windows.MainWindowInteraction.Rates.AdditionalServices;
 using Partner.Views.Windows.MainWindowInteraction.Rental;
@@ -235,6 +236,38 @@ namespace Partner.ViewModels.Views.Administration
 
         #endregion
 
+        #region Команда вызова окна "Новости" : OpenListNewsWindowCommand
+
+        public ICommand OpenListNewsWindowCommand { get; }
+
+        private bool CanOpenListNewsWindowCommandExecute(object p) => true;
+
+        private void OnOpenListNewsWindowCommandExecuted(object p)
+        {
+            ListNewsWindow listNewsWindow = new ListNewsWindow();
+            listNewsWindow.ShowDialog();
+
+            UpdatePageCommand.Execute(null);
+        }
+
+        #endregion
+
+        #region Команда вызова окна "Важная информация" : OpenListImportantInformationWindowCommand
+
+        public ICommand OpenListImportantInformationWindowCommand { get; }
+
+        private bool CanOpenListImportantInformationWindowCommandExecute(object p) => true;
+
+        private void OnOpenListImportantInformationWindowCommandExecuted(object p)
+        {
+            ListImportantInformationWindow listImportantInformationWindow = new ListImportantInformationWindow();
+            listImportantInformationWindow.ShowDialog();
+
+            UpdatePageCommand.Execute(null);
+        }
+
+        #endregion
+
         #endregion
 
         /*------------------------------------------------------------------------------------------------*/
@@ -242,6 +275,10 @@ namespace Partner.ViewModels.Views.Administration
         public MainPageAdministrationViewModel()
         {
             #region Команды
+
+            OpenListImportantInformationWindowCommand = new LamdaCommand(OnOpenListImportantInformationWindowCommandExecuted, CanOpenListImportantInformationWindowCommandExecute);
+
+            OpenListNewsWindowCommand = new LamdaCommand(OnOpenListNewsWindowCommandExecuted, CanOpenListNewsWindowCommandExecute);
 
             OpenListUsersWindowCommand = new LamdaCommand(OnOpenListUsersWindowCommandExecuted, CanOpenListUsersWindowCommandExecute);
 

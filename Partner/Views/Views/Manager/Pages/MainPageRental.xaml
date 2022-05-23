@@ -57,7 +57,7 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid HorizontalAlignment="Stretch">
-                                        <Border BorderBrush="Black" BorderThickness="0.5" HorizontalAlignment="Stretch">
+                                        <Border CornerRadius="3" BorderBrush="Black" BorderThickness="0.5" HorizontalAlignment="Stretch">
                                             <Grid>
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="auto"/>
@@ -113,7 +113,7 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid HorizontalAlignment="Stretch">
-                                        <Border BorderBrush="Black" BorderThickness="0.5" HorizontalAlignment="Stretch">
+                                        <Border CornerRadius="3" BorderBrush="Black" BorderThickness="0.5" HorizontalAlignment="Stretch">
                                             <Grid>
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="auto"/>
@@ -214,16 +214,7 @@
                                 <TextBlock Margin="10,0,0,0" FontSize="16" Text="Список тарифов..." HorizontalAlignment="Right"/>
                             </WrapPanel>
                         </Button.Content>
-                    </Button>
-                    <Button Background="{DynamicResource BackgroundColor}" FontSize="16" Margin="0,40,0,15" Style="{StaticResource ButtonStroge}" HorizontalAlignment="Center" Width="180" Height="35" Foreground="{DynamicResource ForegroundMainText}">
-                        <Button.Content>
-                            <TextBlock>
-                            <Run Text="Уведомления("/>
-                            <Run Text="{}"/>
-                            <Run Text=")"/>
-                            </TextBlock>
-                        </Button.Content>
-                    </Button>
+                    </Button>                   
                 </StackPanel>
                 <Border CornerRadius="3" Margin="10,0,10,5" Grid.Row="1" BorderBrush="Black" BorderThickness="1">
                     <Grid VerticalAlignment="Bottom" Grid.Column="1">

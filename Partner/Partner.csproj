@@ -97,6 +97,7 @@
     <Compile Include="Models\Insurances\ListMainInsuranceData.cs" />
     <Compile Include="Models\Maintenances\CompletedWorks.cs" />
     <Compile Include="Models\Maintenances\EditMaintenancesData.cs" />
+    <Compile Include="Models\News\DataNewsModel.cs" />
     <Compile Include="Models\Rate\AdditionalServices\AddListData.cs" />
     <Compile Include="Models\Rate\AdditionalServices\MainListAdditionalServices.cs" />
     <Compile Include="Models\Rate\ListRateInformation.cs" />
@@ -125,6 +126,9 @@
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Maintenances\Additional\EditMaintenanceWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Maintenances\ListMaintenanceWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Maintenances\SelectVehicleMaintenanceWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\News\AddNewsWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\News\ListImportantInformationWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\News\ListNewsWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rates\AdditionalServices\AddAdditionalServicesViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rates\AdditionalServices\AdditionalServicesViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rates\EditRateWindowViewModel.cs" />
@@ -199,6 +203,15 @@
     </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\Maintenances\SelectVehicleMaintenanceWindow.xaml.cs">
       <DependentUpon>SelectVehicleMaintenanceWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\News\AddNewsWindow.xaml.cs">
+      <DependentUpon>AddNewsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\News\ListImportantInformationWindow.xaml.cs">
+      <DependentUpon>ListImportantInformationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\News\ListNewsWindow.xaml.cs">
+      <DependentUpon>ListNewsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\Rates\AdditionalServices\AddAdditionalServicesWindow.xaml.cs">
       <DependentUpon>AddAdditionalServicesWindow.xaml</DependentUpon>
@@ -405,6 +418,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Windows\MainWindowInteraction\Maintenances\SelectVehicleMaintenanceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\News\AddNewsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\News\ListImportantInformationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\News\ListNewsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

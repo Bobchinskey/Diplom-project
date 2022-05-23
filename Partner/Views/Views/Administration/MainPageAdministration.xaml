@@ -58,28 +58,10 @@
                     <MenuItem/>
                 </MenuItem>
                 <MenuItem Header="Администрирование" Background="{DynamicResource BackgroundColor}">
-                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Новости"/>
-                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Важная информация"/>
+                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Новости" Command="{Binding OpenListNewsWindowCommand}"/>
+                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Важная информация" Command="{Binding OpenListImportantInformationWindowCommand}"/>
                     <Separator/>
                     <MenuItem Background="{DynamicResource BackgroundColor}" Header="Пользователи" Command="{Binding OpenListUsersWindowCommand}"/>
-                </MenuItem>
-                <MenuItem Background="{DynamicResource BackgroundColor}">
-                    <MenuItem.Header>
-                        <TextBlock>
-                            <Run Text="Уведомления("/>
-                            <Run Text="{}"/>
-                            <Run Text=")"/>
-                        </TextBlock>
-                    </MenuItem.Header>
-                    <MenuItem Background="{DynamicResource BackgroundColor}">
-                        <MenuItem.Header>
-                            <TextBlock>
-                            <Run Text="Уведомления("/>
-                            <Run Text="{}"/>
-                            <Run Text=")"/>
-                            </TextBlock>
-                        </MenuItem.Header>
-                    </MenuItem>
                 </MenuItem>
                 <MenuItem Header="Опции" Background="{DynamicResource BackgroundColor}">
                     <MenuItem Background="{DynamicResource BackgroundColor}" Header="Пользовательские настройки..." Command="{Binding OpenUserSettingsWindowCommand}" FontSize="14"/>

@@ -57,24 +57,6 @@
                 <MenuItem Header="Отчеты">
                     <MenuItem/>
                 </MenuItem>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <TextBlock>
-                            <Run Text="Уведомления("/>
-                            <Run Text="{}"/>
-                            <Run Text=")"/>
-                        </TextBlock>
-                    </MenuItem.Header>
-                    <MenuItem>
-                        <MenuItem.Header>
-                            <TextBlock>
-                            <Run Text="Уведомления("/>
-                            <Run Text="{}"/>
-                            <Run Text=")"/>
-                            </TextBlock>
-                        </MenuItem.Header>
-                    </MenuItem>
-                </MenuItem>
                 <MenuItem Header="Опции" Background="{DynamicResource BackgroundColor}">
                     <MenuItem Background="{DynamicResource BackgroundColor}" Header="Пользовательские настройки..." Command="{Binding OpenUserSettingsWindowCommand}" FontSize="14"/>
                 </MenuItem>

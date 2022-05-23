@@ -316,6 +316,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Users
         }
 
         #endregion
+
         #endregion
 
         /*------------------------------------------------------------------------------------------------*/

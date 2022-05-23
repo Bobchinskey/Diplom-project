@@ -13,6 +13,20 @@
         Height="550" Width="1000"
         MinHeight="550" MinWidth="1000"
         Background="{DynamicResource BackgroundColor}">
+    <Window.Resources>
+        <ControlTemplate x:Key="{x:Static MenuItem.TopLevelHeaderTemplateKey}" TargetType="{x:Type MenuItem}">
+            <Border Name="Border" >
+                <Grid>
+                    <ContentPresenter Margin="6,3,6,3" ContentSource="Header" RecognizesAccessKey="True" />
+                    <Popup Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsSubmenuOpen}" AllowsTransparency="True" Focusable="False" PopupAnimation="Fade">
+                        <Border Name="SubmenuBorder" SnapsToDevicePixels="True" Background="{DynamicResource BackgroundColor}">
+                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
+                        </Border>
+                    </Popup>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+    </Window.Resources>
     <Window.DataContext>
         <Datacontext:InsurancesInformationWindowViewModel/>
     </Window.DataContext>
