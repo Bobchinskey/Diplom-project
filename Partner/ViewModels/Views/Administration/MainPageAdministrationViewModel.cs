@@ -1,11 +1,7 @@
 ﻿using Partner.Infrastructure.Commands;
-using Partner.Models.PersonalData;
 using Partner.Models.Vehicle;
 using Partner.ViewModels.Base;
-using Partner.ViewModels.Windows;
-using Partner.Views.Views.Manager;
 using Partner.Views.Views.Manager.Pages;
-using Partner.Views.Windows;
 using Partner.Views.Windows.InformativeWindows;
 using Partner.Views.Windows.MainWindowInteraction.ClientWindow;
 using Partner.Views.Windows.MainWindowInteraction.Insurances;
@@ -13,20 +9,20 @@ using Partner.Views.Windows.MainWindowInteraction.Maintenances;
 using Partner.Views.Windows.MainWindowInteraction.Rates;
 using Partner.Views.Windows.MainWindowInteraction.Rates.AdditionalServices;
 using Partner.Views.Windows.MainWindowInteraction.Rental;
+using Partner.Views.Windows.MainWindowInteraction.Users;
 using Partner.Views.Windows.MainWindowInteraction.VehicleWindow;
 using Partner.Views.Windows.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Partner.ViewModels.Views.Maneger
+namespace Partner.ViewModels.Views.Administration
 {
-    class MainPageManagerViewModel : ViewModelBase
+    internal class MainPageAdministrationViewModel : ViewModelBase
     {
         #region Данные
 
@@ -223,13 +219,31 @@ namespace Partner.ViewModels.Views.Maneger
 
         #endregion
 
+        #region Команда вызова окна "Пользователи" : OpenListUserWindowCommand
+
+        public ICommand OpenListUsersWindowCommand { get; }
+
+        private bool CanOpenListUsersWindowCommandExecute(object p) => true;
+
+        private void OnOpenListUsersWindowCommandExecuted(object p)
+        {
+            ListUsersWindow listUsersWindow = new ListUsersWindow();
+            listUsersWindow.ShowDialog();
+
+            UpdatePageCommand.Execute(null);
+        }
+
+        #endregion
+
         #endregion
 
         /*------------------------------------------------------------------------------------------------*/
 
-        public MainPageManagerViewModel()
+        public MainPageAdministrationViewModel()
         {
             #region Команды
+
+            OpenListUsersWindowCommand = new LamdaCommand(OnOpenListUsersWindowCommandExecuted, CanOpenListUsersWindowCommandExecute);
 
             ChangeUserCommand = new LamdaCommand(OnChangeUserCommandExecuted, CanChangeUserCommandExecute);
 

@@ -52,7 +52,7 @@
                 <DataGridTextColumn Header="Клиент" Binding="{Binding name}"/>
                 <DataGridTextColumn Header="Номер телефона" Binding="{Binding phone_number}"/>
                 <DataGridTextColumn Header="Тип" Binding="{Binding type}"/>
-                <DataGridTextColumn Header="Статус" Binding="{Binding reality}"/>
+                <DataGridTextColumn Header="Статус" Binding="{Binding reality}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Margin="5,0,10,0" Grid.Row="1" Grid.Column="1">

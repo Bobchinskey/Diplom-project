@@ -3,6 +3,7 @@ using Partner.Data.UserData;
 using Partner.Infrastructure.Commands;
 using Partner.Models.PersonalData;
 using Partner.ViewModels.Base;
+using Partner.Views.Views.Administration;
 using Partner.Views.Views.Manager;
 using Partner.Views.Windows.InformativeWindows;
 using System.Configuration;
@@ -94,8 +95,8 @@ namespace Partner.ViewModels.Windows
                         MessageBox.Show(UserDataModel.name + " " + UserDataModel.surname + "\nДобро пожаловать в программу 'ООО Партнер'\nУдачного рабочего дня!", "Авторизация", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                         password = null;
                         HistoryUserInputBackUpProcedure mHistoryUserInputBackUpProcedure = new HistoryUserInputBackUpProcedure(UserDataModel.id_user);
-                        if (UserDataModel.access_lavel == "Администратор") ;
-                            //UserDataModel.page = new MainPageAdminView();
+                        if (UserDataModel.access_lavel == "Администратор")
+                            UserDataModel.page = new MainPageAdministration();
                         else if (UserDataModel.access_lavel == "Менеджер")
                             UserDataModel.page = new MainPageManager();
                         MainWindow mainWindow = new MainWindow();

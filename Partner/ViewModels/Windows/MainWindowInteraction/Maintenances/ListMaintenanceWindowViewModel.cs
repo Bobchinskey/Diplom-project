@@ -18,7 +18,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Maintenances
 {
     class ListMaintenanceWindowViewModel : ViewModelBase
     {
-
         #region Данные
 
         #region List данных Технических обслуживаний : MainListMaintenance
@@ -134,7 +133,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Maintenances
         }
 
         #endregion
-
 
         #region Команда Удаления Технического обслуживания : DropMaintenanceCommand
 

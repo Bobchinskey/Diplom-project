@@ -1,0 +1,94 @@
+﻿<Page x:Class="Partner.Views.Views.Administration.MainPageAdministration"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Partner.Views.Views.Administration"
+      xmlns:Datacontext="clr-namespace:Partner.ViewModels.Views.Administration"
+      xmlns:cmd="clr-namespace:Partner.Infrastructure.Commands"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MainPageAdministration">
+    <Page.DataContext>
+        <Datacontext:MainPageAdministrationViewModel/>
+    </Page.DataContext>
+    <Page.Resources>
+        <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
+        <ControlTemplate x:Key="{x:Static MenuItem.TopLevelHeaderTemplateKey}" TargetType="{x:Type MenuItem}">
+            <Border Name="Border" >
+                <Grid>
+                    <ContentPresenter Margin="6,3,6,3" ContentSource="Header" RecognizesAccessKey="True" />
+                    <Popup Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsSubmenuOpen}" AllowsTransparency="True" Focusable="False" PopupAnimation="Fade">
+                        <Border Name="SubmenuBorder" SnapsToDevicePixels="True" Background="{DynamicResource BackgroundColor}">
+                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
+                        </Border>
+                    </Popup>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+            <Menu Foreground="{DynamicResource ForegroundMainText}" Background="{DynamicResource BackgroundColor}" DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="16">
+                <MenuItem Background="{DynamicResource BackgroundColor}" Header="Программа" VerticalAlignment="Center">
+                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Обновить..." Command="{Binding UpdatePageCommand}" FontSize="14"/>
+                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Войти как..." Command="{Binding ChangeUserCommand}" FontSize="14"/>
+                    <Separator/>
+                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Выход" Command="{StaticResource CloseApplicationCommand}" FontSize="14"/>
+                </MenuItem>
+                <MenuItem Header="Списки" Background="{DynamicResource BackgroundColor}">
+                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Клиенты..." Command="{Binding OpenListClientWindowCommand}" FontSize="14"/>
+                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Аренды..." Command="{Binding OpenRentalWindowCommand}" FontSize="14"/>
+                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Брони..." Command="{Binding OpenListBookingWindowCommand}" FontSize="14"/>
+                    <Separator/>
+                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Автомобили..." Command="{Binding OpenListVehicleWindowCommand}" FontSize="14"/>
+                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Страхование..." Command="{Binding OpenInsurancesInformationWindowCommand}" FontSize="14"/>
+                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Техническое обслуживание..." Command="{Binding OpeMaintenanceWindowCommand}" FontSize="14"/>
+                    <Separator/>
+                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Список штрафов..." FontSize="14"/>
+                    <Separator/>
+                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Тарифы..." Command="{Binding OpenListRateWindowCommand}" FontSize="14"/>
+                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Дополнительные услуги..." Command="{Binding OpenListAdditionalServicesWindowCommand}" FontSize="14"/>
+                </MenuItem>
+                <MenuItem Header="Отчеты" Background="{DynamicResource BackgroundColor}">
+                    <MenuItem/>
+                </MenuItem>
+                <MenuItem Header="Администрирование" Background="{DynamicResource BackgroundColor}">
+                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Новости"/>
+                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Важная информация"/>
+                    <Separator/>
+                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Пользователи" Command="{Binding OpenListUsersWindowCommand}"/>
+                </MenuItem>
+                <MenuItem Background="{DynamicResource BackgroundColor}">
+                    <MenuItem.Header>
+                        <TextBlock>
+                            <Run Text="Уведомления("/>
+                            <Run Text="{}"/>
+                            <Run Text=")"/>
+                        </TextBlock>
+                    </MenuItem.Header>
+                    <MenuItem Background="{DynamicResource BackgroundColor}">
+                        <MenuItem.Header>
+                            <TextBlock>
+                            <Run Text="Уведомления("/>
+                            <Run Text="{}"/>
+                            <Run Text=")"/>
+                            </TextBlock>
+                        </MenuItem.Header>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Опции" Background="{DynamicResource BackgroundColor}">
+                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Пользовательские настройки..." Command="{Binding OpenUserSettingsWindowCommand}" FontSize="14"/>
+                </MenuItem>
+                <MenuItem Header="Помощь" Background="{DynamicResource BackgroundColor}">
+                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="О программе..." Command="{Binding OpenAboutProgramCommand}" FontSize="14"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <Frame Grid.Row="1" Content="{DynamicResource Content}" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Page>

@@ -103,8 +103,10 @@
     <Compile Include="Models\Rate\ListRateStatic.cs" />
     <Compile Include="Models\Rental\DataAdditionalServices.cs" />
     <Compile Include="Models\Rental\DataStaticRental.cs" />
+    <Compile Include="Models\User\UserDataModel.cs" />
     <Compile Include="Models\Vehicle\ListVehicle.cs" />
     <Compile Include="Models\Vehicle\VehicleDataModel.cs" />
+    <Compile Include="ViewModels\Views\Administration\MainPageAdministrationViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Booking\AddBooking\AddBookingWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Booking\AddBooking\EditBookingWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Booking\ListRentalInformationWindowViewModel.cs" />
@@ -136,9 +138,14 @@
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\ListBookingWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\ListRentalWindowVeiwModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\SelectVehicleRentalWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\Users\AddUserDataWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\Users\ListUsersWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\VehicleWindow\AddVehicleWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\VehicleWindow\ListVehicleWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\Settings\AuthorizationWindowViewModel.cs" />
+    <Compile Include="Views\Views\Administration\MainPageAdministration.xaml.cs">
+      <DependentUpon>MainPageAdministration.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\Booking\AddBooking\AddBookingWindow.xaml.cs">
       <DependentUpon>AddBookingWindow.xaml</DependentUpon>
     </Compile>
@@ -232,6 +239,12 @@
     <Compile Include="Views\Windows\MainWindowInteraction\Rental\SelectVehicleRentalWindow.xaml.cs">
       <DependentUpon>SelectVehicleRentalWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\Users\AddUserDataWindow.xaml.cs">
+      <DependentUpon>AddUserDataWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\Users\ListUsersWindow.xaml.cs">
+      <DependentUpon>ListUsersWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\VehicleWindow\AddVehicleWindow.xaml.cs">
       <DependentUpon>AddVehicleWindow.xaml</DependentUpon>
     </Compile>
@@ -262,6 +275,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles\TextBoxStroge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Views\Administration\MainPageAdministration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -443,6 +460,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\Users\AddUserDataWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\Users\ListUsersWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\MainWindowInteraction\VehicleWindow\AddVehicleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -487,9 +512,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Views\Administration\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\Pictures\MainIconWindow.png" />
     <Resource Include="Resources\Pictures\MainPicture.jpg" />

@@ -6,13 +6,13 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:Partner.Views.Windows.MainWindowInteraction.ClientWindow"
         xmlns:Datacontext="clr-namespace:Partner.ViewModels.Windows.MainWindowInteraction.ClientWindow"
-        mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"    
         Title="{Binding Title}" 
         Height="610" Width="100"
         MinHeight="610" MinWidth="1000"
         ResizeMode="NoResize"
-        Background="{DynamicResource BackgroundColor}">
+        Background="{DynamicResource BackgroundColor}"
+        WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <Datacontext:AddClientNaturapPersonViewModel/>
     </Window.DataContext>
