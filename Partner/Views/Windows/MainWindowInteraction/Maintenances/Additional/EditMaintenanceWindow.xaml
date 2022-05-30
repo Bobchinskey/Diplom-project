@@ -164,7 +164,7 @@
                     </Grid>
                 </Button.Content>
             </Button>
-            <Button Grid.Column="1" Command="{Binding}" Style="{StaticResource ButtonStroge}" Background="{DynamicResource BackgroundColor}" Width="120" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10">
+            <Button Grid.Column="1" Command="{Binding ExportMaintananceWordCommand}" Style="{StaticResource ButtonStroge}" Background="{DynamicResource BackgroundColor}" Width="120" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10">
                 <Button.Content>
                     <Grid HorizontalAlignment="Stretch" Width="120">
                         <fa:ImageAwesome Icon="FileWordOutline" HorizontalAlignment="Left" Height="20" Margin="5,0" Foreground="{DynamicResource ForegroundMainText}"/>

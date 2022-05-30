@@ -63,10 +63,10 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rates
             SqlConnection ThisConnection = new SqlConnection(connectionString);
             ThisConnection.Open();
             SqlCommand thisCommand = ThisConnection.CreateCommand();
-            thisCommand.CommandText = "Select vehicle.id_vehicle,vehicle.make_model,rate.id_rate,rate.[1-3_day],rate.[4-9_day],rate.[10-29_day],rate.[30_day],rate.Deposit,rate.excess_mileage,rate.reality from rate,vehicle where vehicle.id_vehicle=rate.id_vehicle and rate.reality='Актуально'";
+            thisCommand.CommandText = "Select vehicle.id_vehicle,vehicle.make_model,rate.id_rate,rate.[1-3_day],rate.[4-9_day],rate.[10-29_day],rate.[30_day],rate.Deposit,rate.excess_mileage from rate,vehicle where vehicle.id_vehicle=rate.id_vehicle and vehicle.status='Свободен'";
             SqlDataReader thisReader = thisCommand.ExecuteReader();
             dt.Load(thisReader);
-            MainListRate = dt.AsEnumerable().Select(se => new ListRateInformation() { id_vehicle = se.Field<int>("id_vehicle"), id_rate = se.Field<int>("id_rate"), Rate1_3 = se.Field<string>("1-3_day"), Rate4_9 = se.Field<string>("4-9_day"), Rate10_29 = se.Field<string>("10-29_day"), Rate30 = se.Field<string>("30_day"), Deposit = se.Field<string>("Deposit"), excess_mileage = se.Field<string>("excess_mileage"), reality = se.Field<string>("reality"), make_model = se.Field<string>("make_model") }).ToList();
+            MainListRate = dt.AsEnumerable().Select(se => new ListRateInformation() { id_vehicle = se.Field<int>("id_vehicle"), id_rate = se.Field<int>("id_rate"), Rate1_3 = se.Field<string>("1-3_day"), Rate4_9 = se.Field<string>("4-9_day"), Rate10_29 = se.Field<string>("10-29_day"), Rate30 = se.Field<string>("30_day"), Deposit = se.Field<string>("Deposit"), excess_mileage = se.Field<string>("excess_mileage"), make_model = se.Field<string>("make_model") }).ToList();
             ThisConnection.Close();
             int k = MainListRate.Count;
             for (int i = 0; i < k; i++)
@@ -243,10 +243,10 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rates
             SqlConnection ThisConnection = new SqlConnection(connectionString);
             ThisConnection.Open();
             SqlCommand thisCommand = ThisConnection.CreateCommand();
-            thisCommand.CommandText = "Select vehicle.id_vehicle,vehicle.make_model,rate.id_rate,rate.[1-3_day],rate.[4-9_day],rate.[10-29_day],rate.[30_day],rate.Deposit,rate.excess_mileage,rate.reality from rate,vehicle where vehicle.id_vehicle=rate.id_vehicle and rate.reality='Актуально' and vehicle.status='Свободен'";
+            thisCommand.CommandText = "Select vehicle.id_vehicle,vehicle.make_model,rate.id_rate,rate.[1-3_day],rate.[4-9_day],rate.[10-29_day],rate.[30_day],rate.Deposit,rate.excess_mileage from rate,vehicle where vehicle.id_vehicle=rate.id_vehicle and vehicle.status='Свободен'";
             SqlDataReader thisReader = thisCommand.ExecuteReader();
             dt.Load(thisReader);
-            MainListRate = dt.AsEnumerable().Select(se => new ListRateInformation() { id_vehicle = se.Field<int>("id_vehicle"), id_rate = se.Field<int>("id_rate"), Rate1_3 = se.Field<string>("1-3_day"), Rate4_9 = se.Field<string>("4-9_day"), Rate10_29 = se.Field<string>("10-29_day"), Rate30 = se.Field<string>("30_day"), Deposit = se.Field<string>("Deposit"), excess_mileage = se.Field<string>("excess_mileage"), reality = se.Field<string>("reality"), make_model = se.Field<string>("make_model") }).ToList(); 
+            MainListRate = dt.AsEnumerable().Select(se => new ListRateInformation() { id_vehicle = se.Field<int>("id_vehicle"), id_rate = se.Field<int>("id_rate"), Rate1_3 = se.Field<string>("1-3_day"), Rate4_9 = se.Field<string>("4-9_day"), Rate10_29 = se.Field<string>("10-29_day"), Rate30 = se.Field<string>("30_day"), Deposit = se.Field<string>("Deposit"), excess_mileage = se.Field<string>("excess_mileage"), make_model = se.Field<string>("make_model") }).ToList(); 
             ThisConnection.Close();
             int k = MainListRate.Count;
             for (int i = 0; i < k; i++)

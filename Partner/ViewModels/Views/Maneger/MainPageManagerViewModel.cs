@@ -1,5 +1,6 @@
 ﻿using Partner.Infrastructure.Commands;
 using Partner.Models.PersonalData;
+using Partner.Models.Reports;
 using Partner.Models.Vehicle;
 using Partner.ViewModels.Base;
 using Partner.ViewModels.Windows;
@@ -13,6 +14,7 @@ using Partner.Views.Windows.MainWindowInteraction.Maintenances;
 using Partner.Views.Windows.MainWindowInteraction.Rates;
 using Partner.Views.Windows.MainWindowInteraction.Rates.AdditionalServices;
 using Partner.Views.Windows.MainWindowInteraction.Rental;
+using Partner.Views.Windows.MainWindowInteraction.Reports;
 using Partner.Views.Windows.MainWindowInteraction.VehicleWindow;
 using Partner.Views.Windows.Settings;
 using System;
@@ -223,6 +225,24 @@ namespace Partner.ViewModels.Views.Maneger
 
         #endregion
 
+        #region Команда вызова окна "Отчеты", Отчет по колличеству аренд : OpenListImportantInformationWindowCommand
+
+        public ICommand OpenReportNumberRentsWindowCommand { get; }
+
+        private bool CanOpenReportNumberRentsWindowCommandExecute(object p) => true;
+
+        private void OnOpenReportNumberRentsWindowCommandExecuted(object p)
+        {
+            ReportDataModel.Title = "Отчет по количеству аренд";
+
+            ReportWindow reportWindow = new ReportWindow();
+            reportWindow.ShowDialog();
+
+            UpdatePageCommand.Execute(null);
+        }
+
+        #endregion
+
         #endregion
 
         /*------------------------------------------------------------------------------------------------*/
@@ -230,6 +250,8 @@ namespace Partner.ViewModels.Views.Maneger
         public MainPageManagerViewModel()
         {
             #region Команды
+
+            OpenReportNumberRentsWindowCommand = new LamdaCommand(OnOpenReportNumberRentsWindowCommandExecuted, CanOpenReportNumberRentsWindowCommandExecute);
 
             ChangeUserCommand = new LamdaCommand(OnChangeUserCommandExecuted, CanChangeUserCommandExecute);
 

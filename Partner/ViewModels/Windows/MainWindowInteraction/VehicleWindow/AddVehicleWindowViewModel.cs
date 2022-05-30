@@ -72,19 +72,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
 
         #endregion
 
-        #region Тип ТС : TypeVehicle 
-
-        private string[] _TypeVehicle = { "Легковой", "Грузовой", "Пассажирский"};
-
-        /// <summary>TypeVehicle</summary>
-        public string[] TypeVehicle
-        {
-            get => _TypeVehicle;
-            set => Set(ref _TypeVehicle, value);
-        }
-
-        #endregion
-
         #region Выбранный тип ТС : SelectStateNumber 
 
         private string _SelectStateNumber = VehicleDataModel.SelectStateNumber;
@@ -113,7 +100,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
 
         #region Категория ТС : Category 
 
-        private string[] _Category = { "A", "B", "B1","C","CE","C1","C1E","D","D1","M" };
+        private string[] _Category = { "A", "B", "B1","C","CE","C1","C1E","D","D1","M","прицеп" };
 
         /// <summary>Category</summary>
         public string[] Category
@@ -562,14 +549,12 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
 
         #endregion
 
-
         #endregion
 
         /*------------------------------------------------------------------------------------------------*/
 
         public AddVehicleWindowViewModel()
         {
-
             #region Команды
 
             AddVehicleCommand = new LamdaCommand(OnAddVehicleCommandExecuted, CanAddVehicleCommandExecute);
@@ -577,7 +562,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
             OpenTechnicalConditionCommand = new LamdaCommand(OnOpenTechnicalConditionCommandExecuted, CanOpenTechnicalConditionCommandExecute);
 
             #endregion
-
         }
 
     }

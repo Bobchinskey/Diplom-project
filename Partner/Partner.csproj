@@ -104,6 +104,7 @@
     <Compile Include="Models\Rate\ListRateStatic.cs" />
     <Compile Include="Models\Rental\DataAdditionalServices.cs" />
     <Compile Include="Models\Rental\DataStaticRental.cs" />
+    <Compile Include="Models\Reports\ReportDataModel.cs" />
     <Compile Include="Models\User\UserDataModel.cs" />
     <Compile Include="Models\Vehicle\ListVehicle.cs" />
     <Compile Include="Models\Vehicle\VehicleDataModel.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\ListBookingWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\ListRentalWindowVeiwModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Rental\SelectVehicleRentalWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\Reports\ReportWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Users\AddUserDataWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Users\ListUsersWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\VehicleWindow\AddVehicleWindowViewModel.cs" />
@@ -251,6 +253,9 @@
     </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\Rental\SelectVehicleRentalWindow.xaml.cs">
       <DependentUpon>SelectVehicleRentalWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\Reports\ReportWindow.xaml.cs">
+      <DependentUpon>ReportWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\Users\AddUserDataWindow.xaml.cs">
       <DependentUpon>AddUserDataWindow.xaml</DependentUpon>
@@ -485,6 +490,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\Reports\ReportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\MainWindowInteraction\Users\AddUserDataWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -531,6 +540,9 @@
     </None>
     <None Include="Resources\Document\ActReceivingTransfer.doc" />
     <None Include="Resources\Document\RentalContract1.doc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Document\ZakazNaryad.doc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

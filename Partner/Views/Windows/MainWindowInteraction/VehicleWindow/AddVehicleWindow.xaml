@@ -55,7 +55,7 @@
                         <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Гос. номер:" HorizontalAlignment="Left" Margin="47,0,0,0" Width="80"/>
                     </Grid>
                     <Grid Grid.Column="1">
-                        <ComboBox Margin="10,0" HorizontalAlignment="Right" Width="100" ItemsSource="{Binding TypeVehicle}" SelectedItem="{Binding SelectStateNumber}"/>
+                        <TextBox Margin="10,0" HorizontalAlignment="Right" Width="100" Text="{Binding SelectStateNumber}"/>
                         <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Тип ТС:" HorizontalAlignment="Left" Margin="70,0,0,0"/>
                     </Grid>
                 </Grid>
@@ -85,8 +85,8 @@
                     </StackPanel>
                     <StackPanel Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,10">
                         <TextBox Style="{StaticResource TextBoxStroge}" Margin="20,10" Width="280" Text="{Binding NumberEngine, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBox Style="{StaticResource TextBoxStroge}" Margin="20,10" Width="280" MaxLength="17" Text="{Binding ChassisNumber, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBox Style="{StaticResource TextBoxStroge}" Margin="20,10" Width="280" MaxLength="17" Text="{Binding BodyNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" Margin="20,10" Width="280" Text="{Binding ChassisNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" Margin="20,10" Width="280" Text="{Binding BodyNumber, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                 </Grid>
                 <Grid Margin="10,15">
@@ -96,7 +96,7 @@
                     </Grid.ColumnDefinitions>
                     <WrapPanel Grid.Column="0">
                         <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Цвет кузова:" Margin="10,0,0,0"/>
-                        <TextBox Style="{StaticResource TextBoxStroge}" Margin="10,0" Width="100" MaxLength="9" Text="{Binding Color, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" Margin="10,0" Width="100" Text="{Binding Color, UpdateSourceTrigger=PropertyChanged}"/>
                     </WrapPanel>
                     <WrapPanel Grid.Column="1">
                         <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Экологический класс:" Margin="5,0,0,0"/>
@@ -157,7 +157,7 @@
                     </Grid.ColumnDefinitions>
                     <WrapPanel Grid.Column="0" Margin="10,0,0,0">
                         <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Серия ПТС:" Margin="10,0,0,0"/>
-                        <TextBox Style="{StaticResource TextBoxStroge}" PreviewTextInput="NumberValidationTextBox" Margin="10,0" Width="100" MaxLength="4" Text="{Binding SeriesPTS, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" Margin="10,0" Width="100" MaxLength="4" Text="{Binding SeriesPTS, UpdateSourceTrigger=PropertyChanged}"/>
                     </WrapPanel>
                     <WrapPanel Grid.Column="1" Margin="10,0,20,0">
                         <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Номер ПТС:" Margin="5,0,0,0"/>
@@ -181,7 +181,7 @@
                     </Grid.ColumnDefinitions>
                     <WrapPanel Grid.Column="0" Margin="10,0,0,0">
                         <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Серия СТС:" Margin="10,0,0,0"/>
-                        <TextBox Style="{StaticResource TextBoxStroge}" PreviewTextInput="NumberValidationTextBox" Margin="10,0" Width="100" MaxLength="4" Text="{Binding SeriesSTS, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Style="{StaticResource TextBoxStroge}" Margin="10,0" Width="100" MaxLength="4" Text="{Binding SeriesSTS, UpdateSourceTrigger=PropertyChanged}"/>
                     </WrapPanel>
                     <WrapPanel Grid.Column="1" Margin="10,0,20,0">
                         <TextBlock Foreground="{DynamicResource ForegroundMainText}" Text="Номер СТС:" Margin="5,0,0,0"/>

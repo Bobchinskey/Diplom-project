@@ -30,12 +30,19 @@ namespace Partner.Data.Procedures
             if (thisReader.HasRows)
             {
                 dateBackup = Convert.ToDateTime(thisReader["Date_BACKUP"].ToString());
+                thisReader.Close();
             }
             else
             {
                 dateBackup = DateTime.Today;
+                thisReader.Close();
+                command = ThisConnection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "BACKUP";
+                command.Parameters.AddWithValue("@Date_BACKUP", DateTime.Today);
+                command.ExecuteNonQuery();
             }
-            thisReader.Close();
+            
 
             if (dateBackup < DateTime.Today)
             {

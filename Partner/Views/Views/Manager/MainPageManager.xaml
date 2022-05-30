@@ -55,7 +55,15 @@
                     <MenuItem Background="{DynamicResource BackgroundColor}" Header="Дополнительные услуги..." Command="{Binding OpenListAdditionalServicesWindowCommand}" FontSize="14"/>
                 </MenuItem>
                 <MenuItem Header="Отчеты">
-                    <MenuItem/>
+                    <MenuItem Command="{Binding OpenReportNumberRentsWindowCommand}" Background="{DynamicResource BackgroundColor}" Header="Отчет по количеству аренд..." FontSize="14"/>
+                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Отчет по среднему чеку..." FontSize="14"/>
+                    <Separator/>
+                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Отчет по страховкам..." FontSize="14"/>
+                    <Separator/>
+                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Отчет по прибыли от автомобилей..." FontSize="14"/>
+                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Отчет по доходам от дополнительных услуг..." FontSize="14"/>
+                    <Separator/>
+                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Отчет по техническому обслуживанию..." FontSize="14"/>
                 </MenuItem>
                 <MenuItem Header="Опции" Background="{DynamicResource BackgroundColor}">
                     <MenuItem Background="{DynamicResource BackgroundColor}" Header="Пользовательские настройки..." Command="{Binding OpenUserSettingsWindowCommand}" FontSize="14"/>

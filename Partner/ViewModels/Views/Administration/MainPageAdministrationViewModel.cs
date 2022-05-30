@@ -1,4 +1,5 @@
 ﻿using Partner.Infrastructure.Commands;
+using Partner.Models.Reports;
 using Partner.Models.Vehicle;
 using Partner.ViewModels.Base;
 using Partner.Views.Views.Manager.Pages;
@@ -10,6 +11,7 @@ using Partner.Views.Windows.MainWindowInteraction.News;
 using Partner.Views.Windows.MainWindowInteraction.Rates;
 using Partner.Views.Windows.MainWindowInteraction.Rates.AdditionalServices;
 using Partner.Views.Windows.MainWindowInteraction.Rental;
+using Partner.Views.Windows.MainWindowInteraction.Reports;
 using Partner.Views.Windows.MainWindowInteraction.Users;
 using Partner.Views.Windows.MainWindowInteraction.VehicleWindow;
 using Partner.Views.Windows.Settings;
@@ -268,6 +270,24 @@ namespace Partner.ViewModels.Views.Administration
 
         #endregion
 
+        #region Команда вызова окна "Отчеты", Отчет по колличеству аренд : OpenListImportantInformationWindowCommand
+
+        public ICommand OpenReportNumberRentsWindowCommand { get; }
+
+        private bool CanOpenReportNumberRentsWindowCommandExecute(object p) => true;
+
+        private void OnOpenReportNumberRentsWindowCommandExecuted(object p)
+        {
+            ReportDataModel.Title = "Отчет по количеству аренд";
+
+            ReportWindow reportWindow = new ReportWindow();
+            reportWindow.ShowDialog();
+
+            UpdatePageCommand.Execute(null);
+        }
+
+        #endregion
+
         #endregion
 
         /*------------------------------------------------------------------------------------------------*/
@@ -275,6 +295,8 @@ namespace Partner.ViewModels.Views.Administration
         public MainPageAdministrationViewModel()
         {
             #region Команды
+
+            OpenReportNumberRentsWindowCommand = new LamdaCommand(OnOpenReportNumberRentsWindowCommandExecuted, CanOpenReportNumberRentsWindowCommandExecute);
 
             OpenListImportantInformationWindowCommand = new LamdaCommand(OnOpenListImportantInformationWindowCommandExecuted, CanOpenListImportantInformationWindowCommandExecute);
 

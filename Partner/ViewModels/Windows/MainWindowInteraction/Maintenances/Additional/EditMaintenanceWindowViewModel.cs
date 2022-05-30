@@ -1,5 +1,6 @@
 ﻿using Partner.Infrastructure.Commands;
 using Partner.Models.Maintenances;
+using Partner.Models.Vehicle;
 using Partner.ViewModels.Base;
 using Partner.Views.Windows.MainWindowInteraction.Maintenances.Additional;
 using System;
@@ -433,6 +434,359 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Maintenances.Addition
 
         #endregion
 
+        #region Команда Сохранить документ Word : ExportMaintananceWordCommand
+
+        public ICommand ExportMaintananceWordCommand { get; }
+
+        private bool CanExportMaintananceWordCommandExecute(object p) => true;
+
+        private void OnExportMaintananceWordCommandExecuted(object p)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
+            SqlConnection ThisConnection = new SqlConnection(connectionString);
+            ThisConnection.Open();
+            SqlCommand thisCommand;
+            SqlDataReader thisReader;
+
+            #region Процедуры добавления данных в БД
+
+            string Date;
+
+            thisCommand = ThisConnection.CreateCommand();
+            thisCommand.CommandText = "Select end_date_maintenance from [maintenance] where id_maintenance = " + EditMaintenancesData.IDMaintenances;
+            thisReader = thisCommand.ExecuteReader();
+            thisReader.Read();
+            Date = thisReader["end_date_maintenance"].ToString();
+            thisReader.Close();
+            if (Date != "")
+            {
+                #region Экспорт в Word
+
+                //Создаём новый Word.Application
+                Microsoft.Office.Interop.Word.Application app = new Microsoft.Office.Interop.Word.Application();
+
+                //Загружаем документ
+                Microsoft.Office.Interop.Word.Document doc = null;
+
+                object fileName = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName)
+                                + "//Resources/Document/ZakazNaryad.doc";
+                object falseValue = false;
+                object trueValue = true;
+                object missing = Type.Missing;
+
+                doc = app.Documents.Open(ref fileName, ref missing, ref trueValue,
+                ref missing, ref missing, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing);
+
+                //Теперь у нас есть документ который мы будем менять.
+
+                //Очищаем параметры поиска
+                app.Selection.Find.ClearFormatting();
+                app.Selection.Find.Replacement.ClearFormatting();
+
+                //Задаём параметры замены и выполняем замену.
+                object findText = "<ID>";
+                object replaceWith = Convert.ToString(EditMaintenancesData.IDMaintenances);
+                object replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                string Day, Month;
+
+                if (StartDateMaintenance.Day < 10)
+                {
+                    Day = "0" + Convert.ToString(StartDateMaintenance.Day);
+                }
+                else
+                {
+                    Day = Convert.ToString(StartDateMaintenance.Day);
+                }
+
+                if (StartDateMaintenance.Month < 10)
+                {
+                    Month = "0" + Convert.ToString(StartDateMaintenance.Month);
+                }
+                else
+                {
+                    Month = Convert.ToString(StartDateMaintenance.Month);
+                }
+
+                findText = "<Day>";
+                replaceWith = Day;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<Month>";
+                replaceWith = Month;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<Year>";
+                replaceWith = Convert.ToString(StartDateMaintenance.Year);
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                #region Получение данных о транспортном средстве из БД
+
+                string MakeModel, VIN, StateNumber, TypeVehicle, YearManufacture, EngineNumber, ChassisNumber, BodyNumber;
+
+                thisCommand = ThisConnection.CreateCommand();
+                thisCommand.CommandText = "select * from vehicle where id_vehicle = " + VehicleDataModel.id_vehicle;
+                thisReader = thisCommand.ExecuteReader();
+                thisReader.Read();
+
+                VIN = thisReader["VIN"].ToString();
+                StateNumber = thisReader["state_number"].ToString();
+                TypeVehicle = thisReader["type_vehicle"].ToString();
+                YearManufacture = thisReader["year_manufacture"].ToString();
+                EngineNumber = thisReader["engine_number"].ToString();
+                ChassisNumber = thisReader["сhassis_number"].ToString();
+                BodyNumber = thisReader["body_number"].ToString();
+                MakeModel = thisReader["make_model"].ToString();
+
+                thisReader.Close();
+
+                #endregion
+
+                findText = "<VIN>";
+                replaceWith = VIN;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<MakeModel>";
+                replaceWith = MakeModel;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<Type>";
+                replaceWith = TypeVehicle;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<StateNumber>";
+                replaceWith = StateNumber;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<YearManufacture>";
+                replaceWith = YearManufacture;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<NumberEngine>";
+                replaceWith = EngineNumber;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<NumberChassis>";
+                replaceWith = ChassisNumber;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<NumberBody>";
+                replaceWith = BodyNumber;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                string EndDay, EndMonth;
+
+                if (EndDateMaintenance.Day < 10)
+                {
+                    EndDay = "0" + Convert.ToString(EndDateMaintenance.Day);
+                }
+                else
+                {
+                    EndDay = Convert.ToString(EndDateMaintenance.Day);
+                }
+
+                if (EndDateMaintenance.Month < 10)
+                {
+                    EndMonth = "0" + Convert.ToString(EndDateMaintenance.Month);
+                }
+                else
+                {
+                    EndMonth = Convert.ToString(EndDateMaintenance.Month);
+                }
+
+                findText = "<DayEnd>";
+                replaceWith = EndDay;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<MonthEnd>";
+                replaceWith = EndMonth;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                findText = "<YearEnd>";
+                replaceWith = Convert.ToString(EndDateMaintenance.Year);
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                DataTable dt = new DataTable();
+
+                thisCommand = ThisConnection.CreateCommand();
+                thisCommand.CommandText = "Select name_work,cost_work from work,[maintenance] where maintenance.id_maintenance= work.id_maintenance and work.id_maintenance = " + EditMaintenancesData.IDMaintenances;
+                thisReader = thisCommand.ExecuteReader();
+                dt.Load(thisReader);
+
+                //Указываем таблицу в которую будем помещать данные (таблица должна существовать в шаблоне документа!)
+                Microsoft.Office.Interop.Word.Table tbl = app.ActiveDocument.Tables[3];
+
+                //Заполняем в таблицу - 10 записей.
+                for (int i = 1; i <= dt.Rows.Count; i++)
+                {
+                    tbl.Rows.Add(ref missing);//Добавляем в таблицу строку.
+                                              //Обычно саздаю только строку с заголовками и одну пустую для данных.
+                    tbl.Rows[i + 1].Cells[1].Range.Text = Convert.ToString(i);
+                    tbl.Rows[i + 1].Cells[2].Range.Text = Convert.ToString(dt.Rows[i - 1][0]);
+                    tbl.Rows[i + 1].Cells[3].Range.Text = Convert.ToString(dt.Rows[i - 1][1]);
+
+                    if (i == dt.Rows.Count)
+                    {
+                        tbl.Rows[i + 2].Delete();
+                    }
+                }
+
+                int CostWork = 0;
+
+                for (int i = 1; i < dt.Rows.Count; i++)
+                {
+                    CostWork = +Convert.ToInt32(dt.Rows[i - 1][1]);
+                }
+
+                findText = "<CostWork>";
+                replaceWith = CostWork;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                DataTable dtSparePart = new DataTable();
+
+                thisCommand = ThisConnection.CreateCommand();
+                thisCommand.CommandText = "Select name_spare_part,cost_spare_part from spare_part,[maintenance] where maintenance.id_maintenance= spare_part.id_maintenance and spare_part.id_maintenance = " + EditMaintenancesData.IDMaintenances;
+                thisReader = thisCommand.ExecuteReader();
+                dtSparePart.Load(thisReader);
+
+                //Указываем таблицу в которую будем помещать данные (таблица должна существовать в шаблоне документа!)
+                Microsoft.Office.Interop.Word.Table tbl2 = app.ActiveDocument.Tables[4];
+
+                //Заполняем в таблицу - 10 записей.
+                for (int i = 1; i <= dtSparePart.Rows.Count; i++)
+                {
+                    tbl2.Rows.Add(ref missing);//Добавляем в таблицу строку.
+                                               //Обычно саздаю только строку с заголовками и одну пустую для данных.
+                    tbl2.Rows[i + 1].Cells[1].Range.Text = Convert.ToString(i);
+                    tbl2.Rows[i + 1].Cells[2].Range.Text = Convert.ToString(dtSparePart.Rows[i - 1][0]);
+                    tbl2.Rows[i + 1].Cells[3].Range.Text = Convert.ToString(dtSparePart.Rows[i - 1][1]);
+
+                    if (i == dtSparePart.Rows.Count)
+                    {
+                        tbl2.Rows[i + 2].Delete();
+                    }
+                }
+
+                int CostSparePart = 0;
+
+                for (int i = 1; i < dtSparePart.Rows.Count; i++)
+                {
+                    CostSparePart =+ Convert.ToInt32(dtSparePart.Rows[i][1]);
+                }
+
+                findText = "<CostSparePart>";
+                replaceWith = CostSparePart;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                int Cost = CostSparePart + CostWork;
+
+                findText = "<Cost>";
+                replaceWith = Cost;
+                replace = 2;
+
+                app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
+                ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                //Открываем документ для просмотра.
+                app.Visible = true;
+
+                #endregion
+
+            }
+            else
+            {
+                MessageBox.Show("Выберите дату окончания технического обслуживани.\n Сохраните данные.","Ошибка!");
+            }
+
+            thisReader.Close();
+
+            #endregion
+
+            ThisConnection.Close();
+
+            foreach (System.Windows.Window window in System.Windows.Application.Current.Windows)
+            {
+                if (window.DataContext == this)
+                {
+                    window.Close();
+                }
+            }
+        }
+
+        #endregion
+
+
         #endregion
 
         /*------------------------------------------------------------------------------------------------*/
@@ -440,6 +794,8 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Maintenances.Addition
         public EditMaintenanceWindowViewModel()
         {
             #region Команды
+
+            ExportMaintananceWordCommand = new LamdaCommand(OnExportMaintananceWordCommandExecuted, CanExportMaintananceWordCommandExecute);
 
             VisibleCommand = new LamdaCommand(OnVisibleCommandExecuted, CanVisibleCommandExecute);
 
