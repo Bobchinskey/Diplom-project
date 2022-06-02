@@ -93,6 +93,7 @@
     <Compile Include="Models\Client\ListNaturalPersonAdditionalData.cs" />
     <Compile Include="Models\Client\ListRepresentativesOrganizations.cs" />
     <Compile Include="Models\Client\ListRepresentativesOrganizationsData.cs" />
+    <Compile Include="Models\Fine\DataFineModel.cs" />
     <Compile Include="Models\Insurances\EditOrAddInsurancesModel.cs" />
     <Compile Include="Models\Insurances\ListMainInsuranceData.cs" />
     <Compile Include="Models\Maintenances\CompletedWorks.cs" />
@@ -120,6 +121,8 @@
     <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\EditLegalEntityViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\ListClientWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\ClientWindow\RepresentativesOrganizationsWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\Fine\AddFineWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowInteraction\Fine\ListFineWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Insurances\InsurancesInformationWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Insurances\OSAGOWindowViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainWindowInteraction\Maintenances\Additional\AddCompletedWorksCommandWindowViewModel.cs" />
@@ -184,6 +187,12 @@
     </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\ClientWindow\RepresentativesOrganizationsWindow.xaml.cs">
       <DependentUpon>RepresentativesOrganizationsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\Fine\AddFineWindow.xaml.cs">
+      <DependentUpon>AddFineWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainWindowInteraction\Fine\ListFineWindow.xaml.cs">
+      <DependentUpon>ListFineWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\MainWindowInteraction\Insurances\InsurancesInformationWindow.xaml.cs">
       <DependentUpon>InsurancesInformationWindow.xaml</DependentUpon>
@@ -398,6 +407,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\Fine\AddFineWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainWindowInteraction\Fine\ListFineWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\MainWindowInteraction\Insurances\InsurancesInformationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -540,6 +557,9 @@
     </None>
     <None Include="Resources\Document\ActReceivingTransfer.doc" />
     <None Include="Resources\Document\RentalContract1.doc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Document\RentalContractAditionalServices.doc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Document\ZakazNaryad.doc">

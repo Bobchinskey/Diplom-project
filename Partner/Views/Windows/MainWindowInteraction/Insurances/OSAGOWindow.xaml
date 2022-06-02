@@ -19,7 +19,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <WrapPanel Grid.Row="0" Background="{DynamicResource MainColor}">
-            <TextBlock Margin="10" Text="{Binding Title}" Foreground="White" FontSize="20"/>
+            <TextBlock Margin="10" Text="{Binding Title}" Foreground="{DynamicResource UserInfoForeground}" FontSize="20"/>
         </WrapPanel>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>

@@ -281,7 +281,6 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Users
 
         private void OnAddUserDataCommandExecuted(object p)
         {
-            UserDataModel.Id = Convert.ToInt32(MainListUsers.Rows[SelectedUser]["id_user"]);
             UserDataModel.Title = "Добавление пользователя";
 
             AddUserDataWindow addUserDataWindow = new AddUserDataWindow();

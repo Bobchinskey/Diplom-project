@@ -21,7 +21,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="{DynamicResource MainColor}">
-            <TextBlock Margin="5" Text="{Binding Title}" HorizontalAlignment="Center" TextAlignment="Center" Foreground="White" FontSize="20"/>
+            <TextBlock Margin="5" Text="{Binding Title}" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{DynamicResource UserInfoForeground}" FontSize="20"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

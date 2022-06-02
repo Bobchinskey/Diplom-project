@@ -265,11 +265,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
 
         private void OnDropVehicleCommandExecuted(object p)
         {
-            if (MessageBox.Show("Вы действительно хотите удалить безвозвратно данную запись?", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
-            {
-
-            }
-            else
+            if (MessageBox.Show("Вы действительно хотите удалить данную запись?", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
                 SqlConnection ThisConnection = new SqlConnection(connectionString);
@@ -295,7 +291,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.VehicleWindow
 
         private void OnRepeatVehicleCommandExecuted(object p)
         {
-            if (MessageBox.Show("Вы действительно хотите удалить безвозвратно данную запись?", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            if (MessageBox.Show("Вы действительно хотите восстановить данную запись?", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 string connectionString = ConfigurationManager.ConnectionStrings["Partner"].ConnectionString;
                 SqlConnection ThisConnection = new SqlConnection(connectionString);

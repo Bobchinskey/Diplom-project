@@ -21,14 +21,14 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="{DynamicResource MainColor}">
-            <TextBlock Margin="10" Text="Выберите транстпортное средство" TextAlignment="Center" Foreground="White" FontSize="20"/>
+            <TextBlock Margin="10" Text="Выберите транстпортное средство" TextAlignment="Center" Foreground="{DynamicResource UserInfoForeground}" FontSize="20"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <DataGrid Background="{DynamicResource BackgroundColor}" Margin="5,5,5,5" SelectedIndex="{Binding SelectedVehicle}" ItemsSource="{Binding MainListVehicle}" IsReadOnly="True" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
+            <DataGrid Background="{DynamicResource BackgroundColor}" Margin="5,5,5,5" SelectedIndex="{Binding SelectedVehicle}" ItemsSource="{Binding MainListVehicle}" IsReadOnly="True" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" CanUserSortColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="№" Binding="{Binding num}"/>
                     <DataGridTextColumn Header="Наименование" Binding="{Binding MakeModel}"/>

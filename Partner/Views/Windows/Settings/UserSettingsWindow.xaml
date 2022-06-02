@@ -22,7 +22,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="{DynamicResource MainColor}">
-            <TextBlock Text="Пользовательские настройки" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="10"/>
+            <TextBlock Text="Пользовательские настройки" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource UserInfoForeground}" FontSize="18" Margin="10"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

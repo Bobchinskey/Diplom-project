@@ -20,7 +20,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="{DynamicResource MainColor}">
-            <TextBlock Margin="10" Text="Бронирование транспортных средств" HorizontalAlignment="Center" Foreground="White" FontSize="25"/>
+            <TextBlock Margin="10" Text="Бронирование транспортных средств" HorizontalAlignment="Center" Foreground="{DynamicResource UserInfoForeground}" FontSize="25"/>
         </Grid>
         <DataGrid Background="{DynamicResource BackgroundColor}" Margin="5,5,5,5" ItemsSource="{Binding MainListBooking}" IsReadOnly="True" Grid.Row="1" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>

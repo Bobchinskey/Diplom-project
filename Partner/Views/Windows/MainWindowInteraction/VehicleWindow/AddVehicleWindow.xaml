@@ -22,7 +22,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <WrapPanel Grid.Row="0" Background="{DynamicResource MainColor}">
-            <TextBlock Margin="10" Text="{Binding Title}" Foreground="White" FontSize="25"/>
+            <TextBlock Margin="10" Text="{Binding Title}" Foreground="{DynamicResource UserInfoForeground}" FontSize="25"/>
             <Button Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundMainText}" Content="Техническое состояние" Command="{Binding OpenTechnicalConditionCommand}" Style="{StaticResource ButtonStroge}" Height="25" Width="150"/>
         </WrapPanel>
         <Grid Grid.Row="1">

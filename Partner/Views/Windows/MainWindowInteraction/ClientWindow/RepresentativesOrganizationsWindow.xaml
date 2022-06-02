@@ -21,7 +21,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <WrapPanel Grid.Row="0" Background="{DynamicResource MainColor}">
-            <TextBlock Margin="10" Text="{Binding Title}" Foreground="White" FontSize="25"/>
+            <TextBlock Margin="10" Text="{Binding Title}" Foreground="{DynamicResource UserInfoForeground}" FontSize="25"/>
         </WrapPanel>
         <StackPanel Margin="10" Grid.Row="1">
             <WrapPanel Margin="0,10,0,0" Height="20">

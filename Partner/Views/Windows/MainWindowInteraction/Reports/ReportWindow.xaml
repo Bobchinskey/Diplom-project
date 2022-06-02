@@ -16,12 +16,21 @@
         <Datacontext:ReportWindowViewModel/>
     </Window.DataContext>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
-        <DataGrid Background="{DynamicResource BackgroundColor}" Margin="5,5,5,5" SelectedIndex="{Binding SelectedReport}" ItemsSource="{Binding MainListReport}" IsReadOnly="True" SelectionMode="Single" CanUserReorderColumns="False" CanUserSortColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False"/>
-        <StackPanel Margin="5,5,5,0" Grid.Column="1">
+        <Grid Grid.Row="0" Grid.Column="0" Background="{DynamicResource MainColor}">
+            <TextBlock Margin="5" Text="{Binding Title}" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{DynamicResource UserInfoForeground}" FontSize="20"/>
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="1" Background="{DynamicResource MainColor}">
+        </Grid>
+        <DataGrid Grid.Row="1" Background="{DynamicResource BackgroundColor}" Margin="5,5,5,5" SelectedIndex="{Binding SelectedReport}" ItemsSource="{Binding MainListReport}" IsReadOnly="True" SelectionMode="Single" CanUserReorderColumns="False" CanUserSortColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False"/>
+        <StackPanel Grid.Row="1" Margin="5,5,5,0" Grid.Column="1">
             <Button Command="{Binding ExcelCommand}" Style="{StaticResource ButtonStroge}" Background="{DynamicResource BackgroundColor}" Width="50" Height="50">
                 <Button.Content>
                     <Grid>

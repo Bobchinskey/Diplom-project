@@ -7,7 +7,7 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:Partner.Views.Windows.MainWindowInteraction.Rental.AddRental"
         mc:Ignorable="d"
-        Title="Выбор даты аренды" Height="200" Width="400"
+        Title="Выбор даты аренды" Height="200" Width="450"
         ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen"
         Background="{DynamicResource BackgroundColor}">
@@ -21,7 +21,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="{DynamicResource MainColor}">
-            <TextBlock Margin="5" Text="Выбор даты аренды" HorizontalAlignment="Center" TextAlignment="Center" Foreground="White" FontSize="20"/>
+            <TextBlock Margin="5" Text="{Binding Title}" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{DynamicResource UserInfoForeground}" FontSize="20"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -33,11 +33,11 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="Дата начала аренды" TextAlignment="Center" Foreground="{DynamicResource ForegroundMainText}"/>
+                <TextBlock Text="{Binding TitleStartDate}" TextAlignment="Center" Foreground="{DynamicResource ForegroundMainText}"/>
                 <DatePicker Background="{DynamicResource BackgroundColor}" Style="{StaticResource DatePickerStroge}" SelectedDate="{Binding StartDateRental}" Margin="0,10" Width="120"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="Дата окончания аренды" TextAlignment="Center" Foreground="{DynamicResource ForegroundMainText}"/>
+                <TextBlock Text="{Binding TitleEndDate}" TextAlignment="Center" Foreground="{DynamicResource ForegroundMainText}"/>
                 <DatePicker Background="{DynamicResource BackgroundColor}" Style="{StaticResource DatePickerStroge}" SelectedDate="{Binding EndDateRental}" Margin="0,10" Width="120"/>
             </StackPanel>
             <Rectangle Grid.Row="1" Grid.Column="0" Height="1" Stroke="Black"/>

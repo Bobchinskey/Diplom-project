@@ -216,7 +216,7 @@
                         </Button.Content>
                     </Button>                   
                 </StackPanel>
-                <Border CornerRadius="3" Margin="10,0,10,5" Grid.Row="1" BorderBrush="Black" BorderThickness="1">
+                <Border CornerRadius="3" Margin="10,0,10,5" Grid.Row="1" BorderBrush="{DynamicResource UserInfoForeground}" BorderThickness="1">
                     <Grid VerticalAlignment="Bottom" Grid.Column="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
@@ -232,13 +232,13 @@
                             </Image.Source>
                         </Image>
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1">
-                            <TextBlock Text="Пользователь:" Foreground="Black"/>
-                            <TextBlock Foreground="Black" TextWrapping="Wrap">
+                            <TextBlock Text="Пользователь:" Foreground="{DynamicResource UserInfoForeground}"/>
+                            <TextBlock Foreground="{DynamicResource UserInfoForeground}" TextWrapping="Wrap">
                                 <Run Text="{Binding Surname}"/>
                                 <Run Text=" "/>
                                 <Run Text="{Binding Name}"/>
                             </TextBlock>
-                            <TextBlock Text="{Binding AccessLavel}" Foreground="Black"/>
+                            <TextBlock Text="{Binding AccessLavel}" Foreground="{DynamicResource UserInfoForeground}"/>
                         </StackPanel>
                     </Grid>
                 </Border>

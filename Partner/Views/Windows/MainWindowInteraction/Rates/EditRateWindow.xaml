@@ -22,7 +22,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <WrapPanel Background="BlueViolet" Grid.Row="0">
-            <TextBlock Text="Редактирование тарифа" Foreground="White" Margin="10" FontSize="18"/>
+            <TextBlock Text="Редактирование тарифа" Foreground="{DynamicResource UserInfoForeground}" Margin="10" FontSize="18"/>
         </WrapPanel>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>

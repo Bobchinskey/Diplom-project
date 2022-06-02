@@ -91,11 +91,11 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
 
         #region Итоговая стоимость : Cost
 
-        private string _Cost;
+        private int _Cost;
 
         /// <summary>Cost</summary>
 
-        public string Cost
+        public int Cost
         {
             get => _Cost;
             set => Set(ref _Cost, value);
@@ -228,11 +228,11 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
                     k++;
                 }
 
-                Cost = Convert.ToString(CostSD);
+                Cost = CostSD;
             }
             else
             {
-                Cost = Convert.ToString(CostST);
+                Cost = CostST;
             }
         }
 
@@ -305,8 +305,19 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
                 //Загружаем документ
                 Microsoft.Office.Interop.Word.Document doc = null;
 
-                object fileName = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName)
+                object fileName;
+
+                if (AdditionalRateRental.Rows.Count > 0)
+                {
+                    fileName = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName)
+                             + "//Resources/Document/RentalContractAditionalServices.doc";
+                }
+                else
+                {
+                    fileName = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName)
                              + "//Resources/Document/RentalContract1.doc";
+                }
+                
                 object falseValue = false;
                 object trueValue = true;
                 object missing = Type.Missing;
@@ -358,6 +369,24 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
                 app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
                 ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
                 ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                if (AdditionalRateRental.Rows.Count > 0)
+                {
+                    //Указываем таблицу в которую будем помещать данные (таблица должна существовать в шаблоне документа!)
+                    Microsoft.Office.Interop.Word.Table tbl = app.ActiveDocument.Tables[2];
+
+                    //Заполняем в таблицу - 10 записей.
+                    for (int i = 1; i <= AdditionalRateRental.Rows.Count; i++)
+                    {
+                        tbl.Rows.Add(ref missing);//Добавляем в таблицу строку.
+                                                  //Обычно саздаю только строку с заголовками и одну пустую для данных.
+                        tbl.Rows[i + 1].Cells[1].Range.Text = Convert.ToString(i);
+                        tbl.Rows[i + 1].Cells[2].Range.Text = Convert.ToString(AdditionalRateRental.Rows[i - 1]["NameRental"]);
+                        tbl.Rows[i + 1].Cells[3].Range.Text = Convert.ToString(AdditionalRateRental.Rows[i - 1]["TypePayment"]);
+                        tbl.Rows[i + 1].Cells[4].Range.Text = Convert.ToString(AdditionalRateRental.Rows[i - 1]["CostRental"]);
+                    }
+
+                }
 
                 findText = "<Month>";
                 replaceWith = Month;
@@ -663,8 +692,19 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
                 //Загружаем документ
                 Microsoft.Office.Interop.Word.Document doc = null;
 
-                object fileName = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName)
-             + "//Resources/Document/RentalContract1.doc";
+                object fileName;
+
+                if (AdditionalRateRental.Rows.Count > 0)
+                {
+                    fileName = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName)
+                             + "//Resources/Document/RentalContractAditionalServices.doc";
+                }
+                else
+                {
+                    fileName = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName)
+                             + "//Resources/Document/RentalContract1.doc";
+                }
+
                 object falseValue = false;
                 object trueValue = true;
                 object missing = Type.Missing;
@@ -732,6 +772,24 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
                 app.Selection.Find.Execute(ref findText, ref missing, ref missing, ref missing,
                 ref missing, ref missing, ref missing, ref missing, ref missing, ref replaceWith,
                 ref replace, ref missing, ref missing, ref missing, ref missing);
+
+                if (AdditionalRateRental.Rows.Count > 0)
+                {
+                    //Указываем таблицу в которую будем помещать данные (таблица должна существовать в шаблоне документа!)
+                    Microsoft.Office.Interop.Word.Table tbl = app.ActiveDocument.Tables[2];
+
+                    //Заполняем в таблицу - 10 записей.
+                    for (int i = 1; i <= AdditionalRateRental.Rows.Count; i++)
+                    {
+                        tbl.Rows.Add(ref missing);//Добавляем в таблицу строку.
+                                                  //Обычно саздаю только строку с заголовками и одну пустую для данных.
+                        tbl.Rows[i + 1].Cells[1].Range.Text = Convert.ToString(i);
+                        tbl.Rows[i + 1].Cells[2].Range.Text = Convert.ToString(AdditionalRateRental.Rows[i - 1]["NameRental"]);
+                        tbl.Rows[i + 1].Cells[3].Range.Text = Convert.ToString(AdditionalRateRental.Rows[i - 1]["TypePayment"]);
+                        tbl.Rows[i + 1].Cells[4].Range.Text = Convert.ToString(AdditionalRateRental.Rows[i - 1]["CostRental"]);
+                    }
+
+                }
 
                 findText = "<FIO>";
                 replaceWith = DataStaticRental.FIORepresentativesOrganization;
@@ -1075,7 +1133,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental
 
             ThisConnection.Close();
 
-            Cost = Convert.ToString(CostRate * day);
+            Cost = CostRate * day;
             CostST = CostRate * day;
 
             #endregion

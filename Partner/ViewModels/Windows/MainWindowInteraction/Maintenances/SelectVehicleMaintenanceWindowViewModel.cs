@@ -1,6 +1,7 @@
 ﻿using Partner.Infrastructure.Commands;
 using Partner.Models.Vehicle;
 using Partner.ViewModels.Base;
+using Partner.Views.Windows.MainWindowInteraction.Fine;
 using Partner.Views.Windows.MainWindowInteraction.Maintenances;
 using System;
 using System.Collections.Generic;
@@ -88,8 +89,16 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Maintenances
         {
             VehicleDataModel.id_vehicle = MainListVehicle[SelectedVehicle].id_vehicle;
 
-            ListMaintenanceWindow listMaintenanceWindow = new ListMaintenanceWindow();
-            listMaintenanceWindow.ShowDialog();
+            if (VehicleDataModel.EditOrAdd == "Штрафы")
+            {
+                ListFineWindow listFineWindow = new ListFineWindow();
+                listFineWindow.ShowDialog();
+            }
+            else if (VehicleDataModel.EditOrAdd == "Техническое обслуживание")
+            {
+                ListMaintenanceWindow listMaintenanceWindow = new ListMaintenanceWindow();
+                listMaintenanceWindow.ShowDialog();
+            }
 
             ReturnListMaintenanceWindowCommand.Execute(null);
         }

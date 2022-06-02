@@ -20,7 +20,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Background="{DynamicResource MainColor}" Grid.Row="0">
-            <TextBlock Margin="10" Text="{Binding Title}" Foreground="White" FontSize="25" HorizontalAlignment="Center"/>
+            <TextBlock Margin="10" Text="{Binding Title}" Foreground="{DynamicResource UserInfoForeground}" FontSize="25" HorizontalAlignment="Center"/>
         </Grid>
         <StackPanel Grid.Row="1"  Margin="10,20">
             <Grid>

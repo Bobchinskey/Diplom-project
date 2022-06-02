@@ -21,7 +21,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <WrapPanel Grid.Row="0" Background="{DynamicResource MainColor}">
-            <TextBlock Margin="10" Text="Редактирование юридического лица" Foreground="White" FontSize="25"/>
+            <TextBlock Margin="10" Text="Редактирование юридического лица" Foreground="{DynamicResource UserInfoForeground}" FontSize="25"/>
         </WrapPanel>
         <Grid Grid.Row="1" Background="{DynamicResource BackgroundColor}">
             <Grid.ColumnDefinitions>

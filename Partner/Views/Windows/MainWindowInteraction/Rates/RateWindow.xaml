@@ -26,7 +26,7 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <WrapPanel Grid.Row="0" Grid.Column="0" Background="{DynamicResource MainColor}">
-            <TextBlock Text="Редактор тарифов" Foreground="White" FontSize="18" Margin="10"/>
+            <TextBlock Text="Редактор тарифов" Foreground="{DynamicResource UserInfoForeground}" FontSize="18" Margin="10"/>
         </WrapPanel>
         <WrapPanel Grid.Row="0" Grid.Column="1" Background="{DynamicResource MainColor}"/>
         <DataGrid Background="{DynamicResource BackgroundColor}" CanUserSortColumns="False" Margin="5,5,5,5" SelectedIndex="{Binding SelectedRate, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding MainListRate}" IsReadOnly="True" Grid.Row="1" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">

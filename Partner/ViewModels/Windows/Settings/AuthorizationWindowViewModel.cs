@@ -87,7 +87,7 @@ namespace Partner.ViewModels.Windows.Settings
 
         #region Массив данных фильтрующих элементов : status
 
-        private string[] _status = { "Светлая", "Темная" };
+        private string[] _status = { "Светлая", "Темная", "Красная", "Кораловая", "Бирюзовая", "Лаймовая", "Золотая" };
 
         /// <summary>status</summary>
 
@@ -153,6 +153,7 @@ namespace Partner.ViewModels.Windows.Settings
                         Application.Current.Resources["ForegroundAdditionalText"] = new SolidColorBrush(Colors.Black);
                         Application.Current.Resources["BackgroundColor"] = new SolidColorBrush(Color.FromRgb(39, 39, 39));
                         Application.Current.Resources["MainColor"] = new SolidColorBrush(Color.FromRgb(109, 109, 109));
+                        Application.Current.Resources["UserInfoForeground"] = new SolidColorBrush(Colors.White);
                     }
                     else if (SelectedApplicationDesignProperty == "Светлая")
                     {
@@ -160,6 +161,47 @@ namespace Partner.ViewModels.Windows.Settings
                         Application.Current.Resources["ForegroundAdditionalText"] = new SolidColorBrush(Colors.White);
                         Application.Current.Resources["BackgroundColor"] = new SolidColorBrush(Colors.White);
                         Application.Current.Resources["MainColor"] = new SolidColorBrush(Colors.BlueViolet);
+                        Application.Current.Resources["UserInfoForeground"] = new SolidColorBrush(Colors.White);
+                    }
+                    else if (SelectedApplicationDesignProperty == "Красная")
+                    {
+                        Application.Current.Resources["MainColor"] = new SolidColorBrush(Colors.Red);
+                        Application.Current.Resources["UserInfoForeground"] = new SolidColorBrush(Colors.Black);
+                        Application.Current.Resources["ForegroundMainText"] = new SolidColorBrush(Colors.Black);
+                        Application.Current.Resources["ForegroundAdditionalText"] = new SolidColorBrush(Colors.White);
+                        Application.Current.Resources["BackgroundColor"] = new SolidColorBrush(Colors.White);
+                    }
+                    else if (SelectedApplicationDesignProperty == "Кораловая")
+                    {
+                        Application.Current.Resources["MainColor"] = new SolidColorBrush(Colors.LightCoral);
+                        Application.Current.Resources["UserInfoForeground"] = new SolidColorBrush(Colors.Black);
+                        Application.Current.Resources["ForegroundMainText"] = new SolidColorBrush(Colors.Black);
+                        Application.Current.Resources["ForegroundAdditionalText"] = new SolidColorBrush(Colors.White);
+                        Application.Current.Resources["BackgroundColor"] = new SolidColorBrush(Colors.White);
+                    }
+                    else if (SelectedApplicationDesignProperty == "Бирюзовая")
+                    {
+                        Application.Current.Resources["MainColor"] = new SolidColorBrush(Colors.PaleTurquoise);
+                        Application.Current.Resources["UserInfoForeground"] = new SolidColorBrush(Colors.Black);
+                        Application.Current.Resources["ForegroundMainText"] = new SolidColorBrush(Colors.Black);
+                        Application.Current.Resources["ForegroundAdditionalText"] = new SolidColorBrush(Colors.White);
+                        Application.Current.Resources["BackgroundColor"] = new SolidColorBrush(Colors.White);
+                    }
+                    else if (SelectedApplicationDesignProperty == "Лаймовая")
+                    {
+                        Application.Current.Resources["MainColor"] = new SolidColorBrush(Colors.Lime);
+                        Application.Current.Resources["UserInfoForeground"] = new SolidColorBrush(Colors.Black);
+                        Application.Current.Resources["ForegroundMainText"] = new SolidColorBrush(Colors.Black);
+                        Application.Current.Resources["ForegroundAdditionalText"] = new SolidColorBrush(Colors.White);
+                        Application.Current.Resources["BackgroundColor"] = new SolidColorBrush(Colors.White);
+                    }
+                    else if (SelectedApplicationDesignProperty == "Золотая")
+                    {
+                        Application.Current.Resources["MainColor"] = new SolidColorBrush(Colors.Gold);
+                        Application.Current.Resources["UserInfoForeground"] = new SolidColorBrush(Colors.Black);
+                        Application.Current.Resources["ForegroundMainText"] = new SolidColorBrush(Colors.Black);
+                        Application.Current.Resources["ForegroundAdditionalText"] = new SolidColorBrush(Colors.White);
+                        Application.Current.Resources["BackgroundColor"] = new SolidColorBrush(Colors.White);
                     }
                 }
 

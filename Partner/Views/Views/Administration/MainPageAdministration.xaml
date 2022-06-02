@@ -49,21 +49,19 @@
                     <MenuItem Background="{DynamicResource BackgroundColor}" Header="Страхование..." Command="{Binding OpenInsurancesInformationWindowCommand}" FontSize="14"/>
                     <MenuItem Background="{DynamicResource BackgroundColor}" Header="Техническое обслуживание..." Command="{Binding OpeMaintenanceWindowCommand}" FontSize="14"/>
                     <Separator/>
-                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Список штрафов..." FontSize="14"/>
+                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Список штрафов..." Command="{Binding OpenListFineWindowCommand}" FontSize="14"/>
                     <Separator/>
                     <MenuItem Background="{DynamicResource BackgroundColor}" Header="Тарифы..." Command="{Binding OpenListRateWindowCommand}" FontSize="14"/>
                     <MenuItem Background="{DynamicResource BackgroundColor}" Header="Дополнительные услуги..." Command="{Binding OpenListAdditionalServicesWindowCommand}" FontSize="14"/>
                 </MenuItem>
                 <MenuItem Header="Отчеты" Background="{DynamicResource BackgroundColor}">
                     <MenuItem Command="{Binding OpenReportNumberRentsWindowCommand}" Background="{DynamicResource BackgroundColor}" Header="Отчет по количеству аренд..." FontSize="14"/>
-                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Отчет по среднему чеку..." FontSize="14"/>
+                    <MenuItem Command="{Binding OpenListAverageReceiptReportWindowCommand}" Background="{DynamicResource BackgroundColor}" Header="Отчет по среднему чеку..." FontSize="14"/>
                     <Separator/>
-                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Отчет по страховкам..." FontSize="14"/>
+                    <MenuItem Command="{Binding OpenListCarProfitReportWindowCommand}" Background="{DynamicResource BackgroundColor}" Header="Отчет по прибыли от автомобилей..." FontSize="14"/>
+                    <MenuItem Command="{Binding OpenListReportIncomeAdditionalServicesWindowCommand}" Background="{DynamicResource BackgroundColor}" Header="Отчет по доходам от дополнительных услуг..." FontSize="14"/>
                     <Separator/>
-                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Отчет по прибыли от автомобилей..." FontSize="14"/>
-                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Отчет по доходам от дополнительных услуг..." FontSize="14"/>
-                    <Separator/>
-                    <MenuItem Background="{DynamicResource BackgroundColor}" Header="Отчет по техническому обслуживанию..." FontSize="14"/>
+                    <MenuItem Command="{Binding OpenListMaintenanceReportWindowCommand}" Background="{DynamicResource BackgroundColor}" Header="Отчет по техническому обслуживанию..." FontSize="14"/>
                 </MenuItem>
                 <MenuItem Header="Администрирование" Background="{DynamicResource BackgroundColor}">
                     <MenuItem Background="{DynamicResource BackgroundColor}" Header="Новости" Command="{Binding OpenListNewsWindowCommand}"/>

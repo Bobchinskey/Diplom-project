@@ -9,6 +9,7 @@
             <SolidColorBrush x:Key="BackgroundColor" Color="White"/>
             <SolidColorBrush x:Key="ForegroundMainText" Color="Black"/>
             <SolidColorBrush x:Key="ForegroundAdditionalText" Color="White"/>
+            <SolidColorBrush x:Key="UserInfoForeground" Color="White"/>
             <Page x:Key="Content"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Buttons.xaml"/>

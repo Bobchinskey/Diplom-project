@@ -19,7 +19,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="{DynamicResource MainColor}">
-            <TextBlock Margin="10" Text="{Binding Title}" Foreground="White" FontSize="25" HorizontalAlignment="Center"/>
+            <TextBlock Margin="10" Text="{Binding Title}" Foreground="{DynamicResource UserInfoForeground}" FontSize="25" HorizontalAlignment="Center"/>
         </Grid>
         <Grid Grid.Row="1" Margin="20">
             <Grid.ColumnDefinitions>

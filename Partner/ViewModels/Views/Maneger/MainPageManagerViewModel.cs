@@ -1,12 +1,8 @@
 ﻿using Partner.Infrastructure.Commands;
-using Partner.Models.PersonalData;
 using Partner.Models.Reports;
 using Partner.Models.Vehicle;
 using Partner.ViewModels.Base;
-using Partner.ViewModels.Windows;
-using Partner.Views.Views.Manager;
 using Partner.Views.Views.Manager.Pages;
-using Partner.Views.Windows;
 using Partner.Views.Windows.InformativeWindows;
 using Partner.Views.Windows.MainWindowInteraction.ClientWindow;
 using Partner.Views.Windows.MainWindowInteraction.Insurances;
@@ -14,15 +10,9 @@ using Partner.Views.Windows.MainWindowInteraction.Maintenances;
 using Partner.Views.Windows.MainWindowInteraction.Rates;
 using Partner.Views.Windows.MainWindowInteraction.Rates.AdditionalServices;
 using Partner.Views.Windows.MainWindowInteraction.Rental;
-using Partner.Views.Windows.MainWindowInteraction.Reports;
+using Partner.Views.Windows.MainWindowInteraction.Rental.AddRental;
 using Partner.Views.Windows.MainWindowInteraction.VehicleWindow;
 using Partner.Views.Windows.Settings;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -181,6 +171,8 @@ namespace Partner.ViewModels.Views.Maneger
 
         private void OnOpenMaintenanceWindowCommandExecuted(object p)
         {
+            VehicleDataModel.EditOrAdd = "Техническое обслуживание";
+
             SelectVehicleMaintenanceWindow selectVehicleMaintenanceWindow = new SelectVehicleMaintenanceWindow();
             selectVehicleMaintenanceWindow.ShowDialog();
 
@@ -234,9 +226,112 @@ namespace Partner.ViewModels.Views.Maneger
         private void OnOpenReportNumberRentsWindowCommandExecuted(object p)
         {
             ReportDataModel.Title = "Отчет по количеству аренд";
+            ReportDataModel.Slt = "Отчет по количеству аренд";
 
-            ReportWindow reportWindow = new ReportWindow();
-            reportWindow.ShowDialog();
+            SelectedDateRentalWindow selectedDateRentalWindow = new SelectedDateRentalWindow();
+            selectedDateRentalWindow.ShowDialog();
+
+            UpdatePageCommand.Execute(null);
+        }
+
+        #endregion
+
+        #region Команда вызова окна "Отчеты", Отчет по среднему чеку : OpenListAverageReceiptReportWindowCommand
+
+        public ICommand OpenListAverageReceiptReportWindowCommand { get; }
+
+        private bool CanOpenListAverageReceiptReportWindowCommandExecute(object p) => true;
+
+        private void OnOpenListAverageReceiptReportWindowCommandExecuted(object p)
+        {
+            ReportDataModel.Title = "Отчет по среднему чеку";
+            ReportDataModel.Slt = "Отчет по количеству аренд";
+
+            SelectedDateRentalWindow selectedDateRentalWindow = new SelectedDateRentalWindow();
+            selectedDateRentalWindow.ShowDialog();
+
+            UpdatePageCommand.Execute(null);
+
+            UpdatePageCommand.Execute(null);
+        }
+
+        #endregion
+
+        #region Команда вызова окна "Отчеты", Отчет по прибыли от автомобилей : OpenListAverageReceiptReportWindowCommand
+
+        public ICommand OpenListCarProfitReportWindowCommand { get; }
+
+        private bool CanOpenListCarProfitReportWindowCommandExecute(object p) => true;
+
+        private void OnOpenListCarProfitReportWindowCommandExecuted(object p)
+        {
+            ReportDataModel.Title = "Отчет по прибыли от автомобилей";
+            ReportDataModel.Slt = "Отчет по количеству аренд";
+
+            SelectedDateRentalWindow selectedDateRentalWindow = new SelectedDateRentalWindow();
+            selectedDateRentalWindow.ShowDialog();
+
+            UpdatePageCommand.Execute(null);
+
+            UpdatePageCommand.Execute(null);
+        }
+
+        #endregion
+
+        #region Команда вызова окна "Отчеты", Отчет по доходам от дополнительных услуг : OpenListReportIncomeAdditionalServicesWindowCommand
+
+        public ICommand OpenListReportIncomeAdditionalServicesWindowCommand { get; }
+
+        private bool CanOpenListReportIncomeAdditionalServicesWindowCommandExecute(object p) => true;
+
+        private void OnOpenListReportIncomeAdditionalServicesWindowCommandExecuted(object p)
+        {
+            ReportDataModel.Title = "Отчет по доходам от дополнительных услуг";
+            ReportDataModel.Slt = "Отчет по количеству аренд";
+
+            SelectedDateRentalWindow selectedDateRentalWindow = new SelectedDateRentalWindow();
+            selectedDateRentalWindow.ShowDialog();
+
+            UpdatePageCommand.Execute(null);
+
+            UpdatePageCommand.Execute(null);
+        }
+
+        #endregion
+
+        #region Команда вызова окна "Отчеты", Отчет по техническому обслуживанию : OpenListMaintenanceReportWindowCommand
+
+        public ICommand OpenListMaintenanceReportWindowCommand { get; }
+
+        private bool CanOpenListMaintenanceReportWindowCommandExecute(object p) => true;
+
+        private void OnOpenListMaintenanceReportWindowCommandExecuted(object p)
+        {
+            ReportDataModel.Title = "Отчет по техническому обслуживанию";
+            ReportDataModel.Slt = "Отчет по количеству аренд";
+
+            SelectedDateRentalWindow selectedDateRentalWindow = new SelectedDateRentalWindow();
+            selectedDateRentalWindow.ShowDialog();
+
+            UpdatePageCommand.Execute(null);
+
+            UpdatePageCommand.Execute(null);
+        }
+
+        #endregion
+
+        #region Команда вызова окна "Штрафы" : OpenListFineWindowCommand
+
+        public ICommand OpenListFineWindowCommand { get; }
+
+        private bool CanOpenListFineWindowCommandExecute(object p) => true;
+
+        private void OnOpenListFineWindowCommandExecuted(object p)
+        {
+            VehicleDataModel.EditOrAdd = "Штрафы";
+
+            SelectVehicleMaintenanceWindow selectVehicleMaintenanceWindow = new SelectVehicleMaintenanceWindow();
+            selectVehicleMaintenanceWindow.ShowDialog();
 
             UpdatePageCommand.Execute(null);
         }
@@ -250,6 +345,16 @@ namespace Partner.ViewModels.Views.Maneger
         public MainPageManagerViewModel()
         {
             #region Команды
+
+            OpenListFineWindowCommand = new LamdaCommand(OnOpenListFineWindowCommandExecuted, CanOpenListFineWindowCommandExecute);
+
+            OpenListMaintenanceReportWindowCommand = new LamdaCommand(OnOpenListMaintenanceReportWindowCommandExecuted, CanOpenListMaintenanceReportWindowCommandExecute);
+
+            OpenListReportIncomeAdditionalServicesWindowCommand = new LamdaCommand(OnOpenListReportIncomeAdditionalServicesWindowCommandExecuted, CanOpenListReportIncomeAdditionalServicesWindowCommandExecute);
+
+            OpenListCarProfitReportWindowCommand = new LamdaCommand(OnOpenListCarProfitReportWindowCommandExecuted, CanOpenListCarProfitReportWindowCommandExecute);
+
+            OpenListAverageReceiptReportWindowCommand = new LamdaCommand(OnOpenListAverageReceiptReportWindowCommandExecuted, CanOpenListAverageReceiptReportWindowCommandExecute);
 
             OpenReportNumberRentsWindowCommand = new LamdaCommand(OnOpenReportNumberRentsWindowCommandExecuted, CanOpenReportNumberRentsWindowCommandExecute);
 

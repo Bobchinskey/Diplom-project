@@ -718,7 +718,7 @@ namespace Partner.ViewModels.Windows.MainWindowInteraction.Maintenances.Addition
                 //Указываем таблицу в которую будем помещать данные (таблица должна существовать в шаблоне документа!)
                 Microsoft.Office.Interop.Word.Table tbl2 = app.ActiveDocument.Tables[4];
 
-                //Заполняем в таблицу - 10 записей.
+                //Заполняем в таблицу.
                 for (int i = 1; i <= dtSparePart.Rows.Count; i++)
                 {
                     tbl2.Rows.Add(ref missing);//Добавляем в таблицу строку.

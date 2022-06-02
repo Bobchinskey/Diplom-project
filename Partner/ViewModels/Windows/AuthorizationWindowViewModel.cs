@@ -87,6 +87,31 @@ namespace Partner.ViewModels.Windows
                             Application.Current.Resources["BackgroundColor"] = new SolidColorBrush(Color.FromRgb(39,39,39));
                             Application.Current.Resources["MainColor"] = new SolidColorBrush(Color.FromRgb(109,109,109));
                         }
+                        else if (thisReader["Status"].ToString() == "Красная")
+                        {
+                            Application.Current.Resources["MainColor"] = new SolidColorBrush(Colors.Red);
+                            Application.Current.Resources["UserInfoForeground"] = new SolidColorBrush(Colors.Black);
+                        }
+                        else if (thisReader["Status"].ToString() == "Кораловая")
+                        {
+                            Application.Current.Resources["MainColor"] = new SolidColorBrush(Colors.LightCoral);
+                            Application.Current.Resources["UserInfoForeground"] = new SolidColorBrush(Colors.Black);
+                        }
+                        else if (thisReader["Status"].ToString() == "Бирюзовая")
+                        {
+                            Application.Current.Resources["MainColor"] = new SolidColorBrush(Colors.PaleTurquoise);
+                            Application.Current.Resources["UserInfoForeground"] = new SolidColorBrush(Colors.Black);
+                        }
+                        else if (thisReader["Status"].ToString() == "Лаймовая")
+                        {
+                            Application.Current.Resources["MainColor"] = new SolidColorBrush(Colors.Lime);
+                            Application.Current.Resources["UserInfoForeground"] = new SolidColorBrush(Colors.Black);
+                        }
+                        else if (thisReader["Status"].ToString() == "Золотая")
+                        {
+                            Application.Current.Resources["MainColor"] = new SolidColorBrush(Colors.Gold);
+                            Application.Current.Resources["UserInfoForeground"] = new SolidColorBrush(Colors.Black);
+                        }
 
                         thisReader.Close();
 
@@ -99,8 +124,10 @@ namespace Partner.ViewModels.Windows
                             UserDataModel.page = new MainPageAdministration();
                         else if (UserDataModel.access_lavel == "Менеджер")
                             UserDataModel.page = new MainPageManager();
+
                         MainWindow mainWindow = new MainWindow();
                         mainWindow.Show();
+
                         foreach (System.Windows.Window window in System.Windows.Application.Current.Windows)
                         {
                             if (window.DataContext == this)
