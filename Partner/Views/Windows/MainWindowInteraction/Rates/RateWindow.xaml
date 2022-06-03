@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Datacontext="clr-namespace:Partner.ViewModels.Windows.MainWindowInteraction.Rates"
+        xmlns:i1="http://schemas.microsoft.com/expression/2010/interactivity"        
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:Partner.Views.Windows.MainWindowInteraction.Rates"
         mc:Ignorable="d"
@@ -30,6 +31,11 @@
         </WrapPanel>
         <WrapPanel Grid.Row="0" Grid.Column="1" Background="{DynamicResource MainColor}"/>
         <DataGrid Background="{DynamicResource BackgroundColor}" CanUserSortColumns="False" Margin="5,5,5,5" SelectedIndex="{Binding SelectedRate, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding MainListRate}" IsReadOnly="True" Grid.Row="1" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
+            <i1:Interaction.Triggers>
+                <i1:EventTrigger EventName="MouseDoubleClick">
+                    <i1:InvokeCommandAction Command="{Binding OpenEditRateWindowCommand}"/>
+                </i1:EventTrigger>
+            </i1:Interaction.Triggers>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№" Binding="{Binding num}"/>
                 <DataGridTextColumn Header="Автомобиль" Binding="{Binding make_model}"/>

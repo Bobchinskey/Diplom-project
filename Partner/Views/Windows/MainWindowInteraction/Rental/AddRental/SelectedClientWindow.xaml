@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:i1="http://schemas.microsoft.com/expression/2010/interactivity"        
         xmlns:Datacontext="clr-namespace:Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental"        
         xmlns:local="clr-namespace:Partner.Views.Windows.MainWindowInteraction.Rental.AddRental"
         mc:Ignorable="d"
@@ -48,6 +49,11 @@
             </Button>
         </WrapPanel>
         <DataGrid Background="{DynamicResource BackgroundColor}" Margin="5,5,5,5" SelectedIndex="{Binding SelectedClient}" ItemsSource="{Binding MainListClient}" IsReadOnly="True" Grid.Row="1" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
+            <i1:Interaction.Triggers>
+                <i1:EventTrigger EventName="MouseDoubleClick">
+                    <i1:InvokeCommandAction Command="{Binding OpenAddRentalWindowCommand}"/>
+                </i1:EventTrigger>
+            </i1:Interaction.Triggers>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№" Binding="{Binding num}"/>
                 <DataGridTextColumn Header="Клиент" Binding="{Binding name}"/>

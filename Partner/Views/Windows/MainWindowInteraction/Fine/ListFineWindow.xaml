@@ -32,6 +32,11 @@
             </i1:Interaction.Triggers>
         </ComboBox>
         <DataGrid Background="{DynamicResource BackgroundColor}" Margin="5,5,5,5" SelectedIndex="{Binding SelectedFine}" ItemsSource="{Binding MainListFine}" IsReadOnly="True" Grid.Row="1" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" CanUserSortColumns="False">
+            <i1:Interaction.Triggers>
+                <i1:EventTrigger EventName="MouseDoubleClick">
+                    <i1:InvokeCommandAction Command="{Binding OpenEditFineWindowCommand}"/>
+                </i1:EventTrigger>
+            </i1:Interaction.Triggers>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№" Binding="{Binding num}"/>
                 <DataGridTextColumn Header="Кому выдан штраф" Binding="{Binding name}"/>

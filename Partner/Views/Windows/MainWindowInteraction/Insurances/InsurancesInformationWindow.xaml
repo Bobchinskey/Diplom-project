@@ -47,6 +47,11 @@
             </i1:Interaction.Triggers>
         </ComboBox>
         <DataGrid Background="{DynamicResource BackgroundColor}" CanUserSortColumns="False" Margin="5,5,5,5" SelectedIndex="{Binding SelectedInsurance}" ItemsSource="{Binding MainListInsurance}" IsReadOnly="True" Grid.Row="1" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
+            <i1:Interaction.Triggers>
+                <i1:EventTrigger EventName="MouseDoubleClick">
+                    <i1:InvokeCommandAction Command="{Binding OpenEditOSAGOWindowCommand}"/>
+                </i1:EventTrigger>
+            </i1:Interaction.Triggers>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№" Binding="{Binding num}"/>
                 <DataGridTextColumn Header="Автомобиль" Binding="{Binding make_model}"/>

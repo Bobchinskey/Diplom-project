@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Datacontext="clr-namespace:Partner.ViewModels.Windows.MainWindowInteraction.Rental.AddRental"        
         xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:i1="http://schemas.microsoft.com/expression/2010/interactivity"        
         xmlns:local="clr-namespace:Partner.Views.Windows.MainWindowInteraction.Rental.AddRental"
         mc:Ignorable="d"
         Title="Выбор представителя организации" 
@@ -20,6 +21,11 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <DataGrid Background="{DynamicResource BackgroundColor}" Margin="5,5,5,5" SelectedIndex="{Binding SelectRepresentativesOrganizations}" ItemsSource="{Binding ListRepresentativesOrganization}" IsReadOnly="True" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
+            <i1:Interaction.Triggers>
+                <i1:EventTrigger EventName="MouseDoubleClick">
+                    <i1:InvokeCommandAction Command="{Binding OpenAddRentalWindowCommand}"/>
+                </i1:EventTrigger>
+            </i1:Interaction.Triggers>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№" Binding="{Binding num}"/>
                 <DataGridTextColumn Header="Представитель" Binding="{Binding FIO}"/>

@@ -6,6 +6,7 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:Datacontext="clr-namespace:Partner.ViewModels.Windows.MainWindowInteraction.Maintenances"
         xmlns:local="clr-namespace:Partner.Views.Windows.MainWindowInteraction.Maintenances"
+        xmlns:i1="http://schemas.microsoft.com/expression/2010/interactivity"        
         mc:Ignorable="d"
         Title="Выбор автомобиля" 
         Height="350" Width="500"
@@ -29,6 +30,11 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <DataGrid Background="{DynamicResource BackgroundColor}" Margin="5,5,5,5" SelectedIndex="{Binding SelectedVehicle}" ItemsSource="{Binding MainListVehicle}" IsReadOnly="True" Grid.Column="0" SelectionMode="Single" CanUserReorderColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" CanUserSortColumns="False">
+                <i1:Interaction.Triggers>
+                    <i1:EventTrigger EventName="MouseDoubleClick">
+                        <i1:InvokeCommandAction Command="{Binding OpenListMaintenanceWindowCommand}"/>
+                    </i1:EventTrigger>
+                </i1:Interaction.Triggers>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="№" Binding="{Binding num}"/>
                     <DataGridTextColumn Header="Наименование" Binding="{Binding MakeModel}"/>

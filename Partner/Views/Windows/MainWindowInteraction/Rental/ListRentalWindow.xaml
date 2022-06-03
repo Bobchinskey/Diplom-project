@@ -37,6 +37,11 @@
                 </ComboBox>
             </Grid>
             <DataGrid Background="{DynamicResource BackgroundColor}" Margin="5,5,5,5" SelectedIndex="{Binding SelectedRental}" ItemsSource="{Binding MainListRental}" IsReadOnly="True" Grid.Row="1" SelectionMode="Single" CanUserReorderColumns="False" CanUserSortColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False">
+                <i1:Interaction.Triggers>
+                    <i1:EventTrigger EventName="MouseDoubleClick">
+                        <i1:InvokeCommandAction Command="{Binding OpenEditDateRentalWindowCommand}"/>
+                    </i1:EventTrigger>
+                </i1:Interaction.Triggers>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="№" Binding="{Binding num}"/>
                     <DataGridTextColumn Header="Наименование" Binding="{Binding name}"/>
